@@ -2,6 +2,9 @@ import { motion } from 'framer-motion'
 import { ArrowRight, Download } from 'lucide-react'
 import CodeBlock from '../UI/CodeBlock'
 import { socialLinks } from '../../utils/constants'
+import TextReveal from '../UI/TextReveal'
+import SectionReveal from '../UI/SectionReveal'
+import Magnetic from '../UI/Magnetic'
 
 export default function Hero({ setActiveSection }) {
     const containerVariants = {
@@ -40,9 +43,9 @@ export default function Hero({ setActiveSection }) {
                     >
                         <motion.div variants={itemVariants} className="space-y-4 sm:space-y-6">
                             <h1 className="text-3xl xs:text-4xl sm:text-5xl md:text-6xl xl:text-7xl font-black tracking-tighter leading-[1.15] sm:leading-[1.1]">
-                                Hello, I'm <br className="hidden sm:block" />
+                                <TextReveal text="Hello, I'm" className="justify-center lg:justify-start" />
                                 <span className="premium-text-gradient animate-gradient">Md Tanveer Alam</span>, <br />
-                                I&apos;m a Professional <br className="hidden sm:block" />
+                                <TextReveal text="I'm a Professional" className="justify-center lg:justify-start" />
                                 <span className="text-foreground">Full Stack Developer</span>.
                             </h1>
                             <p className="text-muted-foreground text-base sm:text-lg md:text-xl font-medium max-w-2xl mx-auto lg:mx-0 leading-relaxed">
@@ -54,45 +57,50 @@ export default function Hero({ setActiveSection }) {
                             {socialLinks.map((social) => {
                                 const Icon = social.icon
                                 return (
-                                    <motion.a
-                                        key={social.label}
-                                        href={social.href}
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                        whileHover={{ scale: 1.2, y: -4 }}
-                                        className="text-muted-foreground hover:text-primary transition-all p-1"
-                                        aria-label={social.label}
-                                    >
-                                        <Icon className="w-5 h-5 sm:w-6 sm:h-6" />
-                                    </motion.a>
+                                    <Magnetic key={social.label}>
+                                        <motion.a
+                                            href={social.href}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            whileHover={{ scale: 1.2, y: -4 }}
+                                            className="text-muted-foreground hover:text-primary transition-all p-1 block"
+                                            aria-label={social.label}
+                                        >
+                                            <Icon className="w-5 h-5 sm:w-6 sm:h-6" />
+                                        </motion.a>
+                                    </Magnetic>
                                 )
                             })}
                         </motion.div>
 
                         <motion.div variants={itemVariants} className="flex flex-col xs:flex-row items-center justify-center lg:justify-start gap-4">
-                            <motion.button
-                                whileHover={{ scale: 1.05 }}
-                                whileTap={{ scale: 0.95 }}
-                                onClick={() => {
-                                    setActiveSection('contact')
-                                    document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })
-                                }}
-                                className="w-full xs:w-auto px-8 py-4 rounded-full bg-gradient-to-r from-violet-600 to-pink-600 text-white font-bold flex items-center justify-center space-x-3 shadow-xl hover:shadow-violet-500/20 transition-all uppercase tracking-wider text-xs sm:text-sm"
-                            >
-                                <span>Contact Me</span>
-                                <ArrowRight className="w-4 h-4 sm:w-5 h-5" />
-                            </motion.button>
+                            <Magnetic>
+                                <motion.button
+                                    whileHover={{ scale: 1.05 }}
+                                    whileTap={{ scale: 0.95 }}
+                                    onClick={() => {
+                                        setActiveSection('contact')
+                                        document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })
+                                    }}
+                                    className="w-full xs:w-auto px-8 py-4 rounded-full bg-gradient-to-r from-violet-600 to-pink-600 text-white font-bold flex items-center justify-center space-x-3 shadow-xl hover:shadow-violet-500/20 transition-all uppercase tracking-wider text-xs sm:text-sm"
+                                >
+                                    <span>Contact Me</span>
+                                    <ArrowRight className="w-4 h-4 sm:w-5 h-5" />
+                                </motion.button>
+                            </Magnetic>
                             
-                            <motion.a
-                                whileHover={{ scale: 1.05 }}
-                                whileTap={{ scale: 0.95 }}
-                                href="/resume.pdf"
-                                download="Md_Tanveer_Alam_Resume.pdf"
-                                className="w-full xs:w-auto px-8 py-4 rounded-full border border-violet-600/50 text-foreground font-bold flex items-center justify-center space-x-3 hover:bg-violet-600/10 transition-all uppercase tracking-wider text-xs sm:text-sm"
-                            >
-                                <span>Get Resume</span>
-                                <Download className="w-4 h-4 sm:w-5 h-5" />
-                            </motion.a>
+                            <Magnetic>
+                                <motion.a
+                                    whileHover={{ scale: 1.05 }}
+                                    whileTap={{ scale: 0.95 }}
+                                    href="/resume.pdf"
+                                    download="Md_Tanveer_Alam_Resume.pdf"
+                                    className="w-full xs:w-auto px-8 py-4 rounded-full border border-violet-600/50 text-foreground font-bold flex items-center justify-center space-x-3 hover:bg-violet-600/10 transition-all uppercase tracking-wider text-xs sm:text-sm block"
+                                >
+                                    <span>Get Resume</span>
+                                    <Download className="w-4 h-4 sm:w-5 h-5" />
+                                </motion.a>
+                            </Magnetic>
                         </motion.div>
                     </motion.div>
 

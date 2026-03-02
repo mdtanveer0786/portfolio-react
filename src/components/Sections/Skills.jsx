@@ -1,5 +1,7 @@
 import { motion } from 'framer-motion'
 import { skillCategories } from '../../utils/constants'
+import TextReveal from '../UI/TextReveal'
+import SectionReveal from '../UI/SectionReveal'
 
 export default function Skills() {
     // Flatten skills for a marquee or simpler grid
@@ -13,43 +15,41 @@ export default function Skills() {
             </div>
 
             <div className="container mx-auto relative z-10">
-                <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    className="text-center mb-16 space-y-4"
-                >
+                <div className="text-center mb-16 space-y-4">
                     <div className="w-24 h-1 bg-gradient-to-r from-violet-600 to-cyan-400 mx-auto rounded-full" />
-                    <h2 className="text-3xl md:text-5xl font-black uppercase tracking-wider">
-                        Skills
-                    </h2>
-                </motion.div>
+                    <TextReveal 
+                        text="Technical Expertise" 
+                        className="text-3xl md:text-5xl font-black uppercase tracking-wider" 
+                    />
+                </div>
 
                 {/* Marquee effect for skills */}
-                <div className="relative flex overflow-x-hidden group py-10">
-                    <div className="animate-wave flex whitespace-nowrap">
-                        {[...allSkills, ...allSkills].map((skill, index) => (
-                            <div
-                               key={`${skill.name}-${index}`}
-                               className="mx-4 flex flex-col items-center justify-center p-6 min-w-[140px] glass-card border-border rounded-xl hover:border-primary/50 transition-all"
-                            >                                <div className="h-12 w-12 flex items-center justify-center mb-4">
-                                    <img 
-                                        src={`https://cdn.jsdelivr.net/gh/devicons/devicon/icons/${skill.name.toLowerCase().replace('.js', 'js').replace(' ', '')}/${skill.name.toLowerCase().replace('.js', 'js').replace(' ', '')}-original.svg`} 
-                                        alt={skill.name}
-                                        className="w-full h-full object-contain filter grayscale group-hover:grayscale-0 transition-all"
-                                        onError={(e) => {
-                                            e.target.onerror = null;
-                                            e.target.src = `https://ui-avatars.com/api/?name=${skill.name}&background=1b2c68&color=fff&bold=true`;
-                                        }}
-                                    />
+                <SectionReveal>
+                    <div className="relative flex overflow-x-hidden group py-10">
+                        <div className="animate-wave flex whitespace-nowrap">
+                            {[...allSkills, ...allSkills].map((skill, index) => (
+                                <div
+                                key={`${skill.name}-${index}`}
+                                className="mx-4 flex flex-col items-center justify-center p-6 min-w-[140px] glass-card border-border rounded-xl hover:border-primary/50 transition-all"
+                                >                                <div className="h-12 w-12 flex items-center justify-center mb-4">
+                                        <img 
+                                            src={`https://cdn.jsdelivr.net/gh/devicons/devicon/icons/${skill.name.toLowerCase().replace('.js', 'js').replace(' ', '')}/${skill.name.toLowerCase().replace('.js', 'js').replace(' ', '')}-original.svg`} 
+                                            alt={skill.name}
+                                            className="w-full h-full object-contain filter grayscale group-hover:grayscale-0 transition-all"
+                                            onError={(e) => {
+                                                e.target.onerror = null;
+                                                e.target.src = `https://ui-avatars.com/api/?name=${skill.name}&background=1b2c68&color=fff&bold=true`;
+                                            }}
+                                        />
+                                    </div>
+                                    <span className="text-sm font-bold tracking-wider text-muted-foreground group-hover:text-primary transition-colors">
+                                        {skill.name}
+                                    </span>
                                 </div>
-                                <span className="text-sm font-bold tracking-wider text-muted-foreground group-hover:text-primary transition-colors">
-                                    {skill.name}
-                                </span>
-                            </div>
-                        ))}
+                            ))}
+                        </div>
                     </div>
-                </div>
+                </SectionReveal>
 
                 <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4 mt-12">
                     {allSkills.map((skill, index) => (

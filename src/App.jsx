@@ -14,6 +14,8 @@ import Contact from "./components/Sections/Contact";
 
 import Loader from "./components/UI/Loader";
 import ParticlesBackground from "./components/UI/ParticlesBackground";
+import ScrollProgress from "./components/UI/ScrollProgress";
+import CustomCursor from "./components/UI/CustomCursor";
 
 import { SECTIONS, LOADING_DURATION } from "./utils/constants";
 import { useScroll } from "./hooks/useScroll";
@@ -60,6 +62,8 @@ function App() {
                     </motion.div>
                 ) : (
                     <div className="bg-background text-foreground min-h-screen selection:bg-primary/20 selection:text-primary">
+                        <ScrollProgress />
+                        <CustomCursor />
                         <ParticlesBackground />
                         <Header
                             activeSection={activeSection}
