@@ -10,7 +10,6 @@ import {
     Lock,
     Globe
 } from 'lucide-react'
-import { cn } from '../../utils/cn'
 
 export default function ProjectCard({
     project,
@@ -43,7 +42,7 @@ export default function ProjectCard({
                 whileHover={{ x: 10 }}
                 onMouseEnter={() => setIsHovered(true)}
                 onMouseLeave={() => setIsHovered(false)}
-                className="group bg-white dark:bg-gray-800 rounded-2xl p-6 border border-gray-200 dark:border-gray-700 hover:shadow-xl transition-all duration-300"
+                className="group bg-card text-card-foreground rounded-2xl p-6 border border-border hover:shadow-xl transition-all duration-300"
             >
                 <div className="flex flex-col lg:flex-row lg:items-center gap-6">
                     {/* Image */}
@@ -54,7 +53,7 @@ export default function ProjectCard({
                                 alt={project.title}
                                 className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                             />
-                            <div className="absolute inset-0 bg-gradient-to-t from-gray-900/50 via-transparent to-transparent" />
+                            <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
 
                             {/* Status Badge */}
                             <div className="absolute top-3 left-3">
@@ -70,10 +69,10 @@ export default function ProjectCard({
                     <div className="flex-1">
                         <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between mb-4">
                             <div>
-                                <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
+                                <h3 className="text-xl font-bold text-foreground mb-2 group-hover:text-primary transition-colors">
                                     {project.title}
                                 </h3>
-                                <p className="text-gray-600 dark:text-gray-400 line-clamp-2">
+                                <p className="text-muted-foreground line-clamp-2">
                                     {project.description}
                                 </p>
                             </div>
@@ -81,13 +80,13 @@ export default function ProjectCard({
                             {/* Stats */}
                             <div className="flex items-center space-x-4 mt-4 lg:mt-0">
                                 {project.stats?.stars && (
-                                    <div className="flex items-center space-x-1 text-sm text-gray-600 dark:text-gray-400">
+                                    <div className="flex items-center space-x-1 text-sm text-muted-foreground">
                                         <Star className="h-4 w-4 text-yellow-500" />
                                         <span>{project.stats.stars}</span>
                                     </div>
                                 )}
                                 {project.stats?.users && (
-                                    <div className="flex items-center space-x-1 text-sm text-gray-600 dark:text-gray-400">
+                                    <div className="flex items-center space-x-1 text-sm text-muted-foreground">
                                         <Users className="h-4 w-4 text-blue-500" />
                                         <span>{project.stats.users}</span>
                                     </div>
@@ -100,7 +99,7 @@ export default function ProjectCard({
                             {project.tags.map((tag, idx) => (
                                 <span
                                     key={idx}
-                                    className="px-3 py-1 text-xs rounded-full bg-blue-50 dark:bg-blue-900/20 text-blue-600 dark:text-blue-400 font-medium"
+                                    className="px-3 py-1 text-xs rounded-full bg-primary/10 text-primary font-medium border border-primary/20"
                                 >
                                     {tag}
                                 </span>
@@ -108,8 +107,8 @@ export default function ProjectCard({
                         </div>
 
                         {/* Bottom Bar */}
-                        <div className="flex flex-col sm:flex-row sm:items-center justify-between pt-4 border-t border-gray-200 dark:border-gray-700">
-                            <div className="flex items-center space-x-4 text-sm text-gray-500 dark:text-gray-400">
+                        <div className="flex flex-col sm:flex-row sm:items-center justify-between pt-4 border-t border-border">
+                            <div className="flex items-center space-x-4 text-sm text-muted-foreground">
                                 <span className="flex items-center space-x-1">
                                     <Calendar className="h-4 w-4" />
                                     <span>{project.date}</span>
@@ -126,7 +125,7 @@ export default function ProjectCard({
                                         href={project.github}
                                         target="_blank"
                                         rel="noopener noreferrer"
-                                        className="p-2 rounded-lg bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors"
+                                        className="p-2 rounded-lg bg-muted text-muted-foreground hover:text-primary hover:bg-primary/10 transition-colors border border-transparent hover:border-primary/20"
                                         aria-label="View code"
                                     >
                                         <Github className="h-5 w-5" />
@@ -137,14 +136,14 @@ export default function ProjectCard({
                                         href={project.live}
                                         target="_blank"
                                         rel="noopener noreferrer"
-                                        className="p-2 rounded-lg bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors"
+                                        className="p-2 rounded-lg bg-muted text-muted-foreground hover:text-primary hover:bg-primary/10 transition-colors border border-transparent hover:border-primary/20"
                                         aria-label="View live"
                                     >
                                         <ExternalLink className="h-5 w-5" />
                                     </a>
                                 )}
                                 {project.private && (
-                                    <span className="p-2 rounded-lg bg-gray-100 dark:bg-gray-700 text-gray-500" title="Private Project">
+                                    <span className="p-2 rounded-lg bg-muted text-muted-foreground opacity-50" title="Private Project">
                                         <Lock className="h-5 w-5" />
                                     </span>
                                 )}
@@ -162,7 +161,7 @@ export default function ProjectCard({
             whileHover={{ y: -10 }}
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
-            className="group relative overflow-hidden rounded-2xl bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 hover:shadow-2xl transition-all duration-300"
+            className="group relative overflow-hidden rounded-2xl bg-card text-card-foreground border border-border hover:shadow-2xl transition-all duration-300"
             style={{ animationDelay: `${index * 100}ms` }}
         >
             {/* Status Indicator */}
@@ -180,7 +179,7 @@ export default function ProjectCard({
                     alt={project.title}
                     className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-gray-900 via-gray-900/40 to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent" />
 
                 {/* Hover Overlay */}
                 <motion.div
@@ -188,14 +187,14 @@ export default function ProjectCard({
                     animate={{
                         opacity: isHovered ? 1 : 0,
                     }}
-                    className="absolute inset-0 bg-gradient-to-br from-blue-600/20 to-purple-600/20"
+                    className="absolute inset-0 bg-gradient-to-br from-primary/20 to-purple-600/20"
                 />
             </div>
 
             {/* Content */}
             <div className="p-6">
                 <div className="flex items-start justify-between mb-3">
-                    <h3 className="text-xl font-bold text-gray-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors line-clamp-1">
+                    <h3 className="text-xl font-bold text-foreground group-hover:text-primary transition-colors line-clamp-1">
                         {project.title}
                     </h3>
 
@@ -207,7 +206,7 @@ export default function ProjectCard({
                     )}
                 </div>
 
-                <p className="text-sm text-gray-600 dark:text-gray-400 mb-4 line-clamp-2">
+                <p className="text-sm text-muted-foreground mb-4 line-clamp-2">
                     {project.description}
                 </p>
 
@@ -216,13 +215,13 @@ export default function ProjectCard({
                     {project.tags.slice(0, 3).map((tag, idx) => (
                         <span
                             key={idx}
-                            className="px-3 py-1 text-xs rounded-full bg-blue-50 dark:bg-blue-900/20 text-blue-600 dark:text-blue-400 font-medium"
+                            className="px-3 py-1 text-xs rounded-full bg-primary/10 text-primary font-medium border border-primary/20"
                         >
                             {tag}
                         </span>
                     ))}
                     {project.tags.length > 3 && (
-                        <span className="px-3 py-1 text-xs rounded-full bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-400">
+                        <span className="px-3 py-1 text-xs rounded-full bg-muted text-muted-foreground border border-border">
                             +{project.tags.length - 3}
                         </span>
                     )}
@@ -234,13 +233,13 @@ export default function ProjectCard({
                         {project.stats && (
                             <>
                                 {project.stats.stars && (
-                                    <div className="flex items-center space-x-1 text-gray-600 dark:text-gray-400">
+                                    <div className="flex items-center space-x-1 text-muted-foreground">
                                         <Star className="h-4 w-4 text-yellow-500" />
                                         <span>{project.stats.stars}</span>
                                     </div>
                                 )}
                                 {project.stats.impact && (
-                                    <div className="flex items-center space-x-1 text-gray-600 dark:text-gray-400">
+                                    <div className="flex items-center space-x-1 text-muted-foreground">
                                         <TrendingUp className="h-4 w-4 text-green-500" />
                                         <span>{project.stats.impact}</span>
                                     </div>
@@ -249,20 +248,20 @@ export default function ProjectCard({
                         )}
                     </div>
 
-                    <div className="text-xs font-medium text-gray-500 dark:text-gray-400">
+                    <div className="text-xs font-medium text-muted-foreground">
                         {project.date}
                     </div>
                 </div>
 
                 {/* Actions */}
-                <div className="flex items-center justify-between pt-4 border-t border-gray-200 dark:border-gray-700">
+                <div className="flex items-center justify-between pt-4 border-t border-border">
                     <div className="flex items-center space-x-3">
                         {project.github && (
                             <a
                                 href={project.github}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="flex items-center space-x-2 text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+                                className="flex items-center space-x-2 text-sm font-medium text-muted-foreground hover:text-primary transition-colors"
                             >
                                 <Github className="h-4 w-4" />
                                 <span>Code</span>
@@ -274,7 +273,7 @@ export default function ProjectCard({
                                 href={project.live}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="flex items-center space-x-2 text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+                                className="flex items-center space-x-2 text-sm font-medium text-muted-foreground hover:text-primary transition-colors"
                             >
                                 <Globe className="h-4 w-4" />
                                 <span>Live</span>
@@ -283,7 +282,7 @@ export default function ProjectCard({
                     </div>
 
                     {project.private && (
-                        <span className="text-xs text-gray-500 flex items-center" title="Private Repository">
+                        <span className="text-xs text-muted-foreground flex items-center" title="Private Repository">
                             <Lock className="h-3 w-3 mr-1" />
                             Private
                         </span>

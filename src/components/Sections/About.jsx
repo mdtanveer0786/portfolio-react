@@ -1,133 +1,72 @@
 import { motion } from 'framer-motion'
-import { User, Award, Target, Globe } from 'lucide-react'
 
-export default function About({ setActiveSection }) {
-    const stats = [
-        { icon: User, value: '2+', label: 'Years Experience' },
-        { icon: Award, value: '50+', label: 'Projects Completed' },
-        { icon: Target, value: '30+', label: 'Happy Clients' },
-        { icon: Globe, value: '10+', label: 'Countries Served' },
-    ]
-
+export default function About() {
     return (
-        <section id="about" className="py-20">
-            <div className="container mx-auto px-6">
+        <section id="about" className="section-container relative overflow-hidden">
+             {/* Background Text */}
+             <div className="absolute top-16 left-1/2 -translate-x-1/2 text-6xl md:text-8xl font-black text-foreground/[0.05] dark:text-white/[0.05] uppercase tracking-[0.2em] whitespace-nowrap select-none pointer-events-none -z-10">
+                ABOUT
+             </div>
+
+            <div className="container mx-auto relative z-10">
                 <motion.div
-                    initial={{ opacity: 0, y: 50 }}
+                    initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
-                    transition={{ duration: 0.5 }}
-                    className="text-center mb-12"
+                    className="text-center mb-16 space-y-4"
                 >
-                    <span className="inline-block px-4 py-2 rounded-full bg-primary/10 text-primary font-medium text-sm mb-4">
-                        About Me
-                    </span>
-                    <h2 className="text-4xl md:text-5xl font-bold mb-4">
-                        Get to{' '}
-                        <span className="gradient-text">
-                            Know Me
-                        </span>
+                    <div className="w-24 h-1 bg-gradient-to-r from-violet-600 to-cyan-400 mx-auto rounded-full" />
+                    <h2 className="text-3xl md:text-5xl font-black uppercase tracking-wider">
+                        Who I am
                     </h2>
-                    <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-                        Passionate developer with a focus on creating exceptional digital experiences
-                    </p>
                 </motion.div>
 
-                <div className="grid lg:grid-cols-2 gap-12 items-center">
-                    {/* Left Side - Image */}
+                <div className="grid grid-cols-1 md:grid-cols-12 gap-8 lg:gap-12 items-center">
+                    {/* Story Content */}
                     <motion.div
-                        initial={{ opacity: 0, x: -50 }}
+                        initial={{ opacity: 0, x: -30 }}
                         whileInView={{ opacity: 1, x: 0 }}
                         viewport={{ once: true }}
-                        transition={{ duration: 0.5 }}
-                        className="relative"
+                        className="md:col-span-7 space-y-4 md:space-y-6 text-center md:text-left order-2 md:order-1"
                     >
-                        <div className="relative w-full max-w-lg mx-auto">
-                            <div className="absolute -inset-4 rounded-3xl bg-gradient-to-r from-primary/20 to-purple-600/20 blur-3xl" />
-                            <div className="relative rounded-2xl overflow-hidden border border-primary/20">
-                                <img
-                                    src="/profile.jpg"
-                                    alt="Md Md Tanveer Alam"
-                                    className="w-full h-auto"
-                                />
-                                <div className="absolute inset-0 bg-gradient-to-t from-background/50 to-transparent" />
-                            </div>
-
-                            {/* Experience Badge */}
-                            <motion.div
-                                initial={{ scale: 0 }}
-                                whileInView={{ scale: 1 }}
-                                viewport={{ once: true }}
-                                transition={{ delay: 0.3 }}
-                                className="absolute -top-4 -right-4 glass px-6 py-3 rounded-full"
-                            >
-                                <div className="flex items-center space-x-2">
-                                    <div className="w-3 h-3 rounded-full bg-green-500 animate-pulse" />
-                                    <span className="font-semibold">Available for work</span>
-                                </div>
-                            </motion.div>
+                        <h3 className="text-xl sm:text-2xl md:text-3xl font-bold uppercase tracking-widest text-primary">
+                            A Dedicated Coder from India
+                        </h3>
+                        <div className="space-y-4 text-muted-foreground text-base md:text-lg leading-relaxed font-medium">
+                            <p>
+                                I am a professional and enthusiastic <span className="text-foreground font-bold">Full Stack Developer</span> with a strong passion for building modern, scalable web applications. 
+                                My expertise lies in the <span className="text-primary font-bold">MERN Stack</span>, but I am always eager to learn and adapt to new technologies.
+                            </p>
+                            <p>
+                                With over a year of hands-on experience in the digital realm, I have honed my skills in creating intuitive user interfaces with <span className="text-primary font-bold">React</span> and robust backend systems with <span className="text-primary font-bold">Node.js</span>. 
+                                I believe that code is not just instructions for computers, but a tool for solving real-world problems.
+                            </p>
+                            <p>
+                                My journey in tech is driven by curiosity and a commitment to excellence. I focus on writing clean, maintainable code and delivering high-performance solutions that provide an exceptional user experience.
+                            </p>
                         </div>
                     </motion.div>
 
-                    {/* Right Side - Content */}
+                    {/* Image / Stats Card */}
                     <motion.div
-                        initial={{ opacity: 0, x: 50 }}
+                        initial={{ opacity: 0, x: 30 }}
                         whileInView={{ opacity: 1, x: 0 }}
                         viewport={{ once: true }}
-                        transition={{ duration: 0.5 }}
-                        className="space-y-6"
+                        className="md:col-span-5 order-1 md:order-2"
                     >
-                        <h3 className="text-3xl font-bold">
-                            Full Stack Developer & Problem Solver
-                        </h3>
-
-                        <p className="text-lg text-muted-foreground">
-                            I'm a passionate Full Stack Developer with expertise in modern web technologies.
-                            I specialize in building scalable, performant applications that deliver exceptional
-                            user experiences.
-                        </p>
-
-                        <p className="text-lg text-muted-foreground">
-                            My journey in web development started with a curiosity about how things work,
-                            which has evolved into a career dedicated to crafting digital solutions that
-                            make a real impact.
-                        </p>
-
-                        {/* Stats */}
-                        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-8">
-                            {stats.map((stat, index) => (
-                                <motion.div
-                                    key={stat.label}
-                                    initial={{ opacity: 0, y: 20 }}
-                                    whileInView={{ opacity: 1, y: 0 }}
-                                    viewport={{ once: true }}
-                                    transition={{ delay: index * 0.1 }}
-                                    whileHover={{ scale: 1.05 }}
-                                    className="text-center p-4 rounded-xl glass hover:bg-primary/5 transition-colors"
-                                >
-                                    <stat.icon className="h-8 w-8 text-primary mx-auto mb-2" />
-                                    <div className="text-2xl font-bold gradient-text">{stat.value}</div>
-                                    <div className="text-sm text-muted-foreground">{stat.label}</div>
-                                </motion.div>
-                            ))}
-                        </div>
-
-                        {/* CTA Buttons */}
-                        <div className="flex flex-col sm:flex-row gap-4 pt-6">
-                            <a
-                                href="#contact"
-                                onClick={() => setActiveSection('contact')}
-                                className="px-8 py-3 rounded-full bg-gradient-to-r from-primary to-purple-600 text-white font-medium hover:shadow-lg hover:shadow-primary/25 transition-all duration-300 text-center"
-                            >
-                                Hire Me
-                            </a>
-                            <a
-                                href="#projects"
-                                onClick={() => setActiveSection('projects')}
-                                className="px-8 py-3 rounded-full glass border border-primary/20 font-medium hover:bg-primary/5 transition-all duration-300 text-center"
-                            >
-                                View Projects
-                            </a>
+                        <div className="relative group max-w-xs sm:max-w-sm mx-auto">
+                            <div className="absolute -inset-1 bg-gradient-to-r from-violet-600 to-fuchsia-500 rounded-2xl blur opacity-25 group-hover:opacity-50 transition duration-1000"></div>
+                            <div className="relative glass-card p-2 rounded-2xl border-border overflow-hidden">
+                                <img
+                                    src="/profile.jpg"
+                                    alt="Md Tanveer Alam"
+                                    className="w-full rounded-xl transition-transform duration-700 group-hover:scale-105"
+                                    onError={(e) => {
+                                        e.target.onerror = null
+                                        e.target.src = "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=800"
+                                    }}
+                                />
+                            </div>
                         </div>
                     </motion.div>
                 </div>

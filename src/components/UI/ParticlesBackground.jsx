@@ -7,7 +7,7 @@ export default function ParticlesBackground() {
     await loadSlim(engine)
   }, [])
 
-  const particlesLoaded = useCallback(async (container) => {
+  const particlesLoaded = useCallback(async () => {
     // Optional callback when particles are loaded
   }, [])
 
@@ -16,7 +16,7 @@ export default function ParticlesBackground() {
       id="tsparticles"
       init={particlesInit}
       loaded={particlesLoaded}
-      className="absolute inset-0 -z-10"
+      className="absolute inset-0 -z-10 text-muted-foreground/20"
       options={{
         background: {
           color: {
@@ -48,13 +48,13 @@ export default function ParticlesBackground() {
         },
         particles: {
           color: {
-            value: '#3b82f6',
+            value: 'currentColor',
           },
           links: {
-            color: '#3b82f6',
-            distance: 120,
+            color: 'currentColor',
+            distance: 150,
             enable: true,
-            opacity: 0.3,
+            opacity: 0.1,
             width: 1,
           },
           collisions: {

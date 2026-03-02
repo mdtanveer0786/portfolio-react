@@ -1,244 +1,119 @@
 import { motion } from 'framer-motion'
-import { ArrowRight, Github, Linkedin, Twitter, Mail } from 'lucide-react'
-import Typewriter from '../UI/Typewriter'
-import FloatingElements from '../UI/FloatingElements'
+import { ArrowRight, Download } from 'lucide-react'
+import CodeBlock from '../UI/CodeBlock'
+import { socialLinks } from '../../utils/constants'
 
 export default function Hero({ setActiveSection }) {
-    const socialLinks = [
-        {
-            icon: Github,
-            href: 'https://github.com/mdtanveer0786',
-            label: 'GitHub'
-        },
-        {
-            icon: Linkedin,
-            href: 'https://linkedin.com/in/md-tanveer-alam',
-            label: 'LinkedIn'
-        },
-        {
-            icon: Twitter,
-            href: 'https://twitter.com/tanveertoofan01',
-            label: 'Twitter'
-        },
-        {
-            icon: Mail,
-            href: 'mailto:tanveerdev14@gmail.com',
-            label: 'Email'
-        },
-    ]
+    const containerVariants = {
+        hidden: { opacity: 0 },
+        visible: {
+            opacity: 1,
+            transition: {
+                staggerChildren: 0.1,
+                delayChildren: 0.3
+            }
+        }
+    }
+
+    const itemVariants = {
+        hidden: { y: 20, opacity: 0 },
+        visible: {
+            y: 0,
+            opacity: 1,
+            transition: {
+                type: 'spring',
+                stiffness: 100
+            }
+        }
+    }
 
     return (
-        <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
-            <FloatingElements />
-
-            <div className="container mx-auto px-4 sm:px-6">
-                <div className="grid lg:grid-cols-2 gap-12 items-center">
-                    {/* Left Content */}
+        <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden pt-32 pb-12 sm:pt-36 sm:pb-20 lg:pt-24 lg:pb-12 px-4 sm:px-6 md:px-10">
+            <div className="container mx-auto relative z-10">
+                <div className="flex flex-col lg:flex-row items-center justify-between gap-12 xl:gap-20">
+                    {/* Left Column: Text Content */}
                     <motion.div
-                        initial={{ opacity: 0, x: -50 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        transition={{ duration: 0.5 }}
-                        className="text-center lg:text-left"
+                        variants={containerVariants}
+                        initial="hidden"
+                        animate="visible"
+                        className="w-full lg:w-3/5 space-y-8 sm:space-y-10 text-center lg:text-left order-1"
                     >
-                        <motion.div
-                            initial={{ opacity: 0, y: 20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ delay: 0.2 }}
-                            className="inline-flex items-center space-x-2 mb-6 px-4 py-2 rounded-full glass"
-                        >
-                            <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
-                            <span className="text-sm font-medium">Available for opportunities</span>
+                        <motion.div variants={itemVariants} className="space-y-4 sm:space-y-6">
+                            <h1 className="text-3xl xs:text-4xl sm:text-5xl md:text-6xl xl:text-7xl font-black tracking-tighter leading-[1.15] sm:leading-[1.1]">
+                                Hello, I'm <br className="hidden sm:block" />
+                                <span className="premium-text-gradient animate-gradient">Md Tanveer Alam</span>, <br />
+                                I&apos;m a Professional <br className="hidden sm:block" />
+                                <span className="text-foreground">Full Stack Developer</span>.
+                            </h1>
+                            <p className="text-muted-foreground text-base sm:text-lg md:text-xl font-medium max-w-2xl mx-auto lg:mx-0 leading-relaxed">
+                                I engineer highly scalable, performance-driven web applications with an obsessive focus on user experience and clean code architecture.
+                            </p>
                         </motion.div>
 
-                        <motion.h1
-                            initial={{ opacity: 0, y: 20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ delay: 0.3 }}
-                            className="text-4xl sm:text-5xl md:text-7xl font-bold mb-6"
-                        >
-                            Hi, I'm{' '}
-                            <span className="bg-gradient-to-r from-primary via-purple-500 to-primary bg-clip-text text-transparent animate-gradient bg-[length:200%_auto]">
-                                Tanveer
-                            </span>
-                        </motion.h1>
+                        <motion.div variants={itemVariants} className="flex items-center justify-center lg:justify-start space-x-5 sm:space-x-6">
+                            {socialLinks.map((social) => {
+                                const Icon = social.icon
+                                return (
+                                    <motion.a
+                                        key={social.label}
+                                        href={social.href}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        whileHover={{ scale: 1.2, y: -4 }}
+                                        className="text-muted-foreground hover:text-primary transition-all p-1"
+                                        aria-label={social.label}
+                                    >
+                                        <Icon className="w-5 h-5 sm:w-6 sm:h-6" />
+                                    </motion.a>
+                                )
+                            })}
+                        </motion.div>
 
-                        <div className="h-20 mb-6">
-                            <Typewriter
-                                texts={[
-                                    'Full Stack Developer',
-                                    'React Specialist',
-                                    'Problem Solver',
-                                    'Tech Enthusiast',
-                                ]}
-                                className="text-xl sm:text-2xl md:text-3xl text-muted-foreground"
-                            />
-                        </div>
-
-                        <motion.p
-                            initial={{ opacity: 0, y: 20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ delay: 0.5 }}
-                            className="text-base sm:text-lg text-muted-foreground mb-8 max-w-2xl"
-                        >
-                            I craft exceptional digital experiences with modern web technologies.
-                            Passionate about building scalable applications that solve real-world problems.
-                        </motion.p>
-
-                        <motion.div
-                            initial={{ opacity: 0, y: 20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ delay: 0.6 }}
-                            className="flex flex-col sm:flex-row gap-4 mb-8"
-                        >
-                            <a
-                                href="#contact"
-                                onClick={(e) => {
-                                    e.preventDefault()
+                        <motion.div variants={itemVariants} className="flex flex-col xs:flex-row items-center justify-center lg:justify-start gap-4">
+                            <motion.button
+                                whileHover={{ scale: 1.05 }}
+                                whileTap={{ scale: 0.95 }}
+                                onClick={() => {
                                     setActiveSection('contact')
                                     document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })
                                 }}
-                                className="group inline-flex items-center justify-center px-6 sm:px-8 py-3 rounded-full bg-gradient-to-r from-primary to-purple-600 text-white font-medium text-base sm:text-lg hover:shadow-xl hover:shadow-primary/30 transition-all duration-300"
+                                className="w-full xs:w-auto px-8 py-4 rounded-full bg-gradient-to-r from-violet-600 to-pink-600 text-white font-bold flex items-center justify-center space-x-3 shadow-xl hover:shadow-violet-500/20 transition-all uppercase tracking-wider text-xs sm:text-sm"
                             >
-                                Get In Touch
-                                <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
-                            </a>
-                            <a
-                                href="#projects"
-                                onClick={(e) => {
-                                    e.preventDefault()
-                                    setActiveSection('projects')
-                                    document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' })
-                                }}
-                                className="group inline-flex items-center justify-center px-6 sm:px-8 py-3 rounded-full glass border border-primary/20 font-medium text-base sm:text-lg hover:bg-primary/5 transition-all duration-300"
+                                <span>Contact Me</span>
+                                <ArrowRight className="w-4 h-4 sm:w-5 h-5" />
+                            </motion.button>
+                            
+                            <motion.a
+                                whileHover={{ scale: 1.05 }}
+                                whileTap={{ scale: 0.95 }}
+                                href="/resume.pdf"
+                                download="Md_Tanveer_Alam_Resume.pdf"
+                                className="w-full xs:w-auto px-8 py-4 rounded-full border border-violet-600/50 text-foreground font-bold flex items-center justify-center space-x-3 hover:bg-violet-600/10 transition-all uppercase tracking-wider text-xs sm:text-sm"
                             >
-                                View Projects
-                            </a>
-                        </motion.div>
-
-                        {/* Social Links */}
-                        <motion.div
-                            initial={{ opacity: 0, y: 20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ delay: 0.7 }}
-                            className="flex flex-col sm:flex-row items-center justify-center lg:justify-start space-y-4 sm:space-y-0 sm:space-x-4"
-                        >
-                            <span className="text-sm text-muted-foreground">Follow me:</span>
-                            <div className="flex space-x-2">
-                                {socialLinks.map((social, index) => {
-                                    const Icon = social.icon
-                                    return (
-                                        <motion.a
-                                            key={social.label}
-                                            href={social.href}
-                                            target="_blank"
-                                            rel="noopener noreferrer"
-                                            initial={{ opacity: 0, scale: 0 }}
-                                            animate={{ opacity: 1, scale: 1 }}
-                                            transition={{ delay: 0.8 + index * 0.1 }}
-                                            whileHover={{ scale: 1.1, y: -5 }}
-                                            whileTap={{ scale: 0.9 }}
-                                            className="p-2 rounded-lg glass hover:bg-primary/10 transition-colors"
-                                            aria-label={social.label}
-                                        >
-                                            <Icon className="h-5 w-5" />
-                                        </motion.a>
-                                    )
-                                })}
-                            </div>
+                                <span>Get Resume</span>
+                                <Download className="w-4 h-4 sm:w-5 h-5" />
+                            </motion.a>
                         </motion.div>
                     </motion.div>
 
-                    {/* Right Content - Profile Image */}
+                    {/* Right Column: CodeBlock */}
                     <motion.div
-                        initial={{ opacity: 0, scale: 0.5, rotate: -10 }}
-                        animate={{ opacity: 1, scale: 1, rotate: 0 }}
-                        transition={{
-                            type: 'spring',
-                            stiffness: 100,
-                            delay: 0.3
-                        }}
-                        className="relative order-first lg:order-last"
+                        initial={{ opacity: 0, scale: 0.8 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        transition={{ duration: 0.8, delay: 0.5 }}
+                        className="w-full lg:w-2/5 order-2 flex justify-center"
                     >
-                        <div className="relative w-64 h-64 sm:w-80 sm:h-80 md:w-96 md:h-96 mx-auto">
-                            {/* Outer Glow */}
-                            <div className="absolute inset-0 rounded-full bg-gradient-to-r from-primary/20 via-purple-500/20 to-primary/20 blur-3xl animate-pulse" />
-
-                            {/* Gradient Border */}
-                            <div className="absolute inset-0 rounded-full p-1 bg-gradient-to-r from-primary via-purple-500 to-primary">
-                                <div className="relative w-full h-full rounded-full overflow-hidden bg-background">
-                                    {/* Profile Image */}
-                                    <img
-                                        src="/profile.jpg"
-                                        alt="Md Md Tanveer Alam"
-                                        className="w-full h-full object-cover"
-                                        onError={(e) => {
-                                            e.target.onerror = null
-                                            e.target.src = "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=800"
-                                        }}
-                                    />
-                                </div>
-                            </div>
+                        <div className="relative w-full max-w-[500px] lg:max-w-none">
+                            <div className="absolute -inset-0.5 bg-gradient-to-r from-violet-600 to-cyan-400 rounded-lg blur opacity-20 transition duration-1000"></div>
+                            <CodeBlock />
                         </div>
-
-                        {/* Stats */}
-                        <motion.div
-                            initial={{ opacity: 0, y: 50 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ delay: 0.8 }}
-                            className="grid grid-cols-3 gap-4 mt-8 max-w-lg mx-auto"
-                        >
-                            {[
-                                { value: '2+', label: 'Years Experience' },
-                                { value: '50+', label: 'Projects' },
-                                { value: '100%', label: 'Satisfaction' },
-                            ].map((stat, index) => (
-                                <motion.div
-                                    key={stat.label}
-                                    initial={{ opacity: 0, scale: 0 }}
-                                    animate={{ opacity: 1, scale: 1 }}
-                                    transition={{ delay: 0.9 + index * 0.1 }}
-                                    whileHover={{ scale: 1.05 }}
-                                    className="text-center p-4 rounded-xl glass hover:bg-primary/5 transition-colors"
-                                >
-                                    <div className="text-2xl font-bold bg-gradient-to-r from-primary to-purple-600 bg-clip-text text-transparent">
-                                        {stat.value}
-                                    </div>
-                                    <div className="text-sm text-muted-foreground mt-1">{stat.label}</div>
-                                </motion.div>
-                            ))}
-                        </motion.div>
                     </motion.div>
                 </div>
             </div>
 
-            {/* Scroll Indicator */}
-            <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 1.5 }}
-                className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
-            >
-                <a
-                    href="#about"
-                    onClick={(e) => {
-                        e.preventDefault()
-                        setActiveSection('about')
-                        document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' })
-                    }}
-                    className="flex flex-col items-center space-y-2 group"
-                >
-                    <span className="text-sm text-muted-foreground group-hover:text-primary transition-colors">
-                        Scroll Down
-                    </span>
-                    <motion.div
-                        animate={{ y: [0, 10, 0] }}
-                        transition={{ duration: 1.5, repeat: Infinity }}
-                        className="w-6 h-10 rounded-full border-2 border-primary/50 flex items-start justify-center p-1"
-                    >
-                        <div className="w-1 h-3 rounded-full bg-primary" />
-                    </motion.div>
-                </a>
-            </motion.div>
+            {/* Background Decorative Element */}
+            <div className="absolute top-1/4 -right-24 w-96 h-96 bg-violet-600/10 rounded-full blur-[120px] -z-10 animate-pulse" />
+            <div className="absolute bottom-1/4 -left-24 w-96 h-96 bg-cyan-600/10 rounded-full blur-[120px] -z-10 animate-pulse delay-700" />
         </section>
     )
 }

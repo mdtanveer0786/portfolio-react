@@ -1,129 +1,62 @@
 import { motion } from 'framer-motion'
-import { Heart, ArrowUp } from 'lucide-react'
+import { Heart, Mail } from 'lucide-react'
 import { socialLinks } from '../../utils/constants'
 
 export default function Footer() {
-    const scrollToTop = () => {
-        window.scrollTo({ top: 0, behavior: 'smooth' })
-    }
-
     return (
-        <footer className="relative mt-20 pt-12 pb-8">
-            {/* Wave Divider */}
-            <div className="absolute top-0 left-0 right-0 overflow-hidden">
-                <svg
-                    className="w-full h-12"
-                    viewBox="0 0 1200 120"
-                    preserveAspectRatio="none"
-                >
-                    <path
-                        d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z"
-                        className="fill-primary/10"
-                    />
-                </svg>
-            </div>
+        <footer className="relative bg-background pt-16 pb-8 overflow-hidden border-t border-border/40">
+            {/* Subtle premium background glow */}
+            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-4xl h-full bg-gradient-to-b from-primary/5 to-transparent blur-[100px] pointer-events-none rounded-full" />
 
-            <div className="container mx-auto px-6">
-                <div className="grid md:grid-cols-4 gap-8 mb-8">
+            <div className="container mx-auto px-6 relative z-10">
+                <div className="flex flex-col md:flex-row items-center justify-between gap-8 pb-8 border-b border-border/20">
                     {/* Brand */}
-                    <div className="space-y-4">
-                        <div className="flex items-center space-x-2">
-                            <div className="p-2 rounded-lg bg-gradient-to-r from-primary to-purple-600">
-                                <span className="text-lg font-bold text-white">MD</span>
-                            </div>
-                            <span className="text-xl font-bold gradient-text">Md Tanveer Alam</span>
+                    <div className="flex items-center gap-3">
+                        <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-violet-600 to-fuchsia-500 flex items-center justify-center text-white font-bold text-lg shadow-lg">
+                            MD
                         </div>
-                        <p className="text-sm text-muted-foreground">
-                            Crafting exceptional digital experiences with modern web technologies.
-                        </p>
+                        <span className="text-2xl font-black tracking-tighter uppercase">Tanveer<span className="text-primary"></span></span>
                     </div>
 
-                    {/* Quick Links */}
-                    <div>
-                        <h4 className="font-semibold mb-4">Quick Links</h4>
-                        <ul className="space-y-2">
-                            {['Home', 'About', 'Skills', 'Projects', 'Experience', 'Contact'].map((item) => (
-                                <li key={item}>
-                                    <a
-                                        href={`#${item.toLowerCase()}`}
-                                        className="text-sm text-muted-foreground hover:text-primary transition-colors"
+                    {/* Quick Contact & Socials */}
+                    <div className="flex flex-col md:flex-row items-center gap-6 md:gap-10">
+                        <a href="mailto:tanveerdev14@gmail.com" className="flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors font-bold group">
+                            <Mail className="w-4 h-4" />
+                            tanveerdev14@gmail.com
+                        </a>
+                        
+                        <div className="flex items-center gap-4">
+                            {socialLinks.map((social, i) => {
+                                const Icon = social.icon
+                                return (
+                                    <motion.a
+                                        key={i}
+                                        whileHover={{ scale: 1.1, y: -2 }}
+                                        whileTap={{ scale: 0.9 }}
+                                        href={social.href}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="p-2.5 rounded-lg bg-muted/50 hover:bg-primary/10 text-muted-foreground hover:text-primary transition-all border border-transparent hover:border-primary/20"
+                                        aria-label={social.label}
                                     >
-                                        {item}
-                                    </a>
-                                </li>
-                            ))}
-                        </ul>
-                    </div>
-
-                    {/* Services */}
-                    <div>
-                        <h4 className="font-semibold mb-4">Services</h4>
-                        <ul className="space-y-2">
-                            {[
-                                'Web Development',
-                                'Mobile Apps',
-                                'UI/UX Design',
-                                'Consulting',
-                                'Maintenance',
-                                'DevOps',
-                            ].map((service) => (
-                                <li key={service}>
-                                    <span className="text-sm text-muted-foreground">{service}</span>
-                                </li>
-                            ))}
-                        </ul>
-                    </div>
-
-                    {/* Connect */}
-                    <div>
-                        <h4 className="font-semibold mb-4">Connect</h4>
-                        <div className="flex space-x-3 mb-4">
-                            {socialLinks.map((social) => (
-                                <motion.a
-                                    key={social.label}
-                                    href={social.href}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    whileHover={{ scale: 1.1, y: -2 }}
-                                    whileTap={{ scale: 0.9 }}
-                                    className="p-2 rounded-lg glass hover:bg-primary/10 transition-colors"
-                                    aria-label={social.label}
-                                >
-                                    {/* You would replace this with actual icons */}
-                                    <span className="text-sm font-medium">{social.label}</span>
-                                </motion.a>
-                            ))}
+                                        <Icon className="w-4 h-4" />
+                                    </motion.a>
+                                )
+                            })}
                         </div>
-                        <p className="text-sm text-muted-foreground">
-                            Let's build something amazing together!
-                        </p>
                     </div>
                 </div>
 
-                {/* Bottom Bar */}
-                <div className="pt-8 border-t border-primary/20">
-                    <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
-                        <div className="text-sm text-muted-foreground">
-                            &copy; {new Date().getFullYear()} Md Tanveer Alam. All rights reserved.
-                        </div>
-
-                        <div className="flex items-center space-x-4">
-                            <motion.button
-                                onClick={scrollToTop}
-                                whileHover={{ scale: 1.05 }}
-                                whileTap={{ scale: 0.95 }}
-                                className="p-2 rounded-full glass hover:bg-primary/10 transition-colors"
-                                aria-label="Scroll to top"
-                            >
-                                <ArrowUp className="h-5 w-5" />
-                            </motion.button>
-
-                            <div className="flex items-center space-x-2 text-sm text-muted-foreground">
-                                <span>Made with</span>
-                                <Heart className="h-4 w-4 text-red-500 fill-current animate-pulse" />
-                                <span>in India</span>
-                            </div>
-                        </div>
+                {/* Bottom Copyright Bar */}
+                <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+                    <p className="text-muted-foreground text-xs font-bold tracking-wider">
+                        &copy; {new Date().getFullYear()} MD TANVEER ALAM. ALL RIGHTS RESERVED.
+                    </p>
+                    
+                    <div className="flex items-center gap-2 text-[10px] font-black uppercase tracking-[0.2em] text-muted-foreground bg-muted/30 px-4 py-2 rounded-full border border-border/50">
+                        <span>HANDCRAFTED WITH</span>
+                        <Heart className="w-3 h-3 text-primary fill-primary animate-pulse" />
+                        <span>BY MD TANVEER</span>
                     </div>
                 </div>
             </div>

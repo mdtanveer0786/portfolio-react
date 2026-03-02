@@ -141,7 +141,6 @@ export default {
                 },
                 "wave": {
                     "0%": { transform: "translateX(0)" },
-                    "50%": { transform: "translateX(-25%)" },
                     "100%": { transform: "translateX(-50%)" },
                 },
             },
@@ -177,16 +176,7 @@ export default {
                 '90': '90',
                 '100': '100',
             },
-            lineClamp: {
-                1: '1',
-                2: '2',
-                3: '3',
-                4: '4',
-                5: '5',
-            },
         },
     },
-    plugins: [
-        require('@tailwindcss/line-clamp'),
-    ],
+    plugins: [],
 }

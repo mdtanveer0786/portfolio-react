@@ -1,113 +1,84 @@
 import { motion } from 'framer-motion'
-import {
-    Code2,
-    Server,
-    Database,
-    Palette,
-    Cpu,
-    Globe
-} from 'lucide-react'
-import SkillCard from '../UI/SkillCard'
 import { skillCategories } from '../../utils/constants'
 
-export default function Skills({ setActiveSection }) {
+export default function Skills() {
+    // Flatten skills for a marquee or simpler grid
+    const allSkills = skillCategories.flatMap(cat => cat.skills);
+
     return (
-        <section id="skills" className="py-20">
-            <div className="container mx-auto px-4 sm:px-6">
+        <section id="skills" className="section-container relative overflow-hidden">
+            {/* Background Text */}
+             <div className="absolute top-16 left-1/2 -translate-x-1/2 text-6xl md:text-8xl font-black text-foreground/[0.05] dark:text-white/[0.05] uppercase tracking-[0.2em] whitespace-nowrap select-none pointer-events-none -z-10">
+                SKILLS
+            </div>
+
+            <div className="container mx-auto relative z-10">
                 <motion.div
-                    initial={{ opacity: 0, y: 50 }}
+                    initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
-                    transition={{ duration: 0.5 }}
-                    className="text-center mb-12"
+                    className="text-center mb-16 space-y-4"
                 >
-                    <span className="inline-block px-4 py-2 rounded-full bg-primary/10 text-primary font-medium text-sm mb-4">
-                        Expertise
-                    </span>
-                    <h2 className="text-4xl md:text-5xl font-bold mb-4">
-                        Technical{' '}
-                        <span className="bg-gradient-to-r from-primary to-purple-600 bg-clip-text text-transparent">
-                            Skills
-                        </span>
+                    <div className="w-24 h-1 bg-gradient-to-r from-violet-600 to-cyan-400 mx-auto rounded-full" />
+                    <h2 className="text-3xl md:text-5xl font-black uppercase tracking-wider">
+                        Skills
                     </h2>
-                    <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-                        Continuously learning and mastering cutting-edge technologies to deliver
-                        exceptional solutions.
-                    </p>
                 </motion.div>
 
-                <div className="grid md:grid-cols-2 gap-8">
-                    {skillCategories.map((category, categoryIndex) => (
-                        <motion.div
-                            key={category.title}
-                            initial={{ opacity: 0, y: 50 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ duration: 0.5, delay: categoryIndex * 0.1 }}
-                            className="glass rounded-2xl p-6 hover:shadow-xl transition-shadow"
-                        >
-                            <div className="flex items-center space-x-3 mb-6">
-                                <div className="p-3 rounded-xl bg-primary/10">
-                                    {category.icon === Code2 && <Code2 className="h-6 w-6 text-primary" />}
-                                    {category.icon === Server && <Server className="h-6 w-6 text-primary" />}
-                                    {category.icon === Database && <Database className="h-6 w-6 text-primary" />}
-                                    {category.icon === Cpu && <Cpu className="h-6 w-6 text-primary" />}
+                {/* Marquee effect for skills */}
+                <div className="relative flex overflow-x-hidden group py-10">
+                    <div className="animate-wave flex whitespace-nowrap">
+                        {[...allSkills, ...allSkills].map((skill, index) => (
+                            <div
+                               key={`${skill.name}-${index}`}
+                               className="mx-4 flex flex-col items-center justify-center p-6 min-w-[140px] glass-card border-border rounded-xl hover:border-primary/50 transition-all"
+                            >                                <div className="h-12 w-12 flex items-center justify-center mb-4">
+                                    <img 
+                                        src={`https://cdn.jsdelivr.net/gh/devicons/devicon/icons/${skill.name.toLowerCase().replace('.js', 'js').replace(' ', '')}/${skill.name.toLowerCase().replace('.js', 'js').replace(' ', '')}-original.svg`} 
+                                        alt={skill.name}
+                                        className="w-full h-full object-contain filter grayscale group-hover:grayscale-0 transition-all"
+                                        onError={(e) => {
+                                            e.target.onerror = null;
+                                            e.target.src = `https://ui-avatars.com/api/?name=${skill.name}&background=1b2c68&color=fff&bold=true`;
+                                        }}
+                                    />
                                 </div>
-                                <h3 className="text-xl font-bold">{category.title}</h3>
+                                <span className="text-sm font-bold tracking-wider text-muted-foreground group-hover:text-primary transition-colors">
+                                    {skill.name}
+                                </span>
                             </div>
+                        ))}
+                    </div>
+                </div>
 
-                            <div className="space-y-4">
-                                {category.skills.map((skill, skillIndex) => (
-                                    <motion.div
-                                        key={skill.name}
-                                        initial={{ opacity: 0, x: -20 }}
-                                        whileInView={{ opacity: 1, x: 0 }}
-                                        viewport={{ once: true }}
-                                        transition={{ duration: 0.3, delay: skillIndex * 0.05 }}
-                                    >
-                                        <SkillCard
-                                            skill={skill.name}
-                                            level={skill.level}
-                                            color={skill.color}
-                                            showPercentage={true}
-                                        />
-                                    </motion.div>
-                                ))}
+                <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4 mt-12">
+                    {allSkills.map((skill, index) => (
+                        <motion.div
+                            key={skill.name}
+                            initial={{ opacity: 0, scale: 0.9 }}
+                            whileInView={{ opacity: 1, scale: 1 }}
+                            viewport={{ once: true }}
+                            transition={{ delay: index * 0.05 }}
+                            whileHover={{ y: -5 }}
+                            className="flex flex-col items-center justify-center p-6 glass-card border-border rounded-xl hover:border-primary/50 transition-all group"
+                        >
+                            <div className="h-10 w-10 flex items-center justify-center mb-3">
+                                <img 
+                                    src={`https://cdn.jsdelivr.net/gh/devicons/devicon/icons/${skill.name.toLowerCase().replace('.js', 'js').replace(' ', '')}/${skill.name.toLowerCase().replace('.js', 'js').replace(' ', '')}-original.svg`} 
+                                    alt={skill.name}
+                                    className="w-full h-full object-contain filter grayscale group-hover:grayscale-0 transition-all"
+                                    onError={(e) => {
+                                        e.target.onerror = null;
+                                        e.target.src = `https://ui-avatars.com/api/?name=${skill.name}&background=1b2c68&color=fff&bold=true`;
+                                    }}
+                                />
                             </div>
+                            <span className="text-xs font-bold tracking-wider text-muted-foreground group-hover:text-primary transition-colors">
+                                {skill.name}
+                            </span>
                         </motion.div>
                     ))}
                 </div>
-
-                {/* Additional Skills */}
-                <motion.div
-                    initial={{ opacity: 0, y: 50 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.5 }}
-                    className="mt-12 glass rounded-2xl p-8"
-                >
-                    <h3 className="text-2xl font-bold mb-6 text-center">Additional Skills</h3>
-                    <div className="flex flex-wrap gap-3 justify-center">
-                        {[
-                            'Problem Solving', 'Team Leadership', 'Agile Methodologies',
-                            'Code Review', 'Technical Documentation', 'Performance Optimization',
-                            'Security Best Practices', 'UI/UX Principles', 'Testing & Debugging',
-                            'System Design', 'Microservices', 'GraphQL', 'WebSockets', 'PWA'
-                        ].map((skill, index) => (
-                            <motion.span
-                                key={skill}
-                                initial={{ opacity: 0, scale: 0 }}
-                                whileInView={{ opacity: 1, scale: 1 }}
-                                viewport={{ once: true }}
-                                transition={{ duration: 0.3, delay: index * 0.05 }}
-                                whileHover={{ scale: 1.05 }}
-                                className="px-4 py-2 rounded-full bg-secondary hover:bg-primary/10 transition-colors cursor-default"
-                            >
-                                {skill}
-                            </motion.span>
-                        ))}
-                    </div>
-                </motion.div>
             </div>
         </section>
     )
