@@ -1,45 +1,63 @@
-import { TypeAnimation } from "react-type-animation";
+import { useEffect, useState } from "react";
+
+const fullCode = `const developer = {
+  name: "Md Tanveer Alam",
+  role: "Full Stack Developer",
+
+  frontend: ["React", "Tailwind", "JavaScript"],
+  backend: ["Node", "Express", "REST API"],
+  database: ["MongoDB", "MySQL"],
+  tools: ["Git", "GitHub", "Postman"],
+
+  hireable: true
+};`;
 
 const CodeBlock = () => {
+  const [typedText, setTypedText] = useState("");
+
+  useEffect(() => {
+    let index = 0;
+
+    const typing = setInterval(() => {
+      setTypedText(fullCode.slice(0, index));
+      index++;
+      if (index > fullCode.length) clearInterval(typing);
+    }, 25);
+
+    return () => clearInterval(typing);
+  }, []);
+
   return (
-    <div className="w-full max-w-2xl mx-auto rounded-2xl overflow-hidden
-                    bg-[#0f172a] border border-purple-500/30
-                    shadow-[0_0_40px_rgba(168,85,247,0.12)]">
+    <div className="w-full max-w-3xl mx-auto rounded-2xl overflow-hidden
+                    bg-[#0d1117] border border-indigo-500/30
+                    shadow-[0_0_40px_rgba(99,102,241,0.15)]">
 
       {/* Header */}
-      <div className="flex items-center gap-2 px-4 py-3 bg-[#111827] border-b border-purple-500/20">
-        <div className="w-3 h-3 rounded-full bg-purple-500"></div>
-        <div className="w-3 h-3 rounded-full bg-green-500"></div>
+      <div className="flex items-center justify-between px-5 py-3 bg-[#161b22] border-b border-gray-700">
+        <div className="flex gap-2">
+          <div className="w-3 h-3 rounded-full bg-red-500"></div>
+          <div className="w-3 h-3 rounded-full bg-yellow-500"></div>
+          <div className="w-3 h-3 rounded-full bg-green-500"></div>
+        </div>
+        <span className="text-xs text-gray-400 font-mono">
+          developer.js
+        </span>
       </div>
 
-      {/* Code */}
-      <div className="p-6 font-mono text-sm md:text-base leading-relaxed">
-        <pre className="whitespace-pre-wrap text-green-400">
+      {/* Code Area */}
+      <div className="relative p-6 font-mono text-sm md:text-base whitespace-pre-wrap">
 
-          <span className="text-purple-400 font-semibold">const</span> developer = {"{"}
+        {/* Invisible full code to fix height */}
+        <div className="invisible">
+          {fullCode}
+        </div>
 
-          {"\n  "}name: "<TypeAnimation
-            sequence={["Md Tanveer Alam", 2000]}
-            speed={50}
-            repeat={Infinity}
-            wrapper="span"
-          />",
+        {/* Typed text overlay */}
+        <div className="absolute top-6 left-6 text-green-400">
+          {typedText}
+          <span className="animate-pulse">|</span>
+        </div>
 
-          {"\n  "}role: "Full Stack Developer",
-
-          {"\n  "}frontend: ["React", "Tailwind", "JavaScript"],
-
-          {"\n  "}backend: ["Node", "Express", "REST API"],
-
-          {"\n  "}database: ["MongoDB", "MySQL"],
-
-          {"\n  "}tools: ["Git", "GitHub", "Postman"],
-
-          {"\n  "}hireable: <span className="text-purple-400">true</span>
-
-          {"\n"}{"};"}
-
-        </pre>
       </div>
     </div>
   );
