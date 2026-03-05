@@ -11,7 +11,7 @@ export default function Loader() {
                 <div className="w-16 h-16 border-4 border-primary/20 border-t-primary rounded-full animate-spin" />
                 <div className="absolute inset-0 w-16 h-16 border-4 border-transparent border-b-primary rounded-full animate-spin-slow" />
             </motion.div>
-            
+
             <motion.div
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -19,7 +19,7 @@ export default function Loader() {
                 className="mt-6 text-center"
             >
                 <span className="text-lg font-bold tracking-widest uppercase premium-text-gradient">
-                    Tanveer
+                    Loading
                 </span>
             </motion.div>
         </div>

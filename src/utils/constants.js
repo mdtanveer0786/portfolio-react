@@ -1,7 +1,7 @@
-import { 
-    Code2, 
-    Server, 
-    Database, 
+import {
+    Code2,
+    Server,
+    Database,
     Github,
     Linkedin,
     Twitter,
@@ -92,76 +92,81 @@ export const skillCategories = [
 export const projects = [
     {
         id: 1,
-        title: 'E-commerce Platform',
-        description: 'Full-stack e-commerce solution with user authentication, product management, and payment integration.',
-        tags: ['React', 'Node.js', 'MongoDB', 'Express'],
-        image: 'https://images.unsplash.com/photo-1557821552-17105176677c?auto=format&fit=crop&w=800',
-        github: 'https://github.com/mdtanveer0786/ecommerce-platform',
-        live: 'https://ecommerce-demo-mdtanveer.netlify.app',
+        title: 'Real Estate Elite',
+        description: 'Full-stack MERN real estate platform with JWT authentication, secure REST APIs, MongoDB database, admin dashboard, and full CRUD operations for property listings.',
+        tags: ['MongoDB', 'Express', 'React', 'Node.js', 'JWT', 'REST API'],
+        image: 'https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w=800',
+        github: 'https://github.com/mdtanveer0786/real-estate-app',
+        live: 'https://real-estateelite.vercel.app/',
         featured: true,
         category: 'fullstack',
-        date: '2024-02-15'
+        date: '2025-02-10'
     },
+
     {
         id: 2,
-        title: 'Task Management App',
-        description: 'Interactive task management application with drag-drop functionality and local storage.',
-        tags: ['React', 'JavaScript', 'CSS3'],
-        image: 'https://images.unsplash.com/photo-1540350394557-8d14678e7f91?auto=format&fit=crop&w=800',
-        github: 'https://github.com/mdtanveer0786/task-manager',
-        live: 'https://taskmanager-mdtanveer.netlify.app',
+        title: 'Trade Analyzer Pro',
+        description: 'Full-stack MERN trading analytics platform with JWT authentication, REST APIs, MongoDB database, admin dashboard, and complete CRUD operations to track trades and performance.',
+        tags: ['MongoDB', 'Express', 'React', 'Node.js', 'JWT', 'REST API'],
+        image: 'https://images.unsplash.com/photo-1642790106117-e829e14a795f?auto=format&fit=crop&w=800',
+        github: 'https://github.com/mdtanveer0786/Trade-Analyzer-Pro',
+        live: 'https://trade-analyzer-proo.vercel.app/',
         featured: true,
-        category: 'frontend',
-        date: '2023-11-10'
+        category: 'fullstack',
+        date: '2025-01-18'
     },
+
     {
         id: 3,
-        title: 'REST API Service',
-        description: 'Secure RESTful API with JWT authentication, CRUD operations, and database integration.',
-        tags: ['Node.js', 'Express', 'MongoDB'],
-        image: 'https://images.unsplash.com/photo-1558494949-ef010cbdcc48?auto=format&fit=crop&w=800',
-        github: 'https://github.com/mdtanveer0786/rest-api',
-        live: 'https://api-mdtanveer.herokuapp.com',
-        featured: false,
-        category: 'backend',
-        date: '2023-09-20'
+        title: 'Finance Dashboard',
+        description: 'Interactive finance analytics dashboard with charts, statistics, and financial insights.',
+        tags: ['React', 'Tailwind', 'Charts'],
+        image: 'https://images.unsplash.com/photo-1551281044-8c5c2d0f89b1?auto=format&fit=crop&w=800',
+        github: 'https://github.com/mdtanveer0786/finance-dashboard',
+        live: 'https://financee-dashboard.netlify.app/',
+        featured: true,
+        category: 'frontend',
+        date: '2024-12-05'
     },
+
     {
         id: 4,
-        title: 'Weather Application',
-        description: 'Real-time weather application with location detection and 5-day forecast.',
-        tags: ['JavaScript', 'API', 'CSS3'],
-        image: 'https://images.unsplash.com/photo-1592210454359-9043f067919b?auto=format&fit=crop&w=800',
-        github: 'https://github.com/mdtanveer0786/weather-app',
-        live: 'https://weatherapp-mdtanveer.netlify.app',
+        title: 'EduEarn India',
+        description: 'Educational platform providing information about earning opportunities and online learning.',
+        tags: ['React', 'JavaScript', 'CSS'],
+        image: 'https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=800',
+        github: 'https://github.com/mdtanveer0786/EduEarn-India',
+        live: 'https://edu-earn-india.vercel.app/',
         featured: false,
         category: 'frontend',
-        date: '2023-07-05'
+        date: '2024-11-20'
     },
+
     {
         id: 5,
-        title: 'Social Media Dashboard',
-        description: 'Real-time social media dashboard with analytics, notifications, and user management.',
-        tags: ['React', 'Node.js', 'Socket.io'],
-        image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=800',
-        github: 'https://github.com/mdtanveer0786/social-dashboard',
-        live: 'https://social-dashboard-demo.netlify.app',
+        title: 'Delhi Bikes Hub',
+        description: 'Bike selling and listing platform where users can explore bikes and contact sellers.',
+        tags: ['React', 'Tailwind', 'JavaScript'],
+        image: 'https://images.unsplash.com/photo-1558981806-ec527fa84c39?auto=format&fit=crop&w=800',
+        github: 'https://github.com/mdtanveer0786/DelhiBikesHub',
+        live: 'https://delhi-bikes-hub.vercel.app/',
         featured: false,
-        category: 'fullstack',
-        date: '2023-12-15'
+        category: 'frontend',
+        date: '2024-10-15'
     },
+
     {
         id: 6,
-        title: 'Blog CMS',
-        description: 'Full-featured blog CMS with rich text editor, user roles, and comment system.',
-        tags: ['Node.js', 'Express', 'MongoDB'],
-        image: 'https://images.unsplash.com/photo-1499750310107-5fef28a66643?auto=format&fit=crop&w=800',
-        github: 'https://github.com/mdtanveer0786/blog-cms',
-        live: 'https://blog-cms-api.herokuapp.com',
+        title: 'E-commerce Platform',
+        description: 'Full-stack e-commerce solution with authentication, product management, and payment integration.',
+        tags: ['React', 'Node.js', 'MongoDB', 'Express'],
+        image: 'https://images.unsplash.com/photo-1557821552-17105176677c?auto=format&fit=crop&w=800',
+        github: '',
+        live: '',
         featured: false,
-        category: 'backend',
-        date: '2023-10-12'
-    },
+        category: 'fullstack',
+        date: '2024-02-15'
+    }
 ]
 
 export const experience = [
@@ -185,7 +190,7 @@ export const education = [
         id: 1,
         degree: 'Computer Science Engineering (B.Tech)',
         institution: 'Bikaner Technical University',
-        period: '2021 - 2025',
+        period: '2020 - 2025',
         grade: 'CGPA: 7/10',
         description: 'Specialized in software development, database management, and web technologies.'
     },
