@@ -8,14 +8,13 @@ export default function Projects() {
     return (
         <section id="projects" className="section-container relative overflow-hidden">
             {/* Background Text */}
-             <div className="absolute top-16 left-1/2 -translate-x-1/2 text-6xl md:text-8xl font-black text-foreground/[0.05] dark:text-white/[0.05] uppercase tracking-[0.2em] whitespace-nowrap select-none pointer-events-none -z-10">
-                PROJECTS
+            <div className="absolute top-8 md:top-10 left-1/2 -translate-x-1/2 text-5xl sm:text-7xl md:text-8xl lg:text-[10rem] font-black text-foreground/5 dark:text-white/5 uppercase tracking-[0.2em] whitespace-nowrap select-none pointer-events-none -z-10">
+               PROJECTS
             </div>
 
             <div className="container mx-auto relative z-10">
-                <div className="text-center mb-16 space-y-4">
-                    <div className="w-24 h-1 bg-gradient-to-r from-violet-600 to-cyan-400 mx-auto rounded-full" />
-                    <TextReveal 
+               <div className="text-center mb-8 md:mb-10 space-y-4">
+                   <div className="w-24 h-1 bg-gradient-to-r from-violet-600 to-cyan-400 mx-auto rounded-full" />                    <TextReveal 
                         text="Featured Projects" 
                         className="text-3xl md:text-5xl font-black uppercase tracking-wider" 
                     />

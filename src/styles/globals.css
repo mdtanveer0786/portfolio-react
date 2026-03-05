@@ -58,9 +58,24 @@
         @apply scroll-smooth selection:bg-primary/20 selection:text-primary;
     }
 
+    /* Prevent smooth scroll on initial load/refresh to avoid jumps */
+    html.loading {
+        scroll-behavior: auto !important;
+    }
+
+    /* Nuclear fix: Lock body during loading to prevent browser scroll restoration */
+    body.no-scroll {
+        overflow: hidden !important;
+        height: 100vh !important;
+        width: 100% !important;
+        position: fixed !important;
+    }
+
     body {
         @apply bg-background text-foreground antialiased overflow-x-hidden transition-colors duration-500;
         font-feature-settings: "rlig" 1, "calt" 1;
+        /* Professional Fix: Prevent browser from anchoring scroll to footer during dynamic renders */
+        overflow-anchor: none;
     }
 
     h1, h2, h3, h4, h5, h6 {
@@ -98,7 +113,8 @@
     }
 
     .section-container {
-        @apply container mx-auto px-6 py-24 md:py-32 relative z-10;
+        @apply container mx-auto px-4 sm:px-6 pt-20 pb-12 md:pt-28 md:pb-16 relative z-10;
+        scroll-margin-top: 20px;
     }
 
     .bento-grid {

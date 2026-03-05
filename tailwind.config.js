@@ -157,7 +157,7 @@ export default {
                 "pulse-subtle": "pulse-subtle 2s ease-in-out infinite",
                 "spin-slow": "spin-slow 20s linear infinite",
                 "bounce-slow": "bounce-slow 3s ease-in-out infinite",
-                "wave": "wave 10s linear infinite",
+                "wave": "wave 30s linear infinite",
             },
             backdropBlur: {
                 xs: '2px',

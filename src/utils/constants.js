@@ -11,11 +11,10 @@ import {
     User,
     GraduationCap,
     Layers,
-    Briefcase,
     MessageSquare
 } from 'lucide-react'
 
-export const LOADING_DURATION = 2000;
+export const LOADING_DURATION = 1000;
 
 export const SECTIONS = ['home', 'about', 'skills', 'projects', 'education', 'contact'];
 

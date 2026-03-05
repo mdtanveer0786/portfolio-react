@@ -43,56 +43,55 @@ export default function Contact() {
     return (
         <section id="contact" className="section-container relative overflow-hidden">
             {/* Background Text */}
-            <div className="absolute top-16 left-1/2 -translate-x-1/2 text-6xl md:text-8xl font-black text-foreground/[0.05] dark:text-white/[0.05] uppercase tracking-[0.2em] whitespace-nowrap select-none pointer-events-none -z-10">
-                CONTACT
+            <div className="absolute top-8 md:top-10 left-1/2 -translate-x-1/2 text-5xl sm:text-7xl md:text-8xl lg:text-[10rem] font-black text-foreground/5 dark:text-white/5 uppercase tracking-[0.2em] whitespace-nowrap select-none pointer-events-none -z-10">
+               CONTACT
             </div>
 
             <div className="container mx-auto relative z-10">
-                <div className="text-center mb-16 space-y-4">
-                    <div className="w-24 h-1 bg-gradient-to-r from-violet-600 to-cyan-400 mx-auto rounded-full" />
-                    <TextReveal 
+               <div className="text-center mb-8 md:mb-10 space-y-4">
+                   <div className="w-24 h-1 bg-gradient-to-r from-violet-600 to-cyan-400 mx-auto rounded-full" />                    <TextReveal 
                         text="Let's Start a Project" 
-                        className="text-4xl md:text-6xl font-black uppercase tracking-wider" 
+                        className="text-3xl md:text-5xl font-black uppercase tracking-wider" 
                     />
-                    <p className="text-muted-foreground max-w-2xl mx-auto text-lg font-medium">
+                    <p className="text-muted-foreground max-w-2xl mx-auto text-sm md:text-base font-medium">
                         Have an idea? Let&apos;s turn it into a reality.
                     </p>
                 </div>
 
-                <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start max-w-6xl mx-auto">
                     {/* Contact Info Card */}
                     <div className="lg:col-span-5">
                         <SectionReveal x={-30}>
-                            <div className="glass-card p-8 space-y-8 relative overflow-hidden border-border">
+                            <div className="glass-card p-6 md:p-8 space-y-8 relative overflow-hidden border-border/50">
                                 <div className="absolute -right-4 -top-4 p-8 opacity-5">
-                                    <MessageSquare className="w-32 h-32" />
+                                    <MessageSquare className="w-24 h-24" />
                                 </div>
 
                                 <div className="space-y-4">
-                                    <h3 className="text-3xl font-bold">Connect With Me</h3>
-                                    <p className="text-muted-foreground leading-relaxed font-medium">
+                                    <h3 className="text-2xl font-bold">Connect With Me</h3>
+                                    <p className="text-muted-foreground leading-relaxed text-sm font-medium">
                                         I&apos;m always open to discussing new projects, creative ideas, or opportunities to be part of your vision.
                                     </p>
                                 </div>
 
-                                <div className="space-y-6">
+                                <div className="space-y-5">
                                     {[
                                         { icon: Mail, label: 'Email', value: 'tanveerdev14@gmail.com', href: 'mailto:tanveerdev14@gmail.com' },
                                         { icon: Phone, label: 'Phone', value: '+91 8252574386', href: 'tel:+918252574386' },
                                         { icon: MapPin, label: 'Location', value: 'Delhi, India • Remote', href: null },
                                     ].map((item) => (
                                         <div key={item.label} className="flex items-center gap-4 group">
-                                            <div className="p-4 rounded-2xl bg-primary/10 text-primary group-hover:scale-110 transition-transform border border-primary/20">
-                                                <item.icon className="w-5 h-5" />
+                                            <div className="p-3.5 rounded-xl bg-primary/5 text-primary group-hover:scale-105 transition-transform border border-primary/10">
+                                                <item.icon className="w-4 h-4" />
                                             </div>
                                             <div>
-                                                <p className="text-xs font-bold uppercase tracking-wider text-muted-foreground">{item.label}</p>
+                                                <p className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground/70">{item.label}</p>
                                                 {item.href ? (
-                                                    <a href={item.href} className="text-lg font-bold hover:text-primary transition-colors text-foreground">
+                                                    <a href={item.href} className="text-base font-bold hover:text-primary transition-colors text-foreground">
                                                         {item.value}
                                                     </a>
                                                 ) : (
-                                                    <p className="text-lg font-bold text-foreground">{item.value}</p>
+                                                    <p className="text-base font-bold text-foreground">{item.value}</p>
                                                 )}
                                             </div>
                                         </div>
@@ -105,75 +104,77 @@ export default function Contact() {
                     {/* Form Card */}
                     <div className="lg:col-span-7">
                         <SectionReveal x={30}>
-                            <form onSubmit={handleSubmit} className="glass-card p-8 md:p-12 space-y-6 border-border">
-                                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                                    <div className="space-y-2">
-                                        <label className="text-sm font-bold ml-1 text-foreground">Full Name</label>
+                            <form onSubmit={handleSubmit} className="glass-card p-6 md:p-10 space-y-5 border-border/50">
+                                <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+                                    <div className="space-y-1.5">
+                                        <label className="text-xs font-bold ml-1 text-muted-foreground uppercase tracking-wider">Full Name</label>
                                         <input
                                             type="text"
                                             name="name"
                                             value={formData.name}
                                             onChange={handleChange}
-                                            className="w-full px-6 py-4 rounded-2xl bg-background glass border-black/10 dark:border-white/10 focus:border-violet-500 outline-none transition-all text-foreground"
-                                            placeholder="John Doe"
+                                            className="w-full px-5 py-3 rounded-xl bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/10 focus:border-violet-500 outline-none transition-all text-sm text-foreground"
+                                            placeholder="your name"
                                         />
                                     </div>
-                                    <div className="space-y-2">
-                                        <label className="text-sm font-bold ml-1 text-foreground">Email Address</label>
+                                    <div className="space-y-1.5">
+                                        <label className="text-xs font-bold ml-1 text-muted-foreground uppercase tracking-wider">Email Address</label>
                                         <input
                                             type="email"
                                             name="email"
                                             value={formData.email}
                                             onChange={handleChange}
-                                            className="w-full px-6 py-4 rounded-2xl bg-background glass border-black/10 dark:border-white/10 focus:border-violet-500 outline-none transition-all text-foreground"
-                                            placeholder="john@example.com"
+                                            className="w-full px-5 py-3 rounded-xl bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/10 focus:border-violet-500 outline-none transition-all text-sm text-foreground"
+                                            placeholder="your email"
                                         />
                                     </div>
                                 </div>
 
-                                <div className="space-y-2">
-                                    <label className="text-sm font-bold ml-1 text-foreground">Subject</label>
+                                <div className="space-y-1.5">
+                                    <label className="text-xs font-bold ml-1 text-muted-foreground uppercase tracking-wider">Subject</label>
                                     <input
                                         type="text"
                                         name="subject"
                                         value={formData.subject}
                                         onChange={handleChange}
-                                        className="w-full px-6 py-4 rounded-2xl bg-background glass border-black/10 dark:border-white/10 focus:border-violet-500 outline-none transition-all text-foreground"
+                                        className="w-full px-5 py-3 rounded-xl bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/10 focus:border-violet-500 outline-none transition-all text-sm text-foreground"
                                         placeholder="Project Opportunity"
                                     />
                                 </div>
 
-                                <div className="space-y-2">
-                                    <label className="text-sm font-bold ml-1 text-foreground">Message</label>
+                                <div className="space-y-1.5">
+                                    <label className="text-xs font-bold ml-1 text-muted-foreground uppercase tracking-wider">Message</label>
                                     <textarea
                                         name="message"
-                                        rows={5}
+                                        rows={4}
                                         value={formData.message}
                                         onChange={handleChange}
-                                        className="w-full px-6 py-4 rounded-2xl bg-background glass border-black/10 dark:border-white/10 focus:border-violet-500 outline-none transition-all resize-none text-foreground"
+                                        className="w-full px-5 py-3 rounded-xl bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/10 focus:border-violet-500 outline-none transition-all text-sm resize-none text-foreground"
                                         placeholder="Tell me more about your project..."
                                     />
                                 </div>
 
-                                <Magnetic>
-                                    <motion.button
-                                        whileHover={{ scale: 1.02 }}
-                                        whileTap={{ scale: 0.98 }}
-                                        disabled={isSubmitting}
-                                        className="w-full py-5 rounded-2xl bg-gradient-to-r from-violet-600 to-pink-600 text-white font-bold flex items-center justify-center gap-3 shadow-xl hover:shadow-violet-500/40 transition-all disabled:opacity-50 uppercase tracking-widest"
-                                    >
-                                        {isSubmitting ? (
-                                            <div className="w-6 h-6 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-                                        ) : (
-                                            <>
-                                                <span>Send Message</span>
-                                                <Send className="w-5 h-5" />
-                                            </>
-                                        )}
-                                    </motion.button>
-                                </Magnetic>
+                                <div className="pt-2">
+                                    <Magnetic>
+                                        <motion.button
+                                            whileHover={{ scale: 1.02 }}
+                                            whileTap={{ scale: 0.98 }}
+                                            disabled={isSubmitting}
+                                            className="px-8 py-3.5 rounded-xl bg-gradient-to-r from-violet-600 to-indigo-600 text-white font-bold flex items-center justify-center gap-2.5 shadow-lg hover:shadow-violet-500/30 transition-all disabled:opacity-50 uppercase tracking-widest text-xs"
+                                        >
+                                            {isSubmitting ? (
+                                                <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                                            ) : (
+                                                <>
+                                                    <span>Send Message</span>
+                                                    <Send className="w-3.5 h-3.5" />
+                                                </>
+                                            )}
+                                        </motion.button>
+                                    </Magnetic>
+                                </div>
                                 
-                                <p className="text-center text-xs text-muted-foreground flex items-center justify-center gap-2">
+                                <p className="text-xs text-muted-foreground flex items-center gap-2 opacity-70">
                                     <Sparkles className="w-3 h-3 text-primary" />
                                     Usually responds within 24 hours
                                 </p>

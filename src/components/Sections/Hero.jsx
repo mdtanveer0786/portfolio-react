@@ -3,7 +3,6 @@ import { ArrowRight, Download } from 'lucide-react'
 import CodeBlock from '../UI/CodeBlock'
 import { socialLinks } from '../../utils/constants'
 import TextReveal from '../UI/TextReveal'
-import SectionReveal from '../UI/SectionReveal'
 import Magnetic from '../UI/Magnetic'
 
 export default function Hero({ setActiveSection }) {
@@ -31,7 +30,7 @@ export default function Hero({ setActiveSection }) {
     }
 
     return (
-        <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden pt-32 pb-12 sm:pt-36 sm:pb-20 lg:pt-24 lg:pb-12 px-4 sm:px-6 md:px-10">
+        <section id="home" className="relative min-h-[90vh] flex items-center justify-center overflow-hidden pt-28 pb-6 sm:pt-32 sm:pb-8 lg:pt-24 lg:pb-6 px-4 sm:px-6 md:px-10">
             <div className="container mx-auto relative z-10">
                 <div className="flex flex-col lg:flex-row items-center justify-between gap-12 xl:gap-20">
                     {/* Left Column: Text Content */}
@@ -42,13 +41,13 @@ export default function Hero({ setActiveSection }) {
                         className="w-full lg:w-3/5 space-y-8 sm:space-y-10 text-center lg:text-left order-1"
                     >
                         <motion.div variants={itemVariants} className="space-y-4 sm:space-y-6">
-                            <h1 className="text-3xl xs:text-4xl sm:text-5xl md:text-6xl xl:text-7xl font-black tracking-tighter leading-[1.15] sm:leading-[1.1]">
+                            <h1 className="text-2xl xs:text-3xl sm:text-4xl md:text-5xl xl:text-6xl font-black tracking-tight leading-[1.2] sm:leading-[1.1]">
                                 <TextReveal text="Hello, I'm" className="justify-center lg:justify-start" />
                                 <span className="premium-text-gradient animate-gradient">Md Tanveer Alam</span>, <br />
                                 <TextReveal text="I'm a Professional" className="justify-center lg:justify-start" />
                                 <span className="text-foreground">Full Stack Developer</span>.
                             </h1>
-                            <p className="text-muted-foreground text-base sm:text-lg md:text-xl font-medium max-w-2xl mx-auto lg:mx-0 leading-relaxed">
+                            <p className="text-muted-foreground text-sm sm:text-base md:text-lg font-medium max-w-2xl mx-auto lg:mx-0 leading-relaxed">
                                 I engineer highly scalable, performance-driven web applications with an obsessive focus on user experience and clean code architecture.
                             </p>
                         </motion.div>

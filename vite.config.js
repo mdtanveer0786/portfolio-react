@@ -11,15 +11,27 @@ export default defineConfig({
         outDir: 'dist',
         sourcemap: false,
         minify: 'terser',
+        terserOptions: {
+            compress: {
+                drop_console: true,
+                drop_debugger: true
+            }
+        },
         rollupOptions: {
             output: {
-                manualChunks: {
-                    vendor: ['react', 'react-dom'],
-                    framer: ['framer-motion'],
-                    particles: ['react-particles', 'tsparticles-slim'],
-                    ui: ['lucide-react', 'class-variance-authority']
+                manualChunks(id) {
+                    if (id.includes('node_modules')) {
+                        if (id.includes('react')) return 'vendor-react';
+                        if (id.includes('framer-motion')) return 'vendor-framer';
+                        if (id.includes('tsparticles') || id.includes('react-particles')) return 'vendor-particles';
+                        if (id.includes('lucide-react')) return 'vendor-icons';
+                        return 'vendor';
+                    }
                 }
             }
-        }
+        },
+        chunkSizeWarningLimit: 1000,
+        cssCodeSplit: true,
+        assetsInlineLimit: 4096
     }
 })

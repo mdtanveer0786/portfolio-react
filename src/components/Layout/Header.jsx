@@ -28,32 +28,32 @@ export default function Header({ activeSection, setActiveSection }) {
         <header
             className={cn(
                 'fixed top-0 left-0 right-0 z-50 transition-all duration-500 flex justify-center px-4',
-                scrolled ? 'py-4' : 'py-6 md:py-8'
+                scrolled ? 'py-4' : 'py-6'
             )}
         >
             <nav className={cn(
-                "flex items-center justify-between px-4 md:px-6 py-2.5 md:py-3 rounded-full transition-all duration-500 border",
+                "flex items-center justify-between px-4 md:px-6 py-2 rounded-full transition-all duration-500 border w-full max-w-5xl",
                 scrolled 
-                    ? "bg-white/60 dark:bg-black/60 border-black/5 dark:border-white/10 shadow-[0_8px_30px_rgb(0,0,0,0.04)] dark:shadow-[0_8px_30px_rgb(0,0,0,0.1)] backdrop-blur-2xl w-full max-w-5xl" 
-                    : "bg-transparent border-transparent w-full max-w-6xl"
+                    ? "bg-white/70 dark:bg-black/70 border-black/5 dark:border-white/10 shadow-lg backdrop-blur-xl" 
+                    : "bg-white/40 dark:bg-black/40 border-black/5 dark:border-white/5 backdrop-blur-md"
             )}>
                 {/* Logo */}
                 <motion.div
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
                     className="flex items-center gap-2 cursor-pointer group"
                     onClick={() => handleNavClick('#home')}
                 >
-                    <div className="w-8 h-8 rounded-lg bg-gradient-to-tr from-violet-600 to-fuchsia-500 flex items-center justify-center text-white font-bold text-sm flex-shrink-0 shadow-[0_0_20px_rgba(139,92,246,0.3)]">
+                    <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-violet-600 to-indigo-600 flex items-center justify-center text-white font-bold text-xs flex-shrink-0 shadow-lg">
                         MD
                     </div>
-                    <span className="text-lg md:text-xl font-black tracking-tighter text-foreground uppercase hidden xs:block">
-                        Tanveer<span className="text-primary"></span>
+                    <span className="text-base md:text-lg font-bold tracking-tight text-foreground uppercase hidden xs:block">
+                        Tanveer
                     </span>
                 </motion.div>
 
                 {/* Desktop Navigation */}
-                <div className="hidden lg:flex items-center bg-black/5 dark:bg-white/5 rounded-full p-1 border border-black/5 dark:border-white/5 mx-4">
+                <div className="hidden lg:flex items-center gap-1">
                     {navItems.map((item) => {
                         const isActive = activeSection === item.href.substring(1);
                         return (
@@ -61,7 +61,7 @@ export default function Header({ activeSection, setActiveSection }) {
                                 key={item.label}
                                 onClick={() => handleNavClick(item.href)}
                                 className={cn(
-                                    "px-6 py-2 rounded-full text-xs font-bold uppercase tracking-[0.15em] transition-all relative group",
+                                    "px-4 py-2 rounded-full text-[11px] font-bold uppercase tracking-widest transition-all relative group",
                                     isActive 
                                         ? "text-white" 
                                         : "text-muted-foreground hover:text-foreground"
@@ -71,8 +71,8 @@ export default function Header({ activeSection, setActiveSection }) {
                                 {isActive && (
                                     <motion.div 
                                         layoutId="active-pill"
-                                        className="absolute inset-0 bg-gradient-to-r from-violet-600 to-fuchsia-600 rounded-full shadow-[0_0_15px_rgba(139,92,246,0.5)]"
-                                        transition={{ type: 'spring', bounce: 0.25, duration: 0.5 }}
+                                        className="absolute inset-0 bg-violet-600 rounded-full shadow-md"
+                                        transition={{ type: 'spring', bounce: 0.2, duration: 0.6 }}
                                     />
                                 )}
                             </button>

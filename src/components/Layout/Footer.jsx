@@ -4,7 +4,7 @@ import { socialLinks } from '../../utils/constants'
 
 export default function Footer() {
     return (
-        <footer className="relative bg-background pt-16 pb-8 overflow-hidden border-t border-border/40">
+        <footer className="relative bg-background pt-10 pb-8 overflow-hidden border-t border-border/40">
             {/* Subtle premium background glow */}
             <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-4xl h-full bg-gradient-to-b from-primary/5 to-transparent blur-[100px] pointer-events-none rounded-full" />
 

@@ -1,0 +1,1 @@
+import{j as i,m as e}from"./vendor-react-93c956e5.js";function a({children:a,delay:n=0,x:r=0,y:t=40}){return i.jsx(e.div,{initial:{opacity:0,x:r,y:t},whileInView:{opacity:1,x:0,y:0},viewport:{once:!0,margin:"-100px"},transition:{duration:.8,delay:n,ease:[.21,.47,.32,.98]},children:a})}export{a as S};

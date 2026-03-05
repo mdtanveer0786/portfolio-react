@@ -1,0 +1,1 @@
+import{w as s,x as t,j as e,m as a}from"./vendor-react-93c956e5.js";function r(){const{scrollYProgress:r}=s(),o=t(r,{stiffness:100,damping:30,restDelta:.001});return e.jsx(a.div,{className:"fixed top-0 left-0 right-0 h-1 bg-gradient-to-r from-violet-600 via-fuchsia-600 to-cyan-400 z-[10000] origin-left",style:{scaleX:o}})}export{r as default};
