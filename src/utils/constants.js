@@ -14,6 +14,15 @@ import {
     MessageSquare
 } from 'lucide-react'
 
+// Import Project Images
+import realestateImg from '../assets/projects/realestate.webp'
+import realestateDashboardImg from '../assets/projects/realestate_dashboard.webp'
+import tradeImg from '../assets/projects/trade.webp'
+import tradeDashboardImg from '../assets/projects/trade_dashboard.webp'
+import financeImg from '../assets/projects/finance.webp'
+import eduearnImg from '../assets/projects/eduearn.webp'
+import bikesImg from '../assets/projects/bikes.webp'
+
 export const LOADING_DURATION = 1000;
 
 export const SECTIONS = ['home', 'about', 'skills', 'projects', 'education', 'contact'];
@@ -95,7 +104,7 @@ export const projects = [
         title: 'Real Estate Elite',
         description: 'Full-stack MERN real estate platform with JWT authentication, secure REST APIs, MongoDB database, admin dashboard, and full CRUD operations for property listings.',
         tags: ['MongoDB', 'Express', 'React', 'Node.js', 'JWT', 'REST API'],
-        image: 'https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w=800',
+        image: realestateImg,
         github: 'https://github.com/mdtanveer0786/real-estate-app',
         live: 'https://real-estateelite.vercel.app/',
         featured: true,
@@ -108,7 +117,7 @@ export const projects = [
         title: 'Trade Analyzer Pro',
         description: 'Full-stack MERN trading analytics platform with JWT authentication, REST APIs, MongoDB database, admin dashboard, and complete CRUD operations to track trades and performance.',
         tags: ['MongoDB', 'Express', 'React', 'Node.js', 'JWT', 'REST API'],
-        image: 'https://images.unsplash.com/photo-1642790106117-e829e14a795f?auto=format&fit=crop&w=800',
+        image: tradeImg,
         github: 'https://github.com/mdtanveer0786/Trade-Analyzer-Pro',
         live: 'https://trade-analyzer-proo.vercel.app/',
         featured: true,
@@ -121,7 +130,7 @@ export const projects = [
         title: 'Finance Dashboard',
         description: 'Interactive finance analytics dashboard with charts, statistics, and financial insights.',
         tags: ['React', 'Tailwind', 'Charts'],
-        image: 'https://images.unsplash.com/photo-1551281044-8c5c2d0f89b1?auto=format&fit=crop&w=800',
+        image: financeImg,
         github: 'https://github.com/mdtanveer0786/finance-dashboard',
         live: 'https://financee-dashboard.netlify.app/',
         featured: true,
@@ -134,7 +143,7 @@ export const projects = [
         title: 'EduEarn India',
         description: 'Educational platform providing information about earning opportunities and online learning.',
         tags: ['React', 'JavaScript', 'CSS'],
-        image: 'https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=800',
+        image: eduearnImg,
         github: 'https://github.com/mdtanveer0786/EduEarn-India',
         live: 'https://edu-earn-india.vercel.app/',
         featured: false,
@@ -147,7 +156,7 @@ export const projects = [
         title: 'Delhi Bikes Hub',
         description: 'Bike selling and listing platform where users can explore bikes and contact sellers.',
         tags: ['React', 'Tailwind', 'JavaScript'],
-        image: 'https://images.unsplash.com/photo-1558981806-ec527fa84c39?auto=format&fit=crop&w=800',
+        image: bikesImg,
         github: 'https://github.com/mdtanveer0786/DelhiBikesHub',
         live: 'https://delhi-bikes-hub.vercel.app/',
         featured: false,
