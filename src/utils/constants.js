@@ -22,6 +22,7 @@ import tradeDashboardImg from '../assets/projects/trade_dashboard.webp'
 import financeImg from '../assets/projects/finance.webp'
 import eduearnImg from '../assets/projects/eduearn.webp'
 import bikesImg from '../assets/projects/bikes.webp'
+import ecommerceImg from '../assets/projects/ecommerce.webp'
 
 export const LOADING_DURATION = 1000;
 
@@ -169,13 +170,13 @@ export const projects = [
         title: 'E-commerce Platform',
         description: 'Full-stack e-commerce solution with authentication, product management, and payment integration.',
         tags: ['React', 'Node.js', 'MongoDB', 'Express'],
-        image: 'https://images.unsplash.com/photo-1557821552-17105176677c?auto=format&fit=crop&w=800',
+        image: ecommerceImg,
         github: '',
         live: '',
-        featured: false,
+        featured: true,
         category: 'fullstack',
         date: '2024-02-15'
-    }
+    },
 ]
 
 export const experience = [
