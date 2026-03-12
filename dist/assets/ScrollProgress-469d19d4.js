@@ -1,1 +1,0 @@
-import{x as e,y as o,j as r,m as i}from"./vendor-react-021599ad.js";function l(){const{scrollYProgress:s}=e(),t=o(s,{stiffness:100,damping:30,restDelta:.001});return r.jsx(i.div,{className:"fixed top-0 left-0 right-0 h-1 bg-gradient-to-r from-violet-600 via-fuchsia-600 to-cyan-400 z-[10000] origin-left",style:{scaleX:t}})}export{l as default};

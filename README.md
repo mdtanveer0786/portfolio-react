@@ -294,7 +294,8 @@ Create a `.env` file for sensitive data:
 ```env
 VITE_EMAILJS_SERVICE_ID=your_service_id
 VITE_EMAILJS_TEMPLATE_ID=your_template_id
-VITE_EMAILJS_USER_ID=your_user_id
+VITE_EMAILJS_PUBLIC_KEY=your_public_key
+VITE_EMAILJS_AUTOREPLY_TEMPLATE_ID=your_autoreply_template_id
 VITE_GA_TRACKING_ID=your_ga_id
 ```
 
