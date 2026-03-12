@@ -52,6 +52,7 @@ export default function About() {
                                     <img
                                         src="/profile.jpg"
                                         alt="Md Tanveer Alam"
+                                        loading="lazy"
                                         className="w-full rounded-xl transition-transform duration-700 group-hover:scale-105"
                                         onError={(e) => {
                                             e.target.onerror = null

@@ -1,0 +1,17 @@
+{
+  "name": "Md Tanveer Alam | Portfolio",
+  "short_name": "Tanveer",
+  "description": "Professional Portfolio of Md Tanveer Alam - Full Stack Developer",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#000000",
+  "theme_color": "#8b5cf6",
+  "icons": [
+    {
+      "src": "/profile.jpg",
+      "sizes": "512x512",
+      "type": "image/jpeg",
+      "purpose": "any maskable"
+    }
+  ]
+}
