@@ -63,12 +63,20 @@
         scroll-behavior: auto !important;
     }
 
-    /* Nuclear fix: Lock body during loading to prevent browser scroll restoration */
+    /* Improved scroll locking: prevents jump while maintaining lock */
     body.no-scroll {
         overflow: hidden !important;
+        /* Remove position: fixed as it causes page jumps when toggled */
+        touch-action: none;
+        -webkit-overflow-scrolling: none;
+        overscroll-behavior: none;
+    }
+
+    /* Specifically for initial load to prevent flash of content */
+    html.loading body.no-scroll {
+        position: fixed !important;
         height: 100vh !important;
         width: 100% !important;
-        position: fixed !important;
     }
 
     body {
