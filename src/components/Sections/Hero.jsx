@@ -44,25 +44,23 @@ export default function Hero({ setActiveSection }) {
                     >
                         <motion.div variants={itemVariants} className="space-y-4 sm:space-y-6">
                             <div className="space-y-2">
-                                <TextReveal text="Hey! 👋 I'm" className="justify-center lg:justify-start" />
-                                <h1 className="text-3xl xs:text-4xl sm:text-5xl md:text-6xl xl:text-7xl font-black tracking-tight leading-[1.1]">
-                                    <span className="premium-text-gradient animate-gradient">Md Tanveer Alam</span>
+                                <TextReveal text="Hello! 👋 I'm" className="justify-center lg:justify-start text-xl sm:text-2xl font-medium text-muted-foreground" />
+                                <h1 className="text-3xl xs:text-4xl sm:text-5xl md:text-6xl xl:text-7xl font-extrabold tracking-tight leading-[1.1]">
+                                    <span className="premium-text-gradient animate-gradient bg-clip-text text-transparent">
+                                        Md Tanveer Alam
+                                    </span>
                                 </h1>
                             </div>
-                            
+
                             <div className="h-12 xs:h-16 sm:h-20 flex items-center justify-center lg:justify-start">
                                 <h2 className="text-xl xs:text-2xl sm:text-3xl md:text-4xl font-bold text-foreground/90">
-                                    <span className="mr-3">I'm a Professional</span>
+                                    <span className="mr-3">I'm a</span>
                                     <TypeAnimation
                                         sequence={[
-                                            'Full Stack Developer',
-                                            2000,
-                                            'MERN Stack Expert',
-                                            2000,
-                                            'UI/UX Enthusiast',
-                                            2000,
-                                            'Problem Solver',
-                                            2000,
+                                            'Frontend Developer', 2000,
+                                            'Backend Developer', 2000,
+                                            'Full Stack Developer', 2000,
+                                            'MERN Stack Developer', 2000,
                                         ]}
                                         wrapper="span"
                                         speed={50}
@@ -73,7 +71,7 @@ export default function Hero({ setActiveSection }) {
                             </div>
 
                             <p className="text-muted-foreground text-sm sm:text-base md:text-lg font-medium max-w-2xl mx-auto lg:mx-0 leading-relaxed">
-                                I engineer highly scalable, performance-driven web applications with an obsessive focus on user experience and clean code architecture.
+                                I craft scalable, high-performance web apps that users love and businesses trust.
                             </p>
                         </motion.div>
 
@@ -112,7 +110,7 @@ export default function Hero({ setActiveSection }) {
                                     <ArrowRight className="w-4 h-4 sm:w-5 h-5" />
                                 </motion.button>
                             </Magnetic>
-                            
+
                             <Magnetic>
                                 <motion.a
                                     whileHover={{ scale: 1.05 }}

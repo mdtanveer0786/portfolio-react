@@ -4,17 +4,17 @@ import SectionReveal from '../UI/SectionReveal'
 export default function About() {
     return (
         <section id="about" className="section-container relative overflow-hidden">
-             {/* Background Text - Improved visibility and positioning */}
-             <div className="absolute top-8 md:top-10 left-1/2 -translate-x-1/2 text-5xl sm:text-7xl md:text-8xl lg:text-[10rem] font-black text-foreground/5 dark:text-white/5 uppercase tracking-[0.2em] whitespace-nowrap select-none pointer-events-none -z-10">
+            {/* Background Text - Improved visibility and positioning */}
+            <div className="absolute top-8 md:top-10 left-1/2 -translate-x-1/2 text-5xl sm:text-7xl md:text-8xl lg:text-[10rem] font-black text-foreground/5 dark:text-white/5 uppercase tracking-[0.2em] whitespace-nowrap select-none pointer-events-none -z-10">
                 ABOUT
-             </div>
+            </div>
 
             <div className="container mx-auto relative z-10">
                 <div className="text-center mb-8 md:mb-10 space-y-4">
                     <div className="w-24 h-1 bg-gradient-to-r from-violet-600 to-cyan-400 mx-auto rounded-full" />
-                    <TextReveal 
-                        text="Who I am" 
-                        className="text-3xl md:text-5xl font-black uppercase tracking-wider" 
+                    <TextReveal
+                        text="Who I am"
+                        className="text-3xl md:text-5xl font-black uppercase tracking-wider"
                     />
                 </div>
 
@@ -28,16 +28,47 @@ export default function About() {
                                 </h3>
                                 <div className="space-y-4 text-muted-foreground text-base md:text-lg leading-relaxed font-medium">
                                     <p>
-                                        I am a professional and enthusiastic <span className="text-foreground font-bold">Full Stack Developer</span> with a strong passion for building modern, scalable web applications. 
-                                        My expertise lies in the <span className="text-primary font-bold">MERN Stack</span>, but I am always eager to learn and adapt to new technologies.
+                                        I am a passionate <span className="text-foreground font-bold">Full Stack Developer</span> specializing in building modern, scalable web apps with the <span className="text-primary font-bold">MERN Stack</span>.
                                     </p>
                                     <p>
-                                        With over a year of hands-on experience in the digital realm, I have honed my skills in creating intuitive user interfaces with <span className="text-primary font-bold">React</span> and robust backend systems with <span className="text-primary font-bold">Node.js</span>. 
-                                        I believe that code is not just instructions for computers, but a tool for solving real-world problems.
+                                        I craft intuitive interfaces with <span className="text-primary font-bold">React</span> and robust backend systems with <span className="text-primary font-bold">Node.js</span>, transforming complex problems into seamless experiences.
                                     </p>
                                     <p>
-                                        My journey in tech is driven by curiosity and a commitment to excellence. I focus on writing clean, maintainable code and delivering high-performance solutions that provide an exceptional user experience.
+                                        Driven by curiosity and excellence, I write clean, maintainable code to deliver high-performance solutions that delight users and businesses alike.
                                     </p>
+                                </div>
+                                <div className="flex flex-wrap gap-4 mt-4 justify-center md:justify-start">
+                                    {/* React */}
+                                    <span
+                                        className="text-white px-3 py-1 rounded-full text-sm font-semibold"
+                                        style={{ backgroundColor: '#61DAFB' }}
+                                    >
+                                        React
+                                    </span>
+
+                                    {/* Node.js */}
+                                    <span
+                                        className="text-white px-3 py-1 rounded-full text-sm font-semibold"
+                                        style={{ backgroundColor: '#339933' }}
+                                    >
+                                        Node.js
+                                    </span>
+
+                                    {/* Express */}
+                                    <span
+                                        className="text-white px-3 py-1 rounded-full text-sm font-semibold"
+                                        style={{ backgroundColor: '#000000' }}
+                                    >
+                                        Express
+                                    </span>
+
+                                    {/* MongoDB */}
+                                    <span
+                                        className="text-white px-3 py-1 rounded-full text-sm font-semibold"
+                                        style={{ backgroundColor: '#47A248' }}
+                                    >
+                                        MongoDB
+                                    </span>
                                 </div>
                             </div>
                         </SectionReveal>
