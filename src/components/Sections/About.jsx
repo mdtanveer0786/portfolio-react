@@ -82,7 +82,7 @@ export default function About() {
                                             className="w-full aspect-[4/5] object-cover rounded-3xl transition-all duration-700 group-hover:scale-110 group-hover:rotate-2 filter grayscale-[20%] group-hover:grayscale-0"
                                             onError={(e) => {
                                                 e.target.onerror = null
-                                                e.target.src = "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=800"
+                                                e.target.src = ""
                                             }}
                                         />
                                         

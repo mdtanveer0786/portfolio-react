@@ -121,8 +121,8 @@
     }
 
     .section-container {
-        @apply container mx-auto px-4 sm:px-6 pt-20 pb-12 md:pt-28 md:pb-16 relative z-10;
-        scroll-margin-top: 20px;
+        @apply container mx-auto px-4 sm:px-6 py-16 md:py-24 relative z-10;
+        scroll-margin-top: 80px;
     }
 
     .bento-grid {

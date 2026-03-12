@@ -80,17 +80,17 @@ export const skillCategories = [
         skills: [
             { name: 'Node.js', level: 85, color: '#339933' },
             { name: 'Express.js', level: 85, color: '#000000' },
-            { name: 'PHP', level: 80, color: '#777BB4' },
-            { name: 'Python', level: 75, color: '#3776AB' },
             { name: 'REST APIs', level: 90, color: '#FF6C37' },
         ]
     },
     {
-        title: 'Database & Tools',
+        title: 'Cloud & Tools',
         icon: Database,
         skills: [
             { name: 'MongoDB', level: 85, color: '#47A248' },
             { name: 'MySQL', level: 82, color: '#4479A1' },
+            { name: 'Vercel', level: 90, color: '#000000' },
+            { name: 'Render', level: 85, color: '#46E3B7' },
             { name: 'Git', level: 90, color: '#F05032' },
             { name: 'Postman', level: 88, color: '#FF6C37' },
         ]
