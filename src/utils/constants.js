@@ -16,9 +16,7 @@ import {
 
 // Import Project Images
 import realestateImg from '../assets/projects/realestate.webp'
-import realestateDashboardImg from '../assets/projects/realestate_dashboard.webp'
 import tradeImg from '../assets/projects/trade.webp'
-import tradeDashboardImg from '../assets/projects/trade_dashboard.webp'
 import financeImg from '../assets/projects/finance.webp'
 import eduearnImg from '../assets/projects/eduearn.webp'
 import bikesImg from '../assets/projects/bikes.webp'

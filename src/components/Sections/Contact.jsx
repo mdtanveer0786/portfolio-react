@@ -122,7 +122,7 @@ export default function Contact() {
                     />
 
                     <p className="text-muted-foreground max-w-2xl mx-auto text-sm md:text-base font-medium">
-                        Have an idea? Let's turn it into a reality.
+                        Have an idea? Let&apos;s turn it into a reality.
                     </p>
 
                 </div>
@@ -143,7 +143,7 @@ export default function Contact() {
                                     <h3 className="text-2xl font-bold">Connect With Me</h3>
 
                                     <p className="text-muted-foreground leading-relaxed text-sm font-medium">
-                                        I'm always open to discussing new projects, creative ideas, or opportunities.
+                                        I&apos;m always open to discussing new projects, creative ideas, or opportunities.
                                     </p>
 
                                 </div>
