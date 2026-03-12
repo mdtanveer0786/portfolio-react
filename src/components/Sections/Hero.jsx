@@ -1,11 +1,13 @@
 import { motion } from 'framer-motion'
 import { ArrowRight, Download } from 'lucide-react'
+import { TypeAnimation } from 'react-type-animation'
 import CodeBlock from '../UI/CodeBlock'
 import { socialLinks } from '../../utils/constants'
 import TextReveal from '../UI/TextReveal'
 import Magnetic from '../UI/Magnetic'
 
 export default function Hero({ setActiveSection }) {
+    // ... containerVariants and itemVariants remain same
     const containerVariants = {
         hidden: { opacity: 0 },
         visible: {
@@ -41,12 +43,35 @@ export default function Hero({ setActiveSection }) {
                         className="w-full lg:w-3/5 space-y-8 sm:space-y-10 text-center lg:text-left order-1"
                     >
                         <motion.div variants={itemVariants} className="space-y-4 sm:space-y-6">
-                            <h1 className="text-2xl xs:text-3xl sm:text-4xl md:text-5xl xl:text-6xl font-black tracking-tight leading-[1.2] sm:leading-[1.1]">
-                                <TextReveal text="Hello, I'm" className="justify-center lg:justify-start" />
-                                <span className="premium-text-gradient animate-gradient">Md Tanveer Alam</span>, <br />
-                                <TextReveal text="I'm a Professional" className="justify-center lg:justify-start" />
-                                <span className="text-foreground">Full Stack Developer</span>.
-                            </h1>
+                            <div className="space-y-2">
+                                <TextReveal text="Hey! 👋 I'm" className="justify-center lg:justify-start" />
+                                <h1 className="text-3xl xs:text-4xl sm:text-5xl md:text-6xl xl:text-7xl font-black tracking-tight leading-[1.1]">
+                                    <span className="premium-text-gradient animate-gradient">Md Tanveer Alam</span>
+                                </h1>
+                            </div>
+                            
+                            <div className="h-12 xs:h-16 sm:h-20 flex items-center justify-center lg:justify-start">
+                                <h2 className="text-xl xs:text-2xl sm:text-3xl md:text-4xl font-bold text-foreground/90">
+                                    <span className="mr-3">I'm a Professional</span>
+                                    <TypeAnimation
+                                        sequence={[
+                                            'Full Stack Developer',
+                                            2000,
+                                            'MERN Stack Expert',
+                                            2000,
+                                            'UI/UX Enthusiast',
+                                            2000,
+                                            'Problem Solver',
+                                            2000,
+                                        ]}
+                                        wrapper="span"
+                                        speed={50}
+                                        repeat={Infinity}
+                                        className="text-primary underline decoration-primary/30 underline-offset-8"
+                                    />
+                                </h2>
+                            </div>
+
                             <p className="text-muted-foreground text-sm sm:text-base md:text-lg font-medium max-w-2xl mx-auto lg:mx-0 leading-relaxed">
                                 I engineer highly scalable, performance-driven web applications with an obsessive focus on user experience and clean code architecture.
                             </p>
