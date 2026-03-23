@@ -117,6 +117,7 @@ export default function Header({ activeSection, setActiveSection }) {
                         whileHover={{ scale: 1.1 }}
                         whileTap={{ scale: 0.9 }}
                         onClick={toggleTheme}
+                        aria-label={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}
                         className="p-2.5 rounded-full bg-black/5 dark:bg-white/5 border border-black/5 dark:border-white/10 text-foreground hover:text-primary transition-all"
                     >
                         {theme === 'dark' ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
@@ -125,6 +126,7 @@ export default function Header({ activeSection, setActiveSection }) {
                     <motion.button
                         whileTap={{ scale: 0.9 }}
                         onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                        aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
                         className={cn(
                             "lg:hidden p-2.5 rounded-full transition-all duration-300 border shadow-sm",
                             mobileMenuOpen 

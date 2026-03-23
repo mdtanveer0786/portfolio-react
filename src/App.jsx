@@ -88,7 +88,16 @@ function App() {
             }
         };
 
+        const handleVisibilityChange = () => {
+            if (document.hidden) {
+                document.title = "Come back! 👋 | Md Tanveer Alam";
+            } else {
+                document.title = "Md Tanveer Alam | Full Stack Developer";
+            }
+        };
+
         window.addEventListener("hashchange", handleHashChange);
+        document.addEventListener("visibilitychange", handleVisibilityChange);
 
         const startTime = Date.now();
         const handleLoad = () => {
