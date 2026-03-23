@@ -1,6 +1,6 @@
 import { useState, useMemo } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Github, Code2, Globe, Layout, ArrowUpRight } from 'lucide-react'
+import { Github, ArrowUpRight } from 'lucide-react'
 import { projects } from '../../utils/constants'
 import TextReveal from '../UI/TextReveal'
 import SectionReveal from '../UI/SectionReveal'

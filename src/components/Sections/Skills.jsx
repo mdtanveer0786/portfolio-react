@@ -1,8 +1,6 @@
 import { motion } from 'framer-motion'
 import { skillCategories } from '../../utils/constants'
 import TextReveal from '../UI/TextReveal'
-import SectionReveal from '../UI/SectionReveal'
-import { cn } from '../../utils/cn'
 
 const SkillCard = ({ skill, index }) => {
     const getFormattedName = (n) => {

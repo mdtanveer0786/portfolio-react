@@ -59,7 +59,7 @@ const EducationCard = ({ edu, index }) => {
                             </div>
 
                             <p className="text-muted-foreground text-xs md:text-base leading-relaxed line-clamp-3 group-hover:line-clamp-none transition-all duration-500 italic">
-                                "{edu.description}"
+                                &quot;{edu.description}&quot;
                             </p>
 
                             <div className="pt-1 flex items-center gap-1.5 text-[10px] md:text-xs text-muted-foreground/60 font-semibold uppercase tracking-widest">

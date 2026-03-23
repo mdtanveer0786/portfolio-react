@@ -1,6 +1,5 @@
 import { motion } from 'framer-motion'
-import { Github, ExternalLink, Star, Code } from 'lucide-react'
-import { cn } from '../../utils/cn'
+import { Github, ExternalLink, Star } from 'lucide-react'
 
 export default function ProjectCard({ project, index }) {
     return (

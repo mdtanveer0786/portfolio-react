@@ -54,7 +54,7 @@ export default function Hero({ setActiveSection }) {
 
                             <div className="h-12 xs:h-16 sm:h-20 flex items-center justify-center lg:justify-start">
                                 <h2 className="text-xl xs:text-2xl sm:text-3xl md:text-4xl font-bold text-foreground/90">
-                                    <span className="mr-3">I'm a</span>
+                                    <span className="mr-3">I&apos;m a</span>
                                     <TypeAnimation
                                         sequence={[
                                             'Frontend Developer', 2000,
@@ -71,7 +71,8 @@ export default function Hero({ setActiveSection }) {
                             </div>
 
                             <p className="text-muted-foreground text-sm sm:text-base md:text-lg font-medium max-w-2xl mx-auto lg:mx-0 leading-relaxed">
-                                I craft scalable, high-performance web apps that users love and businesses trust.
+                                I build real-world applications that solve real problems
+                                and help businesses grow 🚀
                             </p>
                         </motion.div>
 

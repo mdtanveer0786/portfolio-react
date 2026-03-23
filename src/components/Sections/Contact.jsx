@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { motion } from 'framer-motion'
-import { Mail, Phone, MapPin, Send, MessageSquare, Sparkles, Github, Linkedin, Twitter, ArrowRight } from 'lucide-react'
+import { Mail, Phone, MapPin, Send, Sparkles, Github, Linkedin, Twitter } from 'lucide-react'
 import toast from 'react-hot-toast'
 import emailjs from '@emailjs/browser'
 import TextReveal from '../UI/TextReveal'
@@ -145,7 +145,7 @@ export default function Contact() {
                                 <div className="space-y-4">
                                     <h3 className="text-2xl md:text-3xl font-bold tracking-tight">Contact Information</h3>
                                     <p className="text-muted-foreground text-sm md:text-base max-w-md leading-relaxed">
-                                        I'm currently looking for new opportunities. Whether you have a question or just want to connect, I'll try my best to get back to you!
+                                        I&apos;m currently looking for new opportunities. Whether you have a question or just want to connect, I&apos;ll try my best to get back to you!
                                     </p>
                                 </div>
 

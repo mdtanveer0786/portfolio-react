@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
+import { motion } from 'framer-motion'
 import { Copy, Check, Terminal, Code2, Cpu } from 'lucide-react'
 import { cn } from '../../utils/cn'
 
@@ -41,7 +41,7 @@ const codeLines = [
 const CodeBlock = () => {
   const [visibleTokens, setVisibleTokens] = useState(0)
   const [copied, setCopied] = useState(false)
-  const [activeTab, setActiveTab] = useState('developer.js')
+  const [activeTab] = useState('developer.js')
 
   const fullCodeString = `const developer = {
   name: "Md Tanveer Alam",
