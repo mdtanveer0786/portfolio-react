@@ -108,7 +108,7 @@ export const projects = [
         live: 'https://real-estateelite.vercel.app/',
         featured: true,
         category: 'fullstack',
-        date: '2025-02-10'
+        date: '2025-08-10'
     },
 
     {
@@ -121,7 +121,7 @@ export const projects = [
         live: 'https://trade-analyzer-proo.vercel.app/',
         featured: true,
         category: 'fullstack',
-        date: '2025-01-18'
+        date: '2025-10-18'
     },
 
     {
@@ -198,7 +198,7 @@ export const education = [
         id: 1,
         degree: 'Computer Science Engineering (B.Tech)',
         institution: 'Bikaner Technical University',
-        period: '2020 - 2025',
+        period: '2020 - 2024',
         grade: 'CGPA: 7/10',
         description: 'Specialized in software development, database management, and web technologies.'
     },
