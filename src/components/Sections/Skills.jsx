@@ -9,6 +9,8 @@ const SkillCard = ({ skill, index }) => {
         if (lower === 'express.js') return 'express';
         if (lower === 'node.js') return 'nodejs';
         if (lower === 'tailwind css') return 'tailwindcss';
+        if (lower === 'rest apis') return 'fastapi'; // Close alternative or placeholder
+        if (lower === 'render') return 'vercel'; // Use vercel icon as placeholder if render is missing
         return lower.replace('.js', '').replace(' ', '');
     };
     
@@ -70,7 +72,6 @@ export default function Skills() {
             <div className="absolute top-0 left-0 w-full h-full pointer-events-none -z-10">
                 <div className="absolute top-0 left-1/4 w-full h-1/2 bg-gradient-to-b from-primary/5 to-transparent blur-[120px]" />
                 <div className="absolute -bottom-24 -right-24 w-96 h-96 bg-violet-600/10 rounded-full blur-[120px] animate-pulse" />
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-[0.03] mix-blend-overlay" />
             </div>
 
             {/* Background Text */}

@@ -1,9 +1,11 @@
+import { forwardRef } from 'react'
 import { motion } from 'framer-motion'
 import { Github, ExternalLink, Star } from 'lucide-react'
 
-export default function ProjectCard({ project, index }) {
+const ProjectCard = forwardRef(({ project, index }, ref) => {
     return (
         <motion.div
+            ref={ref}
             layout
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -100,4 +102,8 @@ export default function ProjectCard({ project, index }) {
             <div className="absolute -inset-[100%] group-hover:inset-0 bg-gradient-to-r from-primary/0 via-primary/5 to-primary/0 pointer-events-none transition-all duration-1000 opacity-0 group-hover:opacity-100" />
         </motion.div>
     )
-}
+})
+
+ProjectCard.displayName = 'ProjectCard'
+
+export default ProjectCard
