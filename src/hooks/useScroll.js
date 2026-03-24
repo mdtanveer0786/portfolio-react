@@ -20,12 +20,6 @@ export function useScroll() {
     }, [lastScrollY])
 
     useEffect(() => {
-        const observerOptions = {
-            root: null,
-            rootMargin: '-20% 0px -20% 0px',
-            threshold: [0, 0.1, 0.2, 0.3]
-        }
-
         const observerCallback = (entries) => {
             // Get all sections currently visible
             const visibleEntries = entries.filter(entry => entry.isIntersecting);

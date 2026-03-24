@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion'
-import { Heart, Mail, ArrowUp, Github, Linkedin, Twitter, ExternalLink } from 'lucide-react'
+import { Heart, ArrowUp, ExternalLink } from 'lucide-react'
 import { socialLinks, navItems } from '../../utils/constants'
 import Magnetic from '../UI/Magnetic'
 

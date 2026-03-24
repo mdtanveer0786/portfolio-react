@@ -41,7 +41,7 @@ export default function Header({ activeSection, setActiveSection }) {
         }
     }, [mobileMenuOpen])
 
-    const [isScrolling, setIsScrolling] = useState(false)
+    const [, setIsScrolling] = useState(false)
 
     // ... (rest of effects)
 
