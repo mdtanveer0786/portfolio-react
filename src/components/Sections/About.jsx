@@ -40,7 +40,32 @@ export default function About() {
                                         Driven by curiosity and excellence, I write clean, maintainable code to deliver high-performance solutions that delight users and businesses alike.
                                     </p>
                                 </div>
-                                <div className="flex flex-wrap gap-4 mt-6 justify-center md:justify-start">
+                                <div className="grid grid-cols-2 gap-6 pt-8 border-t border-white/5">
+                                    {[
+                                        { label: 'Months Experience', value: '06', suffix: '+' },
+                                        { label: 'Projects Done', value: '10', suffix: '+' }
+                                    ].map((stat, i) => (
+                                        <div key={i} className="space-y-1">
+                                            <div className="flex items-baseline gap-1">
+                                                <motion.span
+                                                    initial={{ opacity: 0, y: 10 }}
+                                                    whileInView={{ opacity: 1, y: 0 }}
+                                                    viewport={{ once: true }}
+                                                    transition={{ duration: 0.5, delay: 0.5 + (i * 0.1) }}
+                                                    className="text-3xl md:text-4xl font-black text-primary tracking-tighter"
+                                                >
+                                                    {stat.value}
+                                                </motion.span>
+                                                <span className="text-xl font-bold text-primary/60">{stat.suffix}</span>
+                                            </div>
+                                            <p className="text-[10px] md:text-xs font-black uppercase tracking-[0.2em] text-muted-foreground/60 leading-tight">
+                                                {stat.label}
+                                            </p>
+                                        </div>
+                                    ))}
+                                </div>
+
+                                <div className="flex flex-wrap gap-4 mt-8 justify-center md:justify-start">
                                     {/* Tech Stack Pills */}
                                     <div className="flex items-center gap-2 bg-white/5 border border-white/10 px-4 py-2 rounded-full hover:bg-white/10 transition-colors">
                                         <FaReact className="text-[#61DAFB] text-xl" />
@@ -69,10 +94,10 @@ export default function About() {
                             <div className="relative group max-w-[280px] sm:max-w-[320px] w-full">
                                 {/* Intense Glow Effect */}
                                 <div className="absolute -inset-4 bg-gradient-to-r from-violet-600 via-fuchsia-500 to-cyan-500 rounded-[2.5rem] blur-2xl opacity-40 group-hover:opacity-70 transition duration-1000 animate-pulse"></div>
-                                
+
                                 {/* Card Container */}
                                 <div className="relative bg-[#0d1117]/80 backdrop-blur-xl p-3 rounded-[2rem] border border-white/10 shadow-2xl overflow-visible">
-                                    
+
                                     {/* Profile Image Wrapper */}
                                     <div className="relative rounded-3xl overflow-hidden">
                                         <img
@@ -85,13 +110,13 @@ export default function About() {
                                                 e.target.src = ""
                                             }}
                                         />
-                                        
+
                                         {/* Gradient Overlay */}
                                         <div className="absolute inset-0 bg-gradient-to-t from-[#0d1117] via-transparent to-transparent opacity-80"></div>
                                     </div>
 
                                     {/* Floating Badges */}
-                                    <motion.div 
+                                    <motion.div
                                         animate={{ y: [0, -15, 0] }}
                                         transition={{ repeat: Infinity, duration: 4, ease: "easeInOut" }}
                                         className="absolute -right-8 top-16 bg-[#161b22]/90 backdrop-blur-md border border-white/10 p-3 rounded-2xl shadow-xl z-20 hidden sm:block"
@@ -99,14 +124,14 @@ export default function About() {
                                         <FaReact className="w-8 h-8 text-[#61DAFB] animate-[spin_10s_linear_infinite]" />
                                     </motion.div>
 
-                                    <motion.div 
+                                    <motion.div
                                         animate={{ y: [0, 15, 0] }}
                                         transition={{ repeat: Infinity, duration: 5, ease: "easeInOut", delay: 1 }}
                                         className="absolute -left-8 bottom-32 bg-[#161b22]/90 backdrop-blur-md border border-white/10 p-3 rounded-2xl shadow-xl z-20 hidden sm:block"
                                     >
                                         <FaNodeJs className="w-8 h-8 text-[#339933]" />
                                     </motion.div>
-                                    
+
                                     {/* Hover Details Card */}
                                     <div className="absolute -bottom-6 left-1/2 -translate-x-1/2 w-[90%] bg-gradient-to-r from-[#1a1f2e] to-[#121620] border border-white/10 p-4 rounded-2xl shadow-2xl transform translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500 z-30">
                                         <div className="flex items-center gap-4">
@@ -117,8 +142,8 @@ export default function About() {
                                                 <h4 className="text-white font-bold text-sm tracking-wide">MERN Stack Expert</h4>
                                                 <div className="flex items-center gap-1.5 mt-0.5">
                                                     <span className="relative flex h-2 w-2">
-                                                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
-                                                      <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
+                                                        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                                                        <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
                                                     </span>
                                                     <p className="text-gray-400 text-xs font-medium">Available for Work</p>
                                                 </div>
