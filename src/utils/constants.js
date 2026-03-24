@@ -206,7 +206,7 @@ export const education = [
         id: 2,
         degree: 'Full Stack Web Development Certification',
         institution: 'AccioJob / Udemy',
-        period: '2023 - 2025',
+        period: '2022 - 2024',
         grade: 'Grade: A',
         description: 'Comprehensive training in modern web development technologies including HTML, CSS, JavaScript, React, Node.js, Express.js, MongoDB.'
     },
