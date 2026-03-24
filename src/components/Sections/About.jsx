@@ -96,21 +96,23 @@ export default function About() {
                                 <div className="absolute -inset-4 bg-gradient-to-r from-violet-600 via-fuchsia-500 to-cyan-500 rounded-[2.5rem] blur-2xl opacity-40 group-hover:opacity-70 transition duration-1000 animate-pulse"></div>
 
                                 {/* Card Container */}
-                                <div className="relative bg-[#0d1117]/80 backdrop-blur-xl p-3 rounded-[2rem] border border-white/10 shadow-2xl overflow-visible">
+                                <div className="relative bg-[#0d1117]/80 backdrop-blur-xl p-2 rounded-[2rem] border border-white/10 shadow-2xl overflow-visible group-hover:border-primary/50 transition-colors duration-500">
+
+                                    {/* Moving Gradient Border - NEW PREMIUM EFFECT */}
+                                    <div className="absolute -inset-[1px] bg-gradient-to-r from-violet-600 via-fuchsia-500 to-cyan-500 rounded-[2rem] opacity-0 group-hover:opacity-100 transition-opacity duration-500 -z-10 animate-gradient-xy"></div>
 
                                     {/* Profile Image Wrapper */}
-                                    <div className="relative rounded-3xl overflow-hidden">
+                                    <div className="relative rounded-[1.8rem] overflow-hidden">
                                         <img
                                             src="/profile.jpg"
                                             alt="Md Tanveer Alam"
                                             loading="lazy"
-                                            className="w-full aspect-[4/5] object-cover rounded-3xl transition-all duration-700 group-hover:scale-110 group-hover:rotate-2 filter grayscale-[20%] group-hover:grayscale-0"
+                                            className="w-full aspect-[4/5] object-cover rounded-[1.8rem] transition-all duration-700 group-hover:scale-105 filter grayscale-[30%] group-hover:grayscale-0 shadow-inner"
                                             onError={(e) => {
                                                 e.target.onerror = null
-                                                e.target.src = ""
+                                                e.target.src = "https://ui-avatars.com/api/?name=Tanveer+Alam&background=8b5cf6&color=fff&size=512"
                                             }}
                                         />
-
                                         {/* Gradient Overlay */}
                                         <div className="absolute inset-0 bg-gradient-to-t from-[#0d1117] via-transparent to-transparent opacity-80"></div>
                                     </div>
