@@ -7,8 +7,6 @@ import Footer from "./components/Layout/Footer";
 import Loader from "./components/UI/Loader";
 
 // 1. PROFESSIONAL FIX: Remove lazy loading for layout-critical sections.
-// Lazy loading these caused the DOM height to be 0 for a split second,
-// which confused the browser's scroll restoration and caused jumps to the footer.
 import Hero from "./components/Sections/Hero";
 import About from "./components/Sections/About";
 import Education from "./components/Sections/Education";
@@ -26,7 +24,6 @@ import { useScroll } from "./hooks/useScroll";
 
 /**
  * ROCK SOLID SCROLL-TO-TOP
- * Runs synchronously before browser paints to lock position at 0,0
  */
 const ScrollToTop = () => {
     useLayoutEffect(() => {
@@ -38,12 +35,17 @@ const ScrollToTop = () => {
 };
 
 function App() {
-    const [loading, setLoading] = useState(true);
+    const [loading, setLoading] = useState(() => {
+        if (typeof window !== 'undefined' && sessionStorage.getItem('loader-seen')) {
+            return false;
+        }
+        return true;
+    });
+
     const { activeSection, setActiveSection } = useScroll();
 
     // STRICT SCROLL LOCKING ON MOUNT
     useLayoutEffect(() => {
-        // Disable smooth scrolling and physically lock the body height to prevent jump
         document.documentElement.classList.add('loading');
         document.body.classList.add('no-scroll');
         window.scrollTo(0, 0);
@@ -57,10 +59,8 @@ function App() {
     // HANDLE NAVIGATION AFTER LOADING
     useEffect(() => {
         if (!loading) {
-            // Unlock scroll
             document.body.classList.remove('no-scroll');
             
-            // Short delay to allow DOM to paint before restoring smooth scroll
             setTimeout(() => {
                 document.documentElement.classList.remove('loading');
                 
@@ -89,15 +89,18 @@ function App() {
         };
 
         const handleVisibilityChange = () => {
-            if (document.hidden) {
-                document.title = "Come back! 👋 | Md Tanveer Alam";
-            } else {
-                document.title = "Md Tanveer Alam | Full Stack Developer";
-            }
+            document.title = document.hidden 
+                ? "Come back! 👋 | Md Tanveer Alam" 
+                : "Md Tanveer Alam | Full Stack Developer";
         };
 
         window.addEventListener("hashchange", handleHashChange);
         document.addEventListener("visibilitychange", handleVisibilityChange);
+
+        if (sessionStorage.getItem('loader-seen')) {
+            setLoading(false);
+            return;
+        }
 
         const startTime = Date.now();
         const handleLoad = () => {
@@ -106,6 +109,7 @@ function App() {
             
             setTimeout(() => {
                 setLoading(false);
+                sessionStorage.setItem('loader-seen', 'true');
             }, remainingTime);
         };
 
@@ -155,7 +159,6 @@ function App() {
                             setActiveSection={setActiveSection}
                         />
 
-                        {/* Since we removed lazy(), these render instantly, preventing layout shifts */}
                         <main className="relative overflow-hidden">
                             <Hero setActiveSection={setActiveSection} />
                             <About />

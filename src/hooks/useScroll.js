@@ -11,32 +11,38 @@ export function useScroll() {
         const handleScroll = () => {
             const currentScrollY = window.scrollY
             setScrollY(currentScrollY)
-
-            if (currentScrollY > lastScrollY) {
-                setScrollDirection('down')
-            } else {
-                setScrollDirection('up')
-            }
-
+            setScrollDirection(currentScrollY > lastScrollY ? 'down' : 'up')
             setLastScrollY(currentScrollY)
-
-            // Update active section
-            const scrollPosition = currentScrollY + 150
-            for (const section of SECTIONS) {
-                const element = document.getElementById(section)
-                if (element) {
-                    const { offsetTop, offsetHeight } = element
-                    if (scrollPosition >= offsetTop && scrollPosition < offsetTop + offsetHeight) {
-                        setActiveSection(section)
-                        break
-                    }
-                }
-            }
         }
 
         window.addEventListener('scroll', handleScroll, { passive: true })
         return () => window.removeEventListener('scroll', handleScroll)
     }, [lastScrollY])
+
+    useEffect(() => {
+        const observerOptions = {
+            root: null,
+            rootMargin: '-20% 0px -20% 0px',
+            threshold: [0, 0.1, 0.2, 0.3]
+        }
+
+        const observerCallback = (entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting && entry.intersectionRatio > 0.1) {
+                    setActiveSection(entry.target.id)
+                }
+            })
+        }
+
+        const observer = new IntersectionObserver(observerCallback, observerOptions)
+
+        SECTIONS.forEach((id) => {
+            const element = document.getElementById(id)
+            if (element) observer.observe(element)
+        })
+
+        return () => observer.disconnect()
+    }, [])
 
     return { scrollY, scrollDirection, activeSection, setActiveSection }
 }
