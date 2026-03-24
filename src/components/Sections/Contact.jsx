@@ -207,26 +207,40 @@ export default function Contact() {
                                     ))}
                                 </div>
 
-                                <div className="pt-4 space-y-4">
-                                    <p className="text-sm font-bold uppercase tracking-widest text-muted-foreground/60">Follow My Journey</p>
-                                    <div className="flex gap-4">
+                                <div className="pt-6 space-y-6">
+                                    <div className="flex items-center gap-4">
+                                        <div className="h-px flex-1 bg-gradient-to-r from-border to-transparent" />
+                                        <p className="text-[10px] font-black uppercase tracking-[0.3em] text-muted-foreground/60">Follow My Journey</p>
+                                        <div className="h-px flex-1 bg-gradient-to-l from-border to-transparent" />
+                                    </div>
+                                    <div className="flex justify-center md:justify-start gap-4">
                                         {[
-                                            { icon: Github, href: 'https://github.com/mdtanveer0786', color: 'hover:bg-[#333] hover:text-white' },
-                                            { icon: Linkedin, href: 'https://linkedin.com/in/md-tanveer-alam-b7a134219/', color: 'hover:bg-[#0077b5] hover:text-white' },
-                                            { icon: Twitter, href: 'https://x.com/tanveertoofan01', color: 'hover:bg-[#1da1f2] hover:text-white' },
+                                            { icon: Github, href: 'https://github.com/mdtanveer0786', label: 'GitHub', color: 'hover:bg-[#24292e] hover:text-white hover:shadow-[#24292e]/20' },
+                                            { icon: Linkedin, href: 'https://linkedin.com/in/md-tanveer-alam-b7a134219/', label: 'LinkedIn', color: 'hover:bg-[#0077b5] hover:text-white hover:shadow-[#0077b5]/20' },
+                                            { icon: Twitter, href: 'https://x.com/tanveertoofan01', label: 'Twitter', color: 'hover:bg-[#1da1f2] hover:text-white hover:shadow-[#1da1f2]/20' },
                                         ].map((social, i) => (
                                             <Magnetic key={i}>
-                                                <a 
+                                                <motion.a 
                                                     href={social.href}
                                                     target="_blank"
                                                     rel="noopener noreferrer"
+                                                    whileHover={{ y: -5 }}
                                                     className={cn(
-                                                        "p-4 rounded-xl bg-secondary/50 border border-border/50 transition-all duration-300",
+                                                        "group relative p-5 rounded-2xl bg-secondary/30 border border-border/50 transition-all duration-500 overflow-hidden shadow-sm",
                                                         social.color
                                                     )}
+                                                    aria-label={social.label}
                                                 >
-                                                    <social.icon size={20} />
-                                                </a>
+                                                    {/* Hover Glow Effect */}
+                                                    <div className="absolute inset-0 opacity-0 group-hover:opacity-10 transition-opacity duration-500 bg-white" />
+                                                    
+                                                    <social.icon size={22} className="relative z-10 transition-transform duration-500 group-hover:scale-110" />
+                                                    
+                                                    {/* Tooltip */}
+                                                    <span className="absolute -top-10 left-1/2 -translate-x-1/2 px-3 py-1 bg-foreground text-background text-[10px] font-bold rounded-lg opacity-0 group-hover:opacity-100 transition-all duration-300 pointer-events-none">
+                                                        {social.label}
+                                                    </span>
+                                                </motion.a>
                                             </Magnetic>
                                         ))}
                                     </div>
