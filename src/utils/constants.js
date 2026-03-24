@@ -173,7 +173,7 @@ export const projects = [
         live: '',
         featured: true,
         category: 'fullstack',
-        date: '2024-02-15'
+        date: '2026-02-15'
     },
 ]
 
@@ -182,7 +182,7 @@ export const experience = [
         id: 1,
         title: 'Full Stack Developer',
         company: 'Freelance / Projects',
-        period: '2023 - Present',
+        period: '2026 - Present',
         location: 'Delhi, India',
         description: 'Developing modern web applications using the MERN stack and other cutting-edge technologies.',
         achievements: [
