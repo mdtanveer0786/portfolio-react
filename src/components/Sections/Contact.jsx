@@ -39,8 +39,20 @@ export default function Contact() {
     const handleSubmit = async (e) => {
         e.preventDefault()
 
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+        
         if (!formData.name || !formData.email || !formData.message) {
             toast.error('Please fill in all required fields')
+            return
+        }
+
+        if (!emailRegex.test(formData.email)) {
+            toast.error('Please enter a valid email address')
+            return
+        }
+
+        if (formData.message.length < 10) {
+            toast.error('Message is too short (min 10 characters)')
             return
         }
 

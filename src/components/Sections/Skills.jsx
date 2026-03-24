@@ -1,22 +1,30 @@
 import { motion } from 'framer-motion'
 import { skillCategories } from '../../utils/constants'
 import TextReveal from '../UI/TextReveal'
+import { FaReact, FaNodeJs, FaHtml5, FaCss3Alt, FaJs, FaDatabase, FaGitAlt } from 'react-icons/fa'
+import { SiTailwindcss, SiExpress, SiMongodb, SiPostman, SiVercel, SiMysql, SiRender } from 'react-icons/si'
+
+const getIcon = (name) => {
+    const iconMap = {
+        'HTML5': <FaHtml5 />,
+        'CSS3': <FaCss3Alt />,
+        'JavaScript': <FaJs />,
+        'React.js': <FaReact />,
+        'Tailwind CSS': <SiTailwindcss />,
+        'Node.js': <FaNodeJs />,
+        'Express.js': <SiExpress />,
+        'REST APIs': <FaDatabase />,
+        'MongoDB': <SiMongodb />,
+        'MySQL': <SiMysql />,
+        'Vercel': <SiVercel />,
+        'Render': <SiRender />,
+        'Git': <FaGitAlt />,
+        'Postman': <SiPostman />
+    };
+    return iconMap[name] || <FaDatabase />;
+};
 
 const SkillCard = ({ skill, index }) => {
-    const getFormattedName = (n) => {
-        const lower = n.toLowerCase();
-        if (lower === 'react.js') return 'react';
-        if (lower === 'express.js') return 'express';
-        if (lower === 'node.js') return 'nodejs';
-        if (lower === 'tailwind css') return 'tailwindcss';
-        if (lower === 'rest apis') return 'fastapi'; // Close alternative or placeholder
-        if (lower === 'render') return 'vercel'; // Use vercel icon as placeholder if render is missing
-        return lower.replace('.js', '').replace(' ', '');
-    };
-    
-    const formattedName = getFormattedName(skill.name);
-    const iconUrl = `https://cdn.jsdelivr.net/gh/devicons/devicon/icons/${formattedName}/${formattedName}-original.svg`;
-
     return (
         <motion.div
             initial={{ opacity: 0, scale: 0.8 }}
@@ -30,32 +38,24 @@ const SkillCard = ({ skill, index }) => {
             whileHover={{ y: -5, scale: 1.05 }}
             className="group relative flex flex-col items-center justify-center p-3 sm:p-4 bg-white/5 dark:bg-white/[0.03] backdrop-blur-md border border-white/10 rounded-2xl transition-all duration-300 hover:border-primary/50 hover:bg-primary/[0.05] shadow-lg shadow-black/5"
         >
-            {/* Always-on Premium Glow (Subtle) */}
             <div 
                 className="absolute inset-0 rounded-2xl opacity-10 blur-xl pointer-events-none group-hover:opacity-30 transition-opacity duration-500"
                 style={{ backgroundColor: skill.color }}
             />
 
-            {/* Moving Border Gradient (Premium Effect) */}
             <div className="absolute inset-0 rounded-2xl border border-transparent bg-gradient-to-br from-white/10 to-transparent opacity-50 group-hover:from-primary/50 transition-all duration-500" />
 
-            <div className="relative z-10 w-8 h-8 sm:w-10 sm:h-10 mb-2 flex items-center justify-center transition-all duration-500 group-hover:scale-110">
-                <img 
-                    src={iconUrl} 
-                    alt={skill.name}
-                    className="w-full h-full object-contain filter grayscale-[0.2] group-hover:grayscale-0 transition-all duration-500"
-                    onError={(e) => {
-                        e.target.onerror = null;
-                        e.target.src = `https://ui-avatars.com/api/?name=${skill.name}&background=6366f1&color=fff&bold=true&size=64`;
-                    }}
-                />
+            <div 
+                className="relative z-10 text-2xl sm:text-3xl mb-2 transition-all duration-500 group-hover:scale-110"
+                style={{ color: skill.color }}
+            >
+                {getIcon(skill.name)}
             </div>
             
             <span className="relative z-10 text-[10px] sm:text-xs font-bold tracking-tight text-muted-foreground group-hover:text-foreground transition-colors text-center truncate w-full px-1">
                 {skill.name}
             </span>
 
-            {/* Mini Progress Dot */}
             <div className="absolute bottom-1 right-2 flex items-center gap-1">
                 <div className="w-1 h-1 rounded-full animate-pulse" style={{ backgroundColor: skill.color }} />
             </div>
