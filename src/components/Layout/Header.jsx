@@ -41,18 +41,27 @@ export default function Header({ activeSection, setActiveSection }) {
         }
     }, [mobileMenuOpen])
 
+    const [isScrolling, setIsScrolling] = useState(false)
+
+    // ... (rest of effects)
+
     const handleNavClick = (href) => {
         const id = href.substring(1)
+        setIsScrolling(true)
         setActiveSection(id)
         setMobileMenuOpen(false)
         
-        // Update hash in URL without jumping
         window.history.pushState(null, null, href)
         
-        // Small delay for a smoother feel after the menu starts closing
-        setTimeout(() => {
-            document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' })
-        }, 100)
+        const element = document.getElementById(id)
+        if (element) {
+            element.scrollIntoView({ behavior: 'smooth' })
+            
+            // Allow observer to take over after scroll completes
+            setTimeout(() => {
+                setIsScrolling(false)
+            }, 1000)
+        }
     }
 
     return (

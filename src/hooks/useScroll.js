@@ -27,14 +27,25 @@ export function useScroll() {
         }
 
         const observerCallback = (entries) => {
-            entries.forEach((entry) => {
-                if (entry.isIntersecting && entry.intersectionRatio > 0.1) {
-                    setActiveSection(entry.target.id)
-                }
-            })
+            // Get all sections currently visible
+            const visibleEntries = entries.filter(entry => entry.isIntersecting);
+            
+            if (visibleEntries.length > 0) {
+                // Find the one most visible (highest intersection ratio)
+                const mostVisible = visibleEntries.reduce((prev, current) => 
+                    (prev.intersectionRatio > current.intersectionRatio) ? prev : current
+                );
+
+                // Update only if we're not currently doing a manual smooth scroll from header
+                setActiveSection(mostVisible.target.id);
+            }
         }
 
-        const observer = new IntersectionObserver(observerCallback, observerOptions)
+        const observer = new IntersectionObserver(observerCallback, {
+            root: null,
+            rootMargin: '-25% 0px -25% 0px', // Smaller area for more precise activation
+            threshold: [0.1, 0.5, 0.8]
+        })
 
         SECTIONS.forEach((id) => {
             const element = document.getElementById(id)

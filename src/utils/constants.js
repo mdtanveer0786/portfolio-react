@@ -24,7 +24,7 @@ import ecommerceImg from '../assets/projects/ecommerce.webp'
 
 export const LOADING_DURATION = 1000;
 
-export const SECTIONS = ['home', 'about', 'skills', 'projects', 'education', 'contact'];
+export const SECTIONS = ['home', 'about', 'education', 'skills', 'projects', 'contact'];
 
 export const navItems = [
     { label: 'Home', href: '#home', icon: Home },
