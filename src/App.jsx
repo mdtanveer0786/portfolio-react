@@ -5,6 +5,7 @@ import { ThemeProvider } from "./components/Layout/ThemeProvider";
 import Header from "./components/Layout/Header";
 import Footer from "./components/Layout/Footer";
 import Loader from "./components/UI/Loader";
+import SmoothScroll from "./components/UI/SmoothScroll";
 
 // 1. PROFESSIONAL FIX: Remove lazy loading for layout-critical sections.
 import Hero from "./components/Sections/Hero";
@@ -127,51 +128,53 @@ function App() {
 
     return (
         <ThemeProvider defaultTheme="dark" storageKey="portfolio-theme">
-            <ScrollToTop />
-            
-            <AnimatePresence mode="wait">
-                {loading ? (
-                    <motion.div
-                        key="loader"
-                        initial={{ opacity: 1 }}
-                        exit={{ opacity: 0 }}
-                        transition={{ duration: 0.4 }}
-                        className="fixed inset-0 z-[100]"
-                    >
-                        <Loader />
-                    </motion.div>
-                ) : (
-                    <motion.div 
-                        key="main-content"
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        transition={{ duration: 0.6 }}
-                        className="bg-background text-foreground min-h-screen selection:bg-primary/20 selection:text-primary relative"
-                    >
-                        <Suspense fallback={null}>
-                            <ScrollProgress />
-                            <CustomCursor />
-                            <ParticlesBackground />
-                        </Suspense>
-                        
-                        <Header
-                            activeSection={activeSection}
-                            setActiveSection={setActiveSection}
-                        />
+            <SmoothScroll>
+                <ScrollToTop />
+                
+                <AnimatePresence mode="wait">
+                    {loading ? (
+                        <motion.div
+                            key="loader"
+                            initial={{ opacity: 1 }}
+                            exit={{ opacity: 0 }}
+                            transition={{ duration: 0.4 }}
+                            className="fixed inset-0 z-[100]"
+                        >
+                            <Loader />
+                        </motion.div>
+                    ) : (
+                        <motion.div 
+                            key="main-content"
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            transition={{ duration: 0.6 }}
+                            className="bg-background text-foreground min-h-screen selection:bg-primary/20 selection:text-primary relative"
+                        >
+                            <Suspense fallback={null}>
+                                <ScrollProgress />
+                                <CustomCursor />
+                                <ParticlesBackground />
+                            </Suspense>
+                            
+                            <Header
+                                activeSection={activeSection}
+                                setActiveSection={setActiveSection}
+                            />
 
-                        <main className="relative overflow-hidden">
-                            <Hero setActiveSection={setActiveSection} />
-                            <About />
-                            <Education />
-                            <Skills />
-                            <Projects />
-                            <Contact />
-                        </main>
+                            <main className="relative overflow-hidden">
+                                <Hero setActiveSection={setActiveSection} />
+                                <About />
+                                <Education />
+                                <Skills />
+                                <Projects />
+                                <Contact />
+                            </main>
 
-                        <Footer />
-                    </motion.div>
-                )}
-            </AnimatePresence>
+                            <Footer />
+                        </motion.div>
+                    )}
+                </AnimatePresence>
+            </SmoothScroll>
         </ThemeProvider>
     );
 }
