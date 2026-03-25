@@ -98,9 +98,7 @@ export default function Hero({ setActiveSection }) {
 
                         <motion.div variants={itemVariants} className="flex flex-col xs:flex-row items-center justify-center lg:justify-start gap-4">
                             <Magnetic>
-                                <motion.button
-                                    whileHover={{ scale: 1.05 }}
-                                    whileTap={{ scale: 0.95 }}
+                                <button
                                     onClick={() => {
                                         setActiveSection('contact')
                                         document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })
@@ -109,20 +107,18 @@ export default function Hero({ setActiveSection }) {
                                 >
                                     <span>Contact Me</span>
                                     <ArrowRight className="w-4 h-4 sm:w-5 h-5" />
-                                </motion.button>
+                                </button>
                             </Magnetic>
 
                             <Magnetic>
-                                <motion.a
-                                    whileHover={{ scale: 1.05 }}
-                                    whileTap={{ scale: 0.95 }}
+                                <a
                                     href="/resume.pdf"
                                     download="Md_Tanveer_Alam_Resume.pdf"
                                     className="w-full xs:w-auto px-8 py-4 rounded-full border border-violet-600/50 text-foreground font-bold flex items-center justify-center space-x-3 hover:bg-violet-600/10 transition-all uppercase tracking-wider text-xs sm:text-sm block"
                                 >
                                     <span>Get Resume</span>
                                     <Download className="w-4 h-4 sm:w-5 h-5" />
-                                </motion.a>
+                                </a>
                             </Magnetic>
                         </motion.div>
                     </motion.div>

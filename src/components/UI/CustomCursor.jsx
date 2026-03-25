@@ -1,26 +1,28 @@
 import { useEffect, useState } from 'react';
-import { motion, useSpring } from 'framer-motion';
+import { motion, useSpring, AnimatePresence } from 'framer-motion';
 
 export default function CustomCursor() {
     const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
-    const [isHovering, setIsHovering] = useState(false);
+    const [cursorType, setCursorType] = useState('default');
 
-    const springConfig = { damping: 25, stiffness: 200 };
+    const springConfig = { damping: 25, stiffness: 200, mass: 0.5 };
     const cursorX = useSpring(0, springConfig);
     const cursorY = useSpring(0, springConfig);
 
     useEffect(() => {
         const moveMouse = (e) => {
             setMousePosition({ x: e.clientX, y: e.clientY });
-            cursorX.set(e.clientX - 16);
-            cursorY.set(e.clientY - 16);
+            cursorX.set(e.clientX);
+            cursorY.set(e.clientY);
         };
 
         const handleHover = (e) => {
-            if (e.target.closest('a, button, .interactive')) {
-                setIsHovering(true);
+            if (e.target.closest('a, button, .magnetic-wrap')) {
+                setCursorType('pointer');
+            } else if (e.target.closest('.project-image-container')) {
+                setCursorType('view');
             } else {
-                setIsHovering(false);
+                setCursorType('default');
             }
         };
 
@@ -33,24 +35,65 @@ export default function CustomCursor() {
         };
     }, [cursorX, cursorY]);
 
+    const variants = {
+        default: {
+            height: 32,
+            width: 32,
+            backgroundColor: 'transparent',
+            border: '2px solid var(--primary)',
+        },
+        pointer: {
+            height: 64,
+            width: 64,
+            backgroundColor: 'rgba(139, 92, 246, 0.15)',
+            border: '1px solid rgba(139, 92, 246, 0.5)',
+        },
+        view: {
+            height: 80,
+            width: 80,
+            backgroundColor: 'var(--primary)',
+            border: 'none',
+        }
+    };
+
     return (
         <>
             <motion.div
-                className="fixed top-0 left-0 w-8 h-8 border-2 border-primary rounded-full pointer-events-none z-[9999] hidden md:block"
+                className="fixed top-0 left-0 rounded-full pointer-events-none z-[9999] hidden md:flex items-center justify-center overflow-hidden backdrop-blur-[2px]"
+                animate={cursorType}
+                variants={variants}
                 style={{
                     x: cursorX,
                     y: cursorY,
-                    scale: isHovering ? 1.5 : 1,
-                    backgroundColor: isHovering ? 'rgba(139, 92, 246, 0.1)' : 'transparent',
+                    translateX: '-50%',
+                    translateY: '-50%',
                 }}
-            />
+            >
+                <AnimatePresence>
+                    {cursorType === 'view' && (
+                        <motion.span
+                            initial={{ opacity: 0, scale: 0 }}
+                            animate={{ opacity: 1, scale: 1 }}
+                            exit={{ opacity: 0, scale: 0 }}
+                            className="text-[10px] font-black uppercase tracking-widest text-white"
+                        >
+                            View
+                        </motion.span>
+                    )}
+                </AnimatePresence>
+            </motion.div>
             <motion.div
-                className="fixed top-0 left-0 w-2 h-2 bg-primary rounded-full pointer-events-none z-[9999] hidden md:block"
+                className="fixed top-0 left-0 w-1.5 h-1.5 bg-primary rounded-full pointer-events-none z-[9999] hidden md:block"
                 animate={{
-                    x: mousePosition.x - 4,
-                    y: mousePosition.y - 4,
+                    x: mousePosition.x,
+                    y: mousePosition.y,
+                    scale: cursorType === 'default' ? 1 : 0,
                 }}
-                transition={{ type: 'spring', damping: 30, stiffness: 250, mass: 0.5 }}
+                style={{
+                    translateX: '-50%',
+                    translateY: '-50%',
+                }}
+                transition={{ type: 'spring', damping: 30, stiffness: 250, mass: 0.2 }}
             />
         </>
     );

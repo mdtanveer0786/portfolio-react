@@ -4,6 +4,7 @@ import { Menu, X, Sun, Moon } from 'lucide-react'
 import { useTheme } from './ThemeProvider'
 import { navItems, socialLinks } from '../../utils/constants'
 import { cn } from '../../utils/cn'
+import Magnetic from '../UI/Magnetic'
 
 export default function Header({ activeSection, setActiveSection }) {
     const [scrolled, setScrolled] = useState(false)
@@ -78,59 +79,64 @@ export default function Header({ activeSection, setActiveSection }) {
                     : "bg-white/40 dark:bg-black/40 border-black/5 dark:border-white/5 backdrop-blur-md"
             )}>
                 {/* Logo */}
-                <motion.div
-                    whileHover={{ scale: 1.02 }}
-                    whileTap={{ scale: 0.98 }}
-                    className="flex items-center gap-2 cursor-pointer group"
-                    onClick={() => handleNavClick('#home')}
-                >
-                    <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-violet-600 to-indigo-600 flex items-center justify-center text-white font-bold text-xs flex-shrink-0 shadow-lg">
-                        MD
-                    </div>
-                    <span className="text-base md:text-lg font-bold tracking-tight text-foreground uppercase hidden xs:block">
-                        Tanveer
-                    </span>
-                </motion.div>
+                <Magnetic>
+                    <motion.div
+                        whileHover={{ scale: 1.02 }}
+                        whileTap={{ scale: 0.98 }}
+                        className="flex items-center gap-2 cursor-pointer group"
+                        onClick={() => handleNavClick('#home')}
+                    >
+                        <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-violet-600 to-indigo-600 flex items-center justify-center text-white font-bold text-xs flex-shrink-0 shadow-lg">
+                            MD
+                        </div>
+                        <span className="text-base md:text-lg font-bold tracking-tight text-foreground uppercase hidden xs:block">
+                            Tanveer
+                        </span>
+                    </motion.div>
+                </Magnetic>
 
                 {/* Desktop Navigation */}
                 <div className="hidden lg:flex items-center gap-1">
                     {navItems.map((item) => {
                         const isActive = activeSection === item.href.substring(1);
                         return (
-                            <button
-                                key={item.label}
-                                onClick={() => handleNavClick(item.href)}
-                                className={cn(
-                                    "px-4 py-2 rounded-full text-[11px] font-bold uppercase tracking-widest transition-all relative group",
-                                    isActive 
-                                        ? "text-white" 
-                                        : "text-muted-foreground hover:text-foreground"
-                                )}
-                            >
-                                <span className="relative z-10">{item.label}</span>
-                                {isActive && (
-                                    <motion.div 
-                                        layoutId="active-pill"
-                                        className="absolute inset-0 bg-violet-600 rounded-full shadow-md"
-                                        transition={{ type: 'spring', bounce: 0.2, duration: 0.6 }}
-                                    />
-                                )}
-                            </button>
+                            <Magnetic key={item.label}>
+                                <button
+                                    onClick={() => handleNavClick(item.href)}
+                                    className={cn(
+                                        "px-4 py-2 rounded-full text-[11px] font-bold uppercase tracking-widest transition-all relative group",
+                                        isActive 
+                                            ? "text-white" 
+                                            : "text-muted-foreground hover:text-foreground"
+                                    )}
+                                >
+                                    <span className="relative z-10">{item.label}</span>
+                                    {isActive && (
+                                        <motion.div 
+                                            layoutId="active-pill"
+                                            className="absolute inset-0 bg-violet-600 rounded-full shadow-md"
+                                            transition={{ type: 'spring', bounce: 0.2, duration: 0.6 }}
+                                        />
+                                    )}
+                                </button>
+                            </Magnetic>
                         );
                     })}
                 </div>
 
                 {/* Right Actions */}
                 <div className="flex items-center gap-2">
-                    <motion.button
-                        whileHover={{ scale: 1.1 }}
-                        whileTap={{ scale: 0.9 }}
-                        onClick={toggleTheme}
-                        aria-label={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}
-                        className="p-2.5 rounded-full bg-black/5 dark:bg-white/5 border border-black/5 dark:border-white/10 text-foreground hover:text-primary transition-all"
-                    >
-                        {theme === 'dark' ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
-                    </motion.button>
+                    <Magnetic>
+                        <motion.button
+                            whileHover={{ scale: 1.1 }}
+                            whileTap={{ scale: 0.9 }}
+                            onClick={toggleTheme}
+                            aria-label={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}
+                            className="p-2.5 rounded-full bg-black/5 dark:bg-white/5 border border-black/5 dark:border-white/10 text-foreground hover:text-primary transition-all"
+                        >
+                            {theme === 'dark' ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
+                        </motion.button>
+                    </Magnetic>
 
                     <motion.button
                         whileTap={{ scale: 0.9 }}

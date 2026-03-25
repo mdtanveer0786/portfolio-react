@@ -57,7 +57,7 @@ const ProjectCard = forwardRef(({ project, index }, ref) => {
                 {/* Image Section with Overlay */}
                 <div 
                     style={{ transform: "translateZ(50px)" }}
-                    className="relative aspect-[16/9] overflow-hidden"
+                    className="relative aspect-[16/9] overflow-hidden project-image-container cursor-none"
                 >
                     <img
                         src={project.image}
