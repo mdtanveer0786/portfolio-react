@@ -131,7 +131,7 @@ export const projects = [
         tags: ['React', 'Tailwind', 'Charts'],
         image: financeImg,
         github: 'https://github.com/mdtanveer0786/finance-dashboard',
-        live: 'https://financee-dashboard.netlify.app/',
+        live: 'https://wealthwise-finance-dashboard.vercel.app/',
         featured: true,
         category: 'frontend',
         date: '2024-12-05'

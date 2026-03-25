@@ -47,7 +47,24 @@ export default function TextReveal({ text, className }) {
                     style={{ marginRight: '0.25em' }}
                     key={index}
                 >
-                    {word}
+                    {word === '👋' ? (
+                        <motion.span
+                            animate={{
+                                rotate: [0, 15, -10, 15, 0],
+                            }}
+                            transition={{
+                                duration: 1.5,
+                                repeat: Infinity,
+                                repeatDelay: 0.5,
+                                ease: "easeInOut",
+                            }}
+                            style={{ display: 'inline-block', transformOrigin: '70% 70%' }}
+                        >
+                            {word}
+                        </motion.span>
+                    ) : (
+                        word
+                    )}
                 </motion.span>
             ))}
         </motion.div>
