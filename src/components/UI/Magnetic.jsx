@@ -10,7 +10,7 @@ export default function Magnetic({ children }) {
         const { height, width, left, top } = ref.current.getBoundingClientRect();
         const middleX = clientX - (left + width / 2);
         const middleY = clientY - (top + height / 2);
-        setPosition({ x: middleX * 0.1, y: middleY * 0.1 });
+        setPosition({ x: middleX * 0.4, y: middleY * 0.4 });
     };
 
     const reset = () => {
@@ -21,6 +21,7 @@ export default function Magnetic({ children }) {
 
     return (
         <motion.div
+            className="magnetic-wrap"
             style={{ position: 'relative' }}
             ref={ref}
             onMouseMove={handleMouse}

@@ -96,7 +96,7 @@ export default function Header({ activeSection, setActiveSection }) {
                 </Magnetic>
 
                 {/* Desktop Navigation */}
-                <div className="hidden lg:flex items-center gap-1">
+                <div className="hidden lg:flex items-center gap-1 bg-black/5 dark:bg-white/5 p-1 rounded-full border border-black/5 dark:border-white/5">
                     {navItems.map((item) => {
                         const isActive = activeSection === item.href.substring(1);
                         return (
@@ -104,7 +104,7 @@ export default function Header({ activeSection, setActiveSection }) {
                                 <button
                                     onClick={() => handleNavClick(item.href)}
                                     className={cn(
-                                        "px-4 py-2 rounded-full text-[11px] font-bold uppercase tracking-widest transition-all relative group",
+                                        "px-5 py-2.5 rounded-full text-[10px] font-black uppercase tracking-[0.2em] transition-all relative group",
                                         isActive 
                                             ? "text-white" 
                                             : "text-muted-foreground hover:text-foreground"
@@ -114,7 +114,7 @@ export default function Header({ activeSection, setActiveSection }) {
                                     {isActive && (
                                         <motion.div 
                                             layoutId="active-pill"
-                                            className="absolute inset-0 bg-violet-600 rounded-full shadow-md"
+                                            className="absolute inset-0 bg-primary rounded-full shadow-lg shadow-primary/20"
                                             transition={{ type: 'spring', bounce: 0.2, duration: 0.6 }}
                                         />
                                     )}

@@ -71,12 +71,11 @@ export default function Hero({ setActiveSection }) {
                             </div>
 
                             <p className="text-muted-foreground text-sm sm:text-base md:text-lg font-medium max-w-2xl mx-auto lg:mx-0 leading-relaxed">
-                                I build real-world applications that solve real problems
-                                and help businesses grow 🚀
+                                Specializing in the <span className="text-primary font-bold">MERN stack</span>, I transform complex ideas into high-performance web applications that drive business growth.
                             </p>
                         </motion.div>
 
-                        <motion.div variants={itemVariants} className="flex items-center justify-center lg:justify-start space-x-5 sm:space-x-6">
+                        <motion.div variants={itemVariants} className="flex items-center justify-center lg:justify-start space-x-6">
                             {socialLinks.map((social) => {
                                 const Icon = social.icon
                                 return (
@@ -96,17 +95,20 @@ export default function Hero({ setActiveSection }) {
                             })}
                         </motion.div>
 
-                        <motion.div variants={itemVariants} className="flex flex-col xs:flex-row items-center justify-center lg:justify-start gap-4">
+                        <motion.div variants={itemVariants} className="flex flex-col xs:flex-row items-center justify-center lg:justify-start gap-5">
                             <Magnetic>
                                 <button
                                     onClick={() => {
                                         setActiveSection('contact')
                                         document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })
                                     }}
-                                    className="w-full xs:w-auto px-8 py-4 rounded-full bg-gradient-to-r from-violet-600 to-pink-600 text-white font-bold flex items-center justify-center space-x-3 shadow-xl hover:shadow-violet-500/20 transition-all uppercase tracking-wider text-xs sm:text-sm"
+                                    className="w-full xs:w-auto px-10 py-4 rounded-full bg-primary text-white font-bold flex items-center justify-center space-x-3 shadow-xl shadow-primary/20 hover:shadow-primary/40 hover:-translate-y-1 transition-all uppercase tracking-widest text-xs relative overflow-hidden group/btn"
                                 >
-                                    <span>Contact Me</span>
-                                    <ArrowRight className="w-4 h-4 sm:w-5 h-5" />
+                                    <span className="relative z-10 flex items-center gap-2">
+                                        <span>Work With Me</span>
+                                        <ArrowRight className="w-4 h-4" />
+                                    </span>
+                                    <div className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover/btn:translate-x-full transition-transform duration-1000" />
                                 </button>
                             </Magnetic>
 
@@ -114,10 +116,13 @@ export default function Hero({ setActiveSection }) {
                                 <a
                                     href="/resume.pdf"
                                     download="Md_Tanveer_Alam_Resume.pdf"
-                                    className="w-full xs:w-auto px-8 py-4 rounded-full border border-violet-600/50 text-foreground font-bold flex items-center justify-center space-x-3 hover:bg-violet-600/10 transition-all uppercase tracking-wider text-xs sm:text-sm block"
+                                    className="w-full xs:w-auto px-10 py-4 rounded-full border-2 border-primary/20 text-foreground font-bold flex items-center justify-center space-x-3 hover:bg-primary/5 transition-all uppercase tracking-widest text-xs relative overflow-hidden group/btn"
                                 >
-                                    <span>Get Resume</span>
-                                    <Download className="w-4 h-4 sm:w-5 h-5" />
+                                    <span className="relative z-10 flex items-center gap-2">
+                                        <span>Download CV</span>
+                                        <Download className="w-4 h-4" />
+                                    </span>
+                                    <div className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-primary/10 to-transparent -translate-x-full group-hover/btn:translate-x-full transition-transform duration-1000" />
                                 </a>
                             </Magnetic>
                         </motion.div>

@@ -22,7 +22,7 @@ import eduearnImg from '../assets/projects/eduearn.webp'
 import bikesImg from '../assets/projects/bikes.webp'
 import ecommerceImg from '../assets/projects/ecommerce.webp'
 
-export const LOADING_DURATION = 1000;
+export const LOADING_DURATION = 800;
 
 export const SECTIONS = ['home', 'about', 'education', 'skills', 'projects', 'contact'];
 
@@ -181,14 +181,14 @@ export const experience = [
     {
         id: 1,
         title: 'Full Stack Developer',
-        company: 'Freelance / Projects',
-        period: '2026 - Present',
+        company: 'Independent Developer',
+        period: '2024 - Present',
         location: 'Delhi, India',
-        description: 'Developing modern web applications using the MERN stack and other cutting-edge technologies.',
+        description: 'Building high-performance web applications using the MERN stack. Focused on delivering scalable, user-centric solutions.',
         achievements: [
-            'Built and deployed 10+ web applications',
-            'Optimized application performance and SEO',
-            'Implemented secure authentication and real-time features'
+            'Developed 10+ full-stack projects using React, Node.js, and MongoDB',
+            'Implemented secure JWT-based authentication and RESTful APIs',
+            'Optimized application performance and achieved high Lighthouse scores'
         ]
     },
 ]
@@ -196,19 +196,19 @@ export const experience = [
 export const education = [
     {
         id: 1,
-        degree: 'Computer Science Engineering (B.Tech)',
+        degree: 'B.Tech in Computer Science Engineering',
         institution: 'Bikaner Technical University',
         period: '2020 - 2024',
-        grade: 'CGPA: 7/10',
-        description: 'Specialized in software development, database management, and web technologies.'
+        grade: 'CGPA: 7.0/10',
+        description: 'Studied core computer science concepts including Data Structures, Algorithms, and Software Engineering.'
     },
     {
         id: 2,
         degree: 'Full Stack Web Development Certification',
         institution: 'AccioJob / Udemy',
         period: '2022 - 2024',
-        grade: 'Grade: A',
-        description: 'Comprehensive training in modern web development technologies including HTML, CSS, JavaScript, React, Node.js, Express.js, MongoDB.'
+        grade: 'A+',
+        description: 'Intensive training in modern web technologies: React, Node.js, Express, and MongoDB.'
     },
     {
         id: 3,

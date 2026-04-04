@@ -20,50 +20,53 @@ const EducationCard = ({ edu, index }) => {
                     initial={{ scale: 0, opacity: 0 }}
                     whileInView={{ scale: 1, opacity: 1 }}
                     viewport={{ once: true, margin: "-50px" }}
-                    className="w-8 h-8 md:w-12 md:h-12 rounded-xl md:rounded-2xl bg-background border-2 border-primary flex items-center justify-center shadow-lg dark:shadow-primary/20 rotate-45"
+                    className="w-10 h-10 md:w-14 md:h-14 rounded-2xl bg-background border-2 border-primary flex items-center justify-center shadow-xl shadow-primary/20 z-10 relative overflow-hidden group"
                 >
-                    <GraduationCap className="w-4 h-4 md:w-6 md:h-6 text-primary -rotate-45" />
+                    <div className="absolute inset-0 bg-primary/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                    <GraduationCap className="w-5 h-5 md:w-7 md:h-7 text-primary relative z-10" />
                 </motion.div>
             </div>
 
             {/* Content Card Side */}
-            <div className="w-full md:w-[45%] pl-8 md:pl-0 mt-2 md:mt-0">
+            <div className="w-full md:w-[45%] pl-10 md:pl-0 mt-2 md:mt-0">
                 <SectionReveal delay={0.1} direction={isEven ? "left" : "right"}>
                     <motion.div 
                         whileHover={{ y: -5 }}
-                        className="group relative glass-card p-5 md:p-8 rounded-2xl md:rounded-3xl border border-border/50 overflow-hidden"
+                        className="group relative glass-card p-6 md:p-10 rounded-3xl border border-border/50 overflow-hidden shadow-2xl shadow-black/5"
                     >
                         {/* Subtle Background Glow */}
-                        <div className="absolute -right-10 -top-10 w-24 h-24 md:w-32 md:h-32 bg-primary/5 dark:bg-primary/10 rounded-full blur-3xl group-hover:bg-primary/20 transition-all duration-500"></div>
+                        <div className="absolute -right-16 -top-16 w-32 h-32 md:w-48 md:h-48 bg-primary/5 dark:bg-primary/10 rounded-full blur-3xl group-hover:bg-primary/20 transition-all duration-700"></div>
                         
-                        <div className="relative z-10 space-y-3 md:space-y-4">
-                            <div className="flex flex-wrap items-center justify-between gap-2">
-                                <div className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-primary text-[10px] md:text-xs font-bold uppercase tracking-wider">
-                                    <Calendar size={10} className="md:w-3 md:h-3" />
+                        <div className="relative z-10 space-y-4 md:space-y-6">
+                            <div className="flex flex-wrap items-center justify-between gap-3">
+                                <div className="flex items-center gap-2 px-4 py-1.5 rounded-full bg-primary/10 border border-primary/20 text-primary text-[10px] md:text-xs font-black uppercase tracking-widest">
+                                    <Calendar size={12} />
                                     {edu.period}
                                 </div>
-                                <div className="flex items-center gap-1 text-[10px] md:text-xs font-medium text-emerald-600 dark:text-emerald-400 bg-emerald-500/10 px-3 py-1 rounded-full border border-emerald-500/20">
-                                    <Award size={10} className="md:w-3 md:h-3" />
+                                <div className="flex items-center gap-2 text-[10px] md:text-xs font-black text-emerald-500 bg-emerald-500/10 px-4 py-1.5 rounded-full border border-emerald-500/20 uppercase tracking-widest">
+                                    <Award size={12} />
                                     {edu.grade}
                                 </div>
                             </div>
 
-                            <div className="space-y-1">
-                                <h3 className="text-lg md:text-2xl font-bold text-foreground group-hover:text-primary transition-colors duration-300 leading-tight">
+                            <div className="space-y-2">
+                                <h3 className="text-xl md:text-3xl font-black text-foreground group-hover:text-primary transition-colors duration-500 leading-tight">
                                     {edu.degree}
                                 </h3>
-                                <div className="flex items-start md:items-center gap-2 text-muted-foreground font-medium text-xs md:text-base">
-                                    <BookOpen size={14} className="text-primary/70 mt-0.5 md:mt-0" />
+                                <div className="flex items-center gap-2.5 text-muted-foreground/80 font-bold text-sm md:text-lg">
+                                    <div className="p-2 rounded-lg bg-secondary/50 text-primary">
+                                        <BookOpen size={18} />
+                                    </div>
                                     <span className="flex-1">{edu.institution}</span>
                                 </div>
                             </div>
 
-                            <p className="text-muted-foreground text-xs md:text-base leading-relaxed line-clamp-3 group-hover:line-clamp-none transition-all duration-500 italic">
+                            <p className="text-muted-foreground/70 text-sm md:text-base leading-relaxed font-medium border-l-2 border-primary/20 pl-4 py-1 italic">
                                 &quot;{edu.description}&quot;
                             </p>
 
-                            <div className="pt-1 flex items-center gap-1.5 text-[10px] md:text-xs text-muted-foreground/60 font-semibold uppercase tracking-widest">
-                                <MapPin size={12} className="text-primary/70" />
+                            <div className="pt-2 flex items-center gap-2 text-[10px] md:text-xs text-muted-foreground/40 font-black uppercase tracking-[0.3em]">
+                                <MapPin size={14} className="text-primary/50" />
                                 <span>India</span>
                             </div>
                         </div>

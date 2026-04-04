@@ -64,8 +64,6 @@ const SkillCard = ({ skill, index }) => {
 };
 
 export default function Skills() {
-    const allSkills = skillCategories.flatMap(category => category.skills);
-
     return (
         <section id="skills" className="section-container relative overflow-hidden">
             {/* Ultra-Premium Background */}
@@ -96,14 +94,26 @@ export default function Skills() {
                     </p>
                 </div>
 
-                {/* Compact Unified Grid */}
-                <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-8 xl:grid-cols-10 gap-3 sm:gap-4 max-w-6xl mx-auto">
-                    {allSkills.map((skill, index) => (
-                        <SkillCard 
-                            key={`${skill.name}-${index}`} 
-                            skill={skill} 
-                            index={index} 
-                        />
+                {/* Categorized Grid */}
+                <div className="space-y-12 max-w-6xl mx-auto">
+                    {skillCategories.map((category, catIndex) => (
+                        <div key={category.title} className="space-y-6">
+                            <div className="flex items-center gap-3">
+                                <category.icon className="w-6 h-6 text-primary" />
+                                <h3 className="text-lg font-bold uppercase tracking-widest text-foreground/80">
+                                    {category.title}
+                                </h3>
+                            </div>
+                            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+                                {category.skills.map((skill, index) => (
+                                    <SkillCard 
+                                        key={`${skill.name}-${index}`} 
+                                        skill={skill} 
+                                        index={index + (catIndex * 5)} 
+                                    />
+                                ))}
+                            </div>
+                        </div>
                     ))}
                 </div>
 

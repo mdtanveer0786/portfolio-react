@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { motion } from 'framer-motion'
-import { Mail, Phone, MapPin, Send, Sparkles, Github, Linkedin, Twitter } from 'lucide-react'
+import { Mail, Phone, MapPin, Send, Github, Linkedin, Twitter } from 'lucide-react'
 import toast from 'react-hot-toast'
 import emailjs from '@emailjs/browser'
 import TextReveal from '../UI/TextReveal'
@@ -258,8 +258,11 @@ export default function Contact() {
                                 
                                 <form onSubmit={handleSubmit} className="relative glass-card p-6 md:p-12 space-y-6 md:space-y-8 rounded-3xl border-border/50">
                                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
-                                        <div className="space-y-2">
-                                            <label className="text-xs font-bold uppercase tracking-widest text-muted-foreground ml-1">Your Name</label>
+                                        <div className="space-y-3">
+                                            <label className="text-[10px] font-black uppercase tracking-[0.2em] text-muted-foreground/60 ml-1 flex items-center gap-2">
+                                                <div className="w-1 h-1 rounded-full bg-primary" />
+                                                Your Name
+                                            </label>
                                             <input
                                                 type="text"
                                                 name="name"
@@ -267,15 +270,18 @@ export default function Contact() {
                                                 onChange={handleChange}
                                                 onFocus={() => setFocusedField('name')}
                                                 onBlur={() => setFocusedField(null)}
-                                                placeholder="Your Full Name"
+                                                placeholder="Full Name"
                                                 className={cn(
-                                                    "w-full px-6 py-4 rounded-2xl bg-secondary/50 border transition-all duration-300 outline-none",
-                                                    focusedField === 'name' ? "border-primary ring-4 ring-primary/10" : "border-border/50 hover:border-border"
+                                                    "w-full px-6 py-4 rounded-2xl bg-secondary/30 border transition-all duration-500 outline-none placeholder:text-muted-foreground/30 font-medium",
+                                                    focusedField === 'name' ? "border-primary bg-background shadow-lg shadow-primary/5" : "border-border/50 hover:border-primary/20"
                                                 )}
                                             />
                                         </div>
-                                        <div className="space-y-2">
-                                            <label className="text-xs font-bold uppercase tracking-widest text-muted-foreground ml-1">Email Address</label>
+                                        <div className="space-y-3">
+                                            <label className="text-[10px] font-black uppercase tracking-[0.2em] text-muted-foreground/60 ml-1 flex items-center gap-2">
+                                                <div className="w-1 h-1 rounded-full bg-primary" />
+                                                Email Address
+                                            </label>
                                             <input
                                                 type="email"
                                                 name="email"
@@ -283,17 +289,20 @@ export default function Contact() {
                                                 onChange={handleChange}
                                                 onFocus={() => setFocusedField('email')}
                                                 onBlur={() => setFocusedField(null)}
-                                                placeholder="youremail@domain.com"
+                                                placeholder="email@example.com"
                                                 className={cn(
-                                                    "w-full px-6 py-4 rounded-2xl bg-secondary/50 border transition-all duration-300 outline-none",
-                                                    focusedField === 'email' ? "border-primary ring-4 ring-primary/10" : "border-border/50 hover:border-border"
+                                                    "w-full px-6 py-4 rounded-2xl bg-secondary/30 border transition-all duration-500 outline-none placeholder:text-muted-foreground/30 font-medium",
+                                                    focusedField === 'email' ? "border-primary bg-background shadow-lg shadow-primary/5" : "border-border/50 hover:border-primary/20"
                                                 )}
                                             />
                                         </div>
                                     </div>
 
-                                    <div className="space-y-2">
-                                        <label className="text-xs font-bold uppercase tracking-widest text-muted-foreground ml-1">Subject</label>
+                                    <div className="space-y-3">
+                                        <label className="text-[10px] font-black uppercase tracking-[0.2em] text-muted-foreground/60 ml-1 flex items-center gap-2">
+                                            <div className="w-1 h-1 rounded-full bg-primary" />
+                                            Subject
+                                        </label>
                                         <input
                                             type="text"
                                             name="subject"
@@ -303,14 +312,17 @@ export default function Contact() {
                                             onBlur={() => setFocusedField(null)}
                                             placeholder="Project Inquiry"
                                             className={cn(
-                                                "w-full px-6 py-4 rounded-2xl bg-secondary/50 border transition-all duration-300 outline-none",
-                                                focusedField === 'subject' ? "border-primary ring-4 ring-primary/10" : "border-border/50 hover:border-border"
+                                                "w-full px-6 py-4 rounded-2xl bg-secondary/30 border transition-all duration-500 outline-none placeholder:text-muted-foreground/30 font-medium",
+                                                focusedField === 'subject' ? "border-primary bg-background shadow-lg shadow-primary/5" : "border-border/50 hover:border-primary/20"
                                             )}
                                         />
                                     </div>
 
-                                    <div className="space-y-2">
-                                        <label className="text-xs font-bold uppercase tracking-widest text-muted-foreground ml-1">Your Message</label>
+                                    <div className="space-y-3">
+                                        <label className="text-[10px] font-black uppercase tracking-[0.2em] text-muted-foreground/60 ml-1 flex items-center gap-2">
+                                            <div className="w-1 h-1 rounded-full bg-primary" />
+                                            Your Message
+                                        </label>
                                         <textarea
                                             name="message"
                                             rows={5}
@@ -318,37 +330,36 @@ export default function Contact() {
                                             onChange={handleChange}
                                             onFocus={() => setFocusedField('message')}
                                             onBlur={() => setFocusedField(null)}
-                                            placeholder="Tell me about your project..."
+                                            placeholder="How can I help you?"
                                             className={cn(
-                                                "w-full px-6 py-4 rounded-2xl bg-secondary/50 border transition-all duration-300 outline-none resize-none",
-                                                focusedField === 'message' ? "border-primary ring-4 ring-primary/10" : "border-border/50 hover:border-border"
+                                                "w-full px-6 py-4 rounded-2xl bg-secondary/30 border transition-all duration-500 outline-none resize-none placeholder:text-muted-foreground/30 font-medium",
+                                                focusedField === 'message' ? "border-primary bg-background shadow-lg shadow-primary/5" : "border-border/50 hover:border-primary/20"
                                             )}
                                         />
                                     </div>
 
-                                    <div className="flex flex-col sm:flex-row items-center justify-between gap-6 pt-2">
-                                        <div className="flex items-center gap-2 text-xs font-medium text-muted-foreground bg-secondary/50 px-4 py-2 rounded-full">
-                                            <Sparkles size={14} className="text-primary animate-pulse" />
-                                            <span>Replies within 24 hours</span>
+                                    <div className="flex flex-col sm:flex-row items-center justify-between gap-8 pt-4">
+                                        <div className="flex items-center gap-3 text-[10px] font-black uppercase tracking-[0.2em] text-muted-foreground/40 bg-secondary/30 px-5 py-2.5 rounded-full border border-border/50">
+                                            <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
+                                            <span>Fast response guaranteed</span>
                                         </div>
 
                                         <Magnetic>
                                             <motion.button
-                                                whileHover={{ scale: 1.05 }}
-                                                whileTap={{ scale: 0.95 }}
+                                                whileHover={{ scale: 1.02, y: -2 }}
+                                                whileTap={{ scale: 0.98 }}
                                                 disabled={isSubmitting}
-                                                className="w-full sm:w-auto group relative px-10 py-4 rounded-2xl bg-primary text-white font-bold overflow-hidden shadow-xl shadow-primary/20 hover:shadow-primary/40 transition-all"
+                                                className="w-full sm:w-auto group relative px-12 py-5 rounded-2xl bg-primary text-white font-black uppercase tracking-[0.2em] text-[10px] overflow-hidden shadow-xl shadow-primary/20 hover:shadow-primary/40 transition-all flex items-center justify-center gap-3"
                                             >
-                                                <div className="relative z-10 flex items-center justify-center gap-3">
-                                                    {isSubmitting ? (
-                                                        <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
-                                                    ) : (
-                                                        <>
-                                                            <span>Send Message</span>
-                                                            <Send size={18} className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
-                                                        </>
-                                                    )}
-                                                </div>
+                                                {isSubmitting ? (
+                                                    <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                                                ) : (
+                                                    <>
+                                                        <span>Send Proposal</span>
+                                                        <Send size={14} className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+                                                    </>
+                                                )}
+                                                <div className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
                                             </motion.button>
                                         </Magnetic>
                                     </div>
