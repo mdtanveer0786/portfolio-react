@@ -161,6 +161,12 @@ const ProjectCard = forwardRef(({ project, index }, ref) => {
                                 <Github size={18} />
                             </motion.a>
                         )}
+                        {!project.live && !project.github && (
+                            <div className="flex-1 flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-secondary/50 border border-border/50 text-muted-foreground text-xs font-black uppercase tracking-widest cursor-default">
+                                <span className="w-2 h-2 rounded-full bg-amber-500 animate-pulse" />
+                                <span>Coming Soon</span>
+                            </div>
+                        )}
                     </div>
                 </div>
 

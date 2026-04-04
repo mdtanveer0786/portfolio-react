@@ -123,6 +123,7 @@ function App() {
         return () => {
             window.removeEventListener("hashchange", handleHashChange);
             window.removeEventListener("load", handleLoad);
+            document.removeEventListener("visibilitychange", handleVisibilityChange);
         };
     }, [setActiveSection]);
 

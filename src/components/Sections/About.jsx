@@ -81,21 +81,21 @@ export default function About() {
 
                                 <div className="flex flex-wrap gap-4 mt-4 justify-center md:justify-start">
                                     {/* Tech Stack Pills */}
-                                    <div className="flex items-center gap-2 bg-white/5 border border-white/10 px-4 py-2 rounded-full hover:bg-white/10 transition-colors">
+                                    <div className="flex items-center gap-2 bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/10 px-4 py-2 rounded-full hover:bg-black/10 dark:hover:bg-white/10 transition-colors">
                                         <FaReact className="text-[#61DAFB] text-xl" />
-                                        <span className="text-sm font-semibold text-gray-200">React</span>
+                                        <span className="text-sm font-semibold text-foreground">React</span>
                                     </div>
-                                    <div className="flex items-center gap-2 bg-white/5 border border-white/10 px-4 py-2 rounded-full hover:bg-white/10 transition-colors">
+                                    <div className="flex items-center gap-2 bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/10 px-4 py-2 rounded-full hover:bg-black/10 dark:hover:bg-white/10 transition-colors">
                                         <FaNodeJs className="text-[#339933] text-xl" />
-                                        <span className="text-sm font-semibold text-gray-200">Node.js</span>
+                                        <span className="text-sm font-semibold text-foreground">Node.js</span>
                                     </div>
-                                    <div className="flex items-center gap-2 bg-white/5 border border-white/10 px-4 py-2 rounded-full hover:bg-white/10 transition-colors">
-                                        <SiExpress className="text-gray-300 text-xl" />
-                                        <span className="text-sm font-semibold text-gray-200">Express</span>
+                                    <div className="flex items-center gap-2 bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/10 px-4 py-2 rounded-full hover:bg-black/10 dark:hover:bg-white/10 transition-colors">
+                                        <SiExpress className="text-muted-foreground text-xl" />
+                                        <span className="text-sm font-semibold text-foreground">Express</span>
                                     </div>
-                                    <div className="flex items-center gap-2 bg-white/5 border border-white/10 px-4 py-2 rounded-full hover:bg-white/10 transition-colors">
+                                    <div className="flex items-center gap-2 bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/10 px-4 py-2 rounded-full hover:bg-black/10 dark:hover:bg-white/10 transition-colors">
                                         <SiMongodb className="text-[#47A248] text-xl" />
-                                        <span className="text-sm font-semibold text-gray-200">MongoDB</span>
+                                        <span className="text-sm font-semibold text-foreground">MongoDB</span>
                                     </div>
                                 </div>
                             </div>
@@ -110,7 +110,7 @@ export default function About() {
                                 <div className="absolute -inset-4 bg-gradient-to-r from-violet-600 via-fuchsia-500 to-cyan-500 rounded-[2.5rem] blur-2xl opacity-40 group-hover:opacity-70 transition duration-1000 animate-pulse"></div>
 
                                 {/* Card Container */}
-                                <div className="relative bg-[#0d1117]/80 backdrop-blur-xl p-2 rounded-[2rem] border border-white/10 shadow-2xl overflow-visible group-hover:border-primary/50 transition-colors duration-500">
+                                <div className="relative bg-card/80 backdrop-blur-xl p-2 rounded-[2rem] border border-black/10 dark:border-white/10 shadow-2xl overflow-visible group-hover:border-primary/50 transition-colors duration-500">
 
                                     {/* Moving Gradient Border - NEW PREMIUM EFFECT */}
                                     <div className="absolute -inset-[1px] bg-gradient-to-r from-violet-600 via-fuchsia-500 to-cyan-500 rounded-[2rem] opacity-0 group-hover:opacity-100 transition-opacity duration-500 -z-10 animate-gradient-xy"></div>
@@ -149,19 +149,19 @@ export default function About() {
                                     </motion.div>
 
                                     {/* Hover Details Card */}
-                                    <div className="absolute -bottom-6 left-1/2 -translate-x-1/2 w-[90%] bg-gradient-to-r from-[#1a1f2e] to-[#121620] border border-white/10 p-4 rounded-2xl shadow-2xl transform translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500 z-30">
+                                    <div className="absolute -bottom-6 left-1/2 -translate-x-1/2 w-[90%] bg-gradient-to-r from-secondary to-card border border-black/10 dark:border-white/10 p-4 rounded-2xl shadow-2xl transform translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500 z-30">
                                         <div className="flex items-center gap-4">
                                             <div className="p-2.5 bg-gradient-to-br from-violet-500 to-fuchsia-500 rounded-xl shadow-inner">
                                                 <SiMongodb className="w-6 h-6 text-white" />
                                             </div>
                                             <div>
-                                                <h4 className="text-white font-bold text-sm tracking-wide">MERN Stack Expert</h4>
+                                                <h4 className="text-foreground font-bold text-sm tracking-wide">MERN Stack Expert</h4>
                                                 <div className="flex items-center gap-1.5 mt-0.5">
                                                     <span className="relative flex h-2 w-2">
                                                         <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
                                                         <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
                                                     </span>
-                                                    <p className="text-gray-400 text-xs font-medium">Available for Work</p>
+                                                    <p className="text-muted-foreground text-xs font-medium">Available for Work</p>
                                                 </div>
                                             </div>
                                         </div>

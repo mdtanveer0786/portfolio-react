@@ -171,9 +171,10 @@ export const projects = [
         image: ecommerceImg,
         github: '',
         live: '',
-        featured: true,
+        featured: false,
         category: 'fullstack',
-        date: '2026-02-15'
+        date: '2026-02-15',
+        status: 'coming-soon'
     },
 ]
 
