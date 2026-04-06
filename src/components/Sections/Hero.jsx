@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion'
 import { ArrowRight, Download } from 'lucide-react'
 import { TypeAnimation } from 'react-type-animation'
-import CodeBlock from '../UI/CodeBlock'
+import hero3DImage from '../../assets/hero_3d.png'
 import { socialLinks } from '../../utils/constants'
 import TextReveal from '../UI/TextReveal'
 import Magnetic from '../UI/Magnetic'
@@ -128,17 +128,50 @@ export default function Hero({ setActiveSection }) {
                         </motion.div>
                     </motion.div>
 
-                    {/* Right Column: CodeBlock */}
+                    {/* Right Column: Hero Premium 3D Image */}
                     <motion.div
                         initial={{ opacity: 0, scale: 0.8 }}
                         animate={{ opacity: 1, scale: 1 }}
-                        transition={{ duration: 0.8, delay: 0.5 }}
-                        className="w-full lg:w-2/5 order-2 flex justify-center"
+                        transition={{ duration: 1, delay: 0.4, type: "spring", stiffness: 50 }}
+                        className="w-full lg:w-1/3 order-2 flex justify-center perspective-[1200px]"
                     >
-                        <div className="relative w-full max-w-[500px] lg:max-w-none">
-                            <div className="absolute -inset-0.5 bg-gradient-to-r from-violet-600 to-cyan-400 rounded-lg blur opacity-20 transition duration-1000"></div>
-                            <CodeBlock />
-                        </div>
+                        <motion.div 
+                            animate={{ y: [0, -10, 0] }}
+                            transition={{ repeat: Infinity, duration: 6, ease: "easeInOut" }}
+                            className="relative w-full max-w-[320px] lg:max-w-[400px] perspective-[1200px]"
+                        >
+                            {/* Animated Background Glowing Aura */}
+                            <motion.div 
+                                animate={{ opacity: [0.3, 0.6, 0.3], scale: [1, 1.05, 1], rotate: [0, 5, 0] }}
+                                transition={{ repeat: Infinity, duration: 8, ease: "easeInOut" }}
+                                className="absolute -inset-10 bg-gradient-to-tr from-violet-600/40 via-fuchsia-500/20 to-cyan-400/40 rounded-full blur-[80px] -z-10"
+                            />
+                            
+                            {/* Premium 3D Glassmorphism Parallax Card */}
+                            <div 
+                                className="relative transform-gpu transition-all duration-700 ease-out hover:rotate-y-12 hover:-rotate-x-6 hover:scale-105 group" 
+                                style={{ transformStyle: 'preserve-3d' }}
+                            >
+                                {/* Card Glass Base & Border */}
+                                <div className="absolute inset-0 bg-white/40 dark:bg-black/20 backdrop-blur-2xl border border-white/40 dark:border-white/10 rounded-3xl shadow-[0_30px_60px_rgba(0,0,0,0.1)] dark:shadow-[0_30px_60px_rgba(0,0,0,0.5)] transition-all duration-700" />
+
+                                {/* The 3D Asset (Pops out on hover!) */}
+                                <img 
+                                    src={hero3DImage} 
+                                    alt="Premium Developer 3D Dashboard" 
+                                    className="relative z-10 w-full h-auto object-contain rounded-3xl p-3 transform-gpu transition-all duration-700 group-hover:translate-z-12 group-hover:drop-shadow-[0_20px_30px_rgba(0,0,0,0.3)]" 
+                                />
+                                
+                                {/* Glass Reflection Sheen */}
+                                <div 
+                                    className="absolute inset-0 z-20 rounded-3xl bg-gradient-to-br from-white/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" 
+                                    style={{ transform: 'translateZ(1px)' }}
+                                />
+                            </div>
+
+                            {/* Floating Floor Shadow */}
+                            <div className="absolute -bottom-8 left-1/2 -translate-x-1/2 w-[70%] h-4 bg-black/20 dark:bg-black/60 blur-[15px] rounded-[100%] group-hover:w-[80%] group-hover:bg-black/30 dark:group-hover:bg-black/80 transition-all duration-700 -z-20" />
+                        </motion.div>
                     </motion.div>
                 </div>
             </div>

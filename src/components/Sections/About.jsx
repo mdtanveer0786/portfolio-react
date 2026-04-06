@@ -115,20 +115,20 @@ export default function About() {
                                     {/* Moving Gradient Border - NEW PREMIUM EFFECT */}
                                     <div className="absolute -inset-[1px] bg-gradient-to-r from-violet-600 via-fuchsia-500 to-cyan-500 rounded-[2rem] opacity-0 group-hover:opacity-100 transition-opacity duration-500 -z-10 animate-gradient-xy"></div>
 
-                                    {/* Profile Image Wrapper */}
+                                    {/* Premium 3D Avatar Wrapper */}
                                     <div className="relative rounded-[1.8rem] overflow-hidden">
                                         <img
-                                            src="/profile.jpg"
-                                            alt="Md Tanveer Alam"
+                                            src="/about_avatar.png"
+                                            alt="Md Tanveer Alam - 3D Avatar"
                                             loading="lazy"
-                                            className="w-full aspect-[4/5] object-cover rounded-[1.8rem] transition-all duration-700 group-hover:scale-105 filter grayscale-[30%] group-hover:grayscale-0 shadow-inner"
+                                            className="w-full aspect-[4/5] object-cover rounded-[1.8rem] transition-all duration-700 group-hover:scale-105 shadow-inner"
                                             onError={(e) => {
                                                 e.target.onerror = null
-                                                e.target.src = "https://ui-avatars.com/api/?name=Tanveer+Alam&background=8b5cf6&color=fff&size=512"
+                                                e.target.src = "/profile.jpg" // Fallback to original photo
                                             }}
                                         />
                                         {/* Gradient Overlay */}
-                                        <div className="absolute inset-0 bg-gradient-to-t from-[#0d1117] via-transparent to-transparent opacity-80"></div>
+                                        <div className="absolute inset-0 bg-gradient-to-t from-[#0d1117] via-transparent to-transparent opacity-60 pointer-events-none"></div>
                                     </div>
 
                                     {/* Floating Badges */}
