@@ -45,7 +45,10 @@ self.addEventListener('fetch', (event) => {
 
   event.respondWith(
     caches.match(event.request).then((response) => {
-      return response || fetch(event.request);
+      return response || fetch(event.request).catch(() => {
+        // Fallback or silent fail if fetch fails and not in cache
+        console.error('Fetch failed for:', event.request.url);
+      });
     })
   );
 });

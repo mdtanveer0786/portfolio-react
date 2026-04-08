@@ -7,7 +7,6 @@ import Footer from "./components/Layout/Footer";
 import Loader from "./components/UI/Loader";
 import SmoothScroll from "./components/UI/SmoothScroll";
 
-// 1. PROFESSIONAL FIX: Remove lazy loading for layout-critical sections.
 import Hero from "./components/Sections/Hero";
 import About from "./components/Sections/About";
 import Education from "./components/Sections/Education";
@@ -15,17 +14,12 @@ import Skills from "./components/Sections/Skills";
 import Projects from "./components/Sections/Projects";
 import Contact from "./components/Sections/Contact";
 
-// Non-layout critical components can still be lazy loaded
-const ParticlesBackground = lazy(() => import("./components/UI/ParticlesBackground"));
 const ScrollProgress = lazy(() => import("./components/UI/ScrollProgress"));
 const CustomCursor = lazy(() => import("./components/UI/CustomCursor"));
 
 import { SECTIONS, LOADING_DURATION } from "./utils/constants";
 import { useScroll } from "./hooks/useScroll";
 
-/**
- * ROCK SOLID SCROLL-TO-TOP
- */
 const ScrollToTop = () => {
     useLayoutEffect(() => {
         window.scrollTo(0, 0);
@@ -45,7 +39,6 @@ function App() {
 
     const { activeSection, setActiveSection } = useScroll();
 
-    // STRICT SCROLL LOCKING ON MOUNT
     useLayoutEffect(() => {
         document.documentElement.classList.add('loading');
         document.body.classList.add('no-scroll');
@@ -57,14 +50,13 @@ function App() {
         };
     }, []);
 
-    // HANDLE NAVIGATION AFTER LOADING
     useEffect(() => {
         if (!loading) {
             document.body.classList.remove('no-scroll');
-            
+
             setTimeout(() => {
                 document.documentElement.classList.remove('loading');
-                
+
                 const hash = window.location.hash.substring(1);
                 if (hash && SECTIONS.includes(hash)) {
                     const element = document.getElementById(hash);
@@ -80,7 +72,6 @@ function App() {
         }
     }, [loading, setActiveSection]);
 
-    // ASSETS LOADING AND HASH LISTENER
     useEffect(() => {
         const handleHashChange = () => {
             const hash = window.location.hash.substring(1);
@@ -90,8 +81,8 @@ function App() {
         };
 
         const handleVisibilityChange = () => {
-            document.title = document.hidden 
-                ? "Come back! 👋 | Md Tanveer Alam" 
+            document.title = document.hidden
+                ? "Come back! 👋 | Md Tanveer Alam"
                 : "Md Tanveer Alam | Full Stack Developer";
         };
 
@@ -107,7 +98,7 @@ function App() {
         const handleLoad = () => {
             const elapsedTime = Date.now() - startTime;
             const remainingTime = Math.max(0, LOADING_DURATION - elapsedTime);
-            
+
             setTimeout(() => {
                 setLoading(false);
                 sessionStorage.setItem('loader-seen', 'true');
@@ -131,7 +122,7 @@ function App() {
         <ThemeProvider defaultTheme="dark" storageKey="portfolio-theme">
             <SmoothScroll>
                 <ScrollToTop />
-                
+
                 <AnimatePresence mode="wait">
                     {loading ? (
                         <motion.div
@@ -144,7 +135,7 @@ function App() {
                             <Loader />
                         </motion.div>
                     ) : (
-                        <motion.div 
+                        <motion.div
                             key="main-content"
                             initial={{ opacity: 0 }}
                             animate={{ opacity: 1 }}
@@ -154,9 +145,8 @@ function App() {
                             <Suspense fallback={null}>
                                 <ScrollProgress />
                                 <CustomCursor />
-                                <ParticlesBackground />
                             </Suspense>
-                            
+
                             <Header
                                 activeSection={activeSection}
                                 setActiveSection={setActiveSection}

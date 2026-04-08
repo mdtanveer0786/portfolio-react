@@ -30,12 +30,15 @@ export default function CustomCursor() {
     useEffect(() => {
         const handleHover = (e) => {
             const target = e.target;
-            const isClickable = target.closest('a, button, .magnetic-wrap, .clickable');
+            const isMagnetic = target.closest('.magnetic-wrap, .btn-primary, .btn-secondary');
+            const isClickable = target.closest('a, button, .clickable');
             const isProjectImage = target.closest('.project-image-container');
             const isHeading = target.closest('h1, h2, h3, h4');
             const isText = target.closest('p, span, .text-reveal');
 
-            if (isClickable) {
+            if (isMagnetic) {
+                setCursorType('magnetic');
+            } else if (isClickable) {
                 setCursorType('pointer');
             } else if (isProjectImage) {
                 setCursorType('view');
@@ -80,39 +83,52 @@ export default function CustomCursor() {
             backgroundColor: "rgba(139, 92, 246, 0.15)", // Subtle violet
             border: "1px solid rgba(139, 92, 246, 0.3)",
             borderRadius: "50%",
-            rotate: 0
+            rotate: 0,
+            scale: 1
         },
         pointer: {
-            width: 70,
-            height: 70,
-            backgroundColor: "rgba(139, 92, 246, 0.1)",
-            border: "2px solid rgba(139, 92, 246, 0.5)",
+            width: 80,
+            height: 80,
+            backgroundColor: "rgba(139, 92, 246, 0.08)",
+            border: "1px solid rgba(139, 92, 246, 0.4)",
             borderRadius: "50%",
-            rotate: 45
+            rotate: 0,
+            scale: 1.15 // Slight liquid pop
         },
         heading: {
-            width: 120,
-            height: 120,
-            backgroundColor: "rgba(255, 255, 255, 0.05)",
-            border: "1px dashed rgba(255, 255, 255, 0.2)",
+            width: 140,
+            height: 140,
+            backgroundColor: "rgba(139, 92, 246, 0.03)",
+            border: "1px solid rgba(139, 92, 246, 0.2)",
             borderRadius: "50%",
-            mixBlendMode: "difference"
+            mixBlendMode: "difference",
+            scale: 1.1
         },
         text: {
-            width: 24,
-            height: 24,
-            backgroundColor: "rgba(139, 92, 246, 0.4)",
-            border: "none",
-            borderRadius: "2px", // Square/Boxy look
-            rotate: 90
+            width: 2,
+            height: 20,
+            backgroundColor: "rgba(139, 92, 246, 0.8)",
+            border: "1px solid rgba(139, 92, 246, 0)",
+            borderRadius: "2px",
+            rotate: 0,
+            scale: 1
         },
         view: {
             width: 110,
             height: 110,
-            backgroundColor: "rgba(139, 92, 246, 0.9)",
-            border: "none",
+            backgroundColor: "rgba(139, 92, 246, 0.95)",
+            border: "1px solid rgba(139, 92, 246, 0)",
             borderRadius: "50%",
             scale: 1.1
+        },
+        magnetic: {
+            width: 115,
+            height: 115,
+            backgroundColor: "rgba(139, 92, 246, 0.03)", // Even softer
+            border: "1px solid rgba(139, 92, 246, 0.3)", // Thinner but precise
+            borderRadius: "50%",
+            scale: 1.2,
+            transition: { type: 'spring', stiffness: 300, damping: 20 }
         }
     };
 

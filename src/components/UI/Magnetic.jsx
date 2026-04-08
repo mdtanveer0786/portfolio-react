@@ -1,35 +1,34 @@
-import { useRef, useState } from 'react';
-import { motion } from 'framer-motion';
+import { useRef, useState } from 'react'
+import { motion } from 'framer-motion'
 
-export default function Magnetic({ children }) {
-    const ref = useRef(null);
-    const [position, setPosition] = useState({ x: 0, y: 0 });
+export default function Magnetic({ children, strength = 0.18 }) {
+    const ref = useRef(null)
+    const [position, setPosition] = useState({ x: 0, y: 0 })
 
-    const handleMouse = (e) => {
-        const { clientX, clientY } = e;
-        const { height, width, left, top } = ref.current.getBoundingClientRect();
-        const middleX = clientX - (left + width / 2);
-        const middleY = clientY - (top + height / 2);
-        setPosition({ x: middleX * 0.4, y: middleY * 0.4 });
-    };
+    const handleMouseMove = (e) => {
+        const { clientX, clientY } = e
+        const { left, top, width, height } = ref.current.getBoundingClientRect()
+        const middleX = clientX - (left + width / 2)
+        const middleY = clientY - (top + height / 2)
+        setPosition({ x: middleX * strength, y: middleY * strength })
+    }
 
     const reset = () => {
-        setPosition({ x: 0, y: 0 });
-    };
+        setPosition({ x: 0, y: 0 })
+    }
 
-    const { x, y } = position;
+    const { x, y } = position
 
     return (
         <motion.div
-            className="magnetic-wrap"
-            style={{ position: 'relative' }}
             ref={ref}
-            onMouseMove={handleMouse}
+            onMouseMove={handleMouseMove}
             onMouseLeave={reset}
             animate={{ x, y }}
-            transition={{ type: 'spring', stiffness: 150, damping: 15, mass: 0.1 }}
+            transition={{ type: 'spring', stiffness: 70, damping: 25, mass: 0.1 }}
+            className="flex items-center justify-center w-fit h-fit magnetic-wrap"
         >
             {children}
         </motion.div>
-    );
+    )
 }

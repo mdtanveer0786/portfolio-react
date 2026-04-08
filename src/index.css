@@ -1,10 +1,10 @@
 @import './styles/globals.css';
 
-/* Additional global styles */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
 }
 
 html.lenis,
@@ -28,16 +28,6 @@ html.lenis body {
     pointer-events: none;
 }
 
-html {
-    /* Lenis smooth scrolling requires scroll-behavior: auto */
-    scroll-behavior: auto !important;
-}
-
 body {
     overflow-x: hidden;
-}
-
-/* Remove blue highlight on mobile */
-* {
-    -webkit-tap-highlight-color: transparent;
 }
