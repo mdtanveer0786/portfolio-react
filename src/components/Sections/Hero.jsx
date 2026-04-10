@@ -41,16 +41,7 @@ export default function Hero({ setActiveSection }) {
                         animate="visible"
                         className="w-full lg:w-3/5 space-y-8 text-center lg:text-left"
                     >
-                        {/* Status Badge */}
-                        <motion.div variants={itemVariants} className="flex justify-center lg:justify-start">
-                            <div className="section-badge">
-                                <span className="relative flex h-2 w-2">
-                                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
-                                    <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500" />
-                                </span>
-                                Available for Work
-                            </div>
-                        </motion.div>
+
 
                         {/* Headline */}
                         <motion.div variants={itemVariants} className="space-y-4">
