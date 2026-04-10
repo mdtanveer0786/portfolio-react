@@ -171,9 +171,9 @@ export default function Hero({ setActiveSection }) {
 
                                 {/* Code content */}
                                 <div className="p-5 font-mono text-[13px] leading-relaxed space-y-1">
-                                    <motion.div 
-                                        initial={{ opacity: 0 }} 
-                                        animate={{ opacity: 1 }} 
+                                    <motion.div
+                                        initial={{ opacity: 0 }}
+                                        animate={{ opacity: 1 }}
                                         transition={{ delay: 0.8 }}
                                     >
                                         <span className="text-fuchsia-500 dark:text-fuchsia-400">const</span>{' '}
@@ -194,12 +194,14 @@ export default function Hero({ setActiveSection }) {
                                         <span className="text-foreground/50">[</span>
                                         <span className="text-amber-600 dark:text-amber-400">&quot;React&quot;</span><span className="text-foreground/30">, </span>
                                         <span className="text-amber-600 dark:text-amber-400">&quot;Node&quot;</span><span className="text-foreground/30">, </span>
+                                        <span className="text-amber-600 dark:text-amber-400">"Express"</span>
+                                        <span className="text-foreground/30">, </span>
                                         <span className="text-amber-600 dark:text-amber-400">&quot;MongoDB&quot;</span>
                                         <span className="text-foreground/50">]</span><span className="text-foreground/30">,</span>
                                     </motion.div>
                                     <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1.6 }} className="pl-5">
                                         <span className="text-foreground/70">passion:</span>{' '}
-                                        <span className="text-emerald-600 dark:text-emerald-400">&quot;Building amazing UX&quot;</span><span className="text-foreground/30">,</span>
+                                        <span className="text-emerald-600 dark:text-emerald-400">&quot;Creating stunning UI/UX&quot;</span><span className="text-foreground/30">,</span>
                                     </motion.div>
                                     <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1.8 }} className="pl-5">
                                         <span className="text-foreground/70">available:</span>{' '}
