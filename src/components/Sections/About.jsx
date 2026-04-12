@@ -41,7 +41,7 @@ export default function About() {
                     </SectionReveal>
                     <SectionReveal delay={0.2}>
                         <p className="section-subtitle">
-                            A passionate developer from India, dedicated to crafting modern web experiences.
+                            A passionate Full Stack Developer from India, focused on building modern, high-performance web applications with clean design and seamless user experience.
                         </p>
                     </SectionReveal>
                 </div>
@@ -60,13 +60,13 @@ export default function About() {
                                 </div>
                                 <div className="space-y-4 text-sm sm:text-base text-muted-foreground leading-relaxed">
                                     <p>
-                                        I&apos;m a <span className="text-foreground font-semibold">Full Stack Developer</span> who fell in love with coding during my Computer Science degree. What started as curiosity quickly became a passion for building things that live on the internet.
+                                        I specialize in the <span className="text-primary font-semibold">MERN stack</span>, crafting intuitive and responsive user interfaces with React, and building secure, scalable backend systems using Node.js and Express.
                                     </p>
                                     <p>
-                                        I specialize in the <span className="text-primary font-semibold">MERN Stack</span> — crafting intuitive frontend interfaces with React and robust backend systems with Node.js. I believe great software is invisible: it just works beautifully.
+                                        I believe great software should feel <span className="text-foreground font-semibold">effortless</span> — fast, reliable, and user-friendly. My goal is to create products that not only work perfectly but also deliver a smooth and engaging user experience.
                                     </p>
                                     <p>
-                                        When I&apos;m not coding, you&apos;ll find me exploring new technologies, contributing to open source, or helping fellow developers grow.
+                                        Beyond coding, I enjoy exploring new technologies, improving my skills, and sharing knowledge with the developer community.
                                     </p>
                                 </div>
                                 <motion.a
