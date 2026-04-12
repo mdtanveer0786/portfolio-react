@@ -101,79 +101,79 @@ export const projects = [
     {
         id: 1,
         title: 'Real Estate Elite',
-        description: 'Full-stack MERN real estate platform with JWT authentication, secure REST APIs, MongoDB database, admin dashboard, and full CRUD operations for property listings.',
-        tags: ['MongoDB', 'Express', 'React', 'Node.js', 'JWT', 'REST API'],
+        description: 'A scalable real estate platform that allows users to explore, list, and manage properties seamlessly with secure JWT authentication and full CRUD operations.',
+        tags: ['MongoDB', 'Express', 'React', 'Node.js', 'Cloudinary'],
         image: realestateImg,
         github: 'https://github.com/mdtanveer0786/real-estate-app',
         live: 'https://real-estateelite.vercel.app/',
         featured: true,
         category: 'fullstack',
-        date: '2025-08-10'
+        date: '2025-01-01'
     },
 
     {
         id: 2,
         title: 'Trade Analyzer Pro',
-        description: 'Full-stack MERN trading analytics platform with JWT authentication, REST APIs, MongoDB database, admin dashboard, and complete CRUD operations to track trades and performance.',
-        tags: ['MongoDB', 'Express', 'React', 'Node.js', 'JWT', 'REST API'],
+        description: 'A trading analytics platform to track, analyze, and improve trading performance with data visualization and secure authentication.',
+        tags: ['MongoDB', 'Express', 'React', 'Node.js', 'Chart.js'],
         image: tradeImg,
         github: 'https://github.com/mdtanveer0786/Trade-Analyzer-Pro',
         live: 'https://trade-analyzer-proo.vercel.app/',
         featured: true,
         category: 'fullstack',
-        date: '2025-10-18'
+        date: '2025-01-01'
     },
 
     {
         id: 3,
         title: 'Finance Dashboard',
-        description: 'Interactive finance analytics dashboard with charts, statistics, and financial insights.',
-        tags: ['React', 'Tailwind', 'Charts'],
+        description: 'An interactive dashboard to visualize financial data with dynamic charts, insights, and a clean modern UI.',
+        tags: ['React', 'Tailwind', 'Chart.js'],
         image: financeImg,
         github: 'https://github.com/mdtanveer0786/finance-dashboard',
         live: 'https://wealthwise-finance-dashboard.vercel.app/',
         featured: true,
         category: 'frontend',
-        date: '2024-12-05'
+        date: '2024-01-01'
     },
 
     {
         id: 4,
         title: 'EduEarn India',
-        description: 'Educational platform providing information about earning opportunities and online learning.',
+        description: 'An educational platform focused on online earning and learning resources with a clean UI and responsive layout.',
         tags: ['React', 'JavaScript', 'CSS'],
         image: eduearnImg,
         github: 'https://github.com/mdtanveer0786/EduEarn-India',
         live: 'https://edu-earn-india.vercel.app/',
         featured: false,
         category: 'frontend',
-        date: '2024-11-20'
+        date: '2024-01-01'
     },
 
     {
         id: 5,
         title: 'Delhi Bikes Hub',
-        description: 'Bike selling and listing platform where users can explore bikes and contact sellers.',
+        description: 'A bike listing platform where users can explore available bikes and connect with sellers via an improved browsing experience.',
         tags: ['React', 'Tailwind', 'JavaScript'],
         image: bikesImg,
         github: 'https://github.com/mdtanveer0786/DelhiBikesHub',
         live: 'https://delhi-bikes-hub.vercel.app/',
         featured: false,
         category: 'frontend',
-        date: '2024-10-15'
+        date: '2024-01-01'
     },
 
     {
         id: 6,
         title: 'E-commerce Platform',
-        description: 'Full-stack e-commerce solution with authentication, product management, and payment integration.',
-        tags: ['React', 'Node.js', 'MongoDB', 'Express'],
+        description: 'A complete e-commerce solution focused on performance, scalability, and seamless user experience with Stripe integration.',
+        tags: ['React', 'Node.js', 'MongoDB', 'Express', 'Stripe'],
         image: ecommerceImg,
         github: '',
         live: '',
         featured: false,
         category: 'fullstack',
-        date: '2026-02-15',
+        date: '2026-01-01',
         status: 'coming-soon'
     },
 ]
@@ -197,27 +197,30 @@ export const experience = [
 export const education = [
     {
         id: 1,
-        degree: 'B.Tech in Computer Science Engineering',
-        institution: 'Bikaner Technical University',
-        period: '2020 - 2024',
-        grade: 'CGPA: 7.0/10',
-        description: 'Studied core computer science concepts including Data Structures, Algorithms, and Software Engineering.'
+        degree: "Bachelor of Technology (B.Tech) in Computer Science Engineering",
+        institution: "Bikaner Technical University",
+        period: "2020 - 2024",
+        grade: "CGPA: 7.0/10",
+        description:
+            "Studied core computer science subjects including Data Structures, Algorithms, Database Management Systems, and Software Engineering. Built multiple academic and personal projects focused on real-world applications."
     },
     {
         id: 2,
-        degree: 'Full Stack Web Development Certification',
-        institution: 'AccioJob / Udemy',
-        period: '2022 - 2024',
-        grade: 'A+',
-        description: 'Intensive training in modern web technologies: React, Node.js, Express, and MongoDB.'
+        degree: "Full Stack Web Development Certification",
+        institution: "AccioJob / Udemy",
+        period: "2022 - 2024",
+        grade: "A+",
+        description:
+            "Completed intensive training in modern web development technologies including React.js, Node.js, Express.js, and MongoDB. Gained hands-on experience by building full-stack projects."
     },
     {
         id: 3,
-        degree: 'Senior Secondary Education (12th)',
-        institution: 'Bihar Board',
-        period: '2018 - 2020',
-        grade: 'Percentage: 65%',
-        description: 'Completed senior secondary education with focus on Computer Science and Mathematics.'
-    },
-]
+        degree: "Senior Secondary Education (12th - PCM)",
+        institution: "Bihar School Examination Board",
+        period: "2018 - 2020",
+        grade: "Percentage: 65%",
+        description:
+            "Completed higher secondary education with a focus on Physics, Chemistry, and Mathematics (PCM), building a strong analytical and problem-solving foundation."
+    }
+];
 

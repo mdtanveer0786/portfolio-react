@@ -1,11 +1,10 @@
 import { useState, useMemo } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Github, ArrowUpRight, Layout } from 'lucide-react'
+import { Layout } from 'lucide-react'
 import { projects } from '../../utils/constants'
 import SectionReveal from '../UI/SectionReveal'
 import ProjectCard from '../UI/ProjectCard'
 import AnimatedBackground from '../UI/AnimatedBackground'
-import Magnetic from '../UI/Magnetic'
 import { cn } from '../../utils/cn'
 
 const CATEGORIES = ['all', 'fullstack', 'frontend']
@@ -39,7 +38,7 @@ export default function Projects() {
                     </SectionReveal>
                     <SectionReveal delay={0.2}>
                         <p className="section-subtitle">
-                            A selection of my recent works where design meets code to create meaningful digital experiences.
+                            A selection of my recent work where design, performance, and scalability come together to build impactful digital products.
                         </p>
                     </SectionReveal>
                 </div>
@@ -87,32 +86,6 @@ export default function Projects() {
                             />
                         ))}
                     </AnimatePresence>
-                </motion.div>
-
-                {/* GitHub CTA */}
-                <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    className="mt-16 md:mt-20 flex flex-col items-center gap-5"
-                >
-                    <div className="h-px w-full max-w-xs bg-gradient-to-r from-transparent via-border to-transparent" />
-                    <p className="text-sm text-muted-foreground">Want to see more of my work?</p>
-                    <Magnetic>
-                        <motion.a
-                            whileHover={{ scale: 1.03, y: -2 }}
-                            whileTap={{ scale: 0.97 }}
-                            transition={{ type: 'spring', stiffness: 400, damping: 25 }}
-                            href="https://github.com/mdtanveer0786"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="group flex items-center gap-3 px-6 py-3 rounded-xl bg-foreground text-background font-medium text-sm transition-all hover:bg-primary hover:text-white shadow-lg"
-                        >
-                            <Github size={18} />
-                            View All on GitHub
-                            <ArrowUpRight size={16} className="group-hover:rotate-45 transition-transform" />
-                        </motion.a>
-                    </Magnetic>
                 </motion.div>
             </div>
         </section>
