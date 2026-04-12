@@ -45,18 +45,17 @@ export default function Hero({ setActiveSection }) {
                         {/* Headline */}
                         <motion.div variants={itemVariants} className="space-y-4">
                             <p className="text-muted-foreground text-base sm:text-lg font-medium">
-                                Hello, I&apos;m <span className="text-primary font-semibold">Md Tanveer Alam</span>
+                                Hi, I&apos;m <span className="text-primary font-semibold">Md Tanveer Alam</span>
                             </p>
                             <h1 className="text-4xl xs:text-5xl sm:text-6xl md:text-7xl font-display font-bold tracking-tight leading-[1.05]">
-                                I Build{' '}
+                                Full Stack{' '}
                                 <span className="premium-text-gradient">
-                                    Digital
-                                </span>
-                                <br />
-                                <span className="premium-text-gradient">
-                                    Experiences
+                                    Developer
                                 </span>
                             </h1>
+                            <p className="text-xl sm:text-2xl font-medium text-foreground/90 max-w-2xl mx-auto lg:mx-0">
+                                crafting fast, scalable, and visually stunning digital products.
+                            </p>
                         </motion.div>
 
                         {/* Typewriter */}
@@ -65,10 +64,10 @@ export default function Hero({ setActiveSection }) {
                             <div className="text-lg sm:text-xl md:text-2xl font-mono font-medium text-foreground/80">
                                 <TypeAnimation
                                     sequence={[
-                                        'Full Stack Developer', 2500,
                                         'MERN Stack Expert', 2500,
                                         'React Specialist', 2500,
                                         'UI/UX Enthusiast', 2500,
+                                        'Production-Ready Apps', 2500,
                                     ]}
                                     wrapper="span"
                                     speed={40}
@@ -80,7 +79,7 @@ export default function Hero({ setActiveSection }) {
 
                         {/* Description */}
                         <motion.p variants={itemVariants} className="text-muted-foreground text-sm sm:text-base md:text-lg max-w-xl mx-auto lg:mx-0 leading-relaxed">
-                            Specializing in the <span className="text-foreground font-semibold">MERN stack</span>, I transform complex ideas into high-performance web applications that delight users and drive results.
+                            I specialize in the <span className="text-foreground font-semibold">MERN stack</span> and build production-ready applications that combine clean code, modern design, and real-world performance.
                         </motion.p>
 
                         {/* CTA Buttons */}
@@ -160,7 +159,7 @@ export default function Hero({ setActiveSection }) {
                                 </div>
 
                                 {/* Code content */}
-                                <div className="p-5 font-mono text-[13px] leading-relaxed space-y-1">
+                                <div className="p-5 font-mono text-[12px] leading-relaxed space-y-0.5">
                                     <motion.div
                                         initial={{ opacity: 0 }}
                                         animate={{ opacity: 1 }}
@@ -171,35 +170,38 @@ export default function Hero({ setActiveSection }) {
                                         <span className="text-foreground/50">=</span>{' '}
                                         <span className="text-foreground/50">{'{'}</span>
                                     </motion.div>
-                                    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1.0 }} className="pl-5">
+                                    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1.0 }} className="pl-4">
                                         <span className="text-foreground/70">name:</span>{' '}
                                         <span className="text-emerald-600 dark:text-emerald-400">&quot;Md Tanveer Alam&quot;</span><span className="text-foreground/30">,</span>
                                     </motion.div>
-                                    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1.2 }} className="pl-5">
+                                    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1.1 }} className="pl-4">
                                         <span className="text-foreground/70">role:</span>{' '}
                                         <span className="text-emerald-600 dark:text-emerald-400">&quot;Full Stack Developer&quot;</span><span className="text-foreground/30">,</span>
                                     </motion.div>
-                                    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1.4 }} className="pl-5">
-                                        <span className="text-foreground/70">stack:</span>{' '}
+                                    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1.2 }} className="pl-4">
+                                        <span className="text-foreground/70">focus:</span>{' '}
+                                        <span className="text-emerald-600 dark:text-emerald-400">&quot;MERN Stack &amp; Modern Web Apps&quot;</span><span className="text-foreground/30">,</span>
+                                    </motion.div>
+                                    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1.3 }} className="pl-4">
+                                        <span className="text-foreground/70">skills:</span>{' '}
                                         <span className="text-foreground/50">[</span>
-                                        <span className="text-amber-600 dark:text-amber-400">&quot;React&quot;</span><span className="text-foreground/30">, </span>
-                                        <span className="text-amber-600 dark:text-amber-400">&quot;Node&quot;</span><span className="text-foreground/30">, </span>
-                                        <span className="text-amber-600 dark:text-amber-400">&quot;Express&quot;</span>
-                                        <span className="text-foreground/30">, </span>
+                                        <span className="text-amber-600 dark:text-amber-400">&quot;React.js&quot;</span><span className="text-foreground/30">, </span>
+                                        <span className="text-amber-600 dark:text-amber-400">&quot;Node.js&quot;</span><span className="text-foreground/30">, </span>
+                                        <span className="text-amber-600 dark:text-amber-400">&quot;Express.js&quot;</span><span className="text-foreground/30">, </span>
                                         <span className="text-amber-600 dark:text-amber-400">&quot;MongoDB&quot;</span>
                                         <span className="text-foreground/50">]</span><span className="text-foreground/30">,</span>
                                     </motion.div>
-                                    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1.6 }} className="pl-5">
-                                        <span className="text-foreground/70">passion:</span>{' '}
-                                        <span className="text-emerald-600 dark:text-emerald-400">&quot;Creating stunning UI/UX&quot;</span><span className="text-foreground/30">,</span>
+                                    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1.4 }} className="pl-4">
+                                        <span className="text-foreground/70">mindset:</span>{' '}
+                                        <span className="text-emerald-600 dark:text-emerald-400">&quot;Problem solver &amp; continuous learner&quot;</span><span className="text-foreground/30">,</span>
                                     </motion.div>
-                                    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1.8 }} className="pl-5">
-                                        <span className="text-foreground/70">available:</span>{' '}
-                                        <span className="text-primary font-semibold">true</span>
+                                    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1.5 }} className="pl-4">
+                                        <span className="text-foreground/70">availability:</span>{' '}
+                                        <span className="text-emerald-600 dark:text-emerald-400">&quot;Open to freelance &amp; full-time roles&quot;</span>
                                     </motion.div>
-                                    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 2.0 }}>
+                                    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1.6 }}>
                                         <span className="text-foreground/50">{'}'}</span><span className="text-foreground/30">;</span>
-                                        <span className="inline-block w-[2px] h-4 bg-primary ml-1 animate-typing-cursor" />
+                                        <span className="inline-block w-[2px] h-3.5 bg-primary ml-1 animate-typing-cursor" />
                                     </motion.div>
                                 </div>
                             </div>
