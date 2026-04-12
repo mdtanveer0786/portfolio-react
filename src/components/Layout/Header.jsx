@@ -34,23 +34,34 @@ export default function Header({ activeSection, setActiveSection }) {
         setIsScrolling(true)
         setActiveSection(id)
         setMobileMenuOpen(false)
-        window.history.pushState(null, null, href)
-        const element = document.getElementById(id)
-        if (element) {
-            element.scrollIntoView({ behavior: 'smooth' })
-            setTimeout(() => setIsScrolling(false), 1000)
+        
+        // Handle URL and scroll
+        if (id === 'home') {
+            window.scrollTo({ top: 0, behavior: 'smooth' })
+            window.history.pushState(null, null, ' ')
+        } else {
+            window.history.pushState(null, null, href)
+            const element = document.getElementById(id)
+            if (element) {
+                const yOffset = -80; // Offset for fixed header
+                const y = element.getBoundingClientRect().top + window.pageYOffset + yOffset;
+                window.scrollTo({ top: y, behavior: 'smooth' });
+            }
         }
+        
+        setTimeout(() => setIsScrolling(false), 1000)
     }
 
     return (
         <header
             className={cn(
-                'fixed top-0 left-0 right-0 z-50 transition-all duration-500 flex justify-center px-4',
-                scrolled ? 'py-3' : 'py-5'
+                'fixed top-0 left-0 right-0 transition-all duration-500 flex justify-center px-4',
+                scrolled ? 'py-3' : 'py-5',
+                mobileMenuOpen ? 'z-[100]' : 'z-50'
             )}
         >
             <nav className={cn(
-                "flex items-center justify-between px-4 md:px-5 py-2 rounded-2xl transition-all duration-500 border w-full max-w-5xl",
+                "flex items-center justify-between px-4 md:px-5 py-2 rounded-2xl transition-all duration-500 border w-full max-w-5xl relative z-10",
                 scrolled
                     ? "bg-white/70 dark:bg-neutral-950/70 border-black/[0.04] dark:border-white/[0.06] shadow-lg shadow-black/5 dark:shadow-black/30 backdrop-blur-2xl"
                     : "bg-white/30 dark:bg-neutral-950/30 border-transparent backdrop-blur-md"
@@ -61,7 +72,10 @@ export default function Header({ activeSection, setActiveSection }) {
                         whileHover={{ scale: 1.02 }}
                         whileTap={{ scale: 0.98 }}
                         className="flex items-center gap-2.5 cursor-pointer group px-2 py-1"
-                        onClick={() => handleNavClick('#home')}
+                        onClick={() => {
+                            handleNavClick('#home')
+                            setMobileMenuOpen(false)
+                        }}
                     >
                         <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-primary to-fuchsia-600 flex items-center justify-center text-white font-display font-bold text-xs flex-shrink-0 shadow-lg shadow-primary/20 group-hover:shadow-primary/40 transition-shadow">
                             MD
@@ -143,22 +157,22 @@ export default function Header({ activeSection, setActiveSection }) {
             {/* Mobile Sidebar */}
             <AnimatePresence>
                 {mobileMenuOpen && (
-                    <div className="fixed inset-0 z-[100] lg:hidden">
+                    <>
                         <motion.div
                             initial={{ opacity: 0 }}
                             animate={{ opacity: 1 }}
                             exit={{ opacity: 0 }}
                             onClick={() => setMobileMenuOpen(false)}
-                            className="absolute inset-0 bg-black/20 dark:bg-black/50 backdrop-blur-sm"
+                            className="fixed inset-0 bg-black/40 dark:bg-black/80 backdrop-blur-md lg:hidden z-[-1]"
                         />
                         <motion.div
                             initial={{ x: '100%' }}
                             animate={{ x: 0 }}
                             exit={{ x: '100%' }}
                             transition={{ type: "spring", damping: 25, stiffness: 200 }}
-                            className="absolute right-0 top-0 bottom-0 w-[80%] max-w-[320px] bg-white/90 dark:bg-neutral-950/90 backdrop-blur-3xl border-l border-black/5 dark:border-white/5 shadow-2xl flex flex-col"
+                            className="fixed right-0 top-0 bottom-0 w-[85%] max-w-[360px] bg-white dark:bg-neutral-950 border-l border-border shadow-2xl flex flex-col lg:hidden"
                         >
-                            <div className="p-6 pb-4 flex items-center justify-between">
+                            <div className="p-6 flex items-center justify-between border-b border-border/50">
                                 <div className="flex items-center gap-3">
                                     <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-primary to-fuchsia-600 flex items-center justify-center text-white font-display font-bold text-sm shadow-lg shadow-primary/20">
                                         MD
@@ -170,14 +184,14 @@ export default function Header({ activeSection, setActiveSection }) {
                                 </div>
                                 <button
                                     onClick={() => setMobileMenuOpen(false)}
-                                    className="p-2 rounded-xl bg-black/[0.04] dark:bg-white/[0.04] text-foreground hover:text-primary transition-all"
+                                    className="p-2.5 rounded-xl bg-black/[0.04] dark:bg-white/[0.04] text-foreground hover:text-primary transition-all border border-transparent hover:border-primary/20"
                                 >
                                     <X className="w-5 h-5" />
                                 </button>
                             </div>
 
-                            <div className="flex-1 overflow-y-auto px-4 py-6">
-                                <div className="space-y-1">
+                            <div className="flex-1 overflow-y-auto px-4 py-8">
+                                <div className="space-y-2">
                                     {navItems.map((item, idx) => {
                                         const isActive = activeSection === item.href.substring(1)
                                         const Icon = item.icon
@@ -189,23 +203,26 @@ export default function Header({ activeSection, setActiveSection }) {
                                                 transition={{ delay: idx * 0.05 }}
                                                 onClick={() => handleNavClick(item.href)}
                                                 className={cn(
-                                                    "w-full flex items-center gap-4 p-3.5 rounded-xl transition-all duration-300 relative",
+                                                    "w-full flex items-center gap-4 p-4 rounded-2xl transition-all duration-300",
                                                     isActive
-                                                        ? "bg-primary/8 text-primary"
+                                                        ? "bg-primary text-white shadow-lg shadow-primary/20"
                                                         : "text-muted-foreground hover:bg-black/[0.03] dark:hover:bg-white/[0.03] hover:text-foreground"
                                                 )}
                                             >
                                                 <div className={cn(
                                                     "p-2 rounded-lg transition-all",
                                                     isActive
-                                                        ? "bg-primary text-white shadow-md shadow-primary/20"
+                                                        ? "bg-white/20"
                                                         : "bg-black/[0.04] dark:bg-white/[0.04]"
                                                 )}>
                                                     <Icon className="w-4 h-4" />
                                                 </div>
-                                                <span className="font-medium text-sm">{item.label}</span>
+                                                <span className="font-semibold text-sm">{item.label}</span>
                                                 {isActive && (
-                                                    <div className="ml-auto w-1.5 h-1.5 rounded-full bg-primary animate-pulse-soft" />
+                                                    <motion.div 
+                                                        layoutId="active-indicator"
+                                                        className="ml-auto w-1.5 h-1.5 rounded-full bg-white" 
+                                                    />
                                                 )}
                                             </motion.button>
                                         )
@@ -213,31 +230,38 @@ export default function Header({ activeSection, setActiveSection }) {
                                 </div>
                             </div>
 
-                            <div className="p-6 border-t border-black/5 dark:border-white/5 space-y-5">
-                                <p className="text-[10px] font-medium uppercase tracking-widest text-muted-foreground">Connect</p>
-                                <div className="flex gap-3">
-                                    {socialLinks.map((social, i) => {
-                                        const Icon = social.icon
-                                        return (
-                                            <a
-                                                key={i}
-                                                href={social.href}
-                                                target="_blank"
-                                                rel="noopener noreferrer"
-                                                className="p-3 rounded-xl bg-black/[0.03] dark:bg-white/[0.03] text-foreground hover:text-primary border border-black/[0.04] dark:border-white/[0.04] transition-all hover:border-primary/20"
-                                            >
-                                                <Icon className="w-4 h-4" />
-                                            </a>
-                                        )
-                                    })}
+                            <div className="p-8 border-t border-border bg-black/[0.01] dark:bg-white/[0.01] space-y-6">
+                                <div>
+                                    <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-muted-foreground/50 mb-4">Let's Connect</p>
+                                    <div className="flex gap-4">
+                                        {socialLinks.map((social, i) => {
+                                            const Icon = social.icon
+                                            return (
+                                                <Magnetic key={i}>
+                                                    <a
+                                                        href={social.href}
+                                                        target="_blank"
+                                                        rel="noopener noreferrer"
+                                                        className="w-11 h-11 flex items-center justify-center rounded-xl bg-white dark:bg-neutral-900 text-foreground hover:text-primary border border-border transition-all hover:border-primary/30 shadow-sm"
+                                                        aria-label={social.label}
+                                                    >
+                                                        <Icon className="w-4.5 h-4.5" />
+                                                    </a>
+                                                </Magnetic>
+                                            )
+                                        })}
+                                    </div>
                                 </div>
-                                <div className="flex items-center gap-2 text-xs text-muted-foreground">
-                                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
-                                    Available for new projects
+                                <div className="flex items-center gap-3 px-4 py-3 rounded-xl bg-emerald-500/5 border border-emerald-500/10 text-[11px] font-medium text-emerald-600 dark:text-emerald-400">
+                                    <span className="relative flex h-2 w-2">
+                                        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                                        <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+                                    </span>
+                                    Available for new opportunities
                                 </div>
                             </div>
                         </motion.div>
-                    </div>
+                    </>
                 )}
             </AnimatePresence>
         </header>

@@ -3,7 +3,7 @@ import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion'
 import { Github, ExternalLink, Star } from 'lucide-react'
 import Magnetic from '../UI/Magnetic'
 
-const ProjectCard = forwardRef(({ project, index, featured = false }, ref) => {
+const ProjectCard = forwardRef(({ project, index }, ref) => {
     const cardRef = useRef(null)
     const x = useMotionValue(0)
     const y = useMotionValue(0)

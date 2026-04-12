@@ -2,7 +2,6 @@ import { motion } from 'framer-motion'
 import { ArrowRight, Download, ChevronDown } from 'lucide-react'
 import { TypeAnimation } from 'react-type-animation'
 import { socialLinks } from '../../utils/constants'
-import TextReveal from '../UI/TextReveal'
 import MeshGradient from '../UI/MeshGradient'
 import Magnetic from '../UI/Magnetic'
 
@@ -185,7 +184,7 @@ export default function Hero({ setActiveSection }) {
                                         <span className="text-foreground/50">[</span>
                                         <span className="text-amber-600 dark:text-amber-400">&quot;React&quot;</span><span className="text-foreground/30">, </span>
                                         <span className="text-amber-600 dark:text-amber-400">&quot;Node&quot;</span><span className="text-foreground/30">, </span>
-                                        <span className="text-amber-600 dark:text-amber-400">"Express"</span>
+                                        <span className="text-amber-600 dark:text-amber-400">&quot;Express&quot;</span>
                                         <span className="text-foreground/30">, </span>
                                         <span className="text-amber-600 dark:text-amber-400">&quot;MongoDB&quot;</span>
                                         <span className="text-foreground/50">]</span><span className="text-foreground/30">,</span>

@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 
-export default function TextReveal({ text, className, as: Tag = 'h2', charReveal = false }) {
+export default function TextReveal({ text, className, charReveal = false }) {
     const words = text.split(' ');
 
     const container = {
