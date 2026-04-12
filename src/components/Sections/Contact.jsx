@@ -227,7 +227,7 @@ export default function Contact() {
                                             onChange={handleChange}
                                             onFocus={() => setFocusedField('name')}
                                             onBlur={() => setFocusedField(null)}
-                                            placeholder="Full Name"
+                                            placeholder="Enter your full name"
                                             className={inputClasses('name')}
                                         />
                                     </div>
@@ -242,7 +242,7 @@ export default function Contact() {
                                             onChange={handleChange}
                                             onFocus={() => setFocusedField('email')}
                                             onBlur={() => setFocusedField(null)}
-                                            placeholder="email@example.com"
+                                            placeholder="Enter your email address"
                                             className={inputClasses('email')}
                                         />
                                     </div>
@@ -259,7 +259,7 @@ export default function Contact() {
                                         onChange={handleChange}
                                         onFocus={() => setFocusedField('subject')}
                                         onBlur={() => setFocusedField(null)}
-                                        placeholder="Project Inquiry"
+                                        placeholder="What is this regarding? (e.g. Project, Job Opportunity)"
                                         className={inputClasses('subject')}
                                     />
                                 </div>
@@ -275,7 +275,7 @@ export default function Contact() {
                                         onChange={handleChange}
                                         onFocus={() => setFocusedField('message')}
                                         onBlur={() => setFocusedField(null)}
-                                        placeholder="Tell me about your project..."
+                                        placeholder="Tell me about your project, idea, or requirement..."
                                         className={cn(inputClasses('message'), 'resize-none')}
                                     />
                                 </div>
