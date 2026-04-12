@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion'
 import { GraduationCap, Calendar, Award, BookOpen, MapPin } from 'lucide-react'
 import { education } from '../../utils/constants'
+import { cn } from '../../utils/cn'
 import SectionReveal from '../UI/SectionReveal'
 import AnimatedBackground from '../UI/AnimatedBackground'
 
@@ -10,18 +11,27 @@ const EducationCard = ({ edu, index }) => {
     const Icon = icons[index % icons.length]
 
     return (
-        <div className="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group mb-12 last:mb-0">
-            {/* Dot Indicator */}
-            <div className="flex items-center justify-center w-10 h-10 rounded-full border border-primary/30 bg-background shadow-lg shadow-primary/10 z-10 absolute left-0 md:left-1/2 md:-translate-x-1/2 group-hover:scale-110 group-hover:border-primary transition-all duration-300">
-                <Icon className="w-5 h-5 text-primary" />
+        <div className={cn(
+            "relative flex gap-6 md:gap-0 md:items-center group pb-20 md:pb-32 last:pb-0",
+            !isEven ? "md:flex-row-reverse" : "md:flex-row"
+        )}>
+            {/* Timeline Indicator */}
+            {/* Mobile: Part of the flow | Desktop: Centered */}
+            <div className="flex-shrink-0 w-8 md:w-0 md:absolute md:left-1/2 md:-translate-x-1/2 z-20 flex justify-center">
+                <div className="flex items-center justify-center w-8 h-8 md:w-10 md:h-10 rounded-full border border-primary/30 bg-background shadow-lg shadow-primary/10 group-hover:scale-110 group-hover:border-primary transition-all duration-300">
+                    <Icon className="w-4 h-4 md:w-5 md:h-5 text-primary" />
+                </div>
             </div>
 
             {/* Content Card */}
-            <div className="w-[calc(100%-3rem)] md:w-[calc(50%-2.5rem)] ml-auto md:ml-0">
-                <SectionReveal delay={index * 0.1}>
+            <div className={cn(
+                "flex-1 md:w-[calc(50%-2.5rem)] md:flex-none",
+                !isEven ? "md:mr-auto" : "md:ml-auto"
+            )}>
+                <SectionReveal delay={0.1} y={30}>
                     <motion.div
                         whileHover={{ y: -5 }}
-                        className="glass-card p-6 sm:p-8 relative border-primary/10 hover:border-primary/30 transition-all duration-500 shadow-xl shadow-primary/5"
+                        className="glass-card p-6 sm:p-8 relative border-primary/10 hover:border-primary/30 transition-all duration-500 shadow-xl shadow-primary/5 w-full"
                     >
                         {/* Period Badge */}
                         <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 mb-4">
@@ -91,11 +101,12 @@ export default function Education() {
 
                 {/* Timeline Container */}
                 <div className="relative max-w-5xl mx-auto mt-16 px-4">
-                    {/* Vertical Center Line (Desktop) */}
-                    <div className="absolute left-5 md:left-1/2 md:-translate-x-1/2 top-0 bottom-0 w-[2px] bg-gradient-to-b from-primary/50 via-primary/20 to-transparent" />
+                    {/* Vertical Line */}
+                    {/* Aligned perfectly with the center of the 32px (w-8) dot: 32px / 2 = 16px (left-4) */}
+                    <div className="absolute left-8 md:left-1/2 md:-translate-x-1/2 top-0 bottom-0 w-[2px] bg-gradient-to-b from-primary/50 via-primary/20 to-transparent" />
 
                     {/* Education Milestones */}
-                    <div className="space-y-0">
+                    <div className="relative">
                         {education.map((edu, index) => (
                             <EducationCard key={edu.id || index} edu={edu} index={index} />
                         ))}
