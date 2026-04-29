@@ -15,7 +15,6 @@ import Projects from "./components/Sections/Projects";
 import Contact from "./components/Sections/Contact";
 
 const ScrollProgress = lazy(() => import("./components/UI/ScrollProgress"));
-const CustomCursor = lazy(() => import("./components/UI/CustomCursor"));
 
 import { SECTIONS, LOADING_DURATION } from "./utils/constants";
 import { useScroll } from "./hooks/useScroll";
@@ -144,7 +143,6 @@ function App() {
                         >
                             <Suspense fallback={null}>
                                 <ScrollProgress />
-                                <CustomCursor />
                             </Suspense>
 
                             <Header

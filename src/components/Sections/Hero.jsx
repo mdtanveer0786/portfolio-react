@@ -3,7 +3,6 @@ import { ArrowRight, Download, ChevronDown } from 'lucide-react'
 import { TypeAnimation } from 'react-type-animation'
 import { socialLinks } from '../../utils/constants'
 import MeshGradient from '../UI/MeshGradient'
-import Magnetic from '../UI/Magnetic'
 
 export default function Hero({ setActiveSection }) {
     const containerVariants = {
@@ -84,33 +83,29 @@ export default function Hero({ setActiveSection }) {
 
                         {/* CTA Buttons */}
                         <motion.div variants={itemVariants} className="flex flex-col xs:flex-row items-center justify-center lg:justify-start gap-4">
-                            <Magnetic>
-                                <motion.button
-                                    whileHover={{ scale: 1.02, y: -2 }}
-                                    transition={{ type: 'spring', stiffness: 400, damping: 25 }}
-                                    onClick={() => {
-                                        setActiveSection('contact')
-                                        document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })
-                                    }}
-                                    className="btn-primary w-full xs:w-auto"
-                                >
-                                    <span>Let&apos;s Talk</span>
-                                    <ArrowRight className="w-4 h-4" />
-                                </motion.button>
-                            </Magnetic>
+                            <motion.button
+                                whileHover={{ scale: 1.02, y: -2 }}
+                                transition={{ type: 'spring', stiffness: 400, damping: 25 }}
+                                onClick={() => {
+                                    setActiveSection('contact')
+                                    document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })
+                                }}
+                                className="btn-primary w-full xs:w-auto"
+                            >
+                                <span>Let&apos;s Talk</span>
+                                <ArrowRight className="w-4 h-4" />
+                            </motion.button>
 
-                            <Magnetic>
-                                <motion.a
-                                    whileHover={{ scale: 1.02, y: -2 }}
-                                    transition={{ type: 'spring', stiffness: 400, damping: 25 }}
-                                    href="/resume.pdf"
-                                    download="Md_Tanveer_Alam_Resume.pdf"
-                                    className="btn-secondary w-full xs:w-auto"
-                                >
-                                    <Download className="w-4 h-4" />
-                                    <span>Download CV</span>
-                                </motion.a>
-                            </Magnetic>
+                            <motion.a
+                                whileHover={{ scale: 1.02, y: -2 }}
+                                transition={{ type: 'spring', stiffness: 400, damping: 25 }}
+                                href="/resume.pdf"
+                                download="Md_Tanveer_Alam_Resume.pdf"
+                                className="btn-secondary w-full xs:w-auto"
+                            >
+                                <Download className="w-4 h-4" />
+                                <span>Download CV</span>
+                            </motion.a>
                         </motion.div>
 
                         {/* Social Links */}
@@ -118,18 +113,17 @@ export default function Hero({ setActiveSection }) {
                             {socialLinks.map((social) => {
                                 const Icon = social.icon
                                 return (
-                                    <Magnetic key={social.label}>
-                                        <motion.a
-                                            href={social.href}
-                                            target="_blank"
-                                            rel="noopener noreferrer"
-                                            whileHover={{ y: -3 }}
-                                            className="flex items-center justify-center w-10 h-10 rounded-xl bg-black/[0.03] dark:bg-white/[0.03] border border-black/[0.04] dark:border-white/[0.05] text-muted-foreground hover:text-primary hover:border-primary/20 transition-all shrink-0"
-                                            aria-label={social.label}
-                                        >
-                                            <Icon className="w-4 h-4" />
-                                        </motion.a>
-                                    </Magnetic>
+                                    <motion.a
+                                        key={social.label}
+                                        href={social.href}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        whileHover={{ y: -3 }}
+                                        className="flex items-center justify-center w-10 h-10 rounded-xl bg-black/[0.03] dark:bg-white/[0.03] border border-black/[0.04] dark:border-white/[0.05] text-muted-foreground hover:text-primary hover:border-primary/20 transition-all shrink-0"
+                                        aria-label={social.label}
+                                    >
+                                        <Icon className="w-4 h-4" />
+                                    </motion.a>
                                 )
                             })}
                         </motion.div>

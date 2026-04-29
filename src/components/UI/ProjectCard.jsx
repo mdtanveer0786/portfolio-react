@@ -1,7 +1,6 @@
 import { forwardRef, useRef } from 'react'
 import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion'
 import { Github, ExternalLink, Star } from 'lucide-react'
-import Magnetic from '../UI/Magnetic'
 
 const ProjectCard = forwardRef(({ project, index }, ref) => {
     const cardRef = useRef(null)
@@ -120,36 +119,32 @@ const ProjectCard = forwardRef(({ project, index }, ref) => {
                     {/* Actions */}
                     <div className="flex items-center gap-2 pt-3 mt-auto">
                         {project.live && (
-                            <Magnetic>
-                                <motion.a
-                                    whileHover={{ scale: 1.02, y: -1 }}
-                                    whileTap={{ scale: 0.98 }}
-                                    transition={{ type: 'spring', stiffness: 400, damping: 25 }}
-                                    href={project.live}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="flex-1 flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl btn-primary text-xs"
-                                >
-                                    <ExternalLink size={13} />
-                                    Live Demo
-                                </motion.a>
-                            </Magnetic>
+                            <motion.a
+                                whileHover={{ scale: 1.02, y: -1 }}
+                                whileTap={{ scale: 0.98 }}
+                                transition={{ type: 'spring', stiffness: 400, damping: 25 }}
+                                href={project.live}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="flex-1 flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl btn-primary text-xs"
+                            >
+                                <ExternalLink size={13} />
+                                Live Demo
+                            </motion.a>
                         )}
                         {project.github && (
-                            <Magnetic>
-                                <motion.a
-                                    whileHover={{ scale: 1.05, y: -1 }}
-                                    whileTap={{ scale: 0.95 }}
-                                    transition={{ type: 'spring', stiffness: 400, damping: 25 }}
-                                    href={project.github}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="flex items-center justify-center p-2.5 rounded-xl bg-black/[0.03] dark:bg-white/[0.03] text-foreground border border-border/30 hover:border-primary/20 transition-all"
-                                    title="View Source"
-                                >
-                                    <Github size={16} />
-                                </motion.a>
-                            </Magnetic>
+                            <motion.a
+                                whileHover={{ scale: 1.05, y: -1 }}
+                                whileTap={{ scale: 0.95 }}
+                                transition={{ type: 'spring', stiffness: 400, damping: 25 }}
+                                href={project.github}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="flex items-center justify-center p-2.5 rounded-xl bg-black/[0.03] dark:bg-white/[0.03] text-foreground border border-border/30 hover:border-primary/20 transition-all"
+                                title="View Source"
+                            >
+                                <Github size={16} />
+                            </motion.a>
                         )}
                         {!project.live && !project.github && (
                             <div className="flex-1 flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-black/[0.03] dark:bg-white/[0.03] border border-border/30 text-muted-foreground text-xs font-medium">

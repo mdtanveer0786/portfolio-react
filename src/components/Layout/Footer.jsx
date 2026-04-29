@@ -1,19 +1,12 @@
-import { motion } from 'framer-motion'
 import { 
-    Github, 
-    Linkedin, 
-    Twitter, 
     Mail, 
     ArrowUp, 
     MapPin, 
     Clock, 
     Heart,
-    ExternalLink,
-    ChevronRight,
-    MessageCircle
+    ChevronRight
 } from 'lucide-react'
-import { navItems, socialLinks } from '../../utils/constants'
-import Magnetic from '../UI/Magnetic'
+import { socialLinks } from '../../utils/constants'
 
 export default function Footer() {
     const currentYear = new Date().getFullYear()
@@ -132,19 +125,18 @@ export default function Footer() {
                         </h4>
                         <div className="flex flex-col gap-3">
                             {socialLinks.map((link) => (
-                                <Magnetic key={link.label}>
-                                    <a
-                                        href={link.href}
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                        className="flex items-center gap-3 group text-muted-foreground hover:text-primary transition-colors text-sm"
-                                    >
-                                        <div className="p-2 rounded-lg bg-black/[0.03] dark:bg-white/[0.03] group-hover:bg-primary/10 transition-colors">
-                                            <link.icon size={16} />
-                                        </div>
-                                        {link.label}
-                                    </a>
-                                </Magnetic>
+                                <a
+                                    key={link.label}
+                                    href={link.href}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="flex items-center gap-3 group text-muted-foreground hover:text-primary transition-colors text-sm"
+                                >
+                                    <div className="p-2 rounded-lg bg-black/[0.03] dark:bg-white/[0.03] group-hover:bg-primary/10 transition-colors">
+                                        <link.icon size={16} />
+                                    </div>
+                                    {link.label}
+                                </a>
                             ))}
                         </div>
                     </div>
@@ -164,17 +156,15 @@ export default function Footer() {
                         </div>
                     </div>
 
-                    <Magnetic>
-                        <button
-                            onClick={scrollToTop}
-                            className="group relative flex items-center gap-2 px-6 py-3 rounded-full bg-primary/10 text-primary border border-primary/20 hover:bg-primary hover:text-white transition-all duration-500 overflow-hidden"
-                        >
-                            <span className="relative z-10 text-sm font-bold uppercase tracking-wider">Back to Top</span>
-                            <div className="relative z-10 p-1.5 rounded-full bg-primary/20 group-hover:bg-white/20 transition-colors">
-                                <ArrowUp size={14} className="group-hover:-translate-y-1 transition-transform" />
-                            </div>
-                        </button>
-                    </Magnetic>
+                    <button
+                        onClick={scrollToTop}
+                        className="group relative flex items-center gap-2 px-6 py-3 rounded-full bg-primary/10 text-primary border border-primary/20 hover:bg-primary hover:text-white transition-all duration-500 overflow-hidden"
+                    >
+                        <span className="relative z-10 text-sm font-bold uppercase tracking-wider">Back to Top</span>
+                        <div className="relative z-10 p-1.5 rounded-full bg-primary/20 group-hover:bg-white/20 transition-colors">
+                            <ArrowUp size={14} className="group-hover:-translate-y-1 transition-transform" />
+                        </div>
+                    </button>
                 </div>
             </div>
             

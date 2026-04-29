@@ -4,7 +4,6 @@ import { Menu, X, Sun, Moon } from 'lucide-react'
 import { useTheme } from './ThemeProvider'
 import { navItems, socialLinks } from '../../utils/constants'
 import { cn } from '../../utils/cn'
-import Magnetic from '../UI/Magnetic'
 
 export default function Header({ activeSection, setActiveSection }) {
     const [scrolled, setScrolled] = useState(false)
@@ -67,24 +66,22 @@ export default function Header({ activeSection, setActiveSection }) {
                     : "bg-white/30 dark:bg-neutral-950/30 border-transparent backdrop-blur-md"
             )}>
                 {/* Logo */}
-                <Magnetic>
-                    <motion.div
-                        whileHover={{ scale: 1.02 }}
-                        whileTap={{ scale: 0.98 }}
-                        className="flex items-center gap-2.5 cursor-pointer group px-2 py-1"
-                        onClick={() => {
-                            handleNavClick('#home')
-                            setMobileMenuOpen(false)
-                        }}
-                    >
-                        <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-primary to-fuchsia-600 flex items-center justify-center text-white font-display font-bold text-xs flex-shrink-0 shadow-lg shadow-primary/20 group-hover:shadow-primary/40 transition-shadow">
-                            MD
-                        </div>
-                        <span className="text-sm font-display font-bold tracking-tight text-foreground hidden xs:block">
-                            Tanveer
-                        </span>
-                    </motion.div>
-                </Magnetic>
+                <motion.div
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
+                    className="flex items-center gap-2.5 cursor-pointer group px-2 py-1"
+                    onClick={() => {
+                        handleNavClick('#home')
+                        setMobileMenuOpen(false)
+                    }}
+                >
+                    <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-primary to-fuchsia-600 flex items-center justify-center text-white font-display font-bold text-xs flex-shrink-0 shadow-lg shadow-primary/20 group-hover:shadow-primary/40 transition-shadow">
+                        MD
+                    </div>
+                    <span className="text-sm font-display font-bold tracking-tight text-foreground hidden xs:block">
+                        Tanveer
+                    </span>
+                </motion.div>
 
                 {/* Desktop Navigation */}
                 <div className="hidden lg:flex items-center gap-0.5 p-1 rounded-xl bg-black/[0.03] dark:bg-white/[0.03] border border-black/[0.03] dark:border-white/[0.04]">
@@ -116,27 +113,25 @@ export default function Header({ activeSection, setActiveSection }) {
 
                 {/* Right Actions */}
                 <div className="flex items-center gap-2">
-                    <Magnetic>
-                        <motion.button
-                            whileHover={{ scale: 1.05 }}
-                            whileTap={{ scale: 0.9 }}
-                            onClick={toggleTheme}
-                            aria-label={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}
-                            className="p-2.5 rounded-xl bg-black/[0.04] dark:bg-white/[0.04] border border-black/[0.04] dark:border-white/[0.06] text-foreground hover:text-primary transition-all"
-                        >
-                            <AnimatePresence mode="wait">
-                                <motion.div
-                                    key={theme}
-                                    initial={{ rotate: -90, opacity: 0 }}
-                                    animate={{ rotate: 0, opacity: 1 }}
-                                    exit={{ rotate: 90, opacity: 0 }}
-                                    transition={{ duration: 0.2 }}
-                                >
-                                    {theme === 'dark' ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
-                                </motion.div>
-                            </AnimatePresence>
-                        </motion.button>
-                    </Magnetic>
+                    <motion.button
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.9 }}
+                        onClick={toggleTheme}
+                        aria-label={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}
+                        className="p-2.5 rounded-xl bg-black/[0.04] dark:bg-white/[0.04] border border-black/[0.04] dark:border-white/[0.06] text-foreground hover:text-primary transition-all"
+                    >
+                        <AnimatePresence mode="wait">
+                            <motion.div
+                                key={theme}
+                                initial={{ rotate: -90, opacity: 0 }}
+                                animate={{ rotate: 0, opacity: 1 }}
+                                exit={{ rotate: 90, opacity: 0 }}
+                                transition={{ duration: 0.2 }}
+                            >
+                                {theme === 'dark' ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
+                            </motion.div>
+                        </AnimatePresence>
+                    </motion.button>
 
                     <motion.button
                         whileTap={{ scale: 0.9 }}
@@ -239,22 +234,21 @@ export default function Header({ activeSection, setActiveSection }) {
 
                             <div className="p-8 border-t border-border bg-black/[0.01] dark:bg-white/[0.01] space-y-6">
                                 <div>
-                                    <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-muted-foreground/50 mb-4">Let's Connect</p>
+                                    <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-muted-foreground/50 mb-4">Let&apos;s Connect</p>
                                     <div className="flex gap-4">
                                         {socialLinks.map((social, i) => {
                                             const Icon = social.icon
                                             return (
-                                                <Magnetic key={i}>
-                                                    <a
-                                                        href={social.href}
-                                                        target="_blank"
-                                                        rel="noopener noreferrer"
-                                                        className="w-11 h-11 flex items-center justify-center rounded-xl bg-white dark:bg-neutral-900 text-foreground hover:text-primary border border-border transition-all hover:border-primary/30 shadow-sm"
-                                                        aria-label={social.label}
-                                                    >
-                                                        <Icon className="w-4.5 h-4.5" />
-                                                    </a>
-                                                </Magnetic>
+                                                <a
+                                                    key={i}
+                                                    href={social.href}
+                                                    target="_blank"
+                                                    rel="noopener noreferrer"
+                                                    className="w-11 h-11 flex items-center justify-center rounded-xl bg-white dark:bg-neutral-900 text-foreground hover:text-primary border border-border transition-all hover:border-primary/30 shadow-sm"
+                                                    aria-label={social.label}
+                                                >
+                                                    <Icon className="w-4.5 h-4.5" />
+                                                </a>
                                             )
                                         })}
                                     </div>

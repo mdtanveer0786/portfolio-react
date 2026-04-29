@@ -5,7 +5,6 @@ import toast from 'react-hot-toast'
 import emailjs from '@emailjs/browser'
 import SectionReveal from '../UI/SectionReveal'
 import AnimatedBackground from '../UI/AnimatedBackground'
-import Magnetic from '../UI/Magnetic'
 import { cn } from '../../utils/cn'
 
 const SERVICE_ID = import.meta.env.VITE_EMAILJS_SERVICE_ID
@@ -192,18 +191,17 @@ export default function Contact() {
                                     </div>
                                     <div className="flex gap-3">
                                         {socials.map((social) => (
-                                            <Magnetic key={social.label}>
-                                                <motion.a
-                                                    href={social.href}
-                                                    target="_blank"
-                                                    rel="noopener noreferrer"
-                                                    whileHover={{ y: -3 }}
-                                                    className="w-10 h-10 flex items-center justify-center rounded-xl bg-black/[0.02] dark:bg-white/[0.02] border border-border/20 text-muted-foreground hover:text-primary hover:border-primary/20 transition-all shrink-0"
-                                                    aria-label={social.label}
-                                                >
-                                                    <social.icon size={18} />
-                                                </motion.a>
-                                            </Magnetic>
+                                            <motion.a
+                                                key={social.label}
+                                                href={social.href}
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                                whileHover={{ y: -3 }}
+                                                className="w-10 h-10 flex items-center justify-center rounded-xl bg-black/[0.02] dark:bg-white/[0.02] border border-border/20 text-muted-foreground hover:text-primary hover:border-primary/20 transition-all shrink-0"
+                                                aria-label={social.label}
+                                            >
+                                                <social.icon size={18} />
+                                            </motion.a>
                                         ))}
                                     </div>
                                 </div>
@@ -286,24 +284,22 @@ export default function Contact() {
                                         Fast response guaranteed
                                     </div>
 
-                                    <Magnetic>
-                                        <motion.button
-                                            whileHover={{ scale: 1.02, y: -1 }}
-                                            whileTap={{ scale: 0.98 }}
-                                            transition={{ type: 'spring', stiffness: 400, damping: 25 }}
-                                            disabled={isSubmitting}
-                                            className="w-full sm:w-auto btn-primary px-8 py-3.5 text-xs font-semibold disabled:opacity-50 disabled:cursor-not-allowed"
-                                        >
-                                            {isSubmitting ? (
-                                                <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-                                            ) : (
-                                                <>
-                                                    <span>Send Message</span>
-                                                    <Send size={14} />
-                                                </>
-                                            )}
-                                        </motion.button>
-                                    </Magnetic>
+                                    <motion.button
+                                        whileHover={{ scale: 1.02, y: -1 }}
+                                        whileTap={{ scale: 0.98 }}
+                                        transition={{ type: 'spring', stiffness: 400, damping: 25 }}
+                                        disabled={isSubmitting}
+                                        className="w-full sm:w-auto btn-primary px-8 py-3.5 text-xs font-semibold disabled:opacity-50 disabled:cursor-not-allowed"
+                                    >
+                                        {isSubmitting ? (
+                                            <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                                        ) : (
+                                            <>
+                                                <span>Send Message</span>
+                                                <Send size={14} />
+                                            </>
+                                        )}
+                                    </motion.button>
                                 </div>
                             </form>
                         </SectionReveal>
