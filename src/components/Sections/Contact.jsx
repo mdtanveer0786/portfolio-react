@@ -198,9 +198,8 @@ export default function Contact() {
                                                 rel="noopener noreferrer"
                                                 whileHover={{ y: -3 }}
                                                 className="w-10 h-10 flex items-center justify-center rounded-xl bg-black/[0.02] dark:bg-white/[0.02] border border-border/20 text-muted-foreground hover:text-primary hover:border-primary/20 transition-all shrink-0"
-                                                aria-label={social.label}
-                                            >
-                                                <social.icon size={18} />
+                                                aria-label={`Follow me on ${social.label}`}
+                                                >                                                <social.icon size={18} />
                                             </motion.a>
                                         ))}
                                     </div>

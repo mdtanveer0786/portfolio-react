@@ -206,14 +206,14 @@ export default function Hero({ setActiveSection }) {
                                 transition={{ repeat: Infinity, duration: 4, ease: "easeInOut" }}
                                 className="absolute -top-3 -right-3 px-3 py-1.5 rounded-lg bg-white dark:bg-neutral-900 border border-border/50 shadow-lg text-xs font-mono font-medium text-cyan-600 dark:text-cyan-400 hidden sm:block"
                             >
-                                ⚛️ React.js
+                                <span role="img" aria-label="React.js">⚛️</span> React.js
                             </motion.div>
                             <motion.div
                                 animate={{ y: [0, 8, 0] }}
                                 transition={{ repeat: Infinity, duration: 5, ease: "easeInOut", delay: 1 }}
                                 className="absolute -bottom-3 -left-3 px-3 py-1.5 rounded-lg bg-white dark:bg-neutral-900 border border-border/50 shadow-lg text-xs font-mono font-medium text-emerald-600 dark:text-emerald-400 hidden sm:block"
                             >
-                                🟢 Node.js
+                                <span role="img" aria-label="Node.js">🟢</span> Node.js
                             </motion.div>
                         </div>
                     </motion.div>
