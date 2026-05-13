@@ -108,26 +108,25 @@
 @layer components {
     /* Premium Glass Effect */
     .glass {
-        @apply backdrop-blur-2xl border shadow-lg;
+        @apply backdrop-blur-2xl shadow-lg;
         background: hsla(var(--card), 0.6);
-        border-color: hsla(var(--foreground), 0.06);
+        border: 1px solid transparent;
     }
     .dark .glass {
         background: hsla(var(--card), 0.4);
-        border-color: hsla(var(--foreground), 0.08);
-        box-shadow: 0 8px 32px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.05);
+        border: 1px solid transparent;
+        box-shadow: 0 8px 32px rgba(0,0,0,0.3);
     }
 
     .glass-card {
         @apply glass rounded-2xl transition-all duration-500;
     }
     .glass-card:hover {
-        border-color: hsla(var(--primary), 0.2);
-        box-shadow: 0 20px 40px rgba(0,0,0,0.08), 0 0 0 1px hsla(var(--primary), 0.1);
+        box-shadow: 0 20px 40px rgba(0,0,0,0.08);
         transform: translateY(-2px);
     }
     .dark .glass-card:hover {
-        box-shadow: 0 20px 40px rgba(0,0,0,0.4), 0 0 30px rgba(var(--glow-color), 0.08);
+        box-shadow: 0 20px 40px rgba(0,0,0,0.4), 0 0 30px rgba(var(--glow-color), 0.05);
     }
 
     /* Premium Text Gradient */

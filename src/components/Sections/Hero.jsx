@@ -221,21 +221,33 @@ export default function Hero({ setActiveSection }) {
             </div>
 
             {/* Scroll Indicator */}
-            <motion.div
+            <motion.a
+                href="#about"
+                onClick={(e) => {
+                    e.preventDefault()
+                    setActiveSection('about')
+                    const element = document.getElementById('about')
+                    if (element) {
+                        const yOffset = -80 // Match header offset
+                        const y = element.getBoundingClientRect().top + window.pageYOffset + yOffset
+                        window.scrollTo({ top: y, behavior: 'smooth' })
+                    }
+                }}
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 2.5 }}
-                className="absolute bottom-8 left-1/2 -translate-x-1/2"
+                className="absolute bottom-8 left-1/2 -translate-x-1/2 cursor-pointer z-20 select-none group"
+                aria-label="Scroll to About section"
             >
                 <motion.div
                     animate={{ y: [0, 8, 0] }}
                     transition={{ repeat: Infinity, duration: 2, ease: "easeInOut" }}
-                    className="flex flex-col items-center gap-2 text-muted-foreground/40"
+                    className="flex flex-col items-center gap-2 text-muted-foreground/40 group-hover:text-primary/70 transition-colors"
                 >
-                    <span className="text-[10px] font-mono uppercase tracking-widest">Scroll</span>
-                    <ChevronDown className="w-4 h-4" />
+                    <span className="text-[10px] font-mono uppercase tracking-widest font-semibold">Scroll</span>
+                    <ChevronDown className="w-4 h-4 transition-transform group-hover:scale-110" />
                 </motion.div>
-            </motion.div>
+            </motion.a>
         </section>
     )
 }

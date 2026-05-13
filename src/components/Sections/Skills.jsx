@@ -34,10 +34,10 @@ const SkillCard = ({ skill, index }) => {
             viewport={{ once: true }}
             transition={{ duration: 0.4, delay: index * 0.03, ease: [0.22, 1, 0.36, 1] }}
             whileHover={{ y: -4, scale: 1.03 }}
-            className="group relative flex flex-col items-center justify-center p-4 sm:p-5 rounded-2xl transition-all duration-300 cursor-default"
+            className="group relative flex flex-col items-center justify-center p-4 sm:p-5 rounded-2xl transition-all duration-300 cursor-default shadow-sm hover:shadow-md"
             style={{
                 background: 'hsla(var(--card), 0.5)',
-                border: '1px solid hsla(var(--foreground), 0.04)',
+                border: '1px solid transparent',
             }}
         >
             {/* Hover glow */}
@@ -46,8 +46,7 @@ const SkillCard = ({ skill, index }) => {
                 style={{ backgroundColor: skill.color }}
             />
 
-            {/* Hover border */}
-            <div className="absolute inset-0 rounded-2xl border border-transparent group-hover:border-primary/20 transition-colors duration-300" />
+
 
             {/* Icon */}
             <div

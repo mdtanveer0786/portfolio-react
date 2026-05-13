@@ -46,7 +46,7 @@ export default function Projects() {
                 {/* Filter Controls */}
                 <SectionReveal y={15}>
                     <div className="flex justify-center items-center gap-2 mb-12 md:mb-16">
-                        <div className="flex items-center gap-1 p-1 rounded-xl bg-black/[0.03] dark:bg-white/[0.03] border border-black/[0.04] dark:border-white/[0.04]">
+                        <div className="flex items-center gap-1 p-1 rounded-xl bg-black/[0.03] dark:bg-white/[0.03] shadow-inner">
                             {CATEGORIES.map((cat) => (
                                 <button
                                     key={cat}

@@ -48,7 +48,7 @@ const ProjectCard = forwardRef(({ project, index }, ref) => {
                 whileHover={{ borderColor: 'hsla(var(--primary), 0.2)' }}
             >
                 {/* Card background */}
-                <div className="absolute inset-0 bg-card/50 backdrop-blur-sm border border-border/30 rounded-2xl group-hover:border-primary/15 transition-colors" />
+                <div className="absolute inset-0 bg-card/50 backdrop-blur-sm rounded-2xl transition-all duration-300 shadow-md group-hover:shadow-xl" />
 
                 {/* Image Section */}
                 <div className="relative aspect-[16/10] overflow-hidden">
@@ -70,7 +70,7 @@ const ProjectCard = forwardRef(({ project, index }, ref) => {
                                 Featured
                             </div>
                         )}
-                        <div className="px-2.5 py-1 rounded-lg bg-white/10 backdrop-blur-md text-white text-[10px] font-semibold uppercase tracking-wide border border-white/20">
+                        <div className="px-2.5 py-1 rounded-lg bg-white/10 backdrop-blur-md text-white text-[10px] font-semibold uppercase tracking-wide">
                             {project.category}
                         </div>
                     </div>
@@ -104,7 +104,7 @@ const ProjectCard = forwardRef(({ project, index }, ref) => {
                         {project.tags.slice(0, 4).map((tag) => (
                             <span
                                 key={tag}
-                                className="px-2 py-0.5 rounded-md bg-primary/5 text-primary/80 text-[10px] font-medium border border-primary/8"
+                                className="px-2 py-0.5 rounded-md bg-primary/5 text-primary/80 text-[10px] font-medium"
                             >
                                 {tag}
                             </span>
@@ -140,7 +140,7 @@ const ProjectCard = forwardRef(({ project, index }, ref) => {
                                 href={project.github}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="flex items-center justify-center p-2.5 rounded-xl bg-black/[0.03] dark:bg-white/[0.03] text-foreground border border-border/30 hover:border-primary/20 transition-all"
+                                className="flex items-center justify-center p-2.5 rounded-xl bg-black/[0.03] dark:bg-white/[0.03] text-foreground hover:bg-black/[0.05] dark:hover:bg-white/[0.06] transition-all shadow-sm"
                                 title="View Source"
                             >
                                 <Github size={16} />

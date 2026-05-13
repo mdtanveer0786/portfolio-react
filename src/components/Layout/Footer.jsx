@@ -143,12 +143,12 @@ export default function Footer() {
                 </div>
 
                 {/* Bottom Bar */}
-                <div className="pt-12 border-t border-border/30 flex flex-col md:row items-center justify-between gap-8">
-                    <div className="flex flex-col items-center md:items-start gap-4">
-                        <div className="flex items-center gap-2 text-sm text-muted-foreground font-medium">
+                <div className="pt-12 border-t border-border/30 flex items-center justify-between gap-6">
+                    <div className="flex flex-col gap-3">
+                        <div className="hidden md:flex items-center gap-2 text-sm text-muted-foreground font-medium">
                             Building scalable products. Designing seamless experiences.
                         </div>
-                        <div className="text-xs text-muted-foreground/60 flex flex-col items-center md:items-start gap-2">
+                        <div className="text-[11px] sm:text-xs text-muted-foreground/60 flex flex-col gap-1.5">
                             <p>© {currentYear} Md Tanveer Alam. All rights reserved.</p>
                             <p className="flex items-center gap-1.5">
                                 Crafted with <Heart size={12} className="text-red-500 fill-red-500" /> using React & Tailwind CSS
@@ -158,12 +158,10 @@ export default function Footer() {
 
                     <button
                         onClick={scrollToTop}
-                        className="group relative flex items-center gap-2 px-6 py-3 rounded-full bg-primary/10 text-primary border border-primary/20 hover:bg-primary hover:text-white transition-all duration-500 overflow-hidden"
+                        className="group relative flex-shrink-0 flex items-center justify-center w-12 h-12 rounded-full bg-primary/10 text-primary border border-primary/20 hover:bg-primary hover:text-white transition-all duration-500 shadow-lg shadow-primary/5"
+                        aria-label="Back to Top"
                     >
-                        <span className="relative z-10 text-sm font-bold uppercase tracking-wider">Back to Top</span>
-                        <div className="relative z-10 p-1.5 rounded-full bg-primary/20 group-hover:bg-white/20 transition-colors">
-                            <ArrowUp size={14} className="group-hover:-translate-y-1 transition-transform" />
-                        </div>
+                        <ArrowUp size={18} className="group-hover:-translate-y-1 transition-transform duration-300" />
                     </button>
                 </div>
             </div>

@@ -31,10 +31,10 @@ const EducationCard = ({ edu, index }) => {
                 <SectionReveal delay={0.1} y={30}>
                     <motion.div
                         whileHover={{ y: -5 }}
-                        className="glass-card p-6 sm:p-8 relative border-primary/10 hover:border-primary/30 transition-all duration-500 shadow-xl shadow-primary/5 w-full"
+                        className="glass-card p-6 sm:p-8 relative transition-all duration-500 shadow-xl shadow-primary/5 w-full group"
                     >
                         {/* Period Badge */}
-                        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 mb-4">
+                        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 mb-4">
                             <Calendar size={12} className="text-primary" />
                             <span className="text-[11px] font-bold text-primary uppercase tracking-wider">{edu.period}</span>
                         </div>
@@ -57,7 +57,7 @@ const EducationCard = ({ edu, index }) => {
 
                         {/* Grade Badge */}
                         <div className="pt-4 border-t border-border/40 flex items-center justify-between">
-                            <div className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-emerald-500/5 border border-emerald-500/20">
+                            <div className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-emerald-500/5">
                                 <Award size={14} className="text-emerald-500" />
                                 <span className="text-xs font-bold text-emerald-600 dark:text-emerald-400">{edu.grade}</span>
                             </div>

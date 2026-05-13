@@ -1,8 +1,9 @@
 import { motion } from 'framer-motion';
 
-export default function SectionReveal({ children, delay = 0, x = 0, y = 30 }) {
+export default function SectionReveal({ children, delay = 0, x = 0, y = 30, className = "" }) {
     return (
         <motion.div
+            className={className}
             initial={{ opacity: 0, x: x, y: y }}
             whileInView={{ opacity: 1, x: 0, y: 0 }}
             viewport={{ once: true, margin: "-80px" }}
