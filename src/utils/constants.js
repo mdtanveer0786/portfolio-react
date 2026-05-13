@@ -72,6 +72,7 @@ export const skillCategories = [
             { name: 'JavaScript', level: 92, color: '#F7DF1E' },
             { name: 'React.js', level: 88, color: '#61DAFB' },
             { name: 'Tailwind CSS', level: 90, color: '#06B6D4' },
+            { name: 'Bootstrap', level: 85, color: '#7952B3' },
         ]
     },
     {
@@ -81,6 +82,7 @@ export const skillCategories = [
             { name: 'Node.js', level: 85, color: '#339933' },
             { name: 'Express.js', level: 85, color: '#000000' },
             { name: 'REST APIs', level: 90, color: '#FF6C37' },
+            { name: 'PHP', level: 80, color: '#777BB4' },
         ]
     },
     {

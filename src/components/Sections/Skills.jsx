@@ -3,7 +3,7 @@ import { Layers } from 'lucide-react'
 import { skillCategories } from '../../utils/constants'
 import SectionReveal from '../UI/SectionReveal'
 import AnimatedBackground from '../UI/AnimatedBackground'
-import { FaReact, FaNodeJs, FaHtml5, FaCss3Alt, FaJs, FaDatabase, FaGitAlt } from 'react-icons/fa'
+import { FaReact, FaNodeJs, FaHtml5, FaCss3Alt, FaJs, FaDatabase, FaGitAlt, FaBootstrap, FaPhp } from 'react-icons/fa'
 import { SiTailwindcss, SiExpress, SiMongodb, SiPostman, SiVercel, SiMysql, SiRender } from 'react-icons/si'
 
 const getIcon = (name) => {
@@ -13,8 +13,10 @@ const getIcon = (name) => {
         'JavaScript': <FaJs />,
         'React.js': <FaReact />,
         'Tailwind CSS': <SiTailwindcss />,
+        'Bootstrap': <FaBootstrap />,
         'Node.js': <FaNodeJs />,
         'Express.js': <SiExpress />,
+        'PHP': <FaPhp />,
         'REST APIs': <FaDatabase />,
         'MongoDB': <SiMongodb />,
         'MySQL': <SiMysql />,

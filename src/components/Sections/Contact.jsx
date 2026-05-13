@@ -68,7 +68,7 @@ export default function Contact() {
                         name: formData.name,
                         email: formData.email,
                         message: formData.message,
-                        from_name: 'Tanveer',
+                        from_name: 'Md Tanveer Alam',
                         reply_to: 'tanveerdev14@gmail.com'
                     }, PUBLIC_KEY)
                 } catch (err) {
