@@ -143,7 +143,7 @@ export default function Footer() {
                 </div>
 
                 {/* Bottom Bar */}
-                <div className="pt-12 border-t border-border/30 flex items-center justify-center relative px-12 sm:px-16">
+                <div className="pt-12 border-t border-border/30 flex items-center justify-center">
                     {/* Centered Copyright */}
                     <div className="text-center text-[11px] sm:text-xs text-muted-foreground/60 flex flex-col gap-1.5">
                         <p>© {currentYear} Md Tanveer Alam. All rights reserved.</p>
@@ -151,15 +151,6 @@ export default function Footer() {
                             Crafted with <Heart size={12} className="text-red-500 fill-red-500" /> using React & Tailwind CSS
                         </p>
                     </div>
-
-                    {/* Absolute Right-aligned Back to Top Button */}
-                    <button
-                        onClick={scrollToTop}
-                        className="absolute right-0 group flex items-center justify-center w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-primary/10 text-primary border border-primary/20 hover:bg-primary hover:text-white transition-all duration-500 shadow-lg shadow-primary/5"
-                        aria-label="Back to Top"
-                    >
-                        <ArrowUp className="w-4 h-4 sm:w-[18px] sm:h-[18px] group-hover:-translate-y-1 transition-transform duration-300" />
-                    </button>
                 </div>
             </div>
             

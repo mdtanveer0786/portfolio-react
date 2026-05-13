@@ -100,7 +100,6 @@ export default function About() {
                                     <img
                                         src="/about_avatar.png"
                                         alt="Md Tanveer Alam"
-                                        loading="lazy"
                                         className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                                         onError={(e) => {
                                             e.target.onerror = null
