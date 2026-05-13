@@ -253,12 +253,12 @@ export default function Header({ activeSection, setActiveSection }) {
                                         })}
                                     </div>
                                 </div>
-                                <div className="flex items-center gap-3 px-4 py-3 rounded-xl bg-emerald-500/5 border border-emerald-500/10 text-[11px] font-medium text-emerald-600 dark:text-emerald-400">
-                                    <span className="relative flex h-2 w-2">
+                                <div className="inline-flex items-center gap-3 px-4 py-3 rounded-xl bg-emerald-500/5 border border-emerald-500/15 text-[10px] min-[350px]:text-[11px] font-medium text-emerald-600 dark:text-emerald-400 w-full shadow-[0_0_15px_rgba(16,185,129,0.02)] backdrop-blur-sm">
+                                    <span className="relative flex h-2 w-2 flex-shrink-0">
                                         <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
                                         <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
                                     </span>
-                                    Available for new opportunities
+                                    <span>Available for freelance & full-time</span>
                                 </div>
                             </div>
                         </motion.div>

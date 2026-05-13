@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react'
 import { 
     Mail, 
     ArrowUp, 
@@ -10,6 +11,30 @@ import { socialLinks } from '../../utils/constants'
 
 export default function Footer() {
     const currentYear = new Date().getFullYear()
+
+    const [localTime, setLocalTime] = useState(() => {
+        return new Date().toLocaleTimeString('en-US', { 
+            hour: '2-digit', 
+            minute: '2-digit',
+            second: '2-digit',
+            hour12: true,
+            timeZone: 'Asia/Kolkata'
+        })
+    })
+
+    useEffect(() => {
+        const timer = setInterval(() => {
+            setLocalTime(new Date().toLocaleTimeString('en-US', { 
+                hour: '2-digit', 
+                minute: '2-digit',
+                second: '2-digit',
+                hour12: true,
+                timeZone: 'Asia/Kolkata'
+            }))
+        }, 1000)
+        
+        return () => clearInterval(timer)
+    }, [])
 
     const scrollToTop = () => {
         window.scrollTo({ top: 0, behavior: 'smooth' })
@@ -35,7 +60,7 @@ export default function Footer() {
                     <div className="lg:col-span-5 space-y-6">
                         <div className="space-y-3">
                             <h3 className="text-2xl font-display font-bold text-foreground tracking-tight">
-                                Md <span className="premium-text-gradient">Tanveer Alam</span>
+                                <span className="premium-text-gradient">Md Tanveer Alam</span>
                             </h3>
                             <p className="text-sm font-medium text-primary uppercase tracking-widest">
                                 Full Stack Developer
@@ -46,20 +71,22 @@ export default function Footer() {
                             Full Stack Developer crafting high-performance, scalable, and visually engaging digital experiences using modern web technologies.
                         </p>
 
-                        <div className="flex flex-col gap-3">
-                            <div className="flex items-center gap-2 text-emerald-500 text-sm font-medium">
+                        <div className="flex flex-col gap-4 pt-2">
+                            <div className="inline-flex items-center gap-2.5 px-4 py-2 rounded-xl bg-emerald-500/5 border border-emerald-500/20 text-emerald-600 dark:text-emerald-400 text-[11px] xs:text-xs sm:text-sm font-medium w-fit shadow-[0_0_15px_rgba(16,185,129,0.02)] hover:shadow-[0_0_20px_rgba(16,185,129,0.08)] backdrop-blur-sm hover:bg-emerald-500/10 hover:border-emerald-500/30 transition-all duration-300 group/status cursor-default">
                                 <span className="relative flex h-2 w-2">
                                     <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-                                    <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+                                    <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500 group-hover/status:scale-110 transition-transform"></span>
                                 </span>
-                                Available for freelance & full-time opportunities
+                                Available for freelance & full-time
                             </div>
                             <a 
                                 href="mailto:tanveerdev14@gmail.com" 
-                                className="flex items-center gap-2 text-muted-foreground hover:text-primary transition-colors text-sm"
+                                className="inline-flex items-center gap-3 px-4 py-2 rounded-xl bg-black/[0.02] dark:bg-white/[0.02] border border-border/40 text-muted-foreground hover:text-primary text-[11px] xs:text-xs sm:text-sm font-medium w-fit shadow-sm backdrop-blur-sm hover:bg-primary/5 hover:border-primary/20 transition-all duration-300 group/email"
                             >
-                                <Mail size={16} />
-                                tanveerdev14@gmail.com
+                                <div className="p-1.5 rounded-lg bg-black/[0.03] dark:bg-white/[0.05] group-hover/email:bg-primary/10 text-muted-foreground group-hover/email:text-primary transition-all duration-300 flex items-center justify-center">
+                                    <Mail className="w-3.5 h-3.5 group-hover/email:scale-110 transition-transform" />
+                                </div>
+                                <span>tanveerdev14@gmail.com</span>
                             </a>
                         </div>
                     </div>
@@ -104,13 +131,8 @@ export default function Footer() {
                                     <Clock size={18} />
                                 </div>
                                 <div className="space-y-1">
-                                    <p className="text-sm text-foreground font-medium">
-                                        {new Date().toLocaleTimeString('en-US', { 
-                                            hour: '2-digit', 
-                                            minute: '2-digit',
-                                            hour12: true,
-                                            timeZone: 'Asia/Kolkata'
-                                        })} IST
+                                    <p className="text-sm text-foreground font-mono font-medium tabular-nums tracking-tight">
+                                        {localTime} IST
                                     </p>
                                     <p className="text-xs text-muted-foreground">Local Time</p>
                                 </div>
