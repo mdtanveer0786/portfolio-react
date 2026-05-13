@@ -143,25 +143,22 @@ export default function Footer() {
                 </div>
 
                 {/* Bottom Bar */}
-                <div className="pt-12 border-t border-border/30 flex flex-col sm:flex-row items-center justify-between gap-6">
-                    {/* Left Spacer to perfectly balance the centered text with the right button on desktop */}
-                    <div className="hidden sm:block w-12" aria-hidden="true" />
-
+                <div className="pt-12 border-t border-border/30 flex items-center justify-center relative px-12 sm:px-16">
                     {/* Centered Copyright */}
-                    <div className="text-center text-[11px] sm:text-xs text-muted-foreground/60 flex flex-col gap-1.5 flex-1">
+                    <div className="text-center text-[11px] sm:text-xs text-muted-foreground/60 flex flex-col gap-1.5">
                         <p>© {currentYear} Md Tanveer Alam. All rights reserved.</p>
                         <p className="flex items-center justify-center gap-1.5">
                             Crafted with <Heart size={12} className="text-red-500 fill-red-500" /> using React & Tailwind CSS
                         </p>
                     </div>
 
-                    {/* Right-aligned Back to Top Button */}
+                    {/* Absolute Right-aligned Back to Top Button */}
                     <button
                         onClick={scrollToTop}
-                        className="group relative flex-shrink-0 flex items-center justify-center w-12 h-12 rounded-full bg-primary/10 text-primary border border-primary/20 hover:bg-primary hover:text-white transition-all duration-500 shadow-lg shadow-primary/5"
+                        className="absolute right-0 group flex items-center justify-center w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-primary/10 text-primary border border-primary/20 hover:bg-primary hover:text-white transition-all duration-500 shadow-lg shadow-primary/5"
                         aria-label="Back to Top"
                     >
-                        <ArrowUp size={18} className="group-hover:-translate-y-1 transition-transform duration-300" />
+                        <ArrowUp className="w-4 h-4 sm:w-[18px] sm:h-[18px] group-hover:-translate-y-1 transition-transform duration-300" />
                     </button>
                 </div>
             </div>
