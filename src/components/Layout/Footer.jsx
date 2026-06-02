@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react'
 import { 
     Mail, 
-    ArrowUp, 
     MapPin, 
     Clock, 
     Heart,
@@ -35,10 +34,6 @@ export default function Footer() {
         
         return () => clearInterval(timer)
     }, [])
-
-    const scrollToTop = () => {
-        window.scrollTo({ top: 0, behavior: 'smooth' })
-    }
 
     const footerLinks = [
         { name: 'Home', href: '#home' },
