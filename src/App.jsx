@@ -9,6 +9,8 @@ import SmoothScroll from "./components/UI/SmoothScroll";
 
 import Hero from "./components/Sections/Hero";
 import About from "./components/Sections/About";
+import Services from "./components/Sections/Services";
+import Experience from "./components/Sections/Experience";
 import Education from "./components/Sections/Education";
 import Skills from "./components/Sections/Skills";
 import Projects from "./components/Sections/Projects";
@@ -158,9 +160,11 @@ function App() {
                             <main className="relative overflow-hidden">
                                 <Hero setActiveSection={setActiveSection} />
                                 <About />
-                                <Education />
+                                <Services />
+                                <Experience />
                                 <Skills />
                                 <Projects />
+                                <Education />
                                 <Contact />
                             </main>
 

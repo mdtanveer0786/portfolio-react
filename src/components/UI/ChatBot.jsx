@@ -1,9 +1,26 @@
-import React, { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { MessageSquare, X, Send, User, Bot, Sparkles, Phone, Mail, ExternalLink, ArrowRight, Download, Briefcase, Clock, CheckCircle2, Mic, MicOff, Volume2, VolumeX } from 'lucide-react';
+import { MessageSquare, X, Send, User, Bot, Sparkles, ExternalLink, ArrowRight, Download, Briefcase, Clock, CheckCircle2, Mic, MicOff, Volume2, VolumeX } from 'lucide-react';
 import { cn } from '../../utils/cn';
 import { projects, skillCategories } from '../../utils/constants';
 import emailjs from '@emailjs/browser';
+import toast from 'react-hot-toast';
+
+const SERVICE_ID = import.meta.env.VITE_EMAILJS_SERVICE_ID || 'service_l4si2hh';
+const TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID || 'service_l4si2hh';
+const AUTOREPLY_TEMPLATE_ID = import.meta.env.VITE_EMAILJS_AUTOREPLY_TEMPLATE_ID || 'template_y7v9m5b';
+const PUBLIC_KEY = import.meta.env.VITE_EMAILJS_PUBLIC_KEY || '8bsxLGyHrYJHyR_P0';
+
+const SOUNDS = {
+    pop: 'https://assets.mixkit.co/active_storage/sfx/2354/2354-preview.mp3',
+    send: 'https://assets.mixkit.co/active_storage/sfx/2358/2358-preview.mp3'
+};
+
+// Preloaded audio elements for zero latency
+const audioCache = {
+    pop: typeof Audio !== 'undefined' ? new Audio(SOUNDS.pop) : null,
+    send: typeof Audio !== 'undefined' ? new Audio(SOUNDS.send) : null
+};
 
 const CHAT_RULES = [
     {
@@ -13,8 +30,8 @@ const CHAT_RULES = [
     },
     {
         category: 'location',
-        keywords: ['where', 'location', 'live', 'place', 'city', 'based', 'address', 'stay', 'delhi', 'india', 'reside', 'home'],
-        response: "Md Tanveer Alam is currently based in **Delhi, India**. He is available for local opportunities and open to **Remote Work** worldwide."
+        keywords: ['where', 'location', 'live', 'place', 'city', 'based', 'address', 'stay', 'ghaziabad', 'delhi', 'india', 'reside', 'home', 'uttar pradesh'],
+        response: "Md Tanveer Alam is currently based in **Delhi, India**. His current employer, Vinnpro Web Solutions, is located in **Ghaziabad, Uttar Pradesh**."
     },
     {
         category: 'education',
@@ -50,6 +67,16 @@ const CHAT_RULES = [
         category: 'availability',
         keywords: ['hire', 'availability', 'freelance', 'fulltime', 'full-time', 'opportunity', 'job', 'vacancy', 'open to work', 'available', 'contract'],
         response: "Tanveer is currently **Available for Freelance Projects, Remote Work, and Full-Time Opportunities**. He is ready to help you build scalable and user-centric applications immediately."
+    },
+    {
+        category: 'who',
+        keywords: ['who', 'tanveer', 'bio', 'who are you', 'who is tanveer', 'about tanveer', 'introduce', 'yourself', 'your name', 'tell me about', 'developer name', 'what is your name'],
+        response: "I am **TanveerAI**, the official assistant of Md Tanveer Alam. Tanveer is a skilled **Full Stack Developer** specializing in MERN stack, PHP, and Android development. How can I help you explore his work?"
+    },
+    {
+        category: 'thanks',
+        keywords: ['thank', 'thanks', 'cool', 'awesome', 'great', 'nice', 'ok', 'okay', 'perfect', 'bye', 'goodbye'],
+        response: "You are very welcome! Let me know if you would like to see his **projects**, **skills**, **resume**, or if you want to **hire** him!"
     }
 ];
 
@@ -66,11 +93,6 @@ const LEAD_STEPS = [
     { key: 'project', question: "What kind of **project** are you looking for? (e.g., Website, App, AI Bot, etc.)" },
     { key: 'final', question: "Thank you! I've prepared a project summary. Tanveer will review this and get back to you shortly.\n\n**Next Step:** You can also send a direct message in the Contact section below!" }
 ];
-
-const SOUNDS = {
-    pop: 'https://assets.mixkit.co/active_storage/sfx/2354/2354-preview.mp3',
-    send: 'https://assets.mixkit.co/active_storage/sfx/2358/2358-preview.mp3'
-};
 
 const ChatBot = () => {
     const [isOpen, setIsOpen] = useState(false);
@@ -101,32 +123,56 @@ const ChatBot = () => {
     const [isListening, setIsListening] = useState(false);
     const [soundEnabled, setSoundEnabled] = useState(true);
     const messagesEndRef = useRef(null);
-    const audioRef = useRef(new Audio());
 
     useEffect(() => {
         const timer = setInterval(() => {
             setLocalTime(new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }));
         }, 60000);
-        return () => clearInterval(timer);
+        return () => {
+            clearInterval(timer);
+            if (typeof window !== 'undefined' && 'speechSynthesis' in window) {
+                window.speechSynthesis.cancel();
+            }
+        };
     }, []);
 
     useEffect(() => {
-        sessionStorage.setItem('tanveer_chat_history', JSON.stringify(messages));
-    }, [messages]);
-
-    useEffect(() => {
-        const timer = setTimeout(() => {
-            if (messages.length === 1 && !isOpen) {
-                setShowTooltip(true);
-            }
-        }, 5000);
-        return () => clearTimeout(timer);
-    }, [messages.length, isOpen]);
+        if (!isOpen && typeof window !== 'undefined' && 'speechSynthesis' in window) {
+            window.speechSynthesis.cancel();
+        }
+    }, [isOpen]);
 
     const playSound = (type) => {
         if (!soundEnabled) return;
-        audioRef.current.src = SOUNDS[type];
-        audioRef.current.play().catch(() => {});
+        try {
+            const sound = audioCache[type];
+            if (sound) {
+                sound.currentTime = 0;
+                sound.play().catch(() => {});
+            }
+        } catch (e) {
+            console.error('Audio play error', e);
+        }
+    };
+
+    const speakText = (text) => {
+        if (!soundEnabled || !('speechSynthesis' in window)) return;
+        try {
+            window.speechSynthesis.cancel();
+            
+            // Clean up markdown syntax for voice synthesis
+            const cleanText = text
+                .replace(/\*\*([^*]+)\*\*/g, '$1')
+                .replace(/\[([^\]]+)\]\([^)]+\)/g, '$1')
+                .replace(/\* /g, '');
+                
+            const utterance = new SpeechSynthesisUtterance(cleanText);
+            utterance.rate = 1.0;
+            utterance.pitch = 1.0;
+            window.speechSynthesis.speak(utterance);
+        } catch (e) {
+            console.error('Speech synthesis error:', e);
+        }
     };
 
     const scrollToBottom = (behavior = 'smooth') => {
@@ -182,50 +228,61 @@ const ChatBot = () => {
                     text: botResponse,
                     timestamp: new Date()
                 }]);
+                speakText(botResponse);
             } else if (botResponse.type === 'projects') {
+                const msgText = "Here are some of Tanveer's featured projects. These showcase his ability to build scalable and high-performance applications:";
                 setMessages(prev => [...prev, {
                     id: Date.now() + 1,
                     type: 'bot',
-                    text: "Here are some of Tanveer's featured projects. These showcase his ability to build scalable and high-performance applications:",
+                    text: msgText,
                     timestamp: new Date(),
                     content: projects.slice(0, 3)
                 }]);
+                speakText(msgText);
             } else if (botResponse.type === 'skills') {
+                const msgText = "Tanveer has expertise across the full stack. Click a category to explore his technical proficiency:";
                 setMessages(prev => [...prev, {
                     id: Date.now() + 1,
                     type: 'bot',
-                    text: "Tanveer has expertise across the full stack. Click a category to explore his technical proficiency:",
+                    text: msgText,
                     timestamp: new Date(),
                     isSkills: true
                 }]);
+                speakText(msgText);
             } else if (botResponse.type === 'nav') {
                 const section = botResponse.section;
                 const element = document.getElementById(section);
                 if (element) {
                     element.scrollIntoView({ behavior: 'smooth' });
                 }
+                const msgText = `Sure! I've scrolled you to the ${section} section. Let me know if you have any questions about it!`;
                 setMessages(prev => [...prev, {
                     id: Date.now() + 1,
                     type: 'bot',
                     text: `Sure! I've scrolled you to the **${section}** section. Let me know if you have any questions about it!`,
                     timestamp: new Date()
                 }]);
+                speakText(msgText);
             } else if (botResponse.type === 'lead') {
                 setLeadData({ step: 0, data: {} });
+                const msgText = LEAD_STEPS[0].question;
                 setMessages(prev => [...prev, {
                     id: Date.now() + 1,
                     type: 'bot',
-                    text: LEAD_STEPS[0].question,
+                    text: msgText,
                     timestamp: new Date()
                 }]);
+                speakText(msgText);
             } else if (botResponse.type === 'resume') {
+                const msgText = "You can download Md Tanveer Alam's professional resume to review his full career history and certifications:";
                 setMessages(prev => [...prev, {
                     id: Date.now() + 1,
                     type: 'bot',
-                    text: "You can download Md Tanveer Alam's professional resume to review his full career history and certifications:",
+                    text: msgText,
                     timestamp: new Date(),
                     hasResume: true
                 }]);
+                speakText(msgText);
             }
 
             setIsTyping(false);
@@ -242,22 +299,26 @@ const ChatBot = () => {
             if (currentStep < LEAD_STEPS.length - 2) {
                 const nextStep = currentStep + 1;
                 setLeadData({ step: nextStep, data: newData });
+                const nextQuestion = LEAD_STEPS[nextStep].question;
                 setMessages(prev => [...prev, {
                     id: Date.now(),
                     type: 'bot',
-                    text: LEAD_STEPS[nextStep].question,
+                    text: nextQuestion,
                     timestamp: new Date()
                 }]);
+                speakText(nextQuestion);
             } else {
                 setLeadData({ step: -1, data: newData });
                 sendLeadEmail(newData);
+                const finalQuestion = LEAD_STEPS[LEAD_STEPS.length - 1].question;
                 setMessages(prev => [...prev, {
                     id: Date.now(),
                     type: 'bot',
-                    text: LEAD_STEPS[LEAD_STEPS.length - 1].question,
+                    text: finalQuestion,
                     timestamp: new Date(),
                     leadSummary: newData
                 }]);
+                speakText(finalQuestion);
             }
             setIsTyping(false);
         }, 800);
@@ -273,10 +334,10 @@ const ChatBot = () => {
 
         // 1. Send Lead Notification to Tanveer
         emailjs.send(
-            'service_l4si2hh', 
-            'service_l4si2hh', 
+            SERVICE_ID, 
+            TEMPLATE_ID, 
             templateParams, 
-            '8bsxLGyHrYJHyR_P0'
+            PUBLIC_KEY
         ).then(() => {
             console.log('Lead notification sent');
         }).catch((err) => {
@@ -285,10 +346,10 @@ const ChatBot = () => {
 
         // 2. Send Auto-Reply to User
         emailjs.send(
-            'service_l4si2hh', 
-            'template_y7v9m5b', 
+            SERVICE_ID, 
+            AUTOREPLY_TEMPLATE_ID, 
             templateParams, 
-            '8bsxLGyHrYJHyR_P0'
+            PUBLIC_KEY
         ).then(() => {
             console.log('Auto-reply sent successfully');
         }).catch((err) => {
@@ -297,19 +358,40 @@ const ChatBot = () => {
     };
 
     const getBotResponse = (input) => {
+        const normalizedInput = input.toLowerCase().trim().replace(/[?.,!]/g, '');
+
         // 1. Check for specific high-priority intents first
-        if (input.includes('resume') || input.includes('cv') || input.includes('download')) return { type: 'resume' };
-        if ((input.includes('hire') || input.includes('vacancy') || input.includes('opportunity')) && !input.includes('experience')) return { type: 'lead' };
-        if (input.includes('project') || input.includes('showcase') || input.includes('portfolio') || input.includes('demo')) return { type: 'projects' };
-        if (input.includes('skill') && !input.includes('about')) return { type: 'skills' };
+        if (normalizedInput.includes('resume') || normalizedInput.includes('cv') || normalizedInput.includes('download')) return { type: 'resume' };
+        if ((normalizedInput.includes('hire') || normalizedInput.includes('vacancy') || normalizedInput.includes('opportunity')) && !normalizedInput.includes('experience')) return { type: 'lead' };
+        if (normalizedInput.includes('project') || normalizedInput.includes('showcase') || normalizedInput.includes('portfolio') || normalizedInput.includes('demo')) return { type: 'projects' };
+
+        // Check if query is about a specific skill category (Frontend, Backend, etc.)
+        for (const cat of skillCategories) {
+            const catTitle = cat.title.toLowerCase();
+            if (
+                normalizedInput.includes(catTitle) || 
+                (normalizedInput.includes('frontend') && catTitle.includes('frontend')) || 
+                (normalizedInput.includes('backend') && catTitle.includes('backend')) || 
+                (normalizedInput.includes('tools') && catTitle.includes('tools')) || 
+                (normalizedInput.includes('cloud') && catTitle.includes('cloud'))
+            ) {
+                const skillList = cat.skills.map(s => `* **${s.name}** (Level: ${s.level}%)`).join('\n');
+                return `Here are Tanveer's **${cat.title}** skills:\n\n${skillList}\n\nWould you like to know about his projects built with these?`;
+            }
+        }
+
+        if (normalizedInput.includes('skill') && !normalizedInput.includes('about')) return { type: 'skills' };
 
         // 2. Navigation Intent
         const sections = ['home', 'about', 'education', 'skills', 'projects', 'contact'];
         for (const s of sections) {
-            if (input.includes(`go to ${s}`) || input.includes(`show ${s}`) || input.includes(`scroll to ${s}`)) {
+            if (normalizedInput.includes(`go to ${s}`) || normalizedInput.includes(`show ${s}`) || normalizedInput.includes(`scroll to ${s}`)) {
                 return { type: 'nav', section: s };
             }
         }
+
+        // Tokenize user input to match word boundaries
+        const inputWords = normalizedInput.split(/\s+/).filter(w => w.length > 0);
 
         // 3. Rule-based Scoring System
         let bestMatch = null;
@@ -318,9 +400,21 @@ const ChatBot = () => {
         for (const rule of CHAT_RULES) {
             let score = 0;
             for (const keyword of rule.keywords) {
-                const regex = new RegExp(`\\b${keyword}\\b`, 'i');
-                if (regex.test(input)) {
-                    score += 1;
+                const lowerKeyword = keyword.toLowerCase();
+                if (lowerKeyword.includes(' ')) {
+                    // Phrase match
+                    if (normalizedInput.includes(lowerKeyword)) {
+                        score += 5;
+                    }
+                } else {
+                    // Token-based word match
+                    for (const word of inputWords) {
+                        if (word === lowerKeyword) {
+                            score += 3; // Perfect word boundary match
+                        } else if (word.length > 3 && (word.startsWith(lowerKeyword) || lowerKeyword.startsWith(word))) {
+                            score += 1.5; // Fuzzy prefix/partial match for longer words
+                        }
+                    }
                 }
             }
             if (score > highestScore) {
@@ -334,7 +428,7 @@ const ChatBot = () => {
         }
         
         // 4. Fallback with context
-        if (input.length > 3) {
+        if (normalizedInput.length > 3) {
             return "I'm still learning to answer that specific question! However, I can tell you about Tanveer's **skills**, **projects**, **education**, or **how to contact him**. Which would you prefer?";
         }
         
@@ -344,7 +438,7 @@ const ChatBot = () => {
     const toggleListening = () => {
         const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
         if (!SpeechRecognition) {
-            alert("Speech recognition is not supported in this browser.");
+            toast.error("Speech recognition is not supported in this browser.");
             return;
         }
 

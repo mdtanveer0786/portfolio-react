@@ -10,8 +10,13 @@ import {
     Home,
     User,
     GraduationCap,
-    Layers,
-    MessageSquare
+    MessageSquare,
+    Rocket,
+    Palette,
+    Settings,
+    Smartphone,
+    Cloud,
+    Briefcase
 } from 'lucide-react'
 
 // Import Project Images
@@ -24,14 +29,16 @@ import ecommerceImg from '../assets/projects/ecommerce.webp'
 
 export const LOADING_DURATION = 800;
 
-export const SECTIONS = ['home', 'about', 'education', 'skills', 'projects', 'contact'];
+export const SECTIONS = ['home', 'about', 'services', 'experience', 'skills', 'projects', 'education', 'contact'];
 
 export const navItems = [
     { label: 'Home', href: '#home', icon: Home },
     { label: 'About', href: '#about', icon: User },
-    { label: 'Education', href: '#education', icon: GraduationCap },
-    { label: 'Skills', href: '#skills', icon: Layers },
+    { label: 'Services', href: '#services', icon: Server },
+    { label: 'Experience', href: '#experience', icon: Briefcase },
+    { label: 'Skills', href: '#skills', icon: Code2 },
     { label: 'Projects', href: '#projects', icon: Layout },
+    { label: 'Education', href: '#education', icon: GraduationCap },
     { label: 'Contact', href: '#contact', icon: MessageSquare },
 ]
 
@@ -61,6 +68,52 @@ export const socialLinks = [
         color: '#EA4335'
     },
 ]
+
+export const services = [
+    {
+        title: 'Full Stack Web Development',
+        icon: Rocket,
+        description: 'Building end-to-end web applications with modern technologies, ensuring scalability and performance.',
+        technologies: ['React.js', 'Node.js', 'Express.js', 'MongoDB', 'PHP', 'MySQL'],
+        gradient: 'from-blue-500/20 to-purple-500/20'
+    },
+    {
+        title: 'Frontend Development',
+        icon: Palette,
+        description: 'Creating visually stunning and highly interactive user interfaces with a focus on UX/UI.',
+        technologies: ['HTML5', 'CSS3', 'JavaScript', 'React.js', 'Tailwind CSS', 'Bootstrap'],
+        gradient: 'from-pink-500/20 to-orange-500/20'
+    },
+    {
+        title: 'Backend Development',
+        icon: Settings,
+        description: 'Developing robust server-side logic, REST APIs, and secure authentication systems.',
+        technologies: ['Node.js', 'Express.js', 'PHP', 'REST APIs', 'Auth Systems'],
+        gradient: 'from-green-500/20 to-emerald-500/20'
+    },
+    {
+        title: 'Database Development',
+        icon: Database,
+        description: 'Designing efficient database schemas and optimizing queries for high-performance applications.',
+        technologies: ['MongoDB', 'MySQL', 'Database Design', 'Optimization'],
+        gradient: 'from-cyan-500/20 to-blue-500/20'
+    },
+    {
+        title: 'Android App Development',
+        icon: Smartphone,
+        description: 'Crafting cross-platform mobile applications and converting websites into native-like APKs.',
+        technologies: ['React Native', 'Android Apps', 'Web2APK', 'API Integration'],
+        gradient: 'from-yellow-500/20 to-orange-500/20'
+    },
+    {
+        title: 'Deployment & Hosting',
+        icon: Cloud,
+        description: 'Managing production deployments and ensuring 24/7 availability on modern cloud platforms.',
+        technologies: ['Vercel', 'Render', 'GitHub', 'Production'],
+        gradient: 'from-indigo-500/20 to-blue-500/20'
+    }
+];
+
 
 export const skillCategories = [
     {
@@ -183,11 +236,33 @@ export const projects = [
 export const experience = [
     {
         id: 1,
-        title: 'Full Stack Developer',
-        company: 'Independent Developer',
-        period: '2024 - Present',
-        location: 'Delhi, India',
-        description: 'Building high-performance web applications using the MERN stack. Focused on delivering scalable, user-centric solutions.',
+        title: 'Full Stack Developer | PHP Developer | Android Developer',
+        company: 'Vinnpro Web Solutions',
+        period: '2025 - Present',
+        location: 'Ghaziabad, Uttar Pradesh',
+        description: 'Working on scalable web applications, business solutions, admin dashboards, Android applications, REST APIs, and database-driven systems.',
+        projects: [
+            {
+                name: 'Enterprise Management System',
+                tech: 'React.js, Node.js, Express.js, MongoDB',
+                features: ['Authentication', 'Dashboard Analytics', 'Role Based Access', 'CRUD Operations']
+            },
+            {
+                name: 'Corporate Business Website',
+                tech: 'HTML, CSS, JavaScript, PHP, MySQL',
+                features: ['Responsive Design', 'SEO Optimization', 'Contact Forms', 'Admin Panel']
+            },
+            {
+                name: 'Android Application',
+                tech: 'React Native',
+                features: ['API Integration', 'User Authentication', 'Push Notifications', 'Mobile Optimized UI']
+            },
+            {
+                name: 'PHP MySQL Management System',
+                tech: 'PHP, MySQL, Bootstrap',
+                features: ['Inventory Management', 'Customer Management', 'Reports & Analytics', 'Database Optimization']
+            }
+        ],
         achievements: [
             'Developed 10+ full-stack projects using React, Node.js, and MongoDB',
             'Implemented secure JWT-based authentication and RESTful APIs',
@@ -225,4 +300,3 @@ export const education = [
             "Completed higher secondary education with a focus on Physics, Chemistry, and Mathematics (PCM), building a strong analytical and problem-solving foundation."
     }
 ];
-
