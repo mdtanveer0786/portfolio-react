@@ -7,7 +7,7 @@ import emailjs from '@emailjs/browser';
 import toast from 'react-hot-toast';
 
 const SERVICE_ID = import.meta.env.VITE_EMAILJS_SERVICE_ID || 'service_l4si2hh';
-const TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID || 'service_l4si2hh';
+const TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID || 'template_d4jwvxr';
 const AUTOREPLY_TEMPLATE_ID = import.meta.env.VITE_EMAILJS_AUTOREPLY_TEMPLATE_ID || 'template_y7v9m5b';
 const PUBLIC_KEY = import.meta.env.VITE_EMAILJS_PUBLIC_KEY || '8bsxLGyHrYJHyR_P0';
 
@@ -529,10 +529,10 @@ const ChatBot = () => {
                                 </div>
                             </div>
                             <div className="flex items-center gap-1">
-                                <button onClick={() => setSoundEnabled(!soundEnabled)} className="p-2 hover:bg-white/20 rounded-xl transition-all active:scale-90 text-white/80">
+                                <button onClick={() => setSoundEnabled(!soundEnabled)} className="p-2 hover:bg-white/20 rounded-xl transition-all active:scale-90 text-white/80" aria-label={soundEnabled ? 'Mute sound' : 'Enable sound'}>
                                     {soundEnabled ? <Volume2 size={18} /> : <VolumeX size={18} />}
                                 </button>
-                                <button onClick={() => setIsOpen(false)} className="p-2 hover:bg-white/20 rounded-xl transition-all active:scale-90">
+                                <button onClick={() => setIsOpen(false)} className="p-2 hover:bg-white/20 rounded-xl transition-all active:scale-90" aria-label="Close chat">
                                     <X size={22} />
                                 </button>
                             </div>
@@ -588,7 +588,7 @@ const ChatBot = () => {
                                                             <p className="text-[11px] text-muted-foreground line-clamp-2 mb-3">{project.description}</p>
                                                             <div className="flex gap-2">
                                                                 {project.live ? (
-                                                                    <a href={project.live} target="_blank" rel="noopener noreferrer" className="flex-1 flex items-center justify-center gap-1.5 py-1.5 bg-primary/10 text-primary rounded-lg font-bold text-[10px] hover:bg-primary text-primary hover:text-white transition-all">
+                                                                    <a href={project.live} target="_blank" rel="noopener noreferrer" className="flex-1 flex items-center justify-center gap-1.5 py-1.5 bg-primary/10 text-primary rounded-lg font-bold text-[10px] hover:bg-primary hover:text-white transition-all">
                                                                         Live <ExternalLink size={10} />
                                                                     </a>
                                                                 ) : (
@@ -635,14 +635,14 @@ const ChatBot = () => {
                         {/* Input Footer */}
                         <div className="p-4 sm:p-5 border-t border-border bg-background/80 backdrop-blur-xl">
                             <form onSubmit={(e) => { e.preventDefault(); handleSendMessage(inputValue); }} className="flex items-center gap-2">
-                                <button type="button" onClick={toggleListening} className={cn("p-2.5 rounded-xl transition-all", isListening ? "bg-red-500 text-white animate-pulse" : "bg-muted/50 text-muted-foreground hover:bg-muted")}>
+                                <button type="button" onClick={toggleListening} className={cn("p-2.5 rounded-xl transition-all", isListening ? "bg-red-500 text-white animate-pulse" : "bg-muted/50 text-muted-foreground hover:bg-muted")} aria-label={isListening ? 'Stop listening' : 'Start voice input'}>
                                     {isListening ? <MicOff size={18} /> : <Mic size={18} />}
                                 </button>
                                 <div className="relative flex-1 group">
-                                    <input type="text" value={inputValue} onChange={(e) => setInputValue(e.target.value)} placeholder={leadData.step !== -1 ? "Type your answer..." : "Ask TanveerAI anything..."} className="w-full bg-muted/30 border border-border rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all pr-10" />
+                                    <input type="text" value={inputValue} onChange={(e) => setInputValue(e.target.value)} placeholder={leadData.step !== -1 ? "Type your answer..." : "Ask TanveerAI anything..."} className="w-full bg-muted/30 border border-border rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all pr-10" aria-label="Chat message input" />
                                     <div className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground/30 pointer-events-none group-focus-within:text-primary/30 transition-colors"><ArrowRight size={16} /></div>
                                 </div>
-                                <button type="submit" disabled={!inputValue.trim()} className="p-3.5 rounded-xl bg-primary text-white disabled:opacity-50 disabled:cursor-not-allowed hover:shadow-lg hover:shadow-primary/30 transition-all active:scale-90 flex-shrink-0">
+                                <button type="submit" disabled={!inputValue.trim()} className="p-3.5 rounded-xl bg-primary text-white disabled:opacity-50 disabled:cursor-not-allowed hover:shadow-lg hover:shadow-primary/30 transition-all active:scale-90 flex-shrink-0" aria-label="Send message">
                                     <Send size={20} />
                                 </button>
                             </form>
@@ -669,6 +669,7 @@ const ChatBot = () => {
                     whileHover={{ scale: 1.05, y: -2 }}
                     whileTap={{ scale: 0.95 }}
                     onClick={() => { setIsOpen(!isOpen); setShowTooltip(false); playSound('pop'); }}
+                    aria-label={isOpen ? 'Close chat' : 'Open chat assistant'}
                     className={cn("w-16 h-16 rounded-[2rem] flex items-center justify-center text-white shadow-[0_10px_30px_rgba(0,0,0,0.2)] transition-all duration-500 relative overflow-hidden group border-2 border-white/20", isOpen ? "bg-neutral-900 dark:bg-white text-white dark:text-neutral-900 rounded-2xl rotate-90" : "bg-primary")}
                 >
                     {!isOpen && <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/10 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />}
