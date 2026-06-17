@@ -102,16 +102,18 @@ const Experience = () => {
                                     )}
 
                                     {/* Achievements Section */}
-                                    <div className="mt-8 flex flex-wrap gap-2 pt-6 border-t border-border/40">
-                                        {exp.achievements.map((achievement, aIdx) => (
-                                            <div
-                                                key={aIdx}
-                                                className="px-3 py-1.5 rounded-lg bg-primary/5 border border-primary/10 text-xs text-muted-foreground hover:bg-primary/10 transition-colors duration-300"
-                                            >
-                                                {achievement}
-                                            </div>
-                                        ))}
-                                    </div>
+                                    {exp.achievements && exp.achievements.length > 0 && (
+                                        <div className="mt-8 flex flex-wrap gap-2 pt-6 border-t border-border/40">
+                                            {exp.achievements.map((achievement, aIdx) => (
+                                                <div
+                                                    key={aIdx}
+                                                    className="px-3 py-1.5 rounded-lg bg-primary/5 border border-primary/10 text-xs text-muted-foreground hover:bg-primary/10 transition-colors duration-300"
+                                                >
+                                                    {achievement}
+                                                </div>
+                                            ))}
+                                        </div>
+                                    )}
                                 </div>
                             </div>
                         </SectionReveal>

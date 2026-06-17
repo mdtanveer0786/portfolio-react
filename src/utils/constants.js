@@ -238,7 +238,7 @@ export const experience = [
         id: 1,
         title: 'Full Stack Developer | PHP Developer | Android Developer',
         company: 'Vinnpro Web Solutions',
-        period: '2025 - Present',
+        period: '2026 - Present',
         location: 'Ghaziabad, Uttar Pradesh',
         description: 'Working on scalable web applications, business solutions, admin dashboards, Android applications, REST APIs, and database-driven systems.',
         projects: [
@@ -263,11 +263,7 @@ export const experience = [
                 features: ['Inventory Management', 'Customer Management', 'Reports & Analytics', 'Database Optimization']
             }
         ],
-        achievements: [
-            'Developed 10+ full-stack projects using React, Node.js, and MongoDB',
-            'Implemented secure JWT-based authentication and RESTful APIs',
-            'Optimized application performance and achieved high Lighthouse scores'
-        ]
+        achievements: []
     },
 ]
 
