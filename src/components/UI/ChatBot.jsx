@@ -142,6 +142,10 @@ const ChatBot = () => {
         }
     }, [isOpen]);
 
+    useEffect(() => {
+        sessionStorage.setItem('tanveer_chat_history', JSON.stringify(messages));
+    }, [messages]);
+
     const playSound = (type) => {
         if (!soundEnabled) return;
         try {
@@ -572,12 +576,20 @@ const ChatBot = () => {
                                                         <div className="p-3">
                                                             <p className="text-[11px] text-muted-foreground line-clamp-2 mb-3">{project.description}</p>
                                                             <div className="flex gap-2">
-                                                                <a href={project.live} target="_blank" rel="noopener noreferrer" className="flex-1 flex items-center justify-center gap-1.5 py-1.5 bg-primary/10 text-primary rounded-lg font-bold text-[10px] hover:bg-primary text-primary hover:text-white transition-all">
-                                                                    Live <ExternalLink size={10} />
-                                                                </a>
-                                                                <a href={project.github} target="_blank" rel="noopener noreferrer" className="flex-1 flex items-center justify-center gap-1.5 py-1.5 bg-neutral-100 dark:bg-neutral-800 text-foreground rounded-lg font-bold text-[10px] hover:bg-neutral-200 dark:hover:bg-neutral-700 transition-all">
-                                                                    Code <ArrowRight size={10} />
-                                                                </a>
+                                                                {project.live ? (
+                                                                    <a href={project.live} target="_blank" rel="noopener noreferrer" className="flex-1 flex items-center justify-center gap-1.5 py-1.5 bg-primary/10 text-primary rounded-lg font-bold text-[10px] hover:bg-primary text-primary hover:text-white transition-all">
+                                                                        Live <ExternalLink size={10} />
+                                                                    </a>
+                                                                ) : (
+                                                                    <div className="flex-1 flex items-center justify-center gap-1.5 py-1.5 bg-black/[0.03] dark:bg-white/[0.03] text-muted-foreground rounded-lg font-bold text-[10px] border border-border/30">
+                                                                        Soon
+                                                                    </div>
+                                                                )}
+                                                                {project.github ? (
+                                                                    <a href={project.github} target="_blank" rel="noopener noreferrer" className="flex-1 flex items-center justify-center gap-1.5 py-1.5 bg-neutral-100 dark:bg-neutral-800 text-foreground rounded-lg font-bold text-[10px] hover:bg-neutral-200 dark:hover:bg-neutral-700 transition-all">
+                                                                        Code <ArrowRight size={10} />
+                                                                    </a>
+                                                                ) : null}
                                                             </div>
                                                         </div>
                                                     </motion.div>

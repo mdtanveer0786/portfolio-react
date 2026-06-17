@@ -92,31 +92,34 @@ function App() {
         window.addEventListener("hashchange", handleHashChange);
         document.addEventListener("visibilitychange", handleVisibilityChange);
 
+        let handleLoad;
+
         if (sessionStorage.getItem('loader-seen')) {
             setLoading(false);
-            return;
-        }
-
-        const startTime = Date.now();
-        const handleLoad = () => {
-            const elapsedTime = Date.now() - startTime;
-            const remainingTime = Math.max(0, LOADING_DURATION - elapsedTime);
-
-            setTimeout(() => {
-                setLoading(false);
-                sessionStorage.setItem('loader-seen', 'true');
-            }, remainingTime);
-        };
-
-        if (document.readyState === "complete") {
-            handleLoad();
         } else {
-            window.addEventListener("load", handleLoad);
+            const startTime = Date.now();
+            handleLoad = () => {
+                const elapsedTime = Date.now() - startTime;
+                const remainingTime = Math.max(0, LOADING_DURATION - elapsedTime);
+
+                setTimeout(() => {
+                    setLoading(false);
+                    sessionStorage.setItem('loader-seen', 'true');
+                }, remainingTime);
+            };
+
+            if (document.readyState === "complete") {
+                handleLoad();
+            } else {
+                window.addEventListener("load", handleLoad);
+            }
         }
 
         return () => {
             window.removeEventListener("hashchange", handleHashChange);
-            window.removeEventListener("load", handleLoad);
+            if (handleLoad) {
+                window.removeEventListener("load", handleLoad);
+            }
             document.removeEventListener("visibilitychange", handleVisibilityChange);
         };
     }, [setActiveSection]);
