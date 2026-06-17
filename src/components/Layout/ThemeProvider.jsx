@@ -32,7 +32,7 @@ export function ThemeProvider({
 
         const timeout = setTimeout(() => {
             root.classList.remove('theme-transition')
-        }, 500)
+        }, 250)
 
         return () => clearTimeout(timeout)
     }, [theme, storageKey])
