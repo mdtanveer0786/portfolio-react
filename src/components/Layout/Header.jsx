@@ -68,8 +68,8 @@ export default function Header({ activeSection, setActiveSection }) {
             <nav className={cn(
                 "flex items-center justify-between px-4 md:px-5 py-2 rounded-2xl transition-all duration-500 border w-full max-w-5xl relative z-10",
                 scrolled
-                    ? "bg-white/70 dark:bg-neutral-950/70 border-black/[0.04] dark:border-white/[0.06] shadow-lg shadow-black/5 dark:shadow-black/30 backdrop-blur-2xl"
-                    : "bg-white/30 dark:bg-neutral-950/30 border-transparent backdrop-blur-md"
+                    ? "bg-white/90 dark:bg-neutral-950/90 border-black/10 dark:border-white/10 shadow-lg shadow-black/5 dark:shadow-black/30 backdrop-blur-xl supports-[backdrop-filter]:bg-white/80 supports-[backdrop-filter]:dark:bg-neutral-950/80"
+                    : "bg-white/40 dark:bg-neutral-950/40 border-transparent backdrop-blur-md"
             )}>
                 {/* Logo */}
                 <motion.div
