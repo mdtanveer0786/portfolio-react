@@ -1,5 +1,5 @@
 /* eslint-disable react-refresh/only-export-components */
-import { createContext, useContext, useEffect, useState } from 'react'
+import { createContext, useContext, useLayoutEffect, useState } from 'react'
 
 const ThemeContext = createContext({})
 
@@ -14,7 +14,7 @@ export function ThemeProvider({
         () => localStorage.getItem(storageKey) || defaultTheme
     )
 
-    useEffect(() => {
+    useLayoutEffect(() => {
         const root = window.document.documentElement
         
         // Temporarily add theme-transition class to animate colors smoothly
