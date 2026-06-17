@@ -266,7 +266,8 @@
     .animate-marquee-reverse {
         animation: marquee-reverse 30s linear infinite;
     }
-    .pause-marquee:hover {
+    .pause-marquee:hover .animate-marquee,
+    .pause-marquee:hover .animate-marquee-reverse {
         animation-play-state: paused;
     }
     @keyframes marquee {
