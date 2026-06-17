@@ -505,7 +505,7 @@ const ChatBot = () => {
                         animate={{ opacity: 1, y: 0, scale: 1 }}
                         exit={{ opacity: 0, y: 30, scale: 0.9 }}
                         transition={{ type: 'spring', damping: 25, stiffness: 200 }}
-                        className="mb-4 w-[calc(100vw-2rem)] sm:w-[420px] h-[min(calc(100vh-12rem),700px)] glass-card flex flex-col overflow-hidden shadow-[0_20px_60px_rgba(0,0,0,0.3)] border-primary/20 pointer-events-auto"
+                        className="mb-4 w-[calc(100vw-2rem)] sm:w-[420px] h-[calc(100vh-5rem)] sm:h-[min(calc(100vh-12rem),700px)] glass-card flex flex-col overflow-hidden shadow-[0_20px_60px_rgba(0,0,0,0.3)] border-primary/20 pointer-events-auto"
                     >
                         {/* Premium Header */}
                         <div className="p-5 bg-gradient-to-r from-primary via-fuchsia-600 to-accent text-white flex items-center justify-between shadow-lg relative z-10">
