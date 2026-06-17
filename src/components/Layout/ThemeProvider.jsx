@@ -16,10 +16,6 @@ export function ThemeProvider({
 
     useLayoutEffect(() => {
         const root = window.document.documentElement
-        
-        // Temporarily add theme-transition class to animate colors smoothly
-        root.classList.add('theme-transition')
-        
         root.classList.remove('light', 'dark')
         root.classList.add(theme)
         localStorage.setItem(storageKey, theme)
@@ -29,12 +25,6 @@ export function ThemeProvider({
         if (meta) {
             meta.setAttribute('content', theme === 'dark' ? '#050505' : '#fafaf9')
         }
-
-        const timeout = setTimeout(() => {
-            root.classList.remove('theme-transition')
-        }, 250)
-
-        return () => clearTimeout(timeout)
     }, [theme, storageKey])
 
     const value = {
