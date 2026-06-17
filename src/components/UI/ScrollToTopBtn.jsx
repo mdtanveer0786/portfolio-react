@@ -8,7 +8,7 @@ export default function ScrollToTopBtn() {
     useEffect(() => {
         const handleScroll = () => {
             // Using a threshold of 400px scroll height to reveal the button
-            if (window.pageYOffset > 400) {
+            if (window.scrollY > 400) {
                 setVisible(true)
             } else {
                 setVisible(false)

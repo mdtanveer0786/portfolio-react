@@ -8,19 +8,19 @@ export default function SmoothScroll({ children }) {
             easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
             direction: 'vertical',
             gestureDirection: 'vertical',
-            smoothOffsets: true,
             mouseMultiplier: 1,
             smoothTouch: false,
             touchMultiplier: 2,
             infinite: false,
         });
 
+        let rafId;
         function raf(time) {
             lenis.raf(time);
-            requestAnimationFrame(raf);
+            rafId = requestAnimationFrame(raf);
         }
 
-        requestAnimationFrame(raf);
+        rafId = requestAnimationFrame(raf);
 
         // Handle anchor links
         const handleAnchorClick = (e) => {
@@ -43,6 +43,7 @@ export default function SmoothScroll({ children }) {
         document.addEventListener('click', handleAnchorClick);
 
         return () => {
+            cancelAnimationFrame(rafId);
             lenis.destroy();
             document.removeEventListener('click', handleAnchorClick);
         };
@@ -50,3 +51,4 @@ export default function SmoothScroll({ children }) {
 
     return <>{children}</>;
 }
+

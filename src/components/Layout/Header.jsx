@@ -30,11 +30,8 @@ export default function Header({ activeSection, setActiveSection }) {
         return () => document.body.classList.remove('no-scroll')
     }, [mobileMenuOpen])
 
-    const [, setIsScrolling] = useState(false)
-
     const handleNavClick = (href) => {
         const id = href.substring(1)
-        setIsScrolling(true)
         setActiveSection(id)
         setMobileMenuOpen(false)
         
@@ -48,13 +45,11 @@ export default function Header({ activeSection, setActiveSection }) {
                 const element = document.getElementById(id)
                 if (element) {
                     const yOffset = -80; // Offset for fixed header
-                    const y = element.getBoundingClientRect().top + window.pageYOffset + yOffset;
+                    const y = element.getBoundingClientRect().top + window.scrollY + yOffset;
                     window.scrollTo({ top: y, behavior: 'smooth' });
                 }
             }
         }, 120);
-        
-        setTimeout(() => setIsScrolling(false), 1120)
     }
 
     return (
