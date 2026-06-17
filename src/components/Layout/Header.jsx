@@ -180,21 +180,6 @@ export default function Header({ activeSection, setActiveSection }) {
                                     </div>
                                 </div>
                                 <div className="flex items-center gap-2">
-                                    <motion.button
-                                        whileTap={{ scale: 0.9 }}
-                                        onClick={toggleTheme}
-                                        aria-label={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}
-                                        className="p-2.5 rounded-xl bg-black/[0.04] dark:bg-white/[0.04] text-foreground hover:text-primary transition-all"
-                                    >
-                                        <motion.div
-                                            key={theme}
-                                            initial={{ rotate: -70, scale: 0.85, opacity: 0 }}
-                                            animate={{ rotate: 0, scale: 1, opacity: 1 }}
-                                            transition={{ duration: 0.15, ease: "easeOut" }}
-                                        >
-                                            {theme === 'dark' ? <Sun className="w-4.5 h-4.5" /> : <Moon className="w-4.5 h-4.5" />}
-                                        </motion.div>
-                                    </motion.button>
                                     <button
                                         onClick={() => setMobileMenuOpen(false)}
                                         className="p-2.5 rounded-xl bg-black/[0.04] dark:bg-white/[0.04] text-foreground hover:text-primary transition-all border border-transparent hover:border-primary/20"
