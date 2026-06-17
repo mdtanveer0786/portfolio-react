@@ -123,6 +123,7 @@ const ChatBot = () => {
     const [isListening, setIsListening] = useState(false);
     const [soundEnabled, setSoundEnabled] = useState(true);
     const messagesEndRef = useRef(null);
+    const recognitionRef = useRef(null);
 
     useEffect(() => {
         const timer = setInterval(() => {
@@ -132,6 +133,9 @@ const ChatBot = () => {
             clearInterval(timer);
             if (typeof window !== 'undefined' && 'speechSynthesis' in window) {
                 window.speechSynthesis.cancel();
+            }
+            if (recognitionRef.current) {
+                recognitionRef.current.abort();
             }
         };
     }, []);
@@ -447,14 +451,21 @@ const ChatBot = () => {
         }
 
         if (isListening) {
+            if (recognitionRef.current) {
+                recognitionRef.current.stop();
+            }
             setIsListening(false);
             return;
         }
 
         const recognition = new SpeechRecognition();
+        recognitionRef.current = recognition;
         recognition.lang = 'en-US';
         recognition.onstart = () => setIsListening(true);
-        recognition.onend = () => setIsListening(false);
+        recognition.onend = () => {
+            setIsListening(false);
+            recognitionRef.current = null;
+        };
         recognition.onresult = (event) => {
             const transcript = event.results[0][0].transcript;
             setInputValue(transcript);
