@@ -15,6 +15,10 @@ export default function Header({ activeSection, setActiveSection }) {
         const handlePopState = () => setMobileMenuOpen(false)
         window.addEventListener('scroll', handleScroll, { passive: true })
         window.addEventListener('popstate', handlePopState)
+        
+        // Check initial scroll position
+        handleScroll()
+        
         return () => {
             window.removeEventListener('scroll', handleScroll)
             window.removeEventListener('popstate', handlePopState)
