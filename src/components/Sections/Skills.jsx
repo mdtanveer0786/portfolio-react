@@ -1,6 +1,6 @@
-import { motion } from 'framer-motion'
 import { Layers } from 'lucide-react'
 import { skillCategories } from '../../utils/constants'
+import { cn } from '../../utils/cn'
 import SectionReveal from '../UI/SectionReveal'
 import AnimatedBackground from '../UI/AnimatedBackground'
 import { FaReact, FaNodeJs, FaHtml5, FaCss3Alt, FaJs, FaDatabase, FaGitAlt, FaBootstrap, FaPhp } from 'react-icons/fa'
@@ -28,18 +28,13 @@ const getIcon = (name) => {
     return iconMap[name] || <FaDatabase />
 }
 
-const SkillCard = ({ skill, index }) => {
+const SkillItem = ({ skill }) => {
     return (
-        <motion.div
-            initial={{ opacity: 0, y: 15 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.4, delay: index * 0.03, ease: [0.22, 1, 0.36, 1] }}
-            whileHover={{ y: -4, scale: 1.03 }}
-            className="group relative flex flex-col items-center justify-center p-4 sm:p-5 rounded-2xl transition-all duration-300 cursor-default shadow-sm hover:shadow-md"
+        <div
+            className="group relative flex items-center gap-3 px-6 py-3.5 rounded-2xl transition-all duration-300 cursor-default shadow-sm hover:shadow-md flex-shrink-0"
             style={{
-                background: 'hsla(var(--card), 0.5)',
-                border: '1px solid transparent',
+                background: 'hsla(var(--card), 0.6)',
+                border: '1px solid hsla(var(--foreground), 0.05)',
             }}
         >
             {/* Hover glow */}
@@ -48,21 +43,19 @@ const SkillCard = ({ skill, index }) => {
                 style={{ backgroundColor: skill.color }}
             />
 
-
-
             {/* Icon */}
             <div
-                className="relative z-10 text-2xl sm:text-3xl mb-2.5 transition-transform duration-500 group-hover:scale-110"
+                className="relative z-10 text-2xl transition-transform duration-500 group-hover:scale-110 group-hover:-rotate-6"
                 style={{ color: skill.color }}
             >
                 {getIcon(skill.name)}
             </div>
 
             {/* Label */}
-            <span className="relative z-10 text-[11px] sm:text-xs font-medium text-muted-foreground group-hover:text-foreground transition-colors text-center">
+            <span className="relative z-10 text-sm font-semibold text-foreground/80 group-hover:text-foreground transition-colors whitespace-nowrap">
                 {skill.name}
             </span>
-        </motion.div>
+        </div>
     )
 }
 
@@ -71,7 +64,7 @@ export default function Skills() {
         <section id="skills" className="section-container relative overflow-hidden">
             <AnimatedBackground variant="grid" />
 
-            <div className="container mx-auto relative z-10">
+            <div className="container mx-auto relative z-10 mb-12">
                 {/* Header */}
                 <div className="section-header">
                     <SectionReveal>
@@ -92,35 +85,40 @@ export default function Skills() {
                         </p>
                     </SectionReveal>
                 </div>
+            </div>
 
-                {/* Categorized Grid */}
-                <div className="space-y-12 max-w-4xl mx-auto">
-                    {skillCategories.map((category, catIndex) => (
-                        <SectionReveal key={category.title} delay={catIndex * 0.1}>
-                            <div className="space-y-5">
-                                <div className="flex items-center gap-3">
-                                    <div className="p-2 rounded-lg bg-primary/10">
-                                        <category.icon className="w-4 h-4 text-primary" />
-                                    </div>
-                                    <h3 className="text-sm font-display font-semibold text-foreground uppercase tracking-wider">
-                                        {category.title}
-                                    </h3>
-                                    <div className="flex-1 h-px bg-gradient-to-r from-border to-transparent" />
-                                </div>
-                                <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 gap-3">
-                                    {category.skills.map((skill, index) => (
-                                        <SkillCard
-                                            key={`${skill.name}-${index}`}
-                                            skill={skill}
-                                            index={index + (catIndex * 5)}
-                                        />
-                                    ))}
-                                </div>
+            {/* Infinite Marquees */}
+            <div className="relative w-full max-w-[100vw] mx-auto pb-10 flex flex-col gap-6">
+                {/* Edge fade masks */}
+                <div className="absolute inset-y-0 left-0 w-16 md:w-40 bg-gradient-to-r from-background to-transparent z-20 pointer-events-none" />
+                <div className="absolute inset-y-0 right-0 w-16 md:w-40 bg-gradient-to-l from-background to-transparent z-20 pointer-events-none" />
+
+                {skillCategories.map((category, rowIndex) => {
+                    const isReverse = rowIndex % 2 !== 0;
+                    
+                    // We duplicate the items enough times to fill the screen seamlessly
+                    // E.g., repeating 4 times per row guarantees it's wide enough for ultra-wide screens.
+                    const repeatedSkills = [...category.skills, ...category.skills, ...category.skills, ...category.skills];
+
+                    return (
+                        <div key={category.title} className="relative flex overflow-hidden pause-marquee">
+                            {/* Two identical flex containers side-by-side that will translate */}
+                            <div className={cn(
+                                "flex gap-4 items-center w-max",
+                                isReverse ? "animate-marquee-reverse" : "animate-marquee"
+                            )}>
+                                {repeatedSkills.map((skill, index) => (
+                                    <SkillItem
+                                        key={`${category.title}-${skill.name}-${index}`}
+                                        skill={skill}
+                                    />
+                                ))}
                             </div>
-                        </SectionReveal>
-                    ))}
-                </div>
+                        </div>
+                    );
+                })}
             </div>
         </section>
     )
 }
+
