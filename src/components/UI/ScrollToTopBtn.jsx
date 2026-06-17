@@ -41,7 +41,7 @@ export default function ScrollToTopBtn() {
                         damping: 20
                     }}
                     onClick={scrollToTop}
-                    className="fixed bottom-6 right-6 md:bottom-8 md:right-8 z-50 flex items-center justify-center w-10 h-10 sm:w-12 sm:h-12 rounded-full shadow-[0_8px_30px_rgb(0,0,0,0.15)] dark:shadow-[0_8px_30px_rgba(0,0,0,0.6)] bg-white/80 dark:bg-[#0c0c14]/80 backdrop-blur-md border border-primary/20 text-primary hover:text-white overflow-hidden group cursor-pointer"
+                    className="fixed bottom-24 right-7 sm:bottom-28 sm:right-10 z-50 flex items-center justify-center w-10 h-10 sm:w-12 sm:h-12 rounded-full shadow-[0_8px_30px_rgb(0,0,0,0.15)] dark:shadow-[0_8px_30px_rgba(0,0,0,0.6)] bg-white/80 dark:bg-[#0c0c14]/80 backdrop-blur-md border border-primary/20 text-primary hover:text-white overflow-hidden group cursor-pointer"
                     aria-label="Scroll to top"
                 >
                     {/* Premium Gradient BG hover overlay */}
