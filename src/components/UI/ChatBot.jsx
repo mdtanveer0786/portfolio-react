@@ -505,21 +505,21 @@ const ChatBot = () => {
                         animate={{ opacity: 1, y: 0, scale: 1 }}
                         exit={{ opacity: 0, y: 30, scale: 0.9 }}
                         transition={{ type: 'spring', damping: 25, stiffness: 200 }}
-                        className="mb-4 w-[calc(100vw-2rem)] sm:w-[420px] h-[calc(100vh-5rem)] sm:h-[min(calc(100vh-12rem),700px)] glass-card flex flex-col overflow-hidden shadow-[0_20px_60px_rgba(0,0,0,0.3)] border-primary/20 pointer-events-auto"
+                        className="fixed inset-0 sm:absolute sm:inset-auto sm:bottom-full sm:right-0 mb-0 sm:mb-4 w-full sm:w-[420px] h-[100dvh] sm:h-[min(calc(100dvh-12rem),700px)] glass-card rounded-none sm:rounded-2xl border-0 sm:border border-primary/20 flex flex-col overflow-hidden shadow-[0_20px_60px_rgba(0,0,0,0.3)] pointer-events-auto"
                     >
                         {/* Premium Header */}
-                        <div className="p-5 bg-gradient-to-r from-primary via-fuchsia-600 to-accent text-white flex items-center justify-between shadow-lg relative z-10">
+                        <div className="p-4 xs:p-5 bg-gradient-to-r from-primary via-fuchsia-600 to-accent text-white flex items-center justify-between shadow-lg relative z-10">
                             <div className="flex items-center gap-3">
                                 <div className="relative">
-                                    <div className="w-12 h-12 rounded-2xl bg-white/20 backdrop-blur-md flex items-center justify-center border border-white/30 shadow-inner">
-                                        <Bot size={24} className="text-white drop-shadow-sm" />
+                                    <div className="w-10 h-10 xs:w-12 xs:h-12 rounded-2xl bg-white/20 backdrop-blur-md flex items-center justify-center border border-white/30 shadow-inner">
+                                        <Bot size={20} className="text-white drop-shadow-sm xs:size-[24px]" />
                                     </div>
-                                    <span className="absolute -bottom-0.5 -right-0.5 w-4 h-4 bg-emerald-400 border-2 border-primary rounded-full animate-pulse" />
+                                    <span className="absolute -bottom-0.5 -right-0.5 w-3.5 h-3.5 xs:w-4 xs:h-4 bg-emerald-400 border-2 border-primary rounded-full animate-pulse" />
                                 </div>
                                 <div>
-                                    <h3 className="font-bold text-base leading-none tracking-tight">TanveerAI</h3>
-                                    <div className="flex items-center gap-3 mt-2">
-                                        <p className="text-[9px] font-bold text-white/70 uppercase tracking-[0.1em] flex items-center gap-1 bg-white/10 px-2 py-0.5 rounded-full">
+                                    <h3 className="font-bold text-sm xs:text-base leading-none tracking-tight">TanveerAI</h3>
+                                    <div className="flex items-center gap-2 mt-1.5">
+                                        <p className="text-[9px] font-bold text-white/70 uppercase tracking-[0.1em] hidden xs:flex items-center gap-1 bg-white/10 px-2 py-0.5 rounded-full">
                                             <Clock size={10} /> {localTime}
                                         </p>
                                         <p className="text-[9px] font-bold text-emerald-300 uppercase tracking-[0.1em] flex items-center gap-1 bg-emerald-500/10 px-2 py-0.5 rounded-full">
@@ -529,10 +529,10 @@ const ChatBot = () => {
                                 </div>
                             </div>
                             <div className="flex items-center gap-1">
-                                <button onClick={() => setSoundEnabled(!soundEnabled)} className="p-2 hover:bg-white/20 rounded-xl transition-all active:scale-90 text-white/80" aria-label={soundEnabled ? 'Mute sound' : 'Enable sound'}>
+                                <button onClick={() => setSoundEnabled(!soundEnabled)} className="p-2.5 hover:bg-white/20 rounded-xl transition-all active:scale-90 text-white/80" aria-label={soundEnabled ? 'Mute sound' : 'Enable sound'}>
                                     {soundEnabled ? <Volume2 size={18} /> : <VolumeX size={18} />}
                                 </button>
-                                <button onClick={() => setIsOpen(false)} className="p-2 hover:bg-white/20 rounded-xl transition-all active:scale-90" aria-label="Close chat">
+                                <button onClick={() => setIsOpen(false)} className="p-2.5 hover:bg-white/20 rounded-xl transition-all active:scale-90" aria-label="Close chat">
                                     <X size={22} />
                                 </button>
                             </div>
@@ -633,7 +633,7 @@ const ChatBot = () => {
                         </div>
 
                         {/* Input Footer */}
-                        <div className="p-4 sm:p-5 border-t border-border bg-background/80 backdrop-blur-xl">
+                        <div className="p-3 xs:p-4 sm:p-5 border-t border-border bg-background/80 backdrop-blur-xl">
                             <form onSubmit={(e) => { e.preventDefault(); handleSendMessage(inputValue); }} className="flex items-center gap-2">
                                 <button type="button" onClick={toggleListening} className={cn("p-2.5 rounded-xl transition-all", isListening ? "bg-red-500 text-white animate-pulse" : "bg-muted/50 text-muted-foreground hover:bg-muted")} aria-label={isListening ? 'Stop listening' : 'Start voice input'}>
                                     {isListening ? <MicOff size={18} /> : <Mic size={18} />}
@@ -654,7 +654,7 @@ const ChatBot = () => {
             <div className="relative pointer-events-auto">
                 <AnimatePresence>
                     {(showTooltip && !isOpen) && (
-                        <motion.div initial={{ opacity: 0, x: 20, scale: 0.8 }} animate={{ opacity: 1, x: 0, scale: 1 }} exit={{ opacity: 0, x: 20, scale: 0.8 }} className="absolute bottom-[110%] right-0 mb-2 px-4 py-2 rounded-2xl bg-neutral-900 text-white text-xs font-bold whitespace-nowrap shadow-2xl flex items-center gap-2 border border-white/10">
+                        <motion.div initial={{ opacity: 0, x: 20, scale: 0.8 }} animate={{ opacity: 1, x: 0, scale: 1 }} exit={{ opacity: 0, x: 20, scale: 0.8 }} className="absolute bottom-[110%] right-0 mb-2 px-3 py-1.5 sm:px-4 sm:py-2 rounded-xl sm:rounded-2xl bg-neutral-900 text-white text-[10px] sm:text-xs font-bold whitespace-nowrap shadow-2xl flex items-center gap-2 border border-white/10">
                             <span className="relative flex h-2 w-2">
                                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
                                 <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
@@ -670,14 +670,14 @@ const ChatBot = () => {
                     whileTap={{ scale: 0.95 }}
                     onClick={() => { setIsOpen(!isOpen); setShowTooltip(false); playSound('pop'); }}
                     aria-label={isOpen ? 'Close chat' : 'Open chat assistant'}
-                    className={cn("w-16 h-16 rounded-[2rem] flex items-center justify-center text-white shadow-[0_10px_30px_rgba(0,0,0,0.2)] transition-all duration-500 relative overflow-hidden group border-2 border-white/20", isOpen ? "bg-neutral-900 dark:bg-white text-white dark:text-neutral-900 rounded-2xl rotate-90" : "bg-primary")}
+                    className={cn("w-14 h-14 sm:w-16 sm:h-16 rounded-[1.75rem] sm:rounded-[2rem] flex items-center justify-center text-white shadow-[0_10px_30px_rgba(0,0,0,0.2)] transition-all duration-500 relative overflow-hidden group border-2 border-white/20", isOpen ? "hidden sm:flex bg-neutral-900 dark:bg-white text-white dark:text-neutral-900 rounded-2xl rotate-90" : "bg-primary")}
                 >
                     {!isOpen && <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/10 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />}
                     <AnimatePresence mode="wait">
                         {isOpen ? (
-                            <motion.div key="close" initial={{ opacity: 0, rotate: -90 }} animate={{ opacity: 1, rotate: 0 }} exit={{ opacity: 0, rotate: 90 }}><X size={28} strokeWidth={2.5} /></motion.div>
+                            <motion.div key="close" initial={{ opacity: 0, rotate: -90 }} animate={{ opacity: 1, rotate: 0 }} exit={{ opacity: 0, rotate: 90 }}><X size={24} className="sm:w-7 sm:h-7" /></motion.div>
                         ) : (
-                            <motion.div key="open" initial={{ opacity: 0, rotate: 90 }} animate={{ opacity: 1, rotate: 0 }} exit={{ opacity: 0, rotate: -90 }} className="relative"><MessageSquare size={28} strokeWidth={2.5} /></motion.div>
+                            <motion.div key="open" initial={{ opacity: 0, rotate: 90 }} animate={{ opacity: 1, rotate: 0 }} exit={{ opacity: 0, rotate: -90 }} className="relative"><MessageSquare size={24} className="sm:w-7 sm:h-7" /></motion.div>
                         )}
                     </AnimatePresence>
                 </motion.button>
