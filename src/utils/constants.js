@@ -26,6 +26,8 @@ import financeImg from '../assets/projects/finance.webp'
 import eduearnImg from '../assets/projects/eduearn.webp'
 import bikesImg from '../assets/projects/bikes.webp'
 import ecommerceImg from '../assets/projects/ecommerce.webp'
+import safedropImg from '../assets/projects/safedrop.png'
+import parkflowImg from '../assets/projects/parkflow.png'
 
 export const LOADING_DURATION = 800;
 
@@ -139,20 +141,50 @@ export const skillCategories = [
         ]
     },
     {
-        title: 'Cloud & Tools',
-        icon: Database,
+        title: 'DevOps & Cloud',
+        icon: Cloud,
+        skills: [
+            { name: 'Git', level: 90, color: '#F05032' },
+            { name: 'Vercel', level: 90, color: '#000000' },
+            { name: 'Render', level: 85, color: '#46E3B7' },
+        ]
+    },
+    {
+        title: 'Tools & Databases',
+        icon: Settings,
         skills: [
             { name: 'MongoDB', level: 85, color: '#47A248' },
             { name: 'MySQL', level: 82, color: '#4479A1' },
-            { name: 'Vercel', level: 90, color: '#000000' },
-            { name: 'Render', level: 85, color: '#46E3B7' },
-            { name: 'Git', level: 90, color: '#F05032' },
             { name: 'Postman', level: 88, color: '#FF6C37' },
         ]
     }
 ]
 
 export const projects = [
+    {
+        id: 8,
+        title: 'ParkFlow SaaS',
+        description: 'An enterprise-grade parking management SaaS featuring real-time Socket.io state updates, PWA offline capabilities with Workbox networks, and interactive analytical boards. Packaged into a native Android APK using a Web-to-APK Compiler.',
+        tags: ['React', 'Node.js', 'Express', 'MongoDB', 'Socket.io', 'Tailwind CSS'],
+        image: parkflowImg,
+        github: 'https://github.com/mdtanveer0786/ParkFlow_SaaS',
+        live: 'https://park-flow-saas.vercel.app/',
+        featured: true,
+        category: 'fullstack',
+        date: '2026-06-23'
+    },
+    {
+        id: 7,
+        title: 'SafeDrop AI',
+        description: 'A premium luggage & locker management SaaS for high-traffic hubs. Automates secure drops and tracking with Socket.io real-time updates, multi-tenant branch scoping, and crypto-secure QR tokens.',
+        tags: ['React', 'Node.js', 'Express', 'MongoDB', 'Socket.io', 'Razorpay'],
+        image: safedropImg,
+        github: 'https://github.com/mdtanveer0786/SafeDrop_AI',
+        live: 'https://safedrop-ai.vercel.app/',
+        featured: true,
+        category: 'fullstack',
+        date: '2026-06-23'
+    },
     {
         id: 1,
         title: 'Real Estate Elite',
@@ -243,24 +275,24 @@ export const experience = [
         description: 'Working on scalable web applications, business solutions, admin dashboards, Android applications, REST APIs, and database-driven systems.',
         projects: [
             {
-                name: 'Enterprise Management System',
-                tech: 'React.js, Node.js, Express.js, MongoDB',
-                features: ['Authentication', 'Dashboard Analytics', 'Role Based Access', 'CRUD Operations']
+                name: 'ParkFlow SaaS (Enterprise Parking Platform)',
+                tech: 'React 19, Node.js, Express, MongoDB, Socket.io, Vite-PWA, Tailwind CSS',
+                features: ['Real-Time WebSockets', 'PWA Offline Workbox Support', 'Analytics Boards', 'Web-to-APK APK Packaging']
             },
             {
-                name: 'Corporate Business Website',
-                tech: 'HTML, CSS, JavaScript, PHP, MySQL',
-                features: ['Responsive Design', 'SEO Optimization', 'Contact Forms', 'Admin Panel']
+                name: 'SafeDrop AI (SaaS Platform)',
+                tech: 'React, Node.js, Express, MongoDB Atlas, Socket.io, Razorpay',
+                features: ['Multi-Tenant Scoping', 'Real-Time Locker Tracking', 'Crypto-Secure QR Tokens', 'Automated SMS Alerts']
             },
             {
-                name: 'Android Application',
-                tech: 'React Native',
-                features: ['API Integration', 'User Authentication', 'Push Notifications', 'Mobile Optimized UI']
+                name: 'Real Estate Elite (Property Platform)',
+                tech: 'React, Node.js, Express, MongoDB, Cloudinary',
+                features: ['JWT Authentication', 'Full CRUD property management', 'Cloudinary media hosting', 'Client/Agent dashboards']
             },
             {
-                name: 'PHP MySQL Management System',
-                tech: 'PHP, MySQL, Bootstrap',
-                features: ['Inventory Management', 'Customer Management', 'Reports & Analytics', 'Database Optimization']
+                name: 'Trade Analyzer Pro (Trading Analytics)',
+                tech: 'React, Node.js, Express, MongoDB, Chart.js',
+                features: ['Trading performance tracking', 'Interactive chart analytics', 'Detailed profit/loss metrics']
             }
         ],
         achievements: []

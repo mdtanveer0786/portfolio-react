@@ -383,7 +383,7 @@ const ChatBot = () => {
                 (normalizedInput.includes('tools') && catTitle.includes('tools')) || 
                 (normalizedInput.includes('cloud') && catTitle.includes('cloud'))
             ) {
-                const skillList = cat.skills.map(s => `* **${s.name}** (Level: ${s.level}%)`).join('\n');
+                const skillList = cat.skills.map(s => `* **${s.name}**`).join('\n');
                 return `Here are Tanveer's **${cat.title}** skills:\n\n${skillList}\n\nWould you like to know about his projects built with these?`;
             }
         }

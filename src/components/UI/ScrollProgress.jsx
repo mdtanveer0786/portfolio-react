@@ -1,23 +1,20 @@
-import { motion, useScroll, useSpring } from 'framer-motion'
+import useScrollProgress from '../../hooks/useScrollProgress'
 
 export default function ScrollProgress() {
-    const { scrollYProgress } = useScroll()
-    const scaleX = useSpring(scrollYProgress, {
-        stiffness: 100,
-        damping: 30,
-        restDelta: 0.001
-    })
+    const progress = useScrollProgress()
 
     return (
-        <motion.div
-            style={{ scaleX, transformOrigin: '0%' }}
-            className="fixed top-0 left-0 right-0 h-[3px] z-[100]"
+        <div
+            style={{ 
+                width: `${progress}%`,
+                transition: 'width 100ms ease-out'
+            }}
+            className="fixed top-0 left-0 h-[3px] bg-[#8b5cf6] z-[100] shadow-[0_0_8px_rgba(139,92,246,0.5)]"
             role="progressbar"
             aria-label="Page scroll progress"
+            aria-valuenow={Math.round(progress)}
             aria-valuemin="0"
             aria-valuemax="100"
-        >
-            <div className="w-full h-full bg-gradient-to-r from-primary via-fuchsia-500 to-cyan-400 shadow-glow" />
-        </motion.div>
+        />
     )
 }

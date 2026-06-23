@@ -16,9 +16,11 @@ import Skills from "./components/Sections/Skills";
 import Projects from "./components/Sections/Projects";
 import Contact from "./components/Sections/Contact";
 import ChatBot from "./components/UI/ChatBot";
+import TechMarquee from "./components/UI/TechMarquee";
 
 const ScrollProgress = lazy(() => import("./components/UI/ScrollProgress"));
 const ScrollToTopBtn = lazy(() => import("./components/UI/ScrollToTopBtn"));
+const ParticlesBackground = lazy(() => import("./components/UI/ParticlesBackground"));
 
 import { SECTIONS, LOADING_DURATION } from "./utils/constants";
 import { useScroll } from "./hooks/useScroll";
@@ -151,6 +153,7 @@ function App() {
                             <Suspense fallback={null}>
                                 <ScrollProgress />
                                 <ScrollToTopBtn />
+                                <ParticlesBackground />
                             </Suspense>
 
                             <ChatBot />
@@ -162,6 +165,7 @@ function App() {
 
                             <main className="relative overflow-hidden">
                                 <Hero setActiveSection={setActiveSection} />
+                                <TechMarquee />
                                 <About />
                                 <Services />
                                 <Experience />
