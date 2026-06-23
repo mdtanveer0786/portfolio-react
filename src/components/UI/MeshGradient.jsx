@@ -7,7 +7,7 @@ export default function MeshGradient() {
 
     useEffect(() => {
         const container = containerRef.current
-        if (!container || shouldReduceMotion) return
+        if (!container || shouldReduceMotion || window.innerWidth < 640) return
 
         let ticking = false
         const handleMouseMove = (e) => {

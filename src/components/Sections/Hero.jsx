@@ -37,12 +37,22 @@ export default function Hero({ setActiveSection }) {
                         variants={containerVariants}
                         initial="hidden"
                         animate="visible"
-                        className="w-full lg:w-3/5 space-y-8 text-center lg:text-left"
+                        className="w-full lg:w-3/5 space-y-8 text-center lg:text-left flex flex-col items-center lg:items-start"
                     >
-
+                        {/* Currently building / open to work live badge */}
+                        <motion.div 
+                            variants={itemVariants}
+                            className="inline-flex items-center gap-2.5 px-4 py-2 rounded-full bg-emerald-500/5 border border-emerald-500/15 text-[10px] sm:text-[11px] font-mono uppercase tracking-[0.15em] text-emerald-600 dark:text-emerald-400 shadow-[0_0_15px_rgba(16,185,129,0.02)] backdrop-blur-sm w-fit cursor-default"
+                        >
+                            <span className="relative flex h-2 w-2">
+                                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                                <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+                            </span>
+                            Currently building: Web2APK platform
+                        </motion.div>
 
                         {/* Headline */}
-                        <motion.div variants={itemVariants} className="space-y-4">
+                        <motion.div variants={itemVariants} className="space-y-4 w-full">
                             <p className="text-muted-foreground text-base sm:text-lg font-medium">
                                 Hi, I&apos;m <span className="text-primary font-semibold">Md Tanveer Alam</span>
                             </p>
