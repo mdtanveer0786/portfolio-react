@@ -70,11 +70,21 @@ export default function Header({ activeSection, setActiveSection }) {
                 <motion.div
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
-                    className="flex items-center gap-2.5 cursor-pointer group px-2 py-1"
+                    className="flex items-center gap-2.5 cursor-pointer group px-2 py-1 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded-xl"
                     onClick={() => {
                         handleNavClick('#home')
                         setMobileMenuOpen(false)
                     }}
+                    onKeyDown={(e) => {
+                        if (e.key === 'Enter' || e.key === ' ') {
+                            e.preventDefault()
+                            handleNavClick('#home')
+                            setMobileMenuOpen(false)
+                        }
+                    }}
+                    role="button"
+                    tabIndex={0}
+                    aria-label="Go to home section"
                 >
                     <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-primary to-fuchsia-600 flex items-center justify-center text-white font-display font-bold flex-shrink-0 shadow-lg shadow-primary/20 group-hover:shadow-primary/40 transition-shadow">
                         <Terminal size={15} className="stroke-[2.5px]" />
@@ -98,6 +108,7 @@ export default function Header({ activeSection, setActiveSection }) {
                                         ? "text-white"
                                         : "text-muted-foreground hover:text-foreground"
                                 )}
+                                aria-current={isActive ? "page" : undefined}
                             >
                                 <span className="relative z-10">{item.label}</span>
                                 {isActive && (
@@ -211,6 +222,7 @@ export default function Header({ activeSection, setActiveSection }) {
                                                         ? "bg-primary text-white shadow-lg shadow-primary/20"
                                                         : "text-muted-foreground hover:bg-black/[0.03] dark:hover:bg-white/[0.03] hover:text-foreground"
                                                 )}
+                                                aria-current={isActive ? "page" : undefined}
                                             >
                                                 <div className={cn(
                                                     "p-2 rounded-lg transition-all",
@@ -248,7 +260,7 @@ export default function Header({ activeSection, setActiveSection }) {
                                                     className="w-11 h-11 flex items-center justify-center rounded-xl bg-white dark:bg-neutral-900 text-foreground hover:text-primary border border-border transition-all hover:border-primary/30 shadow-sm"
                                                     aria-label={social.label}
                                                 >
-                                                    <Icon className="w-4.5 h-4.5" />
+                                                    <Icon className="w-5 h-5" />
                                                 </a>
                                             )
                                         })}

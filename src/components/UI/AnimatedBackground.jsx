@@ -1,7 +1,9 @@
-export default function AnimatedBackground({ variant = 'dots' }) {
+import { memo } from 'react'
+
+const AnimatedBackground = memo(function AnimatedBackground({ variant = 'dots' }) {
     if (variant === 'dots') {
         return (
-            <div className="absolute inset-0 -z-10 overflow-hidden pointer-events-none">
+            <div className="absolute inset-0 -z-10 overflow-hidden pointer-events-none" aria-hidden="true">
                 {/* Dot grid — uses dark dots in light mode, light dots in dark mode */}
                 <div className="absolute inset-0 opacity-100"
                     style={{
@@ -20,7 +22,7 @@ export default function AnimatedBackground({ variant = 'dots' }) {
 
     if (variant === 'lines') {
         return (
-            <div className="absolute inset-0 -z-10 overflow-hidden pointer-events-none">
+            <div className="absolute inset-0 -z-10 overflow-hidden pointer-events-none" aria-hidden="true">
                 {/* Diagonal lines */}
                 <div className="absolute inset-0"
                     style={{
@@ -42,7 +44,7 @@ export default function AnimatedBackground({ variant = 'dots' }) {
 
     if (variant === 'grid') {
         return (
-            <div className="absolute inset-0 -z-10 overflow-hidden pointer-events-none">
+            <div className="absolute inset-0 -z-10 overflow-hidden pointer-events-none" aria-hidden="true">
                 {/* Grid lines */}
                 <div className="absolute inset-0"
                     style={{
@@ -62,12 +64,14 @@ export default function AnimatedBackground({ variant = 'dots' }) {
 
     if (variant === 'glow') {
         return (
-            <div className="absolute inset-0 -z-10 overflow-hidden pointer-events-none">
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[600px] rounded-full blur-[200px] opacity-[0.12] animate-glow-pulse"
+            <div className="absolute inset-0 -z-10 overflow-hidden pointer-events-none" aria-hidden="true">
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[600px] rounded-full blur-[200px] opacity-[0.12] animate-glow-pulse motion-reduce:animate-none"
                     style={{ background: 'linear-gradient(135deg, hsl(263 70% 58%), hsl(322 80% 55%), hsl(192 91% 46%))' }} />
             </div>
         )
     }
 
     return null
-}
+})
+
+export default AnimatedBackground

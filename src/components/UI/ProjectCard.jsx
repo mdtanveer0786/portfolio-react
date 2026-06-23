@@ -1,9 +1,11 @@
 import { forwardRef, useRef } from 'react'
-import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion'
+import { motion, useMotionValue, useSpring, useTransform, useReducedMotion } from 'framer-motion'
 import { Github, ExternalLink, Star } from 'lucide-react'
 
 const ProjectCard = forwardRef(({ project, index }, ref) => {
     const cardRef = useRef(null)
+    const tickingRef = useRef(false)
+    const shouldReduceMotion = useReducedMotion()
     const x = useMotionValue(0)
     const y = useMotionValue(0)
     const mouseXSpring = useSpring(x, { stiffness: 150, damping: 20 })
@@ -12,19 +14,27 @@ const ProjectCard = forwardRef(({ project, index }, ref) => {
     const rotateY = useTransform(mouseXSpring, [-0.5, 0.5], ["-6deg", "6deg"])
 
     const handleMouseMove = (e) => {
-        if (!cardRef.current) return
-        const rect = cardRef.current.getBoundingClientRect()
-        const mouseX = ((e.clientX - rect.left) / rect.width) * 100
-        const mouseY = ((e.clientY - rect.top) / rect.height) * 100
-        
-        cardRef.current.style.setProperty('--mouse-x', `${mouseX}%`)
-        cardRef.current.style.setProperty('--mouse-y', `${mouseY}%`)
-        
-        x.set((e.clientX - rect.left) / rect.width - 0.5)
-        y.set((e.clientY - rect.top) / rect.height - 0.5)
+        if (!cardRef.current || shouldReduceMotion) return
+        if (!tickingRef.current) {
+            window.requestAnimationFrame(() => {
+                if (!cardRef.current) return
+                const rect = cardRef.current.getBoundingClientRect()
+                const mouseX = ((e.clientX - rect.left) / rect.width) * 100
+                const mouseY = ((e.clientY - rect.top) / rect.height) * 100
+                
+                cardRef.current.style.setProperty('--mouse-x', `${mouseX}%`)
+                cardRef.current.style.setProperty('--mouse-y', `${mouseY}%`)
+                
+                x.set((e.clientX - rect.left) / rect.width - 0.5)
+                y.set((e.clientY - rect.top) / rect.height - 0.5)
+                tickingRef.current = false
+            })
+            tickingRef.current = true
+        }
     }
 
     const handleMouseLeave = () => {
+        if (shouldReduceMotion) return
         x.set(0)
         y.set(0)
     }
@@ -43,7 +53,7 @@ const ProjectCard = forwardRef(({ project, index }, ref) => {
                 ref={cardRef}
                 onMouseMove={handleMouseMove}
                 onMouseLeave={handleMouseLeave}
-                style={{ rotateY, rotateX, transformStyle: "preserve-3d" }}
+                style={shouldReduceMotion ? {} : { rotateY, rotateX, transformStyle: "preserve-3d" }}
                 className="relative flex flex-col h-full rounded-2xl overflow-hidden transition-all duration-500"
                 whileHover={{ borderColor: 'hsla(var(--primary), 0.2)' }}
             >
@@ -142,13 +152,18 @@ const ProjectCard = forwardRef(({ project, index }, ref) => {
                                 rel="noopener noreferrer"
                                 className="flex items-center justify-center p-2.5 rounded-xl bg-black/[0.03] dark:bg-white/[0.03] text-foreground hover:bg-black/[0.05] dark:hover:bg-white/[0.06] transition-all shadow-sm"
                                 title="View Source"
+                                aria-label={`View source code for ${project.title}`}
                             >
                                 <Github size={16} />
                             </motion.a>
                         )}
                         {!project.live && !project.github && (
-                            <div className="flex-1 flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-black/[0.03] dark:bg-white/[0.03] border border-border/30 text-muted-foreground text-xs font-medium">
-                                <span className="w-1.5 h-1.5 rounded-full bg-amber-500 animate-pulse" />
+                            <div 
+                                className="flex-1 flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-black/[0.03] dark:bg-white/[0.03] border border-border/30 text-muted-foreground text-xs font-medium"
+                                role="status"
+                                aria-label="Project coming soon"
+                            >
+                                <span className="w-1.5 h-1.5 rounded-full bg-amber-500 animate-pulse" aria-hidden="true" />
                                 Coming Soon
                             </div>
                         )}

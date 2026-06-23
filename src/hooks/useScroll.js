@@ -1,23 +1,23 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { SECTIONS } from '../utils/constants'
 
 export function useScroll() {
     const [scrollY, setScrollY] = useState(0)
     const [scrollDirection, setScrollDirection] = useState('down')
-    const [lastScrollY, setLastScrollY] = useState(0)
+    const lastScrollY = useRef(0)
     const [activeSection, setActiveSection] = useState('home')
 
     useEffect(() => {
         const handleScroll = () => {
             const currentScrollY = window.scrollY
             setScrollY(currentScrollY)
-            setScrollDirection(currentScrollY > lastScrollY ? 'down' : 'up')
-            setLastScrollY(currentScrollY)
+            setScrollDirection(currentScrollY > lastScrollY.current ? 'down' : 'up')
+            lastScrollY.current = currentScrollY
         }
 
         window.addEventListener('scroll', handleScroll, { passive: true })
         return () => window.removeEventListener('scroll', handleScroll)
-    }, [lastScrollY])
+    }, [])
 
     useEffect(() => {
         const observerCallback = (entries) => {

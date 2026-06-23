@@ -105,7 +105,7 @@ export default function Skills() {
                             {/* Two identical flex containers side-by-side that will translate */}
                             <div className={cn(
                                 "flex gap-4 items-center w-max",
-                                isReverse ? "animate-marquee-reverse" : "animate-marquee"
+                                isReverse ? "animate-marquee-reverse motion-reduce:animate-none" : "animate-marquee motion-reduce:animate-none"
                             )}>
                                 {repeatedSkills.map((skill, index) => (
                                     <SkillItem

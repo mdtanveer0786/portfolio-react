@@ -2,7 +2,12 @@ import { motion } from 'framer-motion'
 
 export default function Loader() {
     return (
-        <div className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-background">
+        <div 
+            className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-background"
+            role="status"
+            aria-live="polite"
+            aria-label="Loading Md Tanveer Alam's Portfolio"
+        >
             <motion.div
                 initial={{ opacity: 0, scale: 0.5 }}
                 animate={{ opacity: 1, scale: 1 }}

@@ -73,7 +73,7 @@ const Experience = () => {
                                     {exp.projects && (
                                         <div className="mt-8">
                                             <h4 className="text-base sm:text-lg font-display font-bold mb-5 flex items-center gap-2 text-foreground/90">
-                                                <Code2 className="w-4.5 h-4.5 text-primary" />
+                                                <Code2 className="w-5 h-5 text-primary" />
                                                 Key Projects at {exp.company}
                                             </h4>
                                             <div className="grid grid-cols-1 md:grid-cols-2 gap-5">

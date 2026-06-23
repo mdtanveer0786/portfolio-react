@@ -47,7 +47,7 @@ export default function Footer() {
     ]
 
     return (
-        <footer className="relative pt-24 pb-12 border-t border-border/40 bg-background/50 backdrop-blur-sm overflow-hidden">
+        <footer className="relative pt-24 pb-12 border-t border-border/40 bg-background/50 backdrop-blur-sm overflow-hidden" aria-label="Site Footer">
             {/* Background elements */}
             <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-4xl h-px bg-gradient-to-r from-transparent via-primary/30 to-transparent" />
             
@@ -93,19 +93,21 @@ export default function Footer() {
                         <h4 className="text-sm font-bold uppercase tracking-widest text-foreground/80">
                             Navigation
                         </h4>
-                        <ul className="space-y-3">
-                            {footerLinks.map((link) => (
-                                <li key={link.name}>
-                                    <a 
-                                        href={link.href}
-                                        className="group flex items-center gap-2 text-muted-foreground hover:text-primary transition-all duration-300 text-sm"
-                                    >
-                                        <ChevronRight size={12} className="opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all" />
-                                        {link.name}
-                                    </a>
-                                </li>
-                            ))}
-                        </ul>
+                        <nav aria-label="Footer navigation">
+                            <ul className="space-y-3">
+                                {footerLinks.map((link) => (
+                                    <li key={link.name}>
+                                        <a 
+                                            href={link.href}
+                                            className="group flex items-center gap-2 text-muted-foreground hover:text-primary transition-all duration-300 text-sm"
+                                        >
+                                            <ChevronRight size={12} className="opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all" />
+                                            {link.name}
+                                        </a>
+                                    </li>
+                                ))}
+                            </ul>
+                        </nav>
                     </div>
 
                     {/* Location & Time Section */}
@@ -167,7 +169,7 @@ export default function Footer() {
                     <div className="text-center text-[11px] sm:text-xs text-muted-foreground/60 flex flex-col gap-1.5">
                         <p>© {currentYear} Md Tanveer Alam. All rights reserved.</p>
                         <p className="flex items-center justify-center gap-1.5">
-                            Crafted with <Heart size={12} className="text-red-500 fill-red-500" /> using React & Tailwind CSS
+                            Crafted with <Heart size={12} className="text-red-500 fill-red-500" aria-hidden="true" /> using React & Tailwind CSS
                         </p>
                     </div>
                 </div>
