@@ -8,15 +8,16 @@ import Loader from "./components/UI/Loader";
 import SmoothScroll from "./components/UI/SmoothScroll";
 
 import Hero from "./components/Sections/Hero";
-import About from "./components/Sections/About";
-import Services from "./components/Sections/Services";
-import Experience from "./components/Sections/Experience";
-import Education from "./components/Sections/Education";
-import Skills from "./components/Sections/Skills";
-import Projects from "./components/Sections/Projects";
-import Contact from "./components/Sections/Contact";
-import ChatBot from "./components/UI/ChatBot";
-import TechMarquee from "./components/UI/TechMarquee";
+
+const TechMarquee = lazy(() => import("./components/UI/TechMarquee"));
+const About = lazy(() => import("./components/Sections/About"));
+const Services = lazy(() => import("./components/Sections/Services"));
+const Experience = lazy(() => import("./components/Sections/Experience"));
+const Education = lazy(() => import("./components/Sections/Education"));
+const Skills = lazy(() => import("./components/Sections/Skills"));
+const Projects = lazy(() => import("./components/Sections/Projects"));
+const Contact = lazy(() => import("./components/Sections/Contact"));
+const ChatBot = lazy(() => import("./components/UI/ChatBot"));
 
 const ScrollProgress = lazy(() => import("./components/UI/ScrollProgress"));
 const ScrollToTopBtn = lazy(() => import("./components/UI/ScrollToTopBtn"));
@@ -156,7 +157,9 @@ function App() {
                                 <ParticlesBackground />
                             </Suspense>
 
-                            <ChatBot />
+                            <Suspense fallback={null}>
+                                <ChatBot />
+                            </Suspense>
 
                             <Header
                                 activeSection={activeSection}
@@ -165,14 +168,16 @@ function App() {
 
                             <main className="relative overflow-hidden">
                                 <Hero setActiveSection={setActiveSection} />
-                                <TechMarquee />
-                                <About />
-                                <Services />
-                                <Experience />
-                                <Skills />
-                                <Projects />
-                                <Education />
-                                <Contact />
+                                <Suspense fallback={<div className="h-screen w-full flex items-center justify-center">Loading...</div>}>
+                                    <TechMarquee />
+                                    <About />
+                                    <Services />
+                                    <Experience />
+                                    <Skills />
+                                    <Projects />
+                                    <Education />
+                                    <Contact />
+                                </Suspense>
                             </main>
 
                             <Footer />
