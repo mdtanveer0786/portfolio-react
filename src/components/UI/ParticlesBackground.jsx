@@ -1,8 +1,10 @@
 import { useEffect, useState, useCallback } from 'react'
 import Particles from 'react-particles'
 import { loadSlim } from 'tsparticles-slim'
+import { useTheme } from '../Layout/ThemeProvider'
 
 export default function ParticlesBackground() {
+    const { theme } = useTheme()
     const [particleCount, setParticleCount] = useState(60)
     const [isMobile, setIsMobile] = useState(false)
     const [reduceMotion, setReduceMotion] = useState(false)
@@ -57,6 +59,7 @@ export default function ParticlesBackground() {
 
     return (
         <Particles
+            key={theme}
             id="tsparticles"
             init={particlesInit}
             className="absolute inset-0 -z-10 text-muted-foreground/20"
