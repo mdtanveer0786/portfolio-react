@@ -118,8 +118,22 @@ const ChatBot = () => {
     const [inputValue, setInputValue] = useState('');
     const [isTyping, setIsTyping] = useState(false);
     const [showTooltip, setShowTooltip] = useState(false);
-    const [leadData, setLeadData] = useState({ step: -1, data: {} });
+    const [leadData, setLeadData] = useState(() => {
+        if (typeof sessionStorage !== 'undefined') {
+            const saved = sessionStorage.getItem('tanveer_chat_lead_data');
+            if (saved) {
+                try { return JSON.parse(saved); } catch (e) {}
+            }
+        }
+        return { step: -1, data: {} };
+    });
     const [localTime, setLocalTime] = useState(new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }));
+
+    useEffect(() => {
+        if (typeof sessionStorage !== 'undefined') {
+            sessionStorage.setItem('tanveer_chat_lead_data', JSON.stringify(leadData));
+        }
+    }, [leadData]);
     const [isListening, setIsListening] = useState(false);
     const [soundEnabled, setSoundEnabled] = useState(true);
     const messagesEndRef = useRef(null);
@@ -300,6 +314,35 @@ const ChatBot = () => {
     const processLeadStep = (text) => {
         const currentStep = leadData.step;
         const key = LEAD_STEPS[currentStep].key;
+
+        // Cancel command
+        if (text.toLowerCase() === 'cancel' || text.toLowerCase() === 'stop') {
+            setLeadData({ step: -1, data: {} });
+            setMessages(prev => [...prev, {
+                id: Date.now(),
+                type: 'bot',
+                text: "No problem! I've cancelled the form. What else can I help you with?",
+                timestamp: new Date()
+            }]);
+            setIsTyping(false);
+            return;
+        }
+
+        // Email validation
+        if (key === 'email' && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(text)) {
+            setTimeout(() => {
+                playSound('pop');
+                setMessages(prev => [...prev, {
+                    id: Date.now(),
+                    type: 'bot',
+                    text: "That doesn't look like a valid email address. Could you please provide a valid one? (or type 'cancel' to stop)",
+                    timestamp: new Date()
+                }]);
+                setIsTyping(false);
+            }, 800);
+            return;
+        }
+
         const newData = { ...leadData.data, [key]: text };
 
         setTimeout(() => {
@@ -340,6 +383,8 @@ const ChatBot = () => {
             to_name: 'Md Tanveer Alam'
         };
 
+        const toastId = toast.loading('Sending your inquiry...');
+
         // 1. Send Lead Notification to Tanveer
         emailjs.send(
             SERVICE_ID, 
@@ -347,8 +392,10 @@ const ChatBot = () => {
             templateParams, 
             PUBLIC_KEY
         ).then(() => {
+            toast.success('Inquiry sent successfully!', { id: toastId });
             console.log('Lead notification sent');
         }).catch((err) => {
+            toast.error('Failed to send inquiry. Please try the contact form instead.', { id: toastId });
             console.error('Lead notification failed', err);
         });
 
@@ -358,9 +405,7 @@ const ChatBot = () => {
             AUTOREPLY_TEMPLATE_ID, 
             templateParams, 
             PUBLIC_KEY
-        ).then(() => {
-            console.log('Auto-reply sent successfully');
-        }).catch((err) => {
+        ).catch((err) => {
             console.error('Auto-reply failed', err);
         });
     };
@@ -625,7 +670,11 @@ const ChatBot = () => {
 
                         {/* Quick Actions Bar */}
                         <div className="px-4 py-3 flex flex-nowrap overflow-x-auto gap-2 scrollbar-none bg-black/[0.02] dark:bg-white/[0.02] border-t border-border/50">
-                            {QUICK_ACTIONS.map((action, i) => (
+                            {leadData.step !== -1 ? (
+                                <button onClick={() => { setLeadData({ step: -1, data: {} }); setMessages(prev => [...prev, { id: Date.now(), type: 'bot', text: 'Inquiry cancelled. How else can I assist you?', timestamp: new Date() }]); playSound('pop'); speakText('Inquiry cancelled.'); }} className="text-[10px] font-bold uppercase tracking-wider px-4 py-2.5 rounded-xl border border-red-500/30 bg-red-500/10 text-red-500 hover:bg-red-500 hover:text-white transition-all flex items-center gap-2 whitespace-nowrap shadow-sm active:scale-95">
+                                    <X size={13} /> Cancel Inquiry
+                                </button>
+                            ) : QUICK_ACTIONS.map((action, i) => (
                                 <button key={i} onClick={() => handleSendMessage(action.value)} className="text-[10px] font-bold uppercase tracking-wider px-4 py-2.5 rounded-xl border border-border bg-background hover:border-primary hover:text-primary transition-all flex items-center gap-2 whitespace-nowrap shadow-sm hover:shadow-md active:scale-95">
                                     <action.icon size={13} /> {action.label}
                                 </button>
