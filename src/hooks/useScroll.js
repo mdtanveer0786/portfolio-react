@@ -41,12 +41,36 @@ export function useScroll() {
             threshold: [0.1, 0.5, 0.8]
         })
 
-        SECTIONS.forEach((id) => {
-            const element = document.getElementById(id)
-            if (element) observer.observe(element)
-        })
+        let observedCount = 0;
+        
+        const observeElements = () => {
+            SECTIONS.forEach((id) => {
+                const element = document.getElementById(id);
+                if (element && !element.dataset.scrollObserved) {
+                    observer.observe(element);
+                    element.dataset.scrollObserved = 'true';
+                    observedCount++;
+                }
+            });
+        };
 
-        return () => observer.disconnect()
+        // Initial observation
+        observeElements();
+
+        // Since components are lazy-loaded, they might not be in the DOM immediately.
+        // We use a short interval to check and observe them once they mount.
+        const interval = setInterval(() => {
+            if (observedCount < SECTIONS.length) {
+                observeElements();
+            } else {
+                clearInterval(interval); // All sections found, stop checking
+            }
+        }, 500);
+
+        return () => {
+            observer.disconnect();
+            clearInterval(interval);
+        }
     }, [])
 
     return { scrollY, scrollDirection, activeSection, setActiveSection }
