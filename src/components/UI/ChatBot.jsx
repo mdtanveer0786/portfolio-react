@@ -122,7 +122,11 @@ const ChatBot = () => {
         if (typeof sessionStorage !== 'undefined') {
             const saved = sessionStorage.getItem('tanveer_chat_lead_data');
             if (saved) {
-                try { return JSON.parse(saved); } catch (e) {}
+                try { 
+                return JSON.parse(saved); 
+            } catch (e) {
+                console.warn("Failed to parse chatbot session storage:", e);
+            }
             }
         }
         return { step: -1, data: {} };
