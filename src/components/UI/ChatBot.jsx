@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { MessageSquare, X, Send, User, Bot, Sparkles, ExternalLink, ArrowRight, Download, Briefcase, Clock, CheckCircle2, Mic, MicOff, Volume2, VolumeX } from 'lucide-react';
+import { MessageSquare, X, Send, User, Bot, Sparkles, ExternalLink, ArrowRight, Download, Briefcase, Clock, CheckCircle2, Mic, MicOff, Volume2, VolumeX, Trash2 } from 'lucide-react';
 import { cn } from '../../utils/cn';
 import { projects, skillCategories } from '../../utils/constants';
 import emailjs from '@emailjs/browser';
@@ -137,7 +137,18 @@ const ChatBot = () => {
     const [isListening, setIsListening] = useState(false);
     const [soundEnabled, setSoundEnabled] = useState(true);
     const messagesEndRef = useRef(null);
+    const inputRef = useRef(null);
     const recognitionRef = useRef(null);
+
+    useEffect(() => {
+        if (isOpen) {
+            setTimeout(() => {
+                if (inputRef.current) inputRef.current.focus();
+            }, 300);
+        } else if (typeof window !== 'undefined' && 'speechSynthesis' in window) {
+            window.speechSynthesis.cancel();
+        }
+    }, [isOpen]);
 
     useEffect(() => {
         const timer = setInterval(() => {
@@ -153,12 +164,6 @@ const ChatBot = () => {
             }
         };
     }, []);
-
-    useEffect(() => {
-        if (!isOpen && typeof window !== 'undefined' && 'speechSynthesis' in window) {
-            window.speechSynthesis.cancel();
-        }
-    }, [isOpen]);
 
     useEffect(() => {
         sessionStorage.setItem('tanveer_chat_history', JSON.stringify(messages));
@@ -218,6 +223,12 @@ const ChatBot = () => {
         }
     }, [messages, isTyping, isOpen]);
 
+    const clearChat = () => {
+        setMessages([{ id: Date.now(), type: 'bot', text: "Chat history cleared! I am **TanveerAI**. How can I help you today?", timestamp: new Date() }]);
+        setLeadData({ step: -1, data: {} });
+        playSound('pop');
+    };
+
     const handleSendMessage = (text) => {
         if (!text.trim()) return;
 
@@ -239,8 +250,12 @@ const ChatBot = () => {
             return;
         }
 
+        // Get response immediately to calculate typing delay
+        const botResponse = getBotResponse(text, messages);
+        const responseLength = typeof botResponse === 'string' ? botResponse.length : 60;
+        const typingDelay = 500 + Math.min(responseLength * 12, 2000); // Dynamic delay between 0.5s and 2.5s
+
         setTimeout(() => {
-            const botResponse = getBotResponse(text.toLowerCase());
             playSound('pop');
             
             if (typeof botResponse === 'string') {
@@ -308,7 +323,7 @@ const ChatBot = () => {
             }
 
             setIsTyping(false);
-        }, 800 + Math.random() * 400);
+        }, typingDelay);
     };
 
     const processLeadStep = (text) => {
@@ -410,8 +425,17 @@ const ChatBot = () => {
         });
     };
 
-    const getBotResponse = (input) => {
+    const getBotResponse = (input, currentMessages) => {
         const normalizedInput = input.toLowerCase().trim().replace(/[?.,!]/g, '');
+
+        // Context Awareness: Check if user is saying 'yes' to a previous bot question
+        const isAffirmative = ['yes', 'yeah', 'yep', 'sure', 'ok', 'okay', 'of course', 'show me', 'please'].includes(normalizedInput);
+        if (isAffirmative && currentMessages && currentMessages.length > 0) {
+            const lastBotMsg = currentMessages.slice().reverse().find(m => m.type === 'bot')?.text?.toLowerCase() || '';
+            if (lastBotMsg.includes('project')) return { type: 'projects' };
+            if (lastBotMsg.includes('skill')) return { type: 'skills' };
+            if (lastBotMsg.includes('hire') || lastBotMsg.includes('contact')) return { type: 'lead' };
+        }
 
         // 1. Check for specific high-priority intents first
         if (normalizedInput.includes('resume') || normalizedInput.includes('cv') || normalizedInput.includes('download')) return { type: 'resume' };
@@ -573,11 +597,14 @@ const ChatBot = () => {
                                     </div>
                                 </div>
                             </div>
-                            <div className="flex items-center gap-1">
-                                <button onClick={() => setSoundEnabled(!soundEnabled)} className="p-2.5 hover:bg-white/20 rounded-xl transition-all active:scale-90 text-white/80" aria-label={soundEnabled ? 'Mute sound' : 'Enable sound'}>
+                            <div className="flex items-center gap-0.5 xs:gap-1">
+                                <button onClick={clearChat} className="p-2 hover:bg-white/20 rounded-xl transition-all active:scale-90 text-white/80" title="Clear chat history" aria-label="Clear chat">
+                                    <Trash2 size={16} />
+                                </button>
+                                <button onClick={() => setSoundEnabled(!soundEnabled)} className="p-2 hover:bg-white/20 rounded-xl transition-all active:scale-90 text-white/80" title={soundEnabled ? 'Mute sound' : 'Enable sound'} aria-label={soundEnabled ? 'Mute sound' : 'Enable sound'}>
                                     {soundEnabled ? <Volume2 size={18} /> : <VolumeX size={18} />}
                                 </button>
-                                <button onClick={() => setIsOpen(false)} className="p-2.5 hover:bg-white/20 rounded-xl transition-all active:scale-90" aria-label="Close chat">
+                                <button onClick={() => setIsOpen(false)} className="p-2 hover:bg-white/20 rounded-xl transition-all active:scale-90" aria-label="Close chat">
                                     <X size={22} />
                                 </button>
                             </div>
@@ -688,7 +715,7 @@ const ChatBot = () => {
                                     {isListening ? <MicOff size={18} /> : <Mic size={18} />}
                                 </button>
                                 <div className="relative flex-1 group">
-                                    <input type="text" value={inputValue} onChange={(e) => setInputValue(e.target.value)} placeholder={leadData.step !== -1 ? "Type your answer..." : "Ask TanveerAI anything..."} className="w-full bg-muted/30 border border-border rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all pr-10" aria-label="Chat message input" />
+                                    <input ref={inputRef} type="text" value={inputValue} onChange={(e) => setInputValue(e.target.value)} placeholder={leadData.step !== -1 ? "Type your answer..." : "Ask TanveerAI anything..."} className="w-full bg-muted/30 border border-border rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all pr-10" aria-label="Chat message input" />
                                     <div className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground/30 pointer-events-none group-focus-within:text-primary/30 transition-colors"><ArrowRight size={16} /></div>
                                 </div>
                                 <button type="submit" disabled={!inputValue.trim()} className="p-3.5 rounded-xl bg-primary text-white disabled:opacity-50 disabled:cursor-not-allowed hover:shadow-lg hover:shadow-primary/30 transition-all active:scale-90 flex-shrink-0" aria-label="Send message">
