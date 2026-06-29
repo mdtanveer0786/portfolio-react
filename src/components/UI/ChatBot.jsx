@@ -396,9 +396,13 @@ const ChatBot = () => {
 
     const sendLeadEmail = (data) => {
         const templateParams = {
+            name: data.name,
+            email: data.email,
+            subject: 'ChatBot Lead - New Project Inquiry',
+            message: `Project Details: ${data.project}`,
             from_name: data.name,
             from_email: data.email,
-            message: `Project Type: ${data.project}`,
+            reply_to: data.email,
             to_name: 'Md Tanveer Alam'
         };
 
@@ -422,7 +426,13 @@ const ChatBot = () => {
         emailjs.send(
             SERVICE_ID, 
             AUTOREPLY_TEMPLATE_ID, 
-            templateParams, 
+            {
+                name: data.name,
+                email: data.email,
+                message: `Project Details: ${data.project}`,
+                from_name: 'Md Tanveer Alam',
+                reply_to: 'tanveerdev14@gmail.com'
+            }, 
             PUBLIC_KEY
         ).catch((err) => {
             console.error('Auto-reply failed', err);
