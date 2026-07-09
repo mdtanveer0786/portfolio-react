@@ -76,17 +76,16 @@ export default function About() {
                                         </p>
                                     </div>
                                 </div>
-                                
                                 <div className="pt-4 relative z-10">
                                     <motion.a
-                                        href="./resume.docx"
-                                        download="Tanveer_Resume.docx"
+                                        href="./resume.pdf"
+                                        download="Md_Tanveer_Alam_Resume.pdf"
                                         whileHover={{ scale: 1.02, y: -2 }}
                                         whileTap={{ scale: 0.98 }}
                                         className="btn-primary inline-flex text-xs sm:text-sm px-7 py-3.5 font-bold rounded-xl shadow-lg hover:shadow-primary/25"
                                         aria-label="Download Resume"
                                     >
-                                        <Download size={20} className="mr-2" /> Download Full CV
+                                        <Download size={20} className="mr-2" /> Download Resume
                                     </motion.a>
                                 </div>
                             </div>
