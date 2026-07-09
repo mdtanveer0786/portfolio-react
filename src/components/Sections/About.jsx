@@ -79,13 +79,14 @@ export default function About() {
                                 
                                 <div className="pt-4 relative z-10">
                                     <motion.a
-                                        href="/resume.pdf"
-                                        download="Md_Tanveer_Alam_Resume.pdf"
+                                        href="./resume.pdf"
+                                        download="Tanveer_Resume.pdf"
                                         whileHover={{ scale: 1.02, y: -2 }}
                                         whileTap={{ scale: 0.98 }}
                                         className="btn-primary inline-flex text-xs sm:text-sm px-7 py-3.5 font-bold rounded-xl shadow-lg hover:shadow-primary/25"
+                                        aria-label="Download Resume"
                                     >
-                                        Download Full CV
+                                        <Download size={20} className="mr-2" /> Download Full CV
                                     </motion.a>
                                 </div>
                             </div>
@@ -98,12 +99,12 @@ export default function About() {
                             <div className="glass-card p-4 h-full relative group flex flex-col">
                                 <div className="relative rounded-2xl overflow-hidden flex-grow min-h-[320px] md:min-h-full shadow-md">
                                     <img
-                                        src="/about_avatar.png"
+                                        src="./about_avatar.png"
                                         alt="Md Tanveer Alam"
                                         className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                                         onError={(e) => {
                                             e.target.onerror = null
-                                            e.target.src = "/profile.jpg"
+                                            e.target.src = "./profile.jpg"
                                         }}
                                     />
                                     

@@ -98,7 +98,7 @@ export default function Hero({ setActiveSection }) {
                             <motion.a
                                 whileHover={{ scale: 1.02, y: -2 }}
                                 transition={{ type: 'spring', stiffness: 400, damping: 25 }}
-                                href="/resume.pdf"
+                                href="./resume.pdf"
                                 download="Md_Tanveer_Alam_Resume.pdf"
                                 className="btn-secondary w-full xs:w-auto"
                             >
