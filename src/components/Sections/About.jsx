@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion'
-import { Code2, Rocket, MapPin, Briefcase, Heart } from 'lucide-react'
+import { Code2, Rocket, MapPin, Briefcase, Heart, Download } from 'lucide-react'
 import { FaReact, FaNodeJs } from 'react-icons/fa'
 import { SiMongodb, SiExpress, SiTailwindcss } from 'react-icons/si'
 import SectionReveal from '../UI/SectionReveal'
