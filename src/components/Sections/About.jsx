@@ -79,8 +79,8 @@ export default function About() {
                                 
                                 <div className="pt-4 relative z-10">
                                     <motion.a
-                                        href="./resume.pdf"
-                                        download="Tanveer_Resume.pdf"
+                                        href="./resume.docx"
+                                        download="Tanveer_Resume.docx"
                                         whileHover={{ scale: 1.02, y: -2 }}
                                         whileTap={{ scale: 0.98 }}
                                         className="btn-primary inline-flex text-xs sm:text-sm px-7 py-3.5 font-bold rounded-xl shadow-lg hover:shadow-primary/25"

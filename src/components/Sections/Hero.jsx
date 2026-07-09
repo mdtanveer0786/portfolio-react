@@ -98,8 +98,8 @@ export default function Hero({ setActiveSection }) {
                             <motion.a
                                 whileHover={{ scale: 1.02, y: -2 }}
                                 transition={{ type: 'spring', stiffness: 400, damping: 25 }}
-                                href="./resume.pdf"
-                                download="Md_Tanveer_Alam_Resume.pdf"
+                                href="./resume.docx"
+                                download="Md_Tanveer_Alam_Resume.docx"
                                 className="btn-secondary w-full xs:w-auto"
                             >
                                 <Download className="w-4 h-4" />

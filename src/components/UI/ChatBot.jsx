@@ -645,8 +645,8 @@ const ChatBot = () => {
                                             )}
 
                                             {msg.hasResume && (
-                                                <a href="./resume.pdf" download className="mt-4 flex items-center justify-center gap-2 w-full py-2.5 bg-primary text-white rounded-xl font-bold text-xs hover:bg-primary/90 transition-all shadow-lg shadow-primary/20">
-                                                    <Download size={14} /> Download PDF Resume
+                                                <a href="./resume.docx" download className="mt-4 flex items-center justify-center gap-2 w-full py-2.5 bg-primary text-white rounded-xl font-bold text-xs hover:bg-primary/90 transition-all shadow-lg shadow-primary/20">
+                                                    <Download size={14} /> Download Word Resume
                                                 </a>
                                             )}
 
