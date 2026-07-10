@@ -5,20 +5,37 @@ const ThemeContext = createContext({})
 
 export const useTheme = () => useContext(ThemeContext)
 
+const getSafeStorage = (key, fallback) => {
+    try {
+        return localStorage.getItem(key) || fallback
+    } catch (e) {
+        console.warn("Storage access failed, using fallback:", e)
+        return fallback
+    }
+}
+
+const setSafeStorage = (key, value) => {
+    try {
+        localStorage.setItem(key, value)
+    } catch (e) {
+        console.warn("Storage write failed:", e)
+    }
+}
+
 export function ThemeProvider({
     children,
     defaultTheme = 'dark',
     storageKey = 'portfolio-theme'
 }) {
     const [theme, setTheme] = useState(
-        () => localStorage.getItem(storageKey) || defaultTheme
+        () => getSafeStorage(storageKey, defaultTheme)
     )
 
     useLayoutEffect(() => {
         const root = window.document.documentElement
         root.classList.remove('light', 'dark')
         root.classList.add(theme)
-        localStorage.setItem(storageKey, theme)
+        setSafeStorage(storageKey, theme)
         
         // Update meta theme color
         const meta = document.querySelector('meta[name="theme-color"]')
