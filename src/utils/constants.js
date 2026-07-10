@@ -168,7 +168,7 @@ export const projects = [
         tags: ['React', 'Node.js', 'Express', 'MongoDB', 'Socket.io', 'Tailwind CSS'],
         image: parkflowImg,
         github: 'https://github.com/mdtanveer0786/ParkFlow_SaaS',
-        live: 'https://park-flow-saas.vercel.app/',
+        live: 'https://parkflow.parknpass.com/',
         featured: true,
         category: 'fullstack',
         date: '2026-06-23'
