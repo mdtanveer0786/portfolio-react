@@ -45,7 +45,7 @@ export default function About() {
                     </SectionReveal>
                     <SectionReveal delay={0.2}>
                         <p className="section-subtitle max-w-3xl text-base sm:text-lg leading-relaxed mt-4">
-                            I am a passionate Full Stack Developer based in India. My mission is to craft exceptional digital experiences that are fast, intuitive, accessible, and beautiful.
+                            I am a Full Stack Developer based in India, driven by a passion for engineering high-performance web applications. My mission is to architect exceptional digital experiences that are robust, intuitive, and visually compelling.
                         </p>
                     </SectionReveal>
                 </div>
@@ -69,10 +69,10 @@ export default function About() {
                                     
                                     <div className="space-y-4 text-sm sm:text-base text-muted-foreground leading-relaxed">
                                         <p>
-                                            I&apos;m someone who genuinely <span className="text-primary font-semibold">loves building things for the web</span>. I specialize in the MERN stack, focusing on creating solid backends and clean, easy-to-use frontends.
+                                            As a dedicated software engineer specializing in the <span className="text-primary font-semibold">MERN stack</span>, I thrive at the intersection of complex backend architecture and refined user interface design.
                                         </p>
                                         <p>
-                                            For me, it&apos;s not just about writing code, but about building real products that feel <span className="text-foreground font-semibold">natural and effortless</span> to the user while staying solid under the hood.
+                                            My approach goes beyond simply writing clean code. I am deeply committed to building scalable, real-world solutions that deliver a <span className="text-foreground font-semibold">seamless and intuitive</span> user experience, ensuring reliability under the hood and elegance on the surface.
                                         </p>
                                     </div>
                                 </div>
