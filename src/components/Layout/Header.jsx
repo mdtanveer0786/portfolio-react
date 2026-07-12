@@ -56,13 +56,13 @@ export default function Header({ activeSection, setActiveSection }) {
     return (
         <header
             className={cn(
-                'fixed top-0 left-0 right-0 transition-all duration-500 flex justify-center px-4',
+                'fixed top-0 left-0 right-0 transition-all duration-300 flex justify-center px-4',
                 scrolled ? 'py-3' : 'py-5',
                 mobileMenuOpen ? 'z-[100]' : 'z-50'
             )}
         >
             <nav className={cn(
-                "flex items-center justify-between px-4 md:px-5 py-2 rounded-2xl transition-all duration-500 border w-full max-w-5xl relative z-10",
+                "flex items-center justify-between px-4 md:px-5 py-2 rounded-2xl transition-all duration-300 border w-full max-w-5xl relative z-10",
                 scrolled
                     ? "bg-white/75 dark:bg-neutral-950/75 border-black/[0.08] dark:border-white/[0.08] shadow-[0_8px_30px_rgb(0,0,0,0.06)] dark:shadow-black/30 backdrop-blur-xl"
                     : "bg-white/40 dark:bg-neutral-950/40 border-transparent backdrop-blur-md"
