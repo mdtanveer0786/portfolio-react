@@ -4,6 +4,7 @@ import { Menu, X, Sun, Moon, Terminal } from 'lucide-react'
 import { useTheme } from './ThemeProvider'
 import { navItems, socialLinks } from '../../utils/constants'
 import { cn } from '../../utils/cn'
+import logo from '../../assets/logo.png'
 
 export default function Header({ activeSection, setActiveSection }) {
     const [scrolled, setScrolled] = useState(false)
@@ -86,8 +87,8 @@ export default function Header({ activeSection, setActiveSection }) {
                     tabIndex={0}
                     aria-label="Go to home section"
                 >
-                    <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-primary to-fuchsia-600 flex items-center justify-center text-white font-display font-bold flex-shrink-0 shadow-lg shadow-primary/20 group-hover:shadow-primary/40 transition-shadow">
-                        <Terminal size={15} className="stroke-[2.5px]" />
+                    <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-primary/10 to-fuchsia-600/10 flex items-center justify-center flex-shrink-0 shadow-lg shadow-primary/20 group-hover:shadow-primary/40 transition-shadow overflow-hidden">
+                        <img src={logo} alt="MTA Logo" className="w-full h-full object-cover" />
                     </div>
                     <span className="text-sm font-display font-bold tracking-tight text-foreground hidden xs:block">
                         Md Tanveer Alam

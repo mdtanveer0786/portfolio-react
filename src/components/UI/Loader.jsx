@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion'
 import { useState, useEffect } from 'react'
+import logo from '../../assets/logo.png'
 
 export default function Loader() {
     const [progress, setProgress] = useState(0);
@@ -41,8 +42,8 @@ export default function Loader() {
                     <div className="absolute inset-0 rounded-2xl border border-fuchsia-500/30 -rotate-45 animate-[spin_3s_linear_infinite_reverse]" />
                     
                     {/* Center Core */}
-                    <div className="relative z-10 flex items-center justify-center w-14 h-14 rounded-xl bg-gradient-to-br from-primary to-fuchsia-600 shadow-2xl shadow-primary/40">
-                        <span className="text-white font-display font-bold text-lg tracking-wider">MD</span>
+                    <div className="relative z-10 flex items-center justify-center w-14 h-14 rounded-xl bg-gradient-to-br from-primary/10 to-fuchsia-600/10 shadow-2xl shadow-primary/40 overflow-hidden">
+                        <img src={logo} alt="MTA Logo" className="w-full h-full object-cover" />
                     </div>
                 </motion.div>
 
