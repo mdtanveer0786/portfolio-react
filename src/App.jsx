@@ -62,35 +62,33 @@ function App() {
     const { activeSection, setActiveSection } = useScroll();
 
     useLayoutEffect(() => {
-        document.documentElement.classList.add('loading');
-        document.body.classList.add('no-scroll');
-        window.scrollTo(0, 0);
+        if (loading) {
+            document.documentElement.classList.add('loading');
+            document.body.classList.add('no-scroll');
+            window.scrollTo(0, 0);
+        }
 
         return () => {
             document.documentElement.classList.remove('loading');
             document.body.classList.remove('no-scroll');
         };
-    }, []);
+    }, [loading]);
 
     useEffect(() => {
         if (!loading) {
             document.body.classList.remove('no-scroll');
+            document.documentElement.classList.remove('loading');
 
-            setTimeout(() => {
-                document.documentElement.classList.remove('loading');
-
-                const hash = window.location.hash.substring(1);
-                if (hash && SECTIONS.includes(hash)) {
+            const hash = window.location.hash.substring(1);
+            if (hash && SECTIONS.includes(hash)) {
+                setTimeout(() => {
                     const element = document.getElementById(hash);
                     if (element) {
                         element.scrollIntoView({ behavior: 'smooth' });
                         setActiveSection(hash);
                     }
-                } else {
-                    window.scrollTo(0, 0);
-                    setActiveSection('home');
-                }
-            }, 50);
+                }, 100);
+            }
         }
     }, [loading, setActiveSection]);
 
