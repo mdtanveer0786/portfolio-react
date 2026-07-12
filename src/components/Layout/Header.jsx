@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Menu, X, Sun, Moon, Terminal } from 'lucide-react'
+import { Menu, X, Sun, Moon } from 'lucide-react'
 import { useTheme } from './ThemeProvider'
 import { navItems, socialLinks } from '../../utils/constants'
 import { cn } from '../../utils/cn'
@@ -182,8 +182,8 @@ export default function Header({ activeSection, setActiveSection }) {
                         >
                             <div className="p-6 flex items-center justify-between border-b border-border/50">
                                 <div className="flex items-center gap-3">
-                                    <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-primary to-fuchsia-600 flex items-center justify-center text-white font-display font-bold shadow-lg shadow-primary/20">
-                                        <Terminal size={17} className="stroke-[2.5px]" />
+                                    <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-primary/10 to-fuchsia-600/10 flex items-center justify-center flex-shrink-0 shadow-lg shadow-primary/20 overflow-hidden">
+                                        <img src={logo} alt="MTA Logo" className="w-full h-full object-cover" />
                                     </div>
                                     <div className="flex flex-col">
                                         <span className="text-sm font-display font-bold text-foreground">Md Tanveer Alam</span>
