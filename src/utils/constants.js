@@ -29,7 +29,7 @@ import ecommerceImg from '../assets/projects/ecommerce.webp'
 import safedropImg from '../assets/projects/safedrop.png'
 import parkflowImg from '../assets/projects/parkflow.png'
 
-export const LOADING_DURATION = 800;
+export const LOADING_DURATION = 1800;
 
 export const SECTIONS = ['home', 'about', 'services', 'experience', 'skills', 'projects', 'education', 'contact'];
 
