@@ -22,6 +22,22 @@ const audioCache = {
     send: typeof Audio !== 'undefined' ? new Audio(SOUNDS.send) : null
 };
 
+const getSafeSessionStorage = (key, fallback = null) => {
+    try {
+        return sessionStorage.getItem(key) || fallback;
+    } catch (e) {
+        return fallback;
+    }
+};
+
+const setSafeSessionStorage = (key, value) => {
+    try {
+        sessionStorage.setItem(key, value);
+    } catch (e) {
+        // ignore
+    }
+};
+
 const CHAT_RULES = [
     {
         category: 'greeting',
@@ -97,7 +113,7 @@ const LEAD_STEPS = [
 const ChatBot = () => {
     const [isOpen, setIsOpen] = useState(false);
     const [messages, setMessages] = useState(() => {
-        const saved = sessionStorage.getItem('tanveer_chat_history');
+        const saved = getSafeSessionStorage('tanveer_chat_history');
         if (saved) {
             try {
                 const parsed = JSON.parse(saved);
@@ -119,14 +135,12 @@ const ChatBot = () => {
     const [isTyping, setIsTyping] = useState(false);
     const [showTooltip, setShowTooltip] = useState(false);
     const [leadData, setLeadData] = useState(() => {
-        if (typeof sessionStorage !== 'undefined') {
-            const saved = sessionStorage.getItem('tanveer_chat_lead_data');
-            if (saved) {
-                try { 
+        const saved = getSafeSessionStorage('tanveer_chat_lead_data');
+        if (saved) {
+            try { 
                 return JSON.parse(saved); 
             } catch (e) {
                 console.warn("Failed to parse chatbot session storage:", e);
-            }
             }
         }
         return { step: -1, data: {} };
@@ -134,9 +148,7 @@ const ChatBot = () => {
     const [localTime, setLocalTime] = useState(new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }));
 
     useEffect(() => {
-        if (typeof sessionStorage !== 'undefined') {
-            sessionStorage.setItem('tanveer_chat_lead_data', JSON.stringify(leadData));
-        }
+        setSafeSessionStorage('tanveer_chat_lead_data', JSON.stringify(leadData));
     }, [leadData]);
     const [isListening, setIsListening] = useState(false);
     const [soundEnabled, setSoundEnabled] = useState(true);
@@ -170,7 +182,7 @@ const ChatBot = () => {
     }, []);
 
     useEffect(() => {
-        sessionStorage.setItem('tanveer_chat_history', JSON.stringify(messages));
+        setSafeSessionStorage('tanveer_chat_history', JSON.stringify(messages));
     }, [messages]);
 
     const playSound = (type) => {

@@ -35,9 +35,25 @@ const ScrollToTop = () => {
     return null;
 };
 
+const getSafeSessionStorage = (key, fallback = null) => {
+    try {
+        return sessionStorage.getItem(key) || fallback;
+    } catch (e) {
+        return fallback;
+    }
+};
+
+const setSafeSessionStorage = (key, value) => {
+    try {
+        sessionStorage.setItem(key, value);
+    } catch (e) {
+        // ignore
+    }
+};
+
 function App() {
     const [loading, setLoading] = useState(() => {
-        if (typeof window !== 'undefined' && sessionStorage.getItem('loader-seen')) {
+        if (typeof window !== 'undefined' && getSafeSessionStorage('loader-seen')) {
             return false;
         }
         return true;
@@ -97,7 +113,7 @@ function App() {
 
         let handleLoad;
 
-        if (sessionStorage.getItem('loader-seen')) {
+        if (getSafeSessionStorage('loader-seen')) {
             setLoading(false);
         } else {
             const startTime = Date.now();
@@ -107,7 +123,7 @@ function App() {
 
                 setTimeout(() => {
                     setLoading(false);
-                    sessionStorage.setItem('loader-seen', 'true');
+                    setSafeSessionStorage('loader-seen', 'true');
                 }, remainingTime);
             };
 
