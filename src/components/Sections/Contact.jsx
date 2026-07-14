@@ -67,6 +67,7 @@ export default function Contact() {
                     await emailjs.send(SERVICE_ID, AUTOREPLY_TEMPLATE_ID, {
                         name: formData.name,
                         email: formData.email,
+                        subject: formData.subject || 'General Inquiry',
                         message: formData.message,
                         from_name: 'Md Tanveer Alam',
                         reply_to: 'tanveerdev14@gmail.com'

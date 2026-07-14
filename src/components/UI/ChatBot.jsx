@@ -442,6 +442,7 @@ const ChatBot = () => {
             {
                 name: data.name,
                 email: data.email,
+                subject: 'ChatBot Inquiry',
                 message: `Project Details: ${data.project}`,
                 from_name: 'Md Tanveer Alam',
                 reply_to: 'tanveerdev14@gmail.com'
