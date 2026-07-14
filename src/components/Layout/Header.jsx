@@ -64,20 +64,9 @@ export default function Header({ activeSection, setActiveSection }) {
             <nav className={cn(
                 "flex items-center justify-between px-4 md:px-5 py-2 rounded-2xl transition-all duration-300 border w-full max-w-5xl relative z-10",
                 scrolled
-                    ? "border-black/[0.08] dark:border-white/[0.08] shadow-[0_8px_30px_rgb(0,0,0,0.06)] dark:shadow-black/30 backdrop-blur-xl"
-                    : "border-transparent backdrop-blur-md"
+                    ? "bg-white/80 dark:bg-neutral-950/80 border-black/[0.08] dark:border-white/[0.08] shadow-[0_8px_30px_rgb(0,0,0,0.06)] dark:shadow-black/30 backdrop-blur-xl"
+                    : "bg-white/40 dark:bg-neutral-950/40 border-transparent backdrop-blur-md"
             )}>
-                {/* Background layers for crossfade to prevent dark flash on theme toggle */}
-                <div className={cn(
-                    "absolute inset-0 rounded-2xl transition-opacity duration-300 pointer-events-none -z-10",
-                    "bg-white/40 dark:opacity-0",
-                    scrolled && "bg-white/75"
-                )} />
-                <div className={cn(
-                    "absolute inset-0 rounded-2xl transition-opacity duration-300 pointer-events-none -z-10",
-                    "opacity-0 dark:opacity-100 bg-neutral-950/40",
-                    scrolled && "bg-neutral-950/75"
-                )} />
 
                 {/* Logo */}
                 <motion.div

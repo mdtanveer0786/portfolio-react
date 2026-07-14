@@ -204,9 +204,8 @@
     }
 
     .btn-secondary {
-        @apply relative inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-xl font-semibold text-sm border;
+        @apply relative inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-xl font-semibold text-sm border text-foreground transition-all duration-300;
         border-color: hsla(var(--primary), 0.2);
-        color: hsl(var(--foreground));
     }
     .btn-secondary:hover {
         background: hsla(var(--primary), 0.06);
