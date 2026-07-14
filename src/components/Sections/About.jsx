@@ -64,7 +64,7 @@ export default function About() {
                                         <div className="p-3 rounded-2xl bg-primary/10 text-primary transition-colors duration-300 group-hover:bg-primary group-hover:text-white">
                                             <Briefcase className="w-5 h-5" />
                                         </div>
-                                        <h3 className="text-xl sm:text-2xl font-display font-bold text-foreground tracking-tight">My Story</h3>
+                                        <h3 className="text-xl sm:text-2xl font-display font-bold text-foreground tracking-tight">Overview</h3>
                                     </div>
                                     
                                     <div className="space-y-5 text-base sm:text-lg text-muted-foreground leading-relaxed">
