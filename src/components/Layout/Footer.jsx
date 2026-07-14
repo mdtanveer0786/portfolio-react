@@ -168,9 +168,6 @@ export default function Footer() {
                     {/* Centered Copyright */}
                     <div className="text-center text-[11px] sm:text-xs text-muted-foreground/60 flex flex-col gap-1.5">
                         <p>© {currentYear} Md Tanveer Alam. All rights reserved.</p>
-                        <p className="flex items-center justify-center gap-1.5">
-                            Crafted with <Heart size={12} className="text-red-500 fill-red-500" aria-hidden="true" /> using React & Tailwind CSS
-                        </p>
                     </div>
                 </div>
             </div>
