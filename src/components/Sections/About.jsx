@@ -67,9 +67,9 @@ export default function About() {
                                         <h3 className="text-xl sm:text-2xl font-display font-bold text-foreground tracking-tight">My Story</h3>
                                     </div>
                                     
-                                    <div className="space-y-4 text-sm sm:text-base text-muted-foreground leading-relaxed">
-                                        <p>
-                                            As a dedicated software engineer specializing in the <span className="text-primary font-semibold">MERN stack</span>, I thrive at the intersection of complex backend architecture and refined user interface design.
+                                    <div className="space-y-5 text-base sm:text-lg text-muted-foreground leading-relaxed">
+                                        <p className="text-foreground font-medium text-lg sm:text-xl leading-relaxed">
+                                            As a dedicated software engineer specializing in the <span className="text-primary font-bold">MERN stack</span>, I thrive at the intersection of complex backend architecture and refined user interface design.
                                         </p>
                                         <p>
                                             My approach goes beyond simply writing clean code. I am deeply committed to building scalable, real-world solutions that deliver a <span className="text-foreground font-semibold">seamless and intuitive</span> user experience, ensuring reliability under the hood and elegance on the surface.
