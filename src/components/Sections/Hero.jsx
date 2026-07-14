@@ -132,7 +132,7 @@ export default function Hero({ setActiveSection }) {
                     <motion.div
                         initial={{ opacity: 0, x: 40 }}
                         animate={{ opacity: 1, x: 0 }}
-                        transition={{ duration: 0.8, delay: 0.5, ease: [0.22, 1, 0.36, 1] }}
+                        transition={{ duration: 0.8, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
                         className="w-full lg:w-2/5 flex justify-center"
                     >
                         <div className="relative w-full max-w-[420px]">
@@ -156,26 +156,26 @@ export default function Hero({ setActiveSection }) {
                                     <motion.div
                                         initial={{ opacity: 0 }}
                                         animate={{ opacity: 1 }}
-                                        transition={{ delay: 0.8 }}
+                                        transition={{ delay: 0.4 }}
                                     >
                                         <span className="text-fuchsia-500 dark:text-fuchsia-400">const</span>{' '}
                                         <span className="text-cyan-600 dark:text-cyan-400">developer</span>{' '}
                                         <span className="text-foreground/50">=</span>{' '}
                                         <span className="text-foreground/50">{'{'}</span>
                                     </motion.div>
-                                    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1.0 }} className="pl-4">
+                                    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.5 }} className="pl-4">
                                         <span className="text-foreground/70">name:</span>{' '}
                                         <span className="text-emerald-600 dark:text-emerald-400">&quot;Md Tanveer Alam&quot;</span><span className="text-foreground/30">,</span>
                                     </motion.div>
-                                    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1.1 }} className="pl-4">
+                                    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.6 }} className="pl-4">
                                         <span className="text-foreground/70">role:</span>{' '}
                                         <span className="text-emerald-600 dark:text-emerald-400">&quot;Full Stack Developer&quot;</span><span className="text-foreground/30">,</span>
                                     </motion.div>
-                                    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1.2 }} className="pl-4">
+                                    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.7 }} className="pl-4">
                                         <span className="text-foreground/70">focus:</span>{' '}
                                         <span className="text-emerald-600 dark:text-emerald-400">&quot;MERN Stack &amp; Modern Web Apps&quot;</span><span className="text-foreground/30">,</span>
                                     </motion.div>
-                                    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1.3 }} className="pl-4">
+                                    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.8 }} className="pl-4">
                                         <span className="text-foreground/70">skills:</span>{' '}
                                         <span className="text-foreground/50">[</span>
                                         <span className="text-amber-600 dark:text-amber-400">&quot;React.js&quot;</span><span className="text-foreground/30">, </span>
@@ -184,15 +184,15 @@ export default function Hero({ setActiveSection }) {
                                         <span className="text-amber-600 dark:text-amber-400">&quot;MongoDB&quot;</span>
                                         <span className="text-foreground/50">]</span><span className="text-foreground/30">,</span>
                                     </motion.div>
-                                    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1.4 }} className="pl-4">
+                                    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.9 }} className="pl-4">
                                         <span className="text-foreground/70">mindset:</span>{' '}
                                         <span className="text-emerald-600 dark:text-emerald-400">&quot;Problem solver &amp; continuous learner&quot;</span><span className="text-foreground/30">,</span>
                                     </motion.div>
-                                    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1.5 }} className="pl-4">
+                                    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1.0 }} className="pl-4">
                                         <span className="text-foreground/70">availability:</span>{' '}
                                         <span className="text-emerald-600 dark:text-emerald-400">&quot;Open to freelance &amp; full-time roles&quot;</span>
                                     </motion.div>
-                                    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1.6 }}>
+                                    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1.1 }}>
                                         <span className="text-foreground/50">{'}'}</span><span className="text-foreground/30">;</span>
                                         <span className="inline-block w-[2px] h-3.5 bg-primary ml-1 animate-typing-cursor" />
                                     </motion.div>
