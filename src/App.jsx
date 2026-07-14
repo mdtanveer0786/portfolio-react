@@ -1,5 +1,6 @@
 import { useState, useEffect, useLayoutEffect, lazy, Suspense } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { Analytics } from '@vercel/analytics/react';
 
 import { ThemeProvider } from "./components/Layout/ThemeProvider";
 import Header from "./components/Layout/Header";
@@ -202,6 +203,7 @@ function App() {
                     )}
                 </AnimatePresence>
             </SmoothScroll>
+            <Analytics />
         </ThemeProvider>
     );
 }
