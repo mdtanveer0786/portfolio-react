@@ -98,7 +98,7 @@ export default function About() {
                             <div className="glass-card p-4 h-full relative group flex flex-col">
                                 <div className="relative rounded-2xl overflow-hidden flex-grow min-h-[320px] md:min-h-full shadow-md">
                                     <img
-                                        src="./about_avatar.png"
+                                        src="./about_avatar.jpeg"
                                         alt="Md Tanveer Alam"
                                         className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                                         onError={(e) => {
