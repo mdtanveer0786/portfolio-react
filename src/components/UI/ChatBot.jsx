@@ -43,7 +43,7 @@ const CHAT_RULES = [
     {
         category: 'greeting',
         keywords: ['hi', 'hello', 'hey', 'namaste', 'greeting', 'good morning', 'good afternoon', 'good evening', 'start', 'online', 'anybody'],
-        response: "Hello! I am **TanveerAI**, the official assistant of Md Tanveer Alam. I am here to provide information about Tanveer's skills, projects, and professional background. How can I help you today?"
+        response: "Hello! I am **Md Tanveer Alam**. I am here to provide information about my skills, projects, and professional background. How can I help you today?"
     },
     {
         category: 'location',
@@ -88,7 +88,7 @@ const CHAT_RULES = [
     {
         category: 'who',
         keywords: ['who', 'tanveer', 'bio', 'who are you', 'who is tanveer', 'about tanveer', 'introduce', 'yourself', 'your name', 'tell me about', 'developer name', 'what is your name'],
-        response: "I am **TanveerAI**, the official assistant of Md Tanveer Alam. Tanveer is a skilled **Full Stack Developer** specializing in MERN stack, PHP, and Android development. How can I help you explore his work?"
+        response: "I am **Md Tanveer Alam**, a skilled **Full Stack Developer** specializing in MERN stack, PHP, and Android development. How can I help you explore my work?"
     },
     {
         category: 'thanks',
@@ -127,7 +127,7 @@ const ChatBot = () => {
             { 
                 id: 1, 
                 type: 'bot', 
-                text: "Hi there! I'm **TanveerAI**. I'm here to help you learn more about Md Tanveer Alam's work and expertise. What's on your mind?",
+                text: "Hi there! I'm **Md Tanveer Alam**. I'm here to help you learn more about my work and expertise. What's on your mind?",
                 timestamp: new Date()
             }
         ];
@@ -241,7 +241,7 @@ const ChatBot = () => {
     }, [messages, isTyping, isOpen]);
 
     const clearChat = () => {
-        setMessages([{ id: Date.now(), type: 'bot', text: "Chat history cleared! I am **TanveerAI**. How can I help you today?", timestamp: new Date() }]);
+        setMessages([{ id: Date.now(), type: 'bot', text: "Chat history cleared! I am **Md Tanveer Alam**. How can I help you today?", timestamp: new Date() }]);
         setLeadData({ step: -1, data: {} });
         playSound('pop');
     };
@@ -742,7 +742,7 @@ const ChatBot = () => {
                                     {isListening ? <MicOff size={18} /> : <Mic size={18} />}
                                 </button>
                                 <div className="relative flex-1 group">
-                                    <input ref={inputRef} type="text" value={inputValue} onChange={(e) => setInputValue(e.target.value)} placeholder={leadData.step !== -1 ? "Type your answer..." : "Ask TanveerAI anything..."} className="w-full bg-muted/30 border border-border rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all pr-10" aria-label="Chat message input" />
+                                    <input ref={inputRef} type="text" value={inputValue} onChange={(e) => setInputValue(e.target.value)} placeholder={leadData.step !== -1 ? "Type your answer..." : "Ask me anything..."} className="w-full bg-muted/30 border border-border rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all pr-10" aria-label="Chat message input" />
                                     <div className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground/30 pointer-events-none group-focus-within:text-primary/30 transition-colors"><ArrowRight size={16} /></div>
                                 </div>
                                 <button type="submit" disabled={!inputValue.trim()} className="p-3.5 rounded-xl bg-primary text-white disabled:opacity-50 disabled:cursor-not-allowed hover:shadow-lg hover:shadow-primary/30 transition-all active:scale-90 flex-shrink-0" aria-label="Send message">
