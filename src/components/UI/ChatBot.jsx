@@ -615,14 +615,11 @@ const ChatBot = () => {
                                 <div>
                                     <h3 className="font-bold text-sm xs:text-base leading-none tracking-tight">Md Tanveer Alam</h3>
                                     <div className="flex items-center gap-2 mt-1.5 flex-wrap">
-                                        <p className="text-[9px] font-bold text-white/70 uppercase tracking-[0.1em] hidden xs:flex items-center gap-1 bg-white/10 px-2 py-0.5 rounded-full">
+                                        <p className="text-[9px] font-bold text-white/70 uppercase tracking-[0.1em] flex items-center gap-1 bg-white/10 px-2 py-0.5 rounded-full">
                                             <Clock size={10} /> {localTime}
                                         </p>
                                         <p className="text-[9px] font-bold text-emerald-300 uppercase tracking-[0.1em] flex items-center gap-1 bg-emerald-500/10 px-2 py-0.5 rounded-full">
                                             <CheckCircle2 size={10} /> Online
-                                        </p>
-                                        <p className="text-[9px] font-bold text-amber-300 uppercase tracking-[0.1em] hidden sm:flex items-center gap-1 bg-amber-500/10 px-2 py-0.5 rounded-full">
-                                            <Zap size={10} className="fill-amber-400" /> Replies instantly
                                         </p>
                                     </div>
                                 </div>
