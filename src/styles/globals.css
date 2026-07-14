@@ -183,13 +183,12 @@
 
     /* Premium Button */
     .btn-primary {
-        @apply relative inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-xl font-semibold text-sm overflow-hidden transition-all duration-300;
+        @apply relative inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-xl font-semibold text-sm overflow-hidden;
         background: linear-gradient(135deg, hsl(var(--primary)), hsl(322 80% 55%));
         color: white;
         box-shadow: 0 4px 15px hsla(var(--primary), 0.3), 0 1px 3px rgba(0,0,0,0.1);
     }
     .btn-primary:hover {
-        transform: translateY(-2px);
         box-shadow: 0 8px 25px hsla(var(--primary), 0.4), 0 2px 6px rgba(0,0,0,0.15);
     }
     .btn-primary::after {
@@ -205,14 +204,13 @@
     }
 
     .btn-secondary {
-        @apply relative inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-xl font-semibold text-sm transition-all duration-300 border;
+        @apply relative inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-xl font-semibold text-sm border;
         border-color: hsla(var(--primary), 0.2);
         color: hsl(var(--foreground));
     }
     .btn-secondary:hover {
         background: hsla(var(--primary), 0.06);
         border-color: hsla(var(--primary), 0.4);
-        transform: translateY(-2px);
     }
 
     /* Dot Grid Background */
