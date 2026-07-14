@@ -107,7 +107,7 @@ export default function Header({ activeSection, setActiveSection }) {
                                 className={cn(
                                     "px-4 py-2 rounded-lg text-xs font-medium transition-all relative",
                                     isActive
-                                        ? "text-white"
+                                        ? "text-foreground font-semibold"
                                         : "text-muted-foreground hover:text-foreground"
                                 )}
                                 aria-current={isActive ? "page" : undefined}
@@ -116,7 +116,7 @@ export default function Header({ activeSection, setActiveSection }) {
                                 {isActive && (
                                     <motion.div
                                         layoutId="active-pill"
-                                        className="absolute inset-0 bg-primary rounded-lg shadow-lg shadow-primary/20"
+                                        className="absolute inset-0 bg-black/[0.08] dark:bg-white/[0.12] rounded-lg"
                                         transition={{ type: 'spring', bounce: 0.15, duration: 0.5 }}
                                     />
                                 )}
