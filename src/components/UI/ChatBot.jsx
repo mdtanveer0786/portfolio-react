@@ -597,11 +597,11 @@ const ChatBot = () => {
             <AnimatePresence>
                 {isOpen && (
                     <motion.div
-                        initial={{ opacity: 0, y: 30, scale: 0.9, transformOrigin: 'bottom right' }}
+                        initial={{ opacity: 0, y: "100%", scale: 0.95, transformOrigin: 'bottom right' }}
                         animate={{ opacity: 1, y: 0, scale: 1 }}
-                        exit={{ opacity: 0, y: 30, scale: 0.9 }}
+                        exit={{ opacity: 0, y: "100%", scale: 0.95 }}
                         transition={{ type: 'spring', damping: 25, stiffness: 200 }}
-                        className="fixed inset-0 sm:absolute sm:inset-auto sm:bottom-full sm:right-0 mb-0 sm:mb-4 w-full sm:w-[420px] h-[100dvh] sm:h-[min(calc(100dvh-12rem),700px)] glass-card rounded-none sm:rounded-2xl border-0 sm:border border-primary/20 flex flex-col overflow-hidden shadow-[0_20px_60px_rgba(0,0,0,0.3)] pointer-events-auto"
+                        className="fixed sm:absolute bottom-[-1rem] right-[-1rem] sm:bottom-full sm:right-0 mb-0 sm:mb-4 w-[100vw] sm:w-[420px] h-[85dvh] sm:h-[min(calc(100dvh-12rem),700px)] glass-card rounded-t-[2rem] sm:rounded-2xl border-t border-l border-r sm:border border-primary/30 flex flex-col overflow-hidden shadow-[0_-20px_60px_rgba(0,0,0,0.4)] pointer-events-auto"
                     >
                         {/* Premium Header */}
                         <div className="p-4 xs:p-5 bg-gradient-to-r from-primary via-fuchsia-600 to-accent text-white flex items-center justify-between shadow-lg relative z-10">
