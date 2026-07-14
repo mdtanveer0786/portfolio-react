@@ -610,10 +610,10 @@ const ChatBot = () => {
                 <AnimatePresence>
                     {isOpen && (
                         <motion.div
-                            initial={{ opacity: 0, y: "100%", scale: 0.95, transformOrigin: 'bottom right' }}
-                            animate={{ opacity: 1, y: 0, scale: 1 }}
-                            exit={{ opacity: 0, y: "100%", scale: 0.95 }}
-                            transition={{ type: 'spring', damping: 25, stiffness: 200 }}
+                            initial={{ opacity: 0, scale: 0.92, y: 20 }}
+                            animate={{ opacity: 1, scale: 1, y: 0 }}
+                            exit={{ opacity: 0, scale: 0.92, y: 20 }}
+                            transition={{ type: 'spring', damping: 25, stiffness: 250 }}
                             className="fixed inset-x-0 bottom-0 sm:inset-auto sm:absolute sm:bottom-full sm:right-0 sm:mb-4 w-full sm:w-[420px] h-[85dvh] sm:h-[min(calc(100dvh-12rem),700px)] glass-card rounded-t-[2rem] sm:rounded-2xl border-t sm:border border-primary/30 flex flex-col overflow-hidden shadow-[0_-10px_50px_rgba(0,0,0,0.5)] pointer-events-auto"
                         >
                         {/* Premium Header */}
