@@ -3,7 +3,6 @@ import {
     Mail, 
     MapPin, 
     Clock, 
-    Heart,
     ChevronRight
 } from 'lucide-react'
 import { socialLinks } from '../../utils/constants'

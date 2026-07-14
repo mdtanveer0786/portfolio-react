@@ -43,7 +43,7 @@ const Services = () => {
                                 <div className={`absolute inset-0 bg-gradient-to-br ${service.gradient} opacity-0 group-hover:opacity-100 transition-opacity duration-500`} />
 
                                 <div className="relative z-10 flex flex-col h-full">
-                                    <div className="mb-6 p-4 rounded-xl bg-primary/8 w-fit group-hover:bg-primary/15 transition-colors duration-300 text-primary">
+                                    <div className="mb-6 p-4 rounded-xl bg-primary/[0.08] w-fit group-hover:bg-primary/15 transition-colors duration-300 text-primary">
                                         <service.icon className="w-8 h-8" />
                                     </div>
 
@@ -59,7 +59,7 @@ const Services = () => {
                                         {service.technologies.map((tech, idx) => (
                                             <span
                                                 key={idx}
-                                                className="px-2.5 py-1 text-[11px] font-medium rounded-lg bg-primary/5 border border-primary/10 group-hover:border-primary/20 group-hover:bg-primary/8 transition-all duration-300 text-foreground/80"
+                                                className="px-2.5 py-1 text-[11px] font-medium rounded-lg bg-primary/5 border border-primary/10 group-hover:border-primary/20 group-hover:bg-primary/[0.08] transition-all duration-300 text-foreground/80"
                                             >
                                                 {tech}
                                             </span>

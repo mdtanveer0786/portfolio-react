@@ -81,7 +81,7 @@ const Experience = () => {
                                                     <motion.div
                                                         key={pIdx}
                                                         whileHover={{ y: -3 }}
-                                                        className="p-5 sm:p-6 rounded-2xl border border-primary/10 bg-primary/5 hover:border-primary/20 hover:bg-primary/8 transition-all duration-300"
+                                                        className="p-5 sm:p-6 rounded-2xl border border-primary/10 bg-primary/5 hover:border-primary/20 hover:bg-primary/[0.08] transition-all duration-300"
                                                     >
                                                         <h5 className="text-base sm:text-lg font-display font-bold mb-1.5 text-primary">{project.name}</h5>
                                                         <p className="text-xs sm:text-sm text-muted-foreground mb-4 font-mono leading-tight">

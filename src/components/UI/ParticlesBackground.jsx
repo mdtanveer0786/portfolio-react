@@ -69,7 +69,7 @@ export default function ParticlesBackground() {
                         value: 'transparent',
                     },
                 },
-                fpsLimit: 120,
+                fpsLimit: 60,
                 interactivity: {
                     events: {
                         onClick: {
@@ -104,7 +104,7 @@ export default function ParticlesBackground() {
                         width: 1,
                     },
                     collisions: {
-                        enable: !reduceMotion,
+                        enable: false,
                     },
                     move: {
                         direction: 'none',

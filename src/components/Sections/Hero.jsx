@@ -28,7 +28,7 @@ export default function Hero({ setActiveSection }) {
             <MeshGradient />
 
             {/* Noise overlay */}
-            <div className="absolute inset-0 noise-overlay -z-5 pointer-events-none" />
+            <div className="absolute inset-0 noise-overlay -z-10 pointer-events-none" />
 
             <div className="container mx-auto relative z-10 py-20 sm:py-24 lg:py-0">
                 <div className="flex flex-col lg:flex-row items-center justify-between gap-12 xl:gap-20">
@@ -228,7 +228,7 @@ export default function Hero({ setActiveSection }) {
                     const element = document.getElementById('about')
                     if (element) {
                         const yOffset = -80 // Match header offset
-                        const y = element.getBoundingClientRect().top + window.pageYOffset + yOffset
+                        const y = element.getBoundingClientRect().top + window.scrollY + yOffset
                         window.scrollTo({ top: y, behavior: 'smooth' })
                     }
                 }}

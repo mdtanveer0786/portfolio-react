@@ -7,10 +7,10 @@ import SectionReveal from '../UI/SectionReveal'
 import AnimatedBackground from '../UI/AnimatedBackground'
 import { cn } from '../../utils/cn'
 
-const SERVICE_ID = import.meta.env.VITE_EMAILJS_SERVICE_ID || 'service_l4si2hh'
-const TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID || 'template_d4jwvxr'
-const AUTOREPLY_TEMPLATE_ID = import.meta.env.VITE_EMAILJS_AUTOREPLY_TEMPLATE_ID || 'template_y7v9m5b'
-const PUBLIC_KEY = import.meta.env.VITE_EMAILJS_PUBLIC_KEY || '8bsxLGyHrYJHyR_P0'
+const SERVICE_ID = import.meta.env.VITE_EMAILJS_SERVICE_ID
+const TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID
+const AUTOREPLY_TEMPLATE_ID = import.meta.env.VITE_EMAILJS_AUTOREPLY_TEMPLATE_ID
+const PUBLIC_KEY = import.meta.env.VITE_EMAILJS_PUBLIC_KEY
 
 if (PUBLIC_KEY) {
     emailjs.init(PUBLIC_KEY)
@@ -163,7 +163,7 @@ export default function Contact() {
                                         <div key={item.label}
                                             className="group flex items-center gap-4 p-3.5 rounded-xl bg-black/[0.02] dark:bg-white/[0.02] border border-border/20 hover:border-primary/15 transition-all"
                                         >
-                                            <div className="p-2.5 rounded-lg bg-primary/8 text-primary group-hover:bg-primary/12 transition-colors">
+                                            <div className="p-2.5 rounded-lg bg-primary/[0.08] text-primary group-hover:bg-primary/[0.12] transition-colors">
                                                 <item.icon size={18} />
                                             </div>
                                             <div>
@@ -214,10 +214,11 @@ export default function Contact() {
                             <form onSubmit={handleSubmit} className="glass-card p-6 md:p-8 space-y-5">
                                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                                     <div className="space-y-2">
-                                        <label className="text-[11px] font-medium uppercase tracking-wider text-muted-foreground/60 ml-1">
+                                        <label htmlFor="name" className="text-[11px] font-medium uppercase tracking-wider text-muted-foreground/60 ml-1">
                                             Your Name *
                                         </label>
                                         <input
+                                            id="name"
                                             type="text"
                                             name="name"
                                             value={formData.name}
@@ -229,10 +230,11 @@ export default function Contact() {
                                         />
                                     </div>
                                     <div className="space-y-2">
-                                        <label className="text-[11px] font-medium uppercase tracking-wider text-muted-foreground/60 ml-1">
+                                        <label htmlFor="email" className="text-[11px] font-medium uppercase tracking-wider text-muted-foreground/60 ml-1">
                                             Email Address *
                                         </label>
                                         <input
+                                            id="email"
                                             type="email"
                                             name="email"
                                             value={formData.email}
@@ -246,10 +248,11 @@ export default function Contact() {
                                 </div>
 
                                 <div className="space-y-2">
-                                    <label className="text-[11px] font-medium uppercase tracking-wider text-muted-foreground/60 ml-1">
+                                    <label htmlFor="subject" className="text-[11px] font-medium uppercase tracking-wider text-muted-foreground/60 ml-1">
                                         Subject
                                     </label>
                                     <input
+                                        id="subject"
                                         type="text"
                                         name="subject"
                                         value={formData.subject}
@@ -262,10 +265,11 @@ export default function Contact() {
                                 </div>
 
                                 <div className="space-y-2">
-                                    <label className="text-[11px] font-medium uppercase tracking-wider text-muted-foreground/60 ml-1">
+                                    <label htmlFor="message" className="text-[11px] font-medium uppercase tracking-wider text-muted-foreground/60 ml-1">
                                         Message *
                                     </label>
                                     <textarea
+                                        id="message"
                                         name="message"
                                         rows={5}
                                         value={formData.message}
@@ -284,10 +288,12 @@ export default function Contact() {
                                     </div>
 
                                     <motion.button
+                                        type="submit"
                                         whileHover={{ scale: 1.02, y: -1 }}
                                         whileTap={{ scale: 0.98 }}
                                         transition={{ type: 'spring', stiffness: 400, damping: 25 }}
                                         disabled={isSubmitting}
+                                        aria-label={isSubmitting ? "Sending message..." : "Send Message"}
                                         className="w-full sm:w-auto btn-primary px-8 py-3.5 text-xs font-semibold disabled:opacity-50 disabled:cursor-not-allowed"
                                     >
                                         {isSubmitting ? (
