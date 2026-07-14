@@ -806,7 +806,7 @@ const ChatBot = () => {
 
         {/* WhatsApp Floating Button — Bottom Left */}
         <motion.a
-            href="https://wa.me/917482946610"
+            href="https://wa.me/917482946610?text=Hi%20Tanveer!%20I%20visited%20your%20portfolio%20and%20would%20like%20to%20discuss%20a%20project%20with%20you."
             target="_blank"
             rel="noopener noreferrer"
             initial={{ opacity: 0, scale: 0.5 }}
