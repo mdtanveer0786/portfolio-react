@@ -58,6 +58,9 @@ function App() {
         }
         return true;
     });
+    
+    // Track if we started with the loader to determine if we should fade in
+    const [wasLoading] = useState(loading);
 
     const { activeSection, setActiveSection } = useScroll();
 
@@ -160,9 +163,9 @@ function App() {
                     ) : (
                         <motion.div
                             key="main-content"
-                            initial={{ opacity: 0 }}
+                            initial={{ opacity: wasLoading ? 0 : 1 }}
                             animate={{ opacity: 1 }}
-                            transition={{ duration: 0.6 }}
+                            transition={{ duration: wasLoading ? 0.6 : 0 }}
                             className="bg-background text-foreground min-h-screen selection:bg-primary/20 selection:text-primary relative"
                         >
                             <Suspense fallback={null}>
