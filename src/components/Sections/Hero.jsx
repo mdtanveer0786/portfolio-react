@@ -130,9 +130,9 @@ export default function Hero({ setActiveSection }) {
 
                     {/* Right — Code Editor Visual */}
                     <motion.div
-                        initial={{ opacity: 0, x: 40 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        transition={{ duration: 0.8, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
+                        initial={{ opacity: 0, scale: 0.95, y: 15 }}
+                        animate={{ opacity: 1, scale: 1, y: 0 }}
+                        transition={{ duration: 0.8, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
                         className="w-full lg:w-2/5 flex justify-center"
                     >
                         <div className="relative w-full max-w-[420px]">
