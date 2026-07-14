@@ -108,7 +108,7 @@ const LEAD_STEPS = [
     { key: 'name', question: "I'd love to help you connect with Tanveer! First, may I know your **name**?" },
     { key: 'email', question: "Nice to meet you! Could you please provide your **email address** so we can reach out?" },
     { key: 'project', question: "What kind of **project** are you looking for? (e.g., Website, App, AI Bot, etc.)" },
-    { key: 'final', question: "Thank you! I've prepared a project summary. Tanveer will review this and get back to you shortly.\n\n**Next Step:** You can also send a direct message in the Contact section below!" }
+    { key: 'final', question: "Thank you! I've prepared a project summary. Tanveer will review this and get back to you shortly.\n\nI have also sent a confirmation email to your inbox.\n\n**Next Step:** You can also send a direct message via the [Contact Section](#contact)!" }
 ];
 
 const ChatBot = () => {
@@ -582,9 +582,10 @@ const ChatBot = () => {
                 const labelMatch = part.match(/\[(.*?)\]/);
                 const urlMatch = part.match(/\((.*?)\)/);
                 if (labelMatch && urlMatch) {
+                    const isInternal = urlMatch[1].startsWith('#');
                     return (
-                        <a key={index} href={urlMatch[1]} target="_blank" rel="noopener noreferrer" className="text-accent underline decoration-accent/30 hover:decoration-accent transition-all inline-flex items-center gap-1 font-medium">
-                            {labelMatch[1]} <ExternalLink size={10} />
+                        <a key={index} href={urlMatch[1]} target={isInternal ? "_self" : "_blank"} rel={isInternal ? undefined : "noopener noreferrer"} className="text-accent underline decoration-accent/30 hover:decoration-accent transition-all inline-flex items-center gap-1 font-medium">
+                            {labelMatch[1]} {!isInternal && <ExternalLink size={10} />}
                         </a>
                     );
                 }
