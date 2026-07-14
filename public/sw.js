@@ -1,8 +1,7 @@
-const CACHE_NAME = 'tanveer-v2'; // Incremented version to force update
+const CACHE_NAME = 'tanveer-v3'; // Incremented version to force update
 const ASSETS = [
   '/',
-  '/profile.jpg',
-  '/favicon.ico',
+  '/logo.png',
   '/resume.pdf',
   '/manifest.webmanifest'
 ];
