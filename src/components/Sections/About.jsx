@@ -107,18 +107,17 @@ export default function About() {
                                         }}
                                     />
                                     
-                                    {/* Elegant Overlay with fine gradients */}
-                                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-90 transition-opacity duration-500 group-hover:opacity-100" />
+                                    {/* Subtle Overlay for badge contrast */}
+                                    <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-80 transition-opacity duration-500 group-hover:opacity-100" />
                                     
-                                    {/* Name & Location Tag */}
-                                    <div className="absolute bottom-6 left-6 right-6 transform translate-y-1 group-hover:translate-y-0 transition-transform duration-500">
-                                        <span className="inline-block px-2.5 py-0.5 rounded-md bg-primary/80 text-white text-[10px] font-mono font-bold uppercase tracking-widest mb-2 backdrop-blur-md shadow-lg shadow-primary/20">
-                                            Available
-                                        </span>
-                                        <h4 className="text-white font-display font-extrabold text-xl sm:text-2xl tracking-tight shadow-sm">Md Tanveer Alam</h4>
-                                        <div className="flex items-center gap-2 mt-1.5 text-white/75">
-                                            <MapPin size={14} className="text-primary-foreground" />
-                                            <p className="text-xs sm:text-sm font-medium">Delhi, India</p>
+                                    {/* Minimal Badge */}
+                                    <div className="absolute bottom-4 left-4 sm:bottom-6 sm:left-6 transform translate-y-1 group-hover:translate-y-0 transition-transform duration-500">
+                                        <div className="inline-flex items-center gap-2 px-3 sm:px-4 py-1.5 sm:py-2 rounded-xl bg-black/20 hover:bg-black/40 backdrop-blur-md border border-white/10 text-white text-[10px] sm:text-xs font-medium tracking-wide shadow-xl transition-all duration-300">
+                                            <span className="relative flex h-2 w-2">
+                                                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                                                <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+                                            </span>
+                                            Open to Work
                                         </div>
                                     </div>
                                 </div>
