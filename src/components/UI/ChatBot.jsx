@@ -593,16 +593,29 @@ const ChatBot = () => {
     };
 
     return (
-        <div className="fixed bottom-4 right-4 sm:bottom-8 sm:right-8 z-[9999] flex flex-col items-end pointer-events-none">
+        <>
             <AnimatePresence>
                 {isOpen && (
                     <motion.div
-                        initial={{ opacity: 0, y: "100%" }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: "100%" }}
-                        transition={{ type: 'spring', damping: 25, stiffness: 200 }}
-                        className="fixed inset-x-0 bottom-0 h-[85dvh] sm:h-[min(calc(100dvh-12rem),700px)] sm:inset-auto sm:absolute sm:bottom-full sm:right-0 sm:mb-4 sm:w-[420px] w-full glass-card rounded-t-3xl sm:rounded-2xl border-t sm:border border-primary/30 flex flex-col overflow-hidden shadow-[0_-10px_40px_rgba(0,0,0,0.4)] pointer-events-auto origin-bottom-right"
-                    >
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        onClick={() => setIsOpen(false)}
+                        className="fixed inset-0 bg-black/50 backdrop-blur-sm z-[9998] sm:hidden pointer-events-auto"
+                    />
+                )}
+            </AnimatePresence>
+
+            <div className="fixed bottom-4 right-4 sm:bottom-8 sm:right-8 z-[9999] flex flex-col items-end pointer-events-none">
+                <AnimatePresence>
+                    {isOpen && (
+                        <motion.div
+                            initial={{ opacity: 0, y: "100%", scale: 0.95, transformOrigin: 'bottom right' }}
+                            animate={{ opacity: 1, y: 0, scale: 1 }}
+                            exit={{ opacity: 0, y: "100%", scale: 0.95 }}
+                            transition={{ type: 'spring', damping: 25, stiffness: 200 }}
+                            className="fixed inset-x-0 bottom-0 sm:inset-auto sm:absolute sm:bottom-full sm:right-0 sm:mb-4 w-full sm:w-[420px] h-[85dvh] sm:h-[min(calc(100dvh-12rem),700px)] glass-card rounded-t-[2rem] sm:rounded-2xl border-t sm:border border-primary/30 flex flex-col overflow-hidden shadow-[0_-10px_50px_rgba(0,0,0,0.5)] pointer-events-auto"
+                        >
                         {/* Premium Header */}
                         <div className="p-4 xs:p-5 bg-gradient-to-r from-primary via-fuchsia-600 to-accent text-white flex items-center justify-between shadow-lg relative z-10">
                             <div className="flex items-center gap-3">
@@ -789,6 +802,7 @@ const ChatBot = () => {
                 </motion.button>
             </div>
         </div>
+        </>
     );
 };
 
