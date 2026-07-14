@@ -5,6 +5,7 @@ import { cn } from '../../utils/cn';
 import { projects, skillCategories } from '../../utils/constants';
 import emailjs from '@emailjs/browser';
 import toast from 'react-hot-toast';
+import logo from '../../assets/logo.png';
 
 const SERVICE_ID = import.meta.env.VITE_EMAILJS_SERVICE_ID || 'service_l4si2hh';
 const TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID || 'template_d4jwvxr';
@@ -606,19 +607,19 @@ const ChatBot = () => {
                         <div className="p-4 xs:p-5 bg-gradient-to-r from-primary via-fuchsia-600 to-accent text-white flex items-center justify-between shadow-lg relative z-10">
                             <div className="flex items-center gap-3">
                                 <div className="relative">
-                                    <div className="w-10 h-10 xs:w-12 xs:h-12 rounded-2xl bg-white/20 backdrop-blur-md flex items-center justify-center border border-white/30 shadow-inner">
-                                        <Bot size={20} className="text-white drop-shadow-sm xs:size-[24px]" />
+                                    <div className="w-10 h-10 xs:w-12 xs:h-12 rounded-2xl bg-white/20 backdrop-blur-md flex items-center justify-center border border-white/30 shadow-inner overflow-hidden">
+                                        <img src={logo} alt="MTA Logo" className="w-full h-full object-cover" />
                                     </div>
                                     <span className="absolute -bottom-0.5 -right-0.5 w-3.5 h-3.5 xs:w-4 xs:h-4 bg-emerald-400 border-2 border-primary rounded-full animate-pulse" />
                                 </div>
                                 <div>
-                                    <h3 className="font-bold text-sm xs:text-base leading-none tracking-tight">TanveerAI</h3>
+                                    <h3 className="font-bold text-sm xs:text-base leading-none tracking-tight">Md Tanveer Alam</h3>
                                     <div className="flex items-center gap-2 mt-1.5">
                                         <p className="text-[9px] font-bold text-white/70 uppercase tracking-[0.1em] hidden xs:flex items-center gap-1 bg-white/10 px-2 py-0.5 rounded-full">
                                             <Clock size={10} /> {localTime}
                                         </p>
                                         <p className="text-[9px] font-bold text-emerald-300 uppercase tracking-[0.1em] flex items-center gap-1 bg-emerald-500/10 px-2 py-0.5 rounded-full">
-                                            <CheckCircle2 size={10} /> Active
+                                            <CheckCircle2 size={10} /> Online
                                         </p>
                                     </div>
                                 </div>
@@ -779,7 +780,10 @@ const ChatBot = () => {
                         {isOpen ? (
                             <motion.div key="close" initial={{ opacity: 0, rotate: -90 }} animate={{ opacity: 1, rotate: 0 }} exit={{ opacity: 0, rotate: 90 }}><X size={24} className="sm:w-7 sm:h-7" /></motion.div>
                         ) : (
-                            <motion.div key="open" initial={{ opacity: 0, rotate: 90 }} animate={{ opacity: 1, rotate: 0 }} exit={{ opacity: 0, rotate: -90 }} className="relative"><MessageSquare size={24} className="sm:w-7 sm:h-7" /></motion.div>
+                            <motion.div key="open" initial={{ opacity: 0, rotate: 90 }} animate={{ opacity: 1, rotate: 0 }} exit={{ opacity: 0, rotate: -90 }} className="relative">
+                                <MessageSquare size={24} className="sm:w-7 sm:h-7" />
+                                <span className="absolute -top-1 -right-1 w-3 h-3 bg-emerald-400 border-2 border-primary rounded-full animate-pulse" />
+                            </motion.div>
                         )}
                     </AnimatePresence>
                 </motion.button>
