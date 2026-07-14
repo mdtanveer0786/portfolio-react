@@ -150,7 +150,7 @@ function App() {
             <SmoothScroll>
                 <ScrollToTop />
 
-                <AnimatePresence mode="wait">
+                <AnimatePresence>
                     {loading ? (
                         <motion.div
                             key="loader"
