@@ -157,6 +157,7 @@ export default function Footer() {
                                         case 'LinkedIn': return 'group-hover:text-[#0A66C2]';
                                         case 'Twitter': return 'group-hover:text-[#1DA1F2]';
                                         case 'Email': return 'group-hover:text-[#EA4335]';
+                                        case 'WhatsApp': return 'group-hover:text-[#25D366]';
                                         default: return 'group-hover:text-primary';
                                     }
                                 };
@@ -166,6 +167,7 @@ export default function Footer() {
                                         case 'LinkedIn': return 'group-hover:bg-[#0A66C2]/10';
                                         case 'Twitter': return 'group-hover:bg-[#1DA1F2]/10';
                                         case 'Email': return 'group-hover:bg-[#EA4335]/10';
+                                        case 'WhatsApp': return 'group-hover:bg-[#25D366]/10';
                                         default: return 'group-hover:bg-primary/10';
                                     }
                                 };

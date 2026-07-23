@@ -18,6 +18,7 @@ import {
     Cloud,
     Briefcase
 } from 'lucide-react'
+import { FaWhatsapp } from 'react-icons/fa'
 
 // Import Project Images
 import realestateImg from '../assets/projects/realestate.webp'
@@ -69,6 +70,12 @@ export const socialLinks = [
         label: 'Email',
         color: '#EA4335'
     },
+    {
+        icon: FaWhatsapp,
+        href: 'https://wa.me/917482946610?text=Hi%20Tanveer!%20I%20saw%20your%20premium%20portfolio%20and%20I%27m%20very%20impressed.%20I%27d%20love%20to%20discuss%20a%20potential%20project%20or%20opportunity%20with%20you.',
+        label: 'WhatsApp',
+        color: '#25D366'
+    }
 ]
 
 export const services = [

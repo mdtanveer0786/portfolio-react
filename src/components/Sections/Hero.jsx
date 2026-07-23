@@ -117,6 +117,7 @@ export default function Hero({ setActiveSection }) {
                                         case 'LinkedIn': return 'hover:text-[#0A66C2] hover:border-[#0A66C2]/30 hover:bg-[#0A66C2]/10';
                                         case 'Twitter': return 'hover:text-[#1DA1F2] hover:border-[#1DA1F2]/30 hover:bg-[#1DA1F2]/10';
                                         case 'Email': return 'hover:text-[#EA4335] hover:border-[#EA4335]/30 hover:bg-[#EA4335]/10';
+                                        case 'WhatsApp': return 'hover:text-[#25D366] hover:border-[#25D366]/30 hover:bg-[#25D366]/10';
                                         default: return 'hover:text-primary hover:border-primary/20 hover:bg-primary/5';
                                     }
                                 };
