@@ -42,58 +42,73 @@ const setSafeSessionStorage = (key, value) => {
 const CHAT_RULES = [
     {
         category: 'greeting',
-        keywords: ['hi', 'hello', 'hey', 'namaste', 'greeting', 'good morning', 'good afternoon', 'good evening', 'start', 'online', 'anybody'],
-        response: "Hello! I am **Md Tanveer Alam**. I am here to provide information about my skills, projects, and professional background. How can I help you today?"
-    },
-    {
-        category: 'location',
-        keywords: ['where', 'location', 'live', 'place', 'city', 'based', 'address', 'stay', 'ghaziabad', 'delhi', 'india', 'reside', 'home', 'uttar pradesh'],
-        response: "Md Tanveer Alam is currently based in **Delhi, India**. His current employer, Vinnpro Web Solutions, is located in **Ghaziabad, Uttar Pradesh**."
-    },
-    {
-        category: 'education',
-        keywords: ['education', 'degree', 'college', 'university', 'btech', 'study', 'qualification', 'graduated', 'cse', 'b.tech', 'school', 'marks', 'cgpa'],
-        response: "Tanveer holds a **Bachelor of Technology (B.Tech)** in Computer Science Engineering from Bikaner Technical University (2020-2024) with a CGPA of 7.0. He also maintains an **A+ certification** in Full Stack Development."
-    },
-    {
-        category: 'experience',
-        keywords: ['experience', 'work', 'job', 'vinnpro', 'current', 'role', 'seniority', 'years', 'history', 'background', 'career', 'employment'],
-        response: "Tanveer is currently a **Full Stack Developer** at **Vinnpro Web Solutions**. He has specialized experience in the MERN stack, PHP, and Android development, focusing on high-performance business applications."
-    },
-    {
-        category: 'skills',
-        keywords: ['skills', 'tech', 'stack', 'languages', 'programming', 'tools', 'database', 'frontend', 'backend', 'expertise', 'proficiency', 'technologies'],
-        response: "Tanveer specializes in the following technologies:\n\n* **Frontend:** React.js, Next.js, Tailwind CSS\n* **Backend:** Node.js, PHP, Express.js\n* **Databases:** MongoDB, MySQL\n* **Mobile:** React Native, Android App Development\n* **AI:** OpenAI API, RAG Applications\n\nWhich of these would you like to discuss for your next project?"
-    },
-    {
-        category: 'services',
-        keywords: ['service', 'offer', 'build', 'website', 'app', 'development', 'developer', 'expert', 'solutions', 'cost', 'price', 'software', 'management system', 'ecommerce'],
-        response: "Md Tanveer Alam offers a variety of premium development services:\n\n* **Full Stack & MERN Development**\n* **AI Chatbots & RAG Applications**\n* **Management Systems** (School, Hotel, Coaching)\n* **Custom E-Commerce & Business Platforms**\n\nAre you looking for a custom solution for your business?"
-    },
-    {
-        category: 'contact',
-        keywords: ['contact', 'email', 'phone', 'reach', 'connect', 'social', 'linkedin', 'github', 'talk', 'message', 'call', 'whatsapp', 'meet'],
-        response: "You can reach Md Tanveer Alam through these official channels:\n\n* **Email:** tanveerdev14@gmail.com\n* **LinkedIn:** [Professional Profile](https://linkedin.com/in/md-tanveer-alam-b7a134219/)\n* **GitHub:** [Code Repositories](https://github.com/mdtanveer0786)\n\nYou may also use the contact form at the bottom of this page."
-    },
-    {
-        category: 'ai',
-        keywords: ['ai', 'chatbot', 'rag', 'openai', 'assistant', 'automation', 'pdf chat', 'gpt', 'llm', 'intelligence', 'artificial'],
-        response: "Tanveer is an expert in **AI Development**, particularly in building RAG (Retrieval-Augmented Generation) applications, OpenAI integrations, and smart assistants that automate business workflows."
-    },
-    {
-        category: 'availability',
-        keywords: ['hire', 'availability', 'freelance', 'fulltime', 'full-time', 'opportunity', 'job', 'vacancy', 'open to work', 'available', 'contract'],
-        response: "Tanveer is currently **Available for Freelance Projects, Remote Work, and Full-Time Opportunities**. He is ready to help you build scalable and user-centric applications immediately."
+        keywords: ['hi', 'hello', 'hey', 'namaste', 'greeting', 'good morning', 'good afternoon', 'good evening', 'start', 'online', 'anybody', 'howdy'],
+        response: "Hello! I am **Md Tanveer Alam's AI Assistant**. I can answer any questions about his skills, projects, experience, and services. How can I help you today?"
     },
     {
         category: 'who',
         keywords: ['who', 'tanveer', 'bio', 'who are you', 'who is tanveer', 'about tanveer', 'introduce', 'yourself', 'your name', 'tell me about', 'developer name', 'what is your name'],
-        response: "I am **Md Tanveer Alam**, a skilled **Full Stack Developer** specializing in MERN stack, PHP, and Android development. How can I help you explore my work?"
+        response: "**Md Tanveer Alam** is a highly skilled **Full Stack Developer** specializing in the MERN stack, PHP, and Android App Development. He builds scalable, high-performance web applications and enterprise SaaS products."
+    },
+    {
+        category: 'experience',
+        keywords: ['experience', 'work', 'job', 'vinnpro', 'current', 'role', 'seniority', 'years', 'history', 'background', 'career', 'employment', 'company'],
+        response: "Tanveer is currently working as a **Full Stack Developer** at **Vinnpro Web Solutions** (Ghaziabad). He handles complex enterprise applications, REST APIs, and database architecture using React, Node.js, and MongoDB."
+    },
+    {
+        category: 'skills',
+        keywords: ['skills', 'tech', 'stack', 'languages', 'programming', 'tools', 'database', 'frontend', 'backend', 'expertise', 'proficiency', 'technologies', 'frameworks'],
+        response: "Tanveer's technical arsenal includes:\n\n* **Frontend:** React.js, Tailwind CSS, JavaScript\n* **Backend:** Node.js, Express.js, PHP\n* **Databases:** MongoDB, MySQL\n* **Mobile & Cloud:** Web2APK Android Apps, Vercel, Render, Socket.io\n\nHe is well-equipped to handle end-to-end development!"
+    },
+    {
+        category: 'projects',
+        keywords: ['projects', 'portfolio', 'work', 'built', 'showcase', 'examples', 'past work', 'live', 'demo', 'safedrop', 'parkflow'],
+        response: "Tanveer has built several impressive enterprise projects:\n\n* **ParkFlow SaaS:** Real-time parking management system.\n* **SafeDrop AI:** Smart luggage tracking & locker SaaS.\n* **Real Estate Elite:** Full-stack property platform.\n\nYou can click the **Projects** button in the chat or scroll down to see them all!"
+    },
+    {
+        category: 'services',
+        keywords: ['service', 'offer', 'build', 'website', 'app', 'development', 'developer', 'expert', 'solutions', 'software', 'management system', 'ecommerce', 'freelance'],
+        response: "Tanveer provides premium development services:\n\n* **Custom Full Stack Web Apps**\n* **Enterprise SaaS & Management Systems**\n* **Real-Time Dashboards (Socket.io)**\n* **Website to Android APK Conversion**\n\nNeed a custom solution built? Let's discuss your requirements!"
+    },
+    {
+        category: 'pricing',
+        keywords: ['cost', 'price', 'pricing', 'budget', 'charge', 'money', 'rates', 'affordable', 'expensive', 'fee'],
+        response: "Project costs vary depending on the scope, complexity, and features required. Tanveer offers highly competitive rates for premium quality work. Please provide your project details via the **Hire Tanveer** button for a custom quote!"
+    },
+    {
+        category: 'education',
+        keywords: ['education', 'degree', 'college', 'university', 'btech', 'study', 'qualification', 'graduated', 'cse', 'b.tech', 'school', 'marks', 'cgpa'],
+        response: "Tanveer holds a **B.Tech in Computer Science Engineering** (2020-2024) from Bikaner Technical University. He also possesses an **A+ Certification in Full Stack Development** from AccioJob/Udemy."
+    },
+    {
+        category: 'location',
+        keywords: ['where', 'location', 'live', 'place', 'city', 'based', 'address', 'stay', 'ghaziabad', 'delhi', 'india', 'reside', 'home', 'uttar pradesh', 'remote', 'relocate'],
+        response: "Tanveer is based in **Delhi/NCR, India**. He is fully equipped for **Remote Work** globally and is open to discussing relocation opportunities for the right full-time role."
+    },
+    {
+        category: 'contact',
+        keywords: ['contact', 'email', 'phone', 'reach', 'connect', 'social', 'linkedin', 'github', 'talk', 'message', 'call', 'whatsapp', 'meet'],
+        response: "You can reach him instantly via:\n\n* **Email:** tanveerdev14@gmail.com\n* **WhatsApp:** Click the floating green icon on the screen\n* **LinkedIn:** [Tanveer's Profile](https://linkedin.com/in/md-tanveer-alam-b7a134219/)\n\nOr just use the form in the Contact section!"
+    },
+    {
+        category: 'resume',
+        keywords: ['resume', 'cv', 'download', 'pdf', 'document', 'curriculum vitae'],
+        response: "You can download Tanveer's latest professional resume by clicking the **Download Resume** button in our quick actions below, or by visiting the Hero section of this website!"
+    },
+    {
+        category: 'ai',
+        keywords: ['ai', 'chatbot', 'rag', 'openai', 'assistant', 'automation', 'pdf chat', 'gpt', 'llm', 'intelligence', 'artificial'],
+        response: "Yes! Tanveer has experience building intelligent AI assistants and Chatbots (just like me!) using React, Node.js, and AI APIs to automate workflows and enhance user engagement."
+    },
+    {
+        category: 'availability',
+        keywords: ['hire', 'availability', 'fulltime', 'full-time', 'opportunity', 'job', 'vacancy', 'open to work', 'available', 'contract', 'recruit'],
+        response: "Tanveer is currently **Open to New Opportunities**! Whether you need a dedicated Full-Time Engineer or a reliable Freelancer for a complex project, he is ready to deliver. Click **Hire Tanveer** to start the conversation."
     },
     {
         category: 'thanks',
-        keywords: ['thank', 'thanks', 'cool', 'awesome', 'great', 'nice', 'ok', 'okay', 'perfect', 'bye', 'goodbye'],
-        response: "You are very welcome! Let me know if you would like to see his **projects**, **skills**, **resume**, or if you want to **hire** him!"
+        keywords: ['thank', 'thanks', 'cool', 'awesome', 'great', 'nice', 'ok', 'okay', 'perfect', 'bye', 'goodbye', 'amazing', 'wow'],
+        response: "You're very welcome! Feel free to explore the portfolio, test out the live project links, or download the resume. Have a fantastic day! 🚀"
     }
 ];
 
