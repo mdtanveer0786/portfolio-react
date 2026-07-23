@@ -6,25 +6,25 @@
 
 @layer base {
     :root {
-        /* Light Mode — Warm Cream with Rich Violet */
-        --background: 40 20% 98%;
-        --foreground: 240 20% 10%;
+        /* Light Mode — Icy Pearl with Rich Violet */
+        --background: 210 20% 98%;
+        --foreground: 220 30% 10%;
         --card: 0 0% 100%;
-        --card-foreground: 240 20% 10%;
+        --card-foreground: 220 30% 10%;
         --popover: 0 0% 100%;
-        --popover-foreground: 240 20% 10%;
+        --popover-foreground: 220 30% 10%;
         --primary: 263 70% 50%;
         --primary-foreground: 0 0% 100%;
-        --secondary: 260 30% 96%;
-        --secondary-foreground: 240 20% 10%;
-        --muted: 240 5% 96%;
+        --secondary: 210 20% 96%;
+        --secondary-foreground: 220 30% 10%;
+        --muted: 210 10% 96%;
         --muted-foreground: 215 16% 47%;
         --accent: 192 91% 36%;
         --accent-foreground: 0 0% 100%;
         --destructive: 0 84% 60%;
         --destructive-foreground: 0 0% 100%;
-        --border: 240 6% 90%;
-        --input: 240 6% 90%;
+        --border: 214 10% 90%;
+        --input: 214 10% 90%;
         --ring: 263 70% 50%;
         --radius: 1rem;
         --glow-color: 139 92 246;
@@ -37,25 +37,25 @@
     }
 
     .dark {
-        /* Dark Mode — Deep Space with Electric Violet */
-        --background: 240 10% 2%;
-        --foreground: 240 10% 96%;
-        --card: 240 10% 4%;
-        --card-foreground: 240 10% 96%;
-        --popover: 240 10% 4%;
-        --popover-foreground: 240 10% 96%;
+        /* Dark Mode — Obsidian Deep Space */
+        --background: 222 47% 3%;
+        --foreground: 210 20% 98%;
+        --card: 222 47% 5%;
+        --card-foreground: 210 20% 98%;
+        --popover: 222 47% 5%;
+        --popover-foreground: 210 20% 98%;
         --primary: 263 70% 58%;
         --primary-foreground: 0 0% 100%;
-        --secondary: 240 10% 6%;
-        --secondary-foreground: 240 10% 96%;
-        --muted: 240 10% 6%;
-        --muted-foreground: 240 5% 55%;
+        --secondary: 222 30% 8%;
+        --secondary-foreground: 210 20% 98%;
+        --muted: 222 30% 8%;
+        --muted-foreground: 215 15% 65%;
         --accent: 192 91% 52%;
         --accent-foreground: 0 0% 100%;
         --destructive: 0 63% 31%;
-        --destructive-foreground: 240 10% 96%;
-        --border: 240 5% 12%;
-        --input: 240 5% 12%;
+        --destructive-foreground: 210 20% 98%;
+        --border: 222 20% 14%;
+        --input: 222 20% 14%;
         --ring: 263 70% 58%;
         --glow-color: 139 92 246;
         --surface: 240 10% 5%;

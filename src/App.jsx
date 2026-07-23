@@ -7,6 +7,7 @@ import Header from "./components/Layout/Header";
 import Footer from "./components/Layout/Footer";
 import Loader from "./components/UI/Loader";
 import SmoothScroll from "./components/UI/SmoothScroll";
+import GlobalBackground from "./components/UI/GlobalBackground";
 
 import Hero from "./components/Sections/Hero";
 
@@ -149,6 +150,7 @@ function App() {
         <ThemeProvider defaultTheme="dark" storageKey="portfolio-theme">
             <SmoothScroll>
                 <ScrollToTop />
+                <GlobalBackground />
 
                 <AnimatePresence>
                     {loading ? (
