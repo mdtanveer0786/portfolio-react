@@ -598,7 +598,18 @@ const ChatBot = () => {
                 if (labelMatch && urlMatch) {
                     const isInternal = urlMatch[1].startsWith('#');
                     return (
-                        <a key={index} href={urlMatch[1]} target={isInternal ? "_self" : "_blank"} rel={isInternal ? undefined : "noopener noreferrer"} className="text-accent underline decoration-accent/30 hover:decoration-accent transition-all inline-flex items-center gap-1 font-medium">
+                        <a 
+                            key={index} 
+                            href={urlMatch[1]} 
+                            target={isInternal ? "_self" : "_blank"} 
+                            rel={isInternal ? undefined : "noopener noreferrer"} 
+                            onClick={(e) => {
+                                if (isInternal) {
+                                    setIsOpen(false);
+                                }
+                            }}
+                            className="text-accent underline decoration-accent/30 hover:decoration-accent transition-all inline-flex items-center gap-1 font-medium"
+                        >
                             {labelMatch[1]} {!isInternal && <ExternalLink size={10} />}
                         </a>
                     );
