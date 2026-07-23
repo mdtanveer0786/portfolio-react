@@ -52,8 +52,8 @@ export default function Header({ activeSection, setActiveSection }) {
             }
         }, 120);
     }
-
     return (
+        <>
         <header
             className={cn(
                 'fixed top-0 left-0 right-0 transition-all duration-300 flex justify-center px-4',
