@@ -144,30 +144,42 @@ export default function Footer() {
                             Connect
                         </h4>
                         <div className="flex flex-col gap-3">
-                            {socialLinks.map((link) => (
+                            {socialLinks.map((link) => {
+                                const getHoverColors = (label) => {
+                                    switch (label) {
+                                        case 'GitHub': return 'group-hover:text-black dark:group-hover:text-white';
+                                        case 'LinkedIn': return 'group-hover:text-[#0A66C2]';
+                                        case 'Twitter': return 'group-hover:text-[#1DA1F2]';
+                                        case 'Email': return 'group-hover:text-[#EA4335]';
+                                        default: return 'group-hover:text-primary';
+                                    }
+                                };
+                                const getBgHoverColors = (label) => {
+                                    switch (label) {
+                                        case 'GitHub': return 'group-hover:bg-black/10 dark:group-hover:bg-white/10';
+                                        case 'LinkedIn': return 'group-hover:bg-[#0A66C2]/10';
+                                        case 'Twitter': return 'group-hover:bg-[#1DA1F2]/10';
+                                        case 'Email': return 'group-hover:bg-[#EA4335]/10';
+                                        default: return 'group-hover:bg-primary/10';
+                                    }
+                                };
+                                
+                                return (
                                 <a
                                     key={link.label}
                                     href={link.href}
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    className="group relative flex items-center justify-between p-2.5 rounded-xl bg-black/[0.02] dark:bg-white/[0.02] border border-border/40 hover:border-primary/30 transition-all duration-300 overflow-hidden shadow-sm hover:shadow-md hover:shadow-primary/5"
+                                    className="flex items-center gap-3 group text-muted-foreground transition-colors text-sm"
                                 >
-                                    {/* Sweeping background gradient */}
-                                    <div className="absolute inset-0 bg-gradient-to-r from-primary/10 to-transparent translate-x-[-100%] group-hover:translate-x-0 transition-transform duration-500 ease-out" />
-                                    
-                                    <div className="flex items-center gap-3 relative z-10">
-                                        <div className="p-2 rounded-lg bg-background text-muted-foreground group-hover:text-primary group-hover:scale-110 transition-all duration-300 shadow-sm border border-border/50">
-                                            <link.icon size={16} />
-                                        </div>
-                                        <span className="text-sm font-semibold text-muted-foreground group-hover:text-foreground transition-colors duration-300">
-                                            {link.label}
-                                        </span>
+                                    <div className={`p-2 rounded-lg bg-black/[0.03] dark:bg-white/[0.03] transition-all duration-300 group-hover:scale-110 group-hover:-rotate-3 ${getBgHoverColors(link.label)}`}>
+                                        <link.icon size={16} className={`transition-colors duration-300 ${getHoverColors(link.label)}`} />
                                     </div>
-                                    
-                                    {/* Flying arrow indicator */}
-                                    <ChevronRight size={16} className="text-primary opacity-0 -translate-x-4 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300 relative z-10 mr-1" />
+                                    <span className={`group-hover:translate-x-1 transition-all duration-300 ${getHoverColors(link.label)}`}>
+                                        {link.label}
+                                    </span>
                                 </a>
-                            ))}
+                            )})}
                         </div>
                     </div>
                 </div>
