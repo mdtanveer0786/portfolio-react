@@ -1,10 +1,17 @@
-import { motion } from 'framer-motion';
+import { useRef } from 'react';
+import { motion, useScroll, useTransform } from 'framer-motion';
 import { experience } from '../../utils/constants';
 import SectionReveal from '../UI/SectionReveal';
 import AnimatedBackground from '../UI/AnimatedBackground';
 import { Briefcase, Calendar, MapPin, CheckCircle2, Code2 } from 'lucide-react';
 
 const Experience = () => {
+    const containerRef = useRef(null);
+    const { scrollYProgress } = useScroll({
+        target: containerRef,
+        offset: ["start center", "end center"]
+    });
+    const scaleY = useTransform(scrollYProgress, [0, 1], [0, 1]);
     return (
         <section id="experience" className="section-container relative overflow-hidden">
             <AnimatedBackground variant="lines" />
@@ -35,9 +42,15 @@ const Experience = () => {
                 </div>
 
                 {/* Experience Cards */}
-                <div className="relative max-w-4xl mx-auto mt-12">
-                    {/* Continuous Timeline Line */}
-                    <div className="absolute left-4 md:left-8 top-4 bottom-0 w-px bg-gradient-to-b from-primary/50 via-primary/20 to-transparent" />
+                <div ref={containerRef} className="relative max-w-4xl mx-auto mt-12">
+                    {/* Background Vertical Line (Dimmed) */}
+                    <div className="absolute left-4 md:left-8 top-4 bottom-0 w-[2px] bg-border/50" />
+                    
+                    {/* Animated Progress Vertical Line */}
+                    <motion.div 
+                        style={{ scaleY, originY: 0 }}
+                        className="absolute left-4 md:left-8 top-4 bottom-0 w-[2px] bg-gradient-to-b from-primary via-fuchsia-500 to-primary shadow-[0_0_15px_rgba(var(--glow-color),0.5)] z-10" 
+                    />
                     
                     <div className="space-y-10 sm:space-y-12">
                         {experience.map((exp, index) => (
@@ -89,6 +102,38 @@ const Experience = () => {
                                                 <p className="text-sm sm:text-base text-muted-foreground leading-relaxed">
                                                     {exp.description}
                                                 </p>
+                                            )}
+
+                                            {/* Projects Sub-section */}
+                                            {exp.projects && exp.projects.length > 0 && (
+                                                <div className="mt-8 pt-6 border-t border-border/40">
+                                                    <h4 className="text-base sm:text-lg font-display font-bold mb-5 flex items-center gap-2 text-foreground/90">
+                                                        <Code2 className="w-5 h-5 text-primary" />
+                                                        Key Projects
+                                                    </h4>
+                                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+                                                        {exp.projects.map((project, pIdx) => (
+                                                            <motion.div
+                                                                key={pIdx}
+                                                                whileHover={{ y: -3 }}
+                                                                className="p-5 sm:p-6 rounded-2xl border border-primary/10 bg-primary/5 hover:border-primary/20 hover:bg-primary/[0.08] transition-all duration-300"
+                                                            >
+                                                                <h5 className="text-base sm:text-lg font-display font-bold mb-1.5 text-primary">{project.name}</h5>
+                                                                <p className="text-xs sm:text-sm text-muted-foreground mb-4 font-mono leading-tight">
+                                                                    <span className="font-semibold text-foreground/70 font-sans">Stack:</span> {project.tech}
+                                                                </p>
+                                                                <ul className="space-y-2">
+                                                                    {project.features.map((feature, fIdx) => (
+                                                                        <li key={fIdx} className="flex items-start gap-2 text-xs sm:text-sm text-muted-foreground/80 leading-relaxed">
+                                                                            <CheckCircle2 className="w-3.5 h-3.5 text-primary/60 shrink-0 mt-0.5" />
+                                                                            <span>{feature}</span>
+                                                                        </li>
+                                                                    ))}
+                                                                </ul>
+                                                            </motion.div>
+                                                        ))}
+                                                    </div>
+                                                </div>
                                             )}
                                         </div>
                                     </div>

@@ -277,6 +277,18 @@ export const experience = [
             'Built responsive web applications using React.js, Next.js, Node.js, and MySQL.',
             'Contributed to Park Flow SaaS, Safe Drop AI, and a University Management System with 10+ REST API endpoints.',
             'Integrated REST APIs, fixed bugs, and deployed production-ready features while optimizing application performance.'
+        ],
+        projects: [
+            {
+                name: 'Safe Drop AI — Multi-Tenant SaaS Luggage & Locker Management',
+                tech: 'React, Node.js, Express, MySQL, Socket.io, Razorpay',
+                features: ['Built a multi-tenant platform supporting real-time locker/luggage tracking for multiple client accounts', 'Integrated Razorpay for payments']
+            },
+            {
+                name: 'Park Flow SaaS — Parking Management Platform',
+                tech: 'React, Node.js, Express, MySQL',
+                features: ['Built a SaaS platform for parking management with secure authentication, RBAC', 'Real-time booking workflows']
+            }
         ]
     },
     {
