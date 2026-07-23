@@ -5,7 +5,6 @@ import { cn } from '../../utils/cn';
 import { projects, skillCategories } from '../../utils/constants';
 import emailjs from '@emailjs/browser';
 import toast from 'react-hot-toast';
-import logo from '../../assets/logo.png';
 
 const SERVICE_ID = import.meta.env.VITE_EMAILJS_SERVICE_ID;
 const TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
@@ -638,7 +637,7 @@ const ChatBot = () => {
                             <div className="flex items-center gap-3">
                                 <div className="relative">
                                     <div className="w-10 h-10 xs:w-12 xs:h-12 rounded-2xl bg-white/20 backdrop-blur-md flex items-center justify-center border border-white/30 shadow-inner overflow-hidden">
-                                        <img src={logo} alt="MTA Logo" className="w-full h-full object-cover" />
+                                        <img src="./about_avatar.jpeg" alt="Md Tanveer Alam" className="w-full h-full object-cover" />
                                     </div>
                                     <span className="absolute -bottom-0.5 -right-0.5 w-3.5 h-3.5 xs:w-4 xs:h-4 bg-emerald-400 border-2 border-primary rounded-full animate-pulse" />
                                 </div>
