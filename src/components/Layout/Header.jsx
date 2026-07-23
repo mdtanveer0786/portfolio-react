@@ -209,7 +209,7 @@ export default function Header({ activeSection, setActiveSection }) {
                                 </div>
                             </div>
 
-                            <div className="flex-1 overflow-y-auto px-4 py-8 custom-scrollbar">
+                            <div className="flex-1 overflow-y-auto overscroll-contain touch-pan-y px-4 py-8 custom-scrollbar">
                                 <div className="space-y-2">
                                     {navItems.map((item, idx) => {
                                         const isActive = activeSection === item.href.substring(1)
