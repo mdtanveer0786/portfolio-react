@@ -56,8 +56,8 @@ export default function Footer() {
                     {/* Brand Section */}
                     <div className="lg:col-span-5 space-y-6">
                         <div className="flex items-center gap-4">
-                            <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-xl bg-primary/10 backdrop-blur-md flex items-center justify-center border border-primary/20 shadow-inner overflow-hidden shrink-0">
-                                <img src={logo} alt="MTA Logo" className="w-full h-full object-cover p-1" />
+                            <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-xl bg-gradient-to-br from-primary/10 to-fuchsia-600/10 flex items-center justify-center flex-shrink-0 shadow-lg shadow-primary/20 overflow-hidden shrink-0">
+                                <img src={logo} alt="MTA Logo" className="w-full h-full object-cover" />
                             </div>
                             <div className="space-y-1 sm:space-y-1.5">
                                 <h3 className="text-xl sm:text-2xl font-display font-bold text-foreground tracking-tight">
