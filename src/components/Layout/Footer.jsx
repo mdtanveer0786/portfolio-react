@@ -6,6 +6,7 @@ import {
     ChevronRight
 } from 'lucide-react'
 import { socialLinks } from '../../utils/constants'
+import logo from '../../assets/logo.png'
 
 export default function Footer() {
     const currentYear = new Date().getFullYear()
@@ -54,13 +55,18 @@ export default function Footer() {
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-12 mb-16">
                     {/* Brand Section */}
                     <div className="lg:col-span-5 space-y-6">
-                        <div className="space-y-3">
-                            <h3 className="text-2xl font-display font-bold text-foreground tracking-tight">
-                                <span className="premium-text-gradient">Md Tanveer Alam</span>
-                            </h3>
-                            <p className="text-sm font-medium text-primary uppercase tracking-widest">
-                                Full Stack Developer
-                            </p>
+                        <div className="flex items-center gap-4">
+                            <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-xl bg-primary/10 backdrop-blur-md flex items-center justify-center border border-primary/20 shadow-inner overflow-hidden shrink-0">
+                                <img src={logo} alt="MTA Logo" className="w-full h-full object-cover p-1" />
+                            </div>
+                            <div className="space-y-1 sm:space-y-1.5">
+                                <h3 className="text-xl sm:text-2xl font-display font-bold text-foreground tracking-tight">
+                                    <span className="premium-text-gradient">Md Tanveer Alam</span>
+                                </h3>
+                                <p className="text-xs sm:text-sm font-bold text-primary uppercase tracking-widest">
+                                    Full Stack Developer
+                                </p>
+                            </div>
                         </div>
                         
                         <p className="text-muted-foreground leading-relaxed max-w-md">
