@@ -111,6 +111,15 @@ export default function Hero({ setActiveSection }) {
                         <motion.div variants={itemVariants} className="flex flex-wrap items-center justify-center lg:justify-start gap-3 pt-2">
                             {socialLinks.map((social) => {
                                 const Icon = social.icon
+                                const getHoverColors = (label) => {
+                                    switch (label) {
+                                        case 'GitHub': return 'hover:text-black dark:hover:text-white hover:border-black/20 dark:hover:border-white/20 hover:bg-black/5 dark:hover:bg-white/5';
+                                        case 'LinkedIn': return 'hover:text-[#0A66C2] hover:border-[#0A66C2]/30 hover:bg-[#0A66C2]/10';
+                                        case 'Twitter': return 'hover:text-[#1DA1F2] hover:border-[#1DA1F2]/30 hover:bg-[#1DA1F2]/10';
+                                        case 'Email': return 'hover:text-[#EA4335] hover:border-[#EA4335]/30 hover:bg-[#EA4335]/10';
+                                        default: return 'hover:text-primary hover:border-primary/20 hover:bg-primary/5';
+                                    }
+                                };
                                 return (
                                     <motion.a
                                         key={social.label}
@@ -118,7 +127,7 @@ export default function Hero({ setActiveSection }) {
                                         target="_blank"
                                         rel="noopener noreferrer"
                                         whileHover={{ y: -3 }}
-                                        className="flex items-center justify-center w-10 h-10 rounded-xl bg-black/[0.03] dark:bg-white/[0.03] border border-black/[0.04] dark:border-white/[0.05] text-muted-foreground hover:text-primary hover:border-primary/20 transition-all shrink-0"
+                                        className={`flex items-center justify-center w-10 h-10 rounded-xl bg-black/[0.03] dark:bg-white/[0.03] border border-black/[0.04] dark:border-white/[0.05] text-muted-foreground transition-all shrink-0 ${getHoverColors(social.label)}`}
                                         aria-label={social.label}
                                     >
                                         <Icon className="w-4 h-4" />

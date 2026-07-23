@@ -191,18 +191,27 @@ export default function Contact() {
                                         <div className="h-px flex-1 bg-gradient-to-l from-border to-transparent" />
                                     </div>
                                     <div className="flex gap-3">
-                                        {socials.map((social) => (
+                                        {socials.map((social) => {
+                                            const getHoverColors = (label) => {
+                                                switch (label) {
+                                                    case 'GitHub': return 'hover:text-black dark:hover:text-white hover:border-black/20 dark:hover:border-white/20 hover:bg-black/5 dark:hover:bg-white/5';
+                                                    case 'LinkedIn': return 'hover:text-[#0A66C2] hover:border-[#0A66C2]/30 hover:bg-[#0A66C2]/10';
+                                                    case 'Twitter': return 'hover:text-[#1DA1F2] hover:border-[#1DA1F2]/30 hover:bg-[#1DA1F2]/10';
+                                                    default: return 'hover:text-primary hover:border-primary/20 hover:bg-primary/5';
+                                                }
+                                            };
+                                            return (
                                             <motion.a
                                                 key={social.label}
                                                 href={social.href}
                                                 target="_blank"
                                                 rel="noopener noreferrer"
                                                 whileHover={{ y: -3 }}
-                                                className="w-10 h-10 flex items-center justify-center rounded-xl bg-black/[0.02] dark:bg-white/[0.02] border border-border/20 text-muted-foreground hover:text-primary hover:border-primary/20 transition-all shrink-0"
+                                                className={`w-10 h-10 flex items-center justify-center rounded-xl bg-black/[0.02] dark:bg-white/[0.02] border border-border/20 text-muted-foreground transition-all shrink-0 ${getHoverColors(social.label)}`}
                                                 aria-label={`Follow me on ${social.label}`}
                                                 >                                                <social.icon size={18} />
                                             </motion.a>
-                                        ))}
+                                        )})}
                                     </div>
                                 </div>
                             </div>

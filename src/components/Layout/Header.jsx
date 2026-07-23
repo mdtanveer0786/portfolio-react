@@ -253,13 +253,22 @@ export default function Header({ activeSection, setActiveSection }) {
                                     <div className="flex gap-4">
                                         {socialLinks.map((social, i) => {
                                             const Icon = social.icon
+                                            const getHoverColors = (label) => {
+                                                switch (label) {
+                                                    case 'GitHub': return 'hover:text-black dark:hover:text-white hover:border-black/30 dark:hover:border-white/30 hover:bg-black/5 dark:hover:bg-white/5';
+                                                    case 'LinkedIn': return 'hover:text-[#0A66C2] hover:border-[#0A66C2]/40 hover:bg-[#0A66C2]/5';
+                                                    case 'Twitter': return 'hover:text-[#1DA1F2] hover:border-[#1DA1F2]/40 hover:bg-[#1DA1F2]/5';
+                                                    case 'Email': return 'hover:text-[#EA4335] hover:border-[#EA4335]/40 hover:bg-[#EA4335]/5';
+                                                    default: return 'hover:text-primary hover:border-primary/40 hover:bg-primary/5';
+                                                }
+                                            };
                                             return (
                                                 <a
                                                     key={i}
                                                     href={social.href}
                                                     target="_blank"
                                                     rel="noopener noreferrer"
-                                                    className="w-11 h-11 flex items-center justify-center rounded-xl bg-white dark:bg-neutral-900 text-foreground hover:text-primary border border-border transition-all hover:border-primary/30 shadow-sm"
+                                                    className={`w-11 h-11 flex items-center justify-center rounded-xl bg-white dark:bg-neutral-900 text-foreground border border-border transition-all shadow-sm ${getHoverColors(social.label)}`}
                                                     aria-label={social.label}
                                                 >
                                                     <Icon className="w-5 h-5" />
