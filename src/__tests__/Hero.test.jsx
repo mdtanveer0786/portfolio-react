@@ -29,7 +29,7 @@ describe('Hero Component', () => {
 
     it('renders the contact button', () => {
         render(<Hero />);
-        const contactBtn = screen.getByText(/Contact Me/i);
+        const contactBtn = screen.getByText(/Let's Talk/i);
         expect(contactBtn).toBeInTheDocument();
     });
 });
