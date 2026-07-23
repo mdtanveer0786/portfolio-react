@@ -808,26 +808,57 @@ const ChatBot = () => {
                     )}
                 </AnimatePresence>
 
-                <AnimatePresence>
-                    {!isOpen && (
-                        <motion.button
-                            initial={{ opacity: 0, scale: 0.5 }}
-                            animate={{ opacity: 1, scale: 1 }}
-                            exit={{ opacity: 0, scale: 0.5, rotate: -90 }}
-                            whileHover={{ scale: 1.05, y: -2 }}
-                            whileTap={{ scale: 0.95 }}
-                            onClick={() => { setIsOpen(true); setShowTooltip(false); playSound('pop'); }}
-                            aria-label="Open chat assistant"
-                            className="w-14 h-14 sm:w-16 sm:h-16 rounded-[1.75rem] sm:rounded-[2rem] flex items-center justify-center text-white shadow-[0_10px_30px_rgba(0,0,0,0.2)] transition-all duration-500 relative overflow-hidden group border-2 border-white/20 bg-primary"
-                        >
-                            <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/10 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
-                            <div className="relative">
-                                <MessageSquare size={24} className="sm:w-7 sm:h-7" />
-                                <span className="absolute -top-1 -right-1 w-3 h-3 bg-emerald-400 border-2 border-primary rounded-full animate-pulse" />
-                            </div>
-                        </motion.button>
+                <motion.button
+                    initial={{ opacity: 0, scale: 0.5 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    whileHover={{ scale: 1.05, y: -2 }}
+                    whileTap={{ scale: 0.95 }}
+                    onClick={() => {
+                        if (isOpen) {
+                            setIsOpen(false);
+                            playSound('pop');
+                        } else {
+                            setIsOpen(true);
+                            setShowTooltip(false);
+                            playSound('pop');
+                        }
+                    }}
+                    aria-label={isOpen ? "Close chat assistant" : "Open chat assistant"}
+                    className={cn(
+                        "w-14 h-14 sm:w-16 sm:h-16 rounded-[1.75rem] sm:rounded-[2rem] items-center justify-center text-white shadow-[0_10px_30px_rgba(0,0,0,0.2)] transition-all duration-500 relative overflow-hidden group border-2 border-white/20 bg-primary",
+                        isOpen ? "hidden sm:flex" : "flex"
                     )}
-                </AnimatePresence>
+                >
+                    <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/10 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
+                    <div className="relative flex items-center justify-center">
+                        <AnimatePresence mode="wait" initial={false}>
+                            {isOpen ? (
+                                <motion.div
+                                    key="close"
+                                    initial={{ rotate: -90, opacity: 0, scale: 0.5 }}
+                                    animate={{ rotate: 0, opacity: 1, scale: 1 }}
+                                    exit={{ rotate: 90, opacity: 0, scale: 0.5 }}
+                                    transition={{ duration: 0.2 }}
+                                    className="flex items-center justify-center"
+                                >
+                                    <X size={28} className="sm:w-8 sm:h-8" />
+                                </motion.div>
+                            ) : (
+                                <motion.div
+                                    key="open"
+                                    initial={{ rotate: 90, opacity: 0, scale: 0.5 }}
+                                    animate={{ rotate: 0, opacity: 1, scale: 1 }}
+                                    exit={{ rotate: -90, opacity: 0, scale: 0.5 }}
+                                    transition={{ duration: 0.2 }}
+                                    className="flex items-center justify-center"
+                                >
+                                    <MessageSquare size={24} className="sm:w-7 sm:h-7" />
+                                    <span className="absolute -top-1 -right-1 w-3 h-3 bg-emerald-400 border-2 border-primary rounded-full animate-pulse" />
+                                </motion.div>
+                            )}
+                        </AnimatePresence>
+                    </div>
+                </motion.button>
             </div>
         </div>
 
