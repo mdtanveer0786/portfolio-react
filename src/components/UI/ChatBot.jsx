@@ -603,7 +603,7 @@ const ChatBot = () => {
                             href={urlMatch[1]} 
                             target={isInternal ? "_self" : "_blank"} 
                             rel={isInternal ? undefined : "noopener noreferrer"} 
-                            onClick={(e) => {
+                            onClick={() => {
                                 if (isInternal) {
                                     setIsOpen(false);
                                 }
