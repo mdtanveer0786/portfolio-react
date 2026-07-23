@@ -57,10 +57,10 @@ const Experience = () => {
                             <SectionReveal key={exp.id || index} delay={index * 0.1}>
                                 <div className="relative pl-12 md:pl-24 group">
                                     {/* Timeline Node */}
-                                    <div className="absolute left-4 md:left-8 top-8 -translate-x-1/2 w-4 h-4 rounded-full bg-background border-2 border-primary ring-4 ring-primary/10 group-hover:ring-primary/30 group-hover:bg-primary transition-all duration-500 z-10" />
+                                    <div className="absolute left-4 md:left-8 top-8 -translate-x-1/2 w-4 h-4 rounded-full bg-background border-2 border-primary ring-4 ring-primary/10 transition-all duration-500 z-10" />
                                     
                                     {/* Glowing Pulse behind node */}
-                                    <div className="absolute left-4 md:left-8 top-8 -translate-x-1/2 w-8 h-8 rounded-full bg-primary/20 blur-sm group-hover:bg-primary/40 group-hover:blur-md transition-all duration-500 scale-75 group-hover:scale-100 opacity-0 group-hover:opacity-100" />
+                                    <div className="absolute left-4 md:left-8 top-8 -translate-x-1/2 w-8 h-8 rounded-full bg-primary/20 blur-sm transition-all duration-500 scale-100 opacity-100" />
                                     
                                     <div className="glass-card p-6 sm:p-8 md:p-10 relative overflow-hidden transition-all duration-500 hover:shadow-xl hover:shadow-primary/5 border border-border/40 hover:border-primary/20">
                                         {/* Corner Glow */}
