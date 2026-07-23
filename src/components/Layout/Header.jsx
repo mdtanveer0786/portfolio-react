@@ -166,136 +166,137 @@ export default function Header({ activeSection, setActiveSection }) {
                     </motion.button>
                 </div>
             </nav>
+        </header>
 
-            {/* Mobile Sidebar */}
-            <AnimatePresence>
-                {mobileMenuOpen && (
-                    <div className="fixed inset-0 lg:hidden z-50">
-                        <motion.div
-                            key="backdrop"
-                            initial={{ opacity: 0 }}
-                            animate={{ opacity: 1 }}
-                            exit={{ opacity: 0 }}
-                            transition={{ duration: 0.3 }}
-                            onClick={() => setMobileMenuOpen(false)}
-                            className="absolute inset-0 bg-black/40 dark:bg-black/80 backdrop-blur-sm"
-                        />
-                        <motion.div
-                            key="sidebar"
-                            initial={{ x: '100%' }}
-                            animate={{ x: 0 }}
-                            exit={{ x: '100%' }}
-                            transition={{ type: "spring", damping: 28, stiffness: 220, mass: 1 }}
-                            className="absolute right-0 top-0 bottom-0 w-[min(85%,380px)] bg-white dark:bg-neutral-950 border-l border-border shadow-2xl flex flex-col"
-                        >
-                            <div className="p-6 flex items-center justify-between border-b border-border/50">
-                                <div className="flex items-center gap-3">
-                                    <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-primary/10 to-fuchsia-600/10 flex items-center justify-center flex-shrink-0 shadow-lg shadow-primary/20 overflow-hidden">
-                                        <img src={logo} alt="MTA Logo" className="w-full h-full object-cover" />
-                                    </div>
-                                    <div className="flex flex-col">
-                                        <span className="text-sm font-display font-bold text-foreground">Md Tanveer Alam</span>
-                                        <span className="text-[10px] font-medium text-primary uppercase tracking-wider">Portfolio</span>
-                                    </div>
+        {/* Mobile Sidebar - Moved OUTSIDE header to fix mobile scrolling/clipping bugs */}
+        <AnimatePresence>
+            {mobileMenuOpen && (
+                <div className="fixed inset-0 lg:hidden z-[100]">
+                    <motion.div
+                        key="backdrop"
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        transition={{ duration: 0.3 }}
+                        onClick={() => setMobileMenuOpen(false)}
+                        className="absolute inset-0 bg-black/40 dark:bg-black/80 backdrop-blur-sm"
+                    />
+                    <motion.div
+                        key="sidebar"
+                        initial={{ x: '100%' }}
+                        animate={{ x: 0 }}
+                        exit={{ x: '100%' }}
+                        transition={{ type: "spring", damping: 28, stiffness: 220, mass: 1 }}
+                        className="absolute right-0 top-0 bottom-0 w-[min(85%,380px)] bg-white dark:bg-neutral-950 border-l border-border shadow-2xl flex flex-col"
+                    >
+                        <div className="p-6 flex items-center justify-between border-b border-border/50 shrink-0">
+                            <div className="flex items-center gap-3">
+                                <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-primary/10 to-fuchsia-600/10 flex items-center justify-center flex-shrink-0 shadow-lg shadow-primary/20 overflow-hidden">
+                                    <img src={logo} alt="MTA Logo" className="w-full h-full object-cover" />
                                 </div>
-                                <div className="flex items-center gap-2">
-                                    <button
-                                        onClick={() => setMobileMenuOpen(false)}
-                                        className="p-2.5 rounded-xl bg-black/[0.04] dark:bg-white/[0.04] text-foreground hover:text-primary transition-all border border-transparent hover:border-primary/20"
-                                        aria-label="Close menu"
-                                    >
-                                        <X className="w-5 h-5" />
-                                    </button>
+                                <div className="flex flex-col">
+                                    <span className="text-sm font-display font-bold text-foreground">Md Tanveer Alam</span>
+                                    <span className="text-[10px] font-medium text-primary uppercase tracking-wider">Portfolio</span>
                                 </div>
                             </div>
+                            <div className="flex items-center gap-2">
+                                <button
+                                    onClick={() => setMobileMenuOpen(false)}
+                                    className="p-2.5 rounded-xl bg-black/[0.04] dark:bg-white/[0.04] text-foreground hover:text-primary transition-all border border-transparent hover:border-primary/20"
+                                    aria-label="Close menu"
+                                >
+                                    <X className="w-5 h-5" />
+                                </button>
+                            </div>
+                        </div>
 
-                            <div className="flex-1 overflow-y-auto overscroll-contain touch-pan-y px-4 py-8 custom-scrollbar">
-                                <div className="space-y-2">
-                                    {navItems.map((item, idx) => {
-                                        const isActive = activeSection === item.href.substring(1)
-                                        const Icon = item.icon
+                        <div className="flex-1 overflow-y-auto overscroll-contain touch-pan-y px-4 py-8 custom-scrollbar">
+                            <div className="space-y-2">
+                                {navItems.map((item, idx) => {
+                                    const isActive = activeSection === item.href.substring(1)
+                                    const Icon = item.icon
+                                    return (
+                                        <motion.button
+                                            key={item.label}
+                                            initial={{ opacity: 0, x: 20 }}
+                                            animate={{ opacity: 1, x: 0 }}
+                                            transition={{ 
+                                                delay: 0.1 + idx * 0.05,
+                                                duration: 0.3,
+                                                ease: "easeOut"
+                                            }}
+                                            onClick={() => handleNavClick(item.href)}
+                                            className={cn(
+                                                "w-full flex items-center gap-4 p-4 rounded-2xl transition-all duration-300",
+                                                isActive
+                                                    ? "bg-primary text-white shadow-lg shadow-primary/20"
+                                                    : "text-muted-foreground hover:bg-black/[0.03] dark:hover:bg-white/[0.03] hover:text-foreground"
+                                            )}
+                                            aria-current={isActive ? "page" : undefined}
+                                        >
+                                            <div className={cn(
+                                                "p-2 rounded-lg transition-all",
+                                                isActive
+                                                    ? "bg-white/20"
+                                                    : "bg-black/[0.04] dark:bg-white/[0.04]"
+                                            )}>
+                                                <Icon className="w-4 h-4" />
+                                            </div>
+                                            <span className="font-semibold text-sm">{item.label}</span>
+                                            {isActive && (
+                                                <motion.div 
+                                                    layoutId="active-indicator"
+                                                    className="ml-auto w-1.5 h-1.5 rounded-full bg-white" 
+                                                />
+                                            )}
+                                        </motion.button>
+                                    )
+                                })}
+                            </div>
+                        </div>
+
+                        <div className="p-8 border-t border-border bg-black/[0.01] dark:bg-white/[0.01] space-y-6 shrink-0">
+                            <div>
+                                <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-muted-foreground/50 mb-4">Let&apos;s Connect</p>
+                                <div className="flex gap-4">
+                                    {socialLinks.map((social, i) => {
+                                        const Icon = social.icon
+                                        const getHoverColors = (label) => {
+                                            switch (label) {
+                                                case 'GitHub': return 'hover:text-black dark:hover:text-white hover:border-black/30 dark:hover:border-white/30 hover:bg-black/5 dark:hover:bg-white/5';
+                                                case 'LinkedIn': return 'hover:text-[#0A66C2] hover:border-[#0A66C2]/40 hover:bg-[#0A66C2]/5';
+                                                case 'Twitter': return 'hover:text-[#1DA1F2] hover:border-[#1DA1F2]/40 hover:bg-[#1DA1F2]/5';
+                                                case 'Email': return 'hover:text-[#EA4335] hover:border-[#EA4335]/40 hover:bg-[#EA4335]/5';
+                                                default: return 'hover:text-primary hover:border-primary/40 hover:bg-primary/5';
+                                            }
+                                        };
                                         return (
-                                            <motion.button
-                                                key={item.label}
-                                                initial={{ opacity: 0, x: 20 }}
-                                                animate={{ opacity: 1, x: 0 }}
-                                                transition={{ 
-                                                    delay: 0.1 + idx * 0.05,
-                                                    duration: 0.3,
-                                                    ease: "easeOut"
-                                                }}
-                                                onClick={() => handleNavClick(item.href)}
-                                                className={cn(
-                                                    "w-full flex items-center gap-4 p-4 rounded-2xl transition-all duration-300",
-                                                    isActive
-                                                        ? "bg-primary text-white shadow-lg shadow-primary/20"
-                                                        : "text-muted-foreground hover:bg-black/[0.03] dark:hover:bg-white/[0.03] hover:text-foreground"
-                                                )}
-                                                aria-current={isActive ? "page" : undefined}
+                                            <a
+                                                key={i}
+                                                href={social.href}
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                                className={`w-11 h-11 flex items-center justify-center rounded-xl bg-white dark:bg-neutral-900 text-foreground border border-border transition-all shadow-sm ${getHoverColors(social.label)}`}
+                                                aria-label={social.label}
                                             >
-                                                <div className={cn(
-                                                    "p-2 rounded-lg transition-all",
-                                                    isActive
-                                                        ? "bg-white/20"
-                                                        : "bg-black/[0.04] dark:bg-white/[0.04]"
-                                                )}>
-                                                    <Icon className="w-4 h-4" />
-                                                </div>
-                                                <span className="font-semibold text-sm">{item.label}</span>
-                                                {isActive && (
-                                                    <motion.div 
-                                                        layoutId="active-indicator"
-                                                        className="ml-auto w-1.5 h-1.5 rounded-full bg-white" 
-                                                    />
-                                                )}
-                                            </motion.button>
+                                                <Icon className="w-5 h-5" />
+                                            </a>
                                         )
                                     })}
                                 </div>
                             </div>
-
-                            <div className="p-8 border-t border-border bg-black/[0.01] dark:bg-white/[0.01] space-y-6">
-                                <div>
-                                    <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-muted-foreground/50 mb-4">Let&apos;s Connect</p>
-                                    <div className="flex gap-4">
-                                        {socialLinks.map((social, i) => {
-                                            const Icon = social.icon
-                                            const getHoverColors = (label) => {
-                                                switch (label) {
-                                                    case 'GitHub': return 'hover:text-black dark:hover:text-white hover:border-black/30 dark:hover:border-white/30 hover:bg-black/5 dark:hover:bg-white/5';
-                                                    case 'LinkedIn': return 'hover:text-[#0A66C2] hover:border-[#0A66C2]/40 hover:bg-[#0A66C2]/5';
-                                                    case 'Twitter': return 'hover:text-[#1DA1F2] hover:border-[#1DA1F2]/40 hover:bg-[#1DA1F2]/5';
-                                                    case 'Email': return 'hover:text-[#EA4335] hover:border-[#EA4335]/40 hover:bg-[#EA4335]/5';
-                                                    default: return 'hover:text-primary hover:border-primary/40 hover:bg-primary/5';
-                                                }
-                                            };
-                                            return (
-                                                <a
-                                                    key={i}
-                                                    href={social.href}
-                                                    target="_blank"
-                                                    rel="noopener noreferrer"
-                                                    className={`w-11 h-11 flex items-center justify-center rounded-xl bg-white dark:bg-neutral-900 text-foreground border border-border transition-all shadow-sm ${getHoverColors(social.label)}`}
-                                                    aria-label={social.label}
-                                                >
-                                                    <Icon className="w-5 h-5" />
-                                                </a>
-                                            )
-                                        })}
-                                    </div>
-                                </div>
-                                <div className="inline-flex items-center gap-3 px-4 py-3 rounded-xl bg-emerald-500/5 border border-emerald-500/15 text-[10px] min-[350px]:text-[11px] font-medium text-emerald-600 dark:text-emerald-400 w-full shadow-[0_0_15px_rgba(16,185,129,0.02)] backdrop-blur-sm">
-                                    <span className="relative flex h-2 w-2 flex-shrink-0">
-                                        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-                                        <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
-                                    </span>
-                                    <span>Available for freelance & full-time</span>
-                                </div>
+                            <div className="inline-flex items-center gap-3 px-4 py-3 rounded-xl bg-emerald-500/5 border border-emerald-500/15 text-[10px] min-[350px]:text-[11px] font-medium text-emerald-600 dark:text-emerald-400 w-full shadow-[0_0_15px_rgba(16,185,129,0.02)] backdrop-blur-sm">
+                                <span className="relative flex h-2 w-2 flex-shrink-0">
+                                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                                    <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+                                </span>
+                                <span>Available for freelance & full-time</span>
                             </div>
-                        </motion.div>
-                    </div>
-                )}
-            </AnimatePresence>
-        </header>
+                        </div>
+                    </motion.div>
+                </div>
+            )}
+        </AnimatePresence>
+        </>
     )
 }
