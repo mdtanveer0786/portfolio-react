@@ -255,7 +255,7 @@ const ChatBot = () => {
     }, [messages, isTyping, isOpen]);
 
     const clearChat = () => {
-        setMessages([{ id: Date.now(), type: 'bot', text: "Chat history cleared! I am **Md Tanveer Alam**. How can I help you today?", timestamp: new Date() }]);
+        setMessages([{ id: Date.now(), type: 'bot', text: "Chat history cleared! I am **Md Tanveer Alam's AI Assistant**. How can I help you today?", timestamp: new Date() }]);
         setLeadData({ step: -1, data: {} });
         playSound('pop');
     };
