@@ -128,19 +128,34 @@ export default function Header({ activeSection, setActiveSection }) {
                 {/* Right Actions */}
                 <div className="flex items-center gap-2">
                     <motion.button
-                        whileHover={{ scale: 1.05 }}
-                        whileTap={{ scale: 0.9 }}
+                        whileHover={{ scale: 1.05, y: -2 }}
+                        whileTap={{ scale: 0.92 }}
                         onClick={toggleTheme}
                         aria-label={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}
-                        className="p-2.5 rounded-xl bg-black/[0.04] dark:bg-white/[0.04] border border-black/[0.04] dark:border-white/[0.06] text-foreground hover:text-primary transition-all"
+                        style={{ perspective: "800px" }}
+                        className="w-10 h-10 rounded-xl bg-gradient-to-b from-black/[0.02] to-black/[0.06] dark:from-white/[0.06] dark:to-white/[0.02] border border-black/[0.08] dark:border-white/[0.08] text-foreground hover:text-primary transition-colors flex items-center justify-center shadow-[inset_0_1px_1px_rgba(255,255,255,0.8)] dark:shadow-[inset_0_1px_1px_rgba(255,255,255,0.15)] drop-shadow-sm"
                     >
                         <motion.div
-                            key={theme}
-                            initial={{ rotate: -70, scale: 0.85, opacity: 0 }}
-                            animate={{ rotate: 0, scale: 1, opacity: 1 }}
-                            transition={{ duration: 0.15, ease: "easeOut" }}
+                            animate={{ rotateY: theme === 'dark' ? 180 : 0 }}
+                            transition={{ type: "spring", stiffness: 200, damping: 15 }}
+                            style={{ transformStyle: "preserve-3d" }}
+                            className="relative w-full h-full flex items-center justify-center"
                         >
-                            {theme === 'dark' ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
+                            {/* Light Mode (Sun) */}
+                            <div 
+                                className="absolute inset-0 flex items-center justify-center" 
+                                style={{ backfaceVisibility: "hidden" }}
+                            >
+                                <Sun className="w-[18px] h-[18px] text-amber-500 drop-shadow-[0_0_8px_rgba(245,158,11,0.5)]" />
+                            </div>
+                            
+                            {/* Dark Mode (Moon) */}
+                            <div 
+                                className="absolute inset-0 flex items-center justify-center" 
+                                style={{ backfaceVisibility: "hidden", transform: "rotateY(180deg)" }}
+                            >
+                                <Moon className="w-[18px] h-[18px] text-fuchsia-400 drop-shadow-[0_0_8px_rgba(232,121,249,0.5)]" />
+                            </div>
                         </motion.div>
                     </motion.button>
 
