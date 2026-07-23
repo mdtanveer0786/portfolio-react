@@ -268,11 +268,16 @@ export const projects = [
 export const experience = [
     {
         id: 1,
-        title: 'Full Stack Developer | PHP Developer | Android Developer',
-        company: 'Vinnpro Web Solutions',
-        period: '2026 - Present',
-        location: 'Ghaziabad, Uttar Pradesh',
-        description: 'Working on scalable web applications, business solutions, admin dashboards, Android applications, REST APIs, and database-driven systems.',
+        title: 'Full Stack Developer & Odoo Developer',
+        company: 'VinnPro Web Solutions Pvt. Ltd.',
+        period: 'Jan 2026 – Present',
+        location: 'Ghaziabad, India (On-site)',
+        description: [
+            'Developed custom Odoo modules using Python, XML, and PostgreSQL.',
+            'Built responsive web applications using React.js, Next.js, Node.js, and MySQL.',
+            'Contributed to Park Flow SaaS, Safe Drop AI, and a University Management System with 10+ REST API endpoints.',
+            'Integrated REST APIs, fixed bugs, and deployed production-ready features while optimizing application performance.'
+        ],
         projects: [
             {
                 name: 'ParkFlow SaaS (Enterprise Parking Platform)',
@@ -297,6 +302,34 @@ export const experience = [
         ],
         achievements: []
     },
+    {
+        id: 2,
+        title: 'Full Stack Engineer',
+        company: 'VinnPro Web Solutions Pvt. Ltd.',
+        period: 'Feb 2025 – Dec 2025',
+        location: 'Ghaziabad, India (On-site)',
+        description: [
+            'Developed full-stack applications using React.js, Node.js, Express.js, and MySQL.',
+            'Designed responsive UI components and integrated backend REST APIs.',
+            'Collaborated with the team using Git/GitHub for version-controlled, sprint-based delivery.'
+        ],
+        projects: [],
+        achievements: []
+    },
+    {
+        id: 3,
+        title: 'Frontend Developer (Intern)',
+        company: 'VinnPro Web Solutions Pvt. Ltd.',
+        period: 'Nov 2024 – Jan 2025',
+        location: 'Ghaziabad, India (On-site)',
+        description: [
+            'Built responsive web pages using HTML, CSS, JavaScript, and React.',
+            'Fixed UI bugs and improved user experience across live projects.',
+            'Worked closely with senior developers on production codebases.'
+        ],
+        projects: [],
+        achievements: []
+    }
 ]
 
 export const education = [

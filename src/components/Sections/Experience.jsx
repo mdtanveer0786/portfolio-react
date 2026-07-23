@@ -65,9 +65,20 @@ const Experience = () => {
                                         </div>
                                     </div>
 
-                                    <p className="text-sm sm:text-base text-muted-foreground leading-relaxed mb-8 max-w-4xl">
-                                        {exp.description}
-                                    </p>
+                                    {Array.isArray(exp.description) ? (
+                                        <ul className="space-y-3 mb-8 max-w-4xl">
+                                            {exp.description.map((point, i) => (
+                                                <li key={i} className="flex items-start gap-3 text-sm sm:text-base text-muted-foreground leading-relaxed">
+                                                    <div className="mt-2 w-1.5 h-1.5 rounded-full bg-primary/60 shrink-0" />
+                                                    <span>{point}</span>
+                                                </li>
+                                            ))}
+                                        </ul>
+                                    ) : (
+                                        <p className="text-sm sm:text-base text-muted-foreground leading-relaxed mb-8 max-w-4xl">
+                                            {exp.description}
+                                        </p>
+                                    )}
 
                                     {/* Projects Sub-section */}
                                     {exp.projects && (
