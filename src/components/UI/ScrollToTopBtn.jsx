@@ -1,30 +1,34 @@
-import { useState, useEffect } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
-import { ArrowUp } from 'lucide-react'
+import { useState, useEffect } from 'react';
+import { motion, AnimatePresence, useScroll, useSpring, useTransform } from 'framer-motion';
+import { ArrowUp } from 'lucide-react';
 
 export default function ScrollToTopBtn() {
-    const [visible, setVisible] = useState(false)
+    const [visible, setVisible] = useState(false);
+    const { scrollYProgress } = useScroll();
+    const scaleX = useSpring(scrollYProgress, {
+        stiffness: 100,
+        damping: 30,
+        restDelta: 0.001
+    });
 
     useEffect(() => {
         const handleScroll = () => {
-            // Using a threshold of 400px scroll height to reveal the button
             if (window.scrollY > 400) {
-                setVisible(true)
+                setVisible(true);
             } else {
-                setVisible(false)
+                setVisible(false);
             }
-        }
+        };
         
-        window.addEventListener('scroll', handleScroll, { passive: true })
-        // Perform immediate check in case page is loaded scrolled down
-        handleScroll()
+        window.addEventListener('scroll', handleScroll, { passive: true });
+        handleScroll();
         
-        return () => window.removeEventListener('scroll', handleScroll)
-    }, [])
+        return () => window.removeEventListener('scroll', handleScroll);
+    }, []);
 
     const scrollToTop = () => {
-        window.scrollTo({ top: 0, behavior: 'smooth' })
-    }
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    };
 
     return (
         <AnimatePresence>
@@ -33,29 +37,38 @@ export default function ScrollToTopBtn() {
                     initial={{ opacity: 0, scale: 0.3, y: 40 }}
                     animate={{ opacity: 1, scale: 1, y: 0 }}
                     exit={{ opacity: 0, scale: 0.3, y: 40 }}
-                    whileHover={{ scale: 1.1, y: -2 }}
-                    whileTap={{ scale: 0.9 }}
-                    transition={{
-                        type: "spring",
-                        stiffness: 260,
-                        damping: 20
-                    }}
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                    transition={{ type: "spring", stiffness: 260, damping: 20 }}
                     onClick={scrollToTop}
-                    className="fixed bottom-24 right-7 sm:bottom-28 sm:right-10 z-50 flex items-center justify-center w-10 h-10 sm:w-12 sm:h-12 rounded-full shadow-[0_8px_30px_rgb(0,0,0,0.15)] dark:shadow-[0_8px_30px_rgba(0,0,0,0.6)] bg-white/80 dark:bg-[#0c0c14]/80 backdrop-blur-md border border-primary/20 text-primary hover:text-white overflow-hidden group cursor-pointer"
+                    className="fixed bottom-24 right-4 sm:bottom-28 sm:right-8 z-50 flex items-center justify-center w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-background/80 dark:bg-background/80 backdrop-blur-xl border border-primary/20 text-foreground shadow-[0_8px_30px_rgba(0,0,0,0.15)] overflow-hidden group hover:shadow-[0_8px_30px_rgba(139,92,246,0.3)] transition-all"
                     aria-label="Scroll to top"
                 >
-                    {/* Premium Gradient BG hover overlay */}
-                    <div className="absolute inset-0 opacity-0 group-hover:opacity-100 bg-gradient-to-br from-primary via-fuchsia-500 to-cyan-400 transition-opacity duration-500 ease-out" />
+                    {/* SVG Circular Progress */}
+                    <svg className="absolute inset-0 w-full h-full -rotate-90 pointer-events-none" viewBox="0 0 50 50">
+                        {/* Track */}
+                        <circle 
+                            cx="25" cy="25" r="22" 
+                            className="stroke-primary/10" 
+                            strokeWidth="2" fill="none" 
+                        />
+                        {/* Progress */}
+                        <motion.circle 
+                            cx="25" cy="25" r="22" 
+                            className="stroke-primary" 
+                            strokeWidth="2" fill="none"
+                            strokeLinecap="round"
+                            style={{ pathLength: scaleX }}
+                        />
+                    </svg>
 
-                    {/* Icon layer (keeps it on top) */}
-                    <span className="relative z-10">
-                        <ArrowUp className="w-4 h-4 sm:w-5 sm:h-5 group-hover:-translate-y-1 transition-transform duration-300 ease-out" />
-                    </span>
+                    {/* Gradient BG hover overlay */}
+                    <div className="absolute inset-1.5 opacity-0 group-hover:opacity-100 bg-gradient-to-br from-primary via-fuchsia-600 to-accent rounded-full transition-opacity duration-300 ease-out -z-10" />
 
-                    {/* Animated glowing ring border on hover */}
-                    <div className="absolute -inset-px rounded-full border border-primary/30 group-hover:border-white/30 group-hover:scale-105 transition-all duration-500 pointer-events-none" />
+                    {/* Icon layer */}
+                    <ArrowUp size={20} className="relative z-10 text-primary group-hover:text-white transition-colors duration-300" strokeWidth={2.5} />
                 </motion.button>
             )}
         </AnimatePresence>
-    )
+    );
 }
