@@ -122,12 +122,12 @@ export default function Education() {
                 {/* Timeline Container */}
                 <div ref={containerRef} className="relative max-w-5xl mx-auto mt-16 px-4">
                     {/* Background Vertical Line (Dimmed) */}
-                    <div className="absolute left-8 md:left-1/2 md:-translate-x-1/2 top-0 bottom-0 w-[2px] bg-border/50" />
+                    <div className="absolute left-4 md:left-1/2 md:-translate-x-1/2 top-0 bottom-0 w-[2px] bg-border/50" />
                     
                     {/* Animated Progress Vertical Line */}
                     <motion.div 
                         style={{ scaleY, originY: 0 }}
-                        className="absolute left-8 md:left-1/2 md:-translate-x-1/2 top-0 bottom-0 w-[2px] bg-gradient-to-b from-primary via-fuchsia-500 to-primary shadow-[0_0_15px_rgba(var(--glow-color),0.5)] z-10" 
+                        className="absolute left-4 md:left-1/2 md:-translate-x-1/2 top-0 bottom-0 w-[2px] bg-gradient-to-b from-primary via-fuchsia-500 to-primary shadow-[0_0_15px_rgba(var(--glow-color),0.5)] z-10" 
                     />
 
                     {/* Education Milestones */}
