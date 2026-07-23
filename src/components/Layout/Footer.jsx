@@ -150,12 +150,22 @@ export default function Footer() {
                                     href={link.href}
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    className="flex items-center gap-3 group text-muted-foreground hover:text-primary transition-colors text-sm"
+                                    className="group relative flex items-center justify-between p-2.5 rounded-xl bg-black/[0.02] dark:bg-white/[0.02] border border-border/40 hover:border-primary/30 transition-all duration-300 overflow-hidden shadow-sm hover:shadow-md hover:shadow-primary/5"
                                 >
-                                    <div className="p-2 rounded-lg bg-black/[0.03] dark:bg-white/[0.03] group-hover:bg-primary/10 transition-transform duration-300 group-hover:scale-110 group-hover:-rotate-3">
-                                        <link.icon size={16} />
+                                    {/* Sweeping background gradient */}
+                                    <div className="absolute inset-0 bg-gradient-to-r from-primary/10 to-transparent translate-x-[-100%] group-hover:translate-x-0 transition-transform duration-500 ease-out" />
+                                    
+                                    <div className="flex items-center gap-3 relative z-10">
+                                        <div className="p-2 rounded-lg bg-background text-muted-foreground group-hover:text-primary group-hover:scale-110 transition-all duration-300 shadow-sm border border-border/50">
+                                            <link.icon size={16} />
+                                        </div>
+                                        <span className="text-sm font-semibold text-muted-foreground group-hover:text-foreground transition-colors duration-300">
+                                            {link.label}
+                                        </span>
                                     </div>
-                                    <span className="group-hover:translate-x-1 transition-transform duration-300">{link.label}</span>
+                                    
+                                    {/* Flying arrow indicator */}
+                                    <ChevronRight size={16} className="text-primary opacity-0 -translate-x-4 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300 relative z-10 mr-1" />
                                 </a>
                             ))}
                         </div>
