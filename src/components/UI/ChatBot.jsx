@@ -42,7 +42,7 @@ const CHAT_RULES = [
     {
         category: 'greeting',
         keywords: ['hi', 'hello', 'hey', 'namaste', 'greeting', 'good morning', 'good afternoon', 'good evening', 'start', 'online', 'anybody', 'howdy'],
-        response: "Hello! I am **Md Tanveer Alam's AI Assistant**. I can answer any questions about his skills, projects, experience, and services. How can I help you today?"
+        response: "Hello! I am **Md Tanveer Alam AI Assistant**. I can answer any questions about his skills, projects, experience, and services. How can I help you today?"
     },
     {
         category: 'who',
@@ -141,7 +141,7 @@ const ChatBot = () => {
             { 
                 id: 1, 
                 type: 'bot', 
-                text: "Hi there! I'm Md Tanveer Alam's **AI Assistant**. I'm here to help you learn more about his work and expertise. Ask me anything!",
+                text: "Hi there! I'm Md Tanveer Alam **AI Assistant**. I'm here to help you learn more about his work and expertise. Ask me anything!",
                 timestamp: new Date()
             }
         ];
@@ -255,7 +255,7 @@ const ChatBot = () => {
     }, [messages, isTyping, isOpen]);
 
     const clearChat = () => {
-        setMessages([{ id: Date.now(), type: 'bot', text: "Chat history cleared! I am **Md Tanveer Alam's AI Assistant**. How can I help you today?", timestamp: new Date() }]);
+        setMessages([{ id: Date.now(), type: 'bot', text: "Chat history cleared! I am **Md Tanveer Alam AI Assistant**. How can I help you today?", timestamp: new Date() }]);
         setLeadData({ step: -1, data: {} });
         playSound('pop');
     };
@@ -342,7 +342,7 @@ const ChatBot = () => {
                 }]);
                 speakText(msgText);
             } else if (botResponse.type === 'resume') {
-                const msgText = "You can download Md Tanveer Alam's professional resume to review his full career history and certifications:";
+                const msgText = "You can download Md Tanveer Alam professional resume to review his full career history and certifications:";
                 setMessages(prev => [...prev, {
                     id: Date.now() + 1,
                     type: 'bot',

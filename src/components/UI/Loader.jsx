@@ -24,7 +24,7 @@ export default function Loader() {
             className="fixed inset-0 z-[100] flex flex-col items-center justify-center bg-background"
             role="status"
             aria-live="polite"
-            aria-label="Loading Md Tanveer Alam's Portfolio"
+            aria-label="Loading Md Tanveer Alam Portfolio"
         >
             <div className="relative flex flex-col items-center">
                 {/* Stunning Logo */}
