@@ -277,30 +277,7 @@ export const experience = [
             'Built responsive web applications using React.js, Next.js, Node.js, and MySQL.',
             'Contributed to Park Flow SaaS, Safe Drop AI, and a University Management System with 10+ REST API endpoints.',
             'Integrated REST APIs, fixed bugs, and deployed production-ready features while optimizing application performance.'
-        ],
-        projects: [
-            {
-                name: 'ParkFlow SaaS (Enterprise Parking Platform)',
-                tech: 'React 19, Node.js, Express, MongoDB, Socket.io, Vite-PWA, Tailwind CSS',
-                features: ['Real-Time WebSockets', 'PWA Offline Workbox Support', 'Analytics Boards', 'Web-to-APK APK Packaging']
-            },
-            {
-                name: 'SafeDrop AI (SaaS Platform)',
-                tech: 'React, Node.js, Express, MongoDB Atlas, Socket.io, Razorpay',
-                features: ['Multi-Tenant Scoping', 'Real-Time Locker Tracking', 'Crypto-Secure QR Tokens', 'Automated SMS Alerts']
-            },
-            {
-                name: 'Real Estate Elite (Property Platform)',
-                tech: 'React, Node.js, Express, MongoDB, Cloudinary',
-                features: ['JWT Authentication', 'Full CRUD property management', 'Cloudinary media hosting', 'Client/Agent dashboards']
-            },
-            {
-                name: 'Trade Analyzer Pro (Trading Analytics)',
-                tech: 'React, Node.js, Express, MongoDB, Chart.js',
-                features: ['Trading performance tracking', 'Interactive chart analytics', 'Detailed profit/loss metrics']
-            }
-        ],
-        achievements: []
+        ]
     },
     {
         id: 2,
@@ -312,9 +289,7 @@ export const experience = [
             'Developed full-stack applications using React.js, Node.js, Express.js, and MySQL.',
             'Designed responsive UI components and integrated backend REST APIs.',
             'Collaborated with the team using Git/GitHub for version-controlled, sprint-based delivery.'
-        ],
-        projects: [],
-        achievements: []
+        ]
     },
     {
         id: 3,
@@ -326,9 +301,7 @@ export const experience = [
             'Built responsive web pages using HTML, CSS, JavaScript, and React.',
             'Fixed UI bugs and improved user experience across live projects.',
             'Worked closely with senior developers on production codebases.'
-        ],
-        projects: [],
-        achievements: []
+        ]
     }
 ]
 
