@@ -152,10 +152,10 @@ export default function Footer() {
                                     rel="noopener noreferrer"
                                     className="flex items-center gap-3 group text-muted-foreground hover:text-primary transition-colors text-sm"
                                 >
-                                    <div className="p-2 rounded-lg bg-black/[0.03] dark:bg-white/[0.03] group-hover:bg-primary/10 transition-colors">
+                                    <div className="p-2 rounded-lg bg-black/[0.03] dark:bg-white/[0.03] group-hover:bg-primary/10 transition-transform duration-300 group-hover:scale-110 group-hover:-rotate-3">
                                         <link.icon size={16} />
                                     </div>
-                                    {link.label}
+                                    <span className="group-hover:translate-x-1 transition-transform duration-300">{link.label}</span>
                                 </a>
                             ))}
                         </div>
@@ -163,16 +163,26 @@ export default function Footer() {
                 </div>
 
                 {/* Bottom Bar */}
-                <div className="pt-12 border-t border-border/30 flex items-center justify-center">
-                    {/* Centered Copyright */}
-                    <div className="text-center text-[11px] sm:text-xs text-muted-foreground/60 flex flex-col gap-1.5">
-                        <p>© {currentYear} Md Tanveer Alam. All rights reserved.</p>
+                <div className="pt-8 border-t border-border/30 flex flex-col md:flex-row items-center justify-between gap-4">
+                    {/* Copyright */}
+                    <p className="text-[11px] sm:text-xs text-muted-foreground/60 font-medium">
+                        © {currentYear} Md Tanveer Alam. All rights reserved.
+                    </p>
+                    
+                    {/* Crafted with love */}
+                    <div className="flex items-center gap-1.5 text-[11px] sm:text-xs text-muted-foreground/60 font-medium bg-black/[0.02] dark:bg-white/[0.02] px-4 py-2 rounded-full border border-border/40 backdrop-blur-sm">
+                        <span>Crafted with</span>
+                        <svg className="w-3.5 h-3.5 text-red-500 animate-pulse drop-shadow-[0_0_8px_rgba(239,68,68,0.5)]" viewBox="0 0 24 24" fill="currentColor" stroke="none">
+                            <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                        </svg>
+                        <span>in India</span>
                     </div>
                 </div>
             </div>
             
             {/* Ambient glows */}
             <div className="absolute -bottom-24 left-1/2 -translate-x-1/2 w-[800px] h-[300px] bg-primary/5 blur-[120px] rounded-full -z-10 pointer-events-none" />
+            <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-fuchsia-500/5 blur-[100px] rounded-full -z-10 pointer-events-none opacity-50" />
         </footer>
     )
 }
