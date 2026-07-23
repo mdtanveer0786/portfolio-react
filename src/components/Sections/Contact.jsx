@@ -96,8 +96,8 @@ export default function Contact() {
         {
             icon: Phone,
             label: 'Phone',
-            value: '+91 8252574386',
-            href: 'tel:+918252574386',
+            value: '+91 7482946610',
+            href: 'tel:+917482946610',
         },
         {
             icon: MapPin,
