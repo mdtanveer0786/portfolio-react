@@ -23,7 +23,6 @@ const ChatBot = lazy(() => import("./components/UI/ChatBot"));
 
 const ScrollProgress = lazy(() => import("./components/UI/ScrollProgress"));
 const ScrollToTopBtn = lazy(() => import("./components/UI/ScrollToTopBtn"));
-const ParticlesBackground = lazy(() => import("./components/UI/ParticlesBackground"));
 
 import { SECTIONS, LOADING_DURATION } from "./utils/constants";
 import { useScroll } from "./hooks/useScroll";
@@ -174,7 +173,6 @@ function App() {
                             <Suspense fallback={null}>
                                 <ScrollProgress />
                                 <ScrollToTopBtn />
-                                <ParticlesBackground />
                             </Suspense>
 
                             <Suspense fallback={null}>
