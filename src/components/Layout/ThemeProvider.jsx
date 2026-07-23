@@ -33,9 +33,19 @@ export function ThemeProvider({
 
     useLayoutEffect(() => {
         const root = window.document.documentElement
+        
+        // Disable transitions to prevent flashing
+        root.classList.add('disable-transitions')
+        
         root.classList.remove('light', 'dark')
         root.classList.add(theme)
         setSafeStorage(storageKey, theme)
+        
+        // Force reflow
+        window.getComputedStyle(root).opacity
+        
+        // Re-enable transitions
+        root.classList.remove('disable-transitions')
         
         // Update meta theme color
         const meta = document.querySelector('meta[name="theme-color"]')

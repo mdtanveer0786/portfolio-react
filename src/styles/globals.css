@@ -32,6 +32,10 @@
         --surface-hover: 263 100% 98%;
     }
 
+    .disable-transitions * {
+        transition: none !important;
+    }
+
     .dark {
         /* Dark Mode — Deep Space with Electric Violet */
         --background: 240 10% 2%;
