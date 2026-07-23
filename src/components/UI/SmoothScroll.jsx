@@ -22,20 +22,9 @@ export default function SmoothScroll({ children }) {
 
         rafId = requestAnimationFrame(raf);
 
-        // Pause Lenis when body has no-scroll class
-        const observer = new MutationObserver((mutations) => {
-            mutations.forEach((mutation) => {
-                if (mutation.attributeName === 'class') {
-                    if (document.body.classList.contains('no-scroll')) {
-                        lenis.stop();
-                    } else {
-                        lenis.start();
-                    }
-                }
-            });
-        });
-
-        observer.observe(document.body, { attributes: true });
+        // Removed MutationObserver that was calling lenis.stop()
+        // lenis.stop() globally blocks touch events, which was preventing the mobile menu from scrolling.
+        // We already use .no-scroll (overflow: hidden) on the body, which is sufficient.
 
         // Handle anchor links
         const handleAnchorClick = (e) => {
@@ -59,7 +48,6 @@ export default function SmoothScroll({ children }) {
 
         return () => {
             cancelAnimationFrame(rafId);
-            observer.disconnect();
             lenis.destroy();
             document.removeEventListener('click', handleAnchorClick);
         };
