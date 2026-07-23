@@ -57,7 +57,7 @@ const CHAT_RULES = [
     {
         category: 'skills',
         keywords: ['skills', 'tech', 'stack', 'languages', 'programming', 'tools', 'database', 'frontend', 'backend', 'expertise', 'proficiency', 'technologies', 'frameworks'],
-        response: "Tanveer's technical arsenal includes:\n\n* **Frontend:** React.js, Tailwind CSS, JavaScript\n* **Backend:** Node.js, Express.js, PHP\n* **Databases:** MongoDB, MySQL\n* **Mobile & Cloud:** Web2APK Android Apps, Vercel, Render, Socket.io\n\nHe is well-equipped to handle end-to-end development!"
+        response: "Tanveer technical arsenal includes:\n\n* **Frontend:** React.js, Tailwind CSS, JavaScript\n* **Backend:** Node.js, Express.js, PHP\n* **Databases:** MongoDB, MySQL\n* **Mobile & Cloud:** Web2APK Android Apps, Vercel, Render, Socket.io\n\nHe is well-equipped to handle end-to-end development!"
     },
     {
         category: 'projects',
@@ -87,12 +87,12 @@ const CHAT_RULES = [
     {
         category: 'contact',
         keywords: ['contact', 'email', 'phone', 'reach', 'connect', 'social', 'linkedin', 'github', 'talk', 'message', 'call', 'whatsapp', 'meet'],
-        response: "You can reach him instantly via:\n\n* **Email:** tanveerdev14@gmail.com\n* **WhatsApp:** Click the floating green icon on the screen\n* **LinkedIn:** [Tanveer's Profile](https://linkedin.com/in/md-tanveer-alam-b7a134219/)\n\nOr just use the form in the Contact section!"
+        response: "You can reach him instantly via:\n\n* **Email:** tanveerdev14@gmail.com\n* **WhatsApp:** Click the floating green icon on the screen\n* **LinkedIn:** [Tanveer Profile](https://linkedin.com/in/md-tanveer-alam-b7a134219/)\n\nOr just use the form in the Contact section!"
     },
     {
         category: 'resume',
         keywords: ['resume', 'cv', 'download', 'pdf', 'document', 'curriculum vitae'],
-        response: "You can download Tanveer's latest professional resume by clicking the **Download Resume** button in our quick actions below, or by visiting the Hero section of this website!"
+        response: "You can download Tanveer latest professional resume by clicking the **Download Resume** button in our quick actions below, or by visiting the Hero section of this website!"
     },
     {
         category: 'ai',
@@ -298,7 +298,7 @@ const ChatBot = () => {
                 }]);
                 speakText(botResponse);
             } else if (botResponse.type === 'projects') {
-                const msgText = "Here are some of Tanveer's featured projects. These showcase his ability to build scalable and high-performance applications:";
+                const msgText = "Here are some of Tanveer featured projects. These showcase his ability to build scalable and high-performance applications:";
                 setMessages(prev => [...prev, {
                     id: Date.now() + 1,
                     type: 'bot',
@@ -495,7 +495,7 @@ const ChatBot = () => {
                 (normalizedInput.includes('cloud') && catTitle.includes('cloud'))
             ) {
                 const skillList = cat.skills.map(s => `* **${s.name}**`).join('\n');
-                return `Here are Tanveer's **${cat.title}** skills:\n\n${skillList}\n\nWould you like to know about his projects built with these?`;
+                return `Here are Tanveer **${cat.title}** skills:\n\n${skillList}\n\nWould you like to know about his projects built with these?`;
             }
         }
 
@@ -548,7 +548,7 @@ const ChatBot = () => {
         
         // 4. Fallback with context
         if (normalizedInput.length > 3) {
-            return "I'm still learning to answer that specific question! However, I can tell you about Tanveer's **skills**, **projects**, **education**, or **how to contact him**. Which would you prefer?";
+            return "I'm still learning to answer that specific question! However, I can tell you about Tanveer **skills**, **projects**, **education**, or **how to contact him**. Which would you prefer?";
         }
         
         return "I'm not sure I caught that. Could you please rephrase your question? You can ask about my **experience**, **services**, or **projects**.";
