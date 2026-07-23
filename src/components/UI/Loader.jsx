@@ -6,15 +6,23 @@ export default function Loader() {
     const [progress, setProgress] = useState(0);
 
     useEffect(() => {
+        const startTime = Date.now();
+        const duration = 1800; // Matches LOADING_DURATION
+        
         const timer = setInterval(() => {
-            setProgress((prev) => {
-                if (prev >= 100) {
-                    clearInterval(timer);
-                    return 100;
-                }
-                return prev + Math.floor(Math.random() * 15) + 5;
-            });
-        }, 150);
+            const elapsed = Date.now() - startTime;
+            const t = Math.min(elapsed / duration, 1);
+            
+            // Cubic ease-out function for natural loading feel (starts fast, slows down)
+            const easeOutCubic = 1 - Math.pow(1 - t, 3);
+            const currentProgress = Math.floor(easeOutCubic * 100);
+            
+            setProgress(currentProgress);
+            
+            if (elapsed >= duration) {
+                clearInterval(timer);
+            }
+        }, 16); // ~60fps for buttery smooth progress
 
         return () => clearInterval(timer);
     }, []);
