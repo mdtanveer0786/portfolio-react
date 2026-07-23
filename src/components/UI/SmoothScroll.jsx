@@ -22,6 +22,21 @@ export default function SmoothScroll({ children }) {
 
         rafId = requestAnimationFrame(raf);
 
+        // Pause Lenis when body has no-scroll class
+        const observer = new MutationObserver((mutations) => {
+            mutations.forEach((mutation) => {
+                if (mutation.attributeName === 'class') {
+                    if (document.body.classList.contains('no-scroll')) {
+                        lenis.stop();
+                    } else {
+                        lenis.start();
+                    }
+                }
+            });
+        });
+
+        observer.observe(document.body, { attributes: true });
+
         // Handle anchor links
         const handleAnchorClick = (e) => {
             const target = e.target.closest('a[href^="#"]');
@@ -44,6 +59,7 @@ export default function SmoothScroll({ children }) {
 
         return () => {
             cancelAnimationFrame(rafId);
+            observer.disconnect();
             lenis.destroy();
             document.removeEventListener('click', handleAnchorClick);
         };
