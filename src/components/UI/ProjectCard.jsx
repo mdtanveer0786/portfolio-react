@@ -54,8 +54,7 @@ const ProjectCard = forwardRef(({ project, index }, ref) => {
                 onMouseMove={handleMouseMove}
                 onMouseLeave={handleMouseLeave}
                 style={shouldReduceMotion ? {} : { rotateY, rotateX, transformStyle: "preserve-3d" }}
-                className="relative flex flex-col h-full rounded-2xl overflow-hidden transition-all duration-500"
-                whileHover={{ borderColor: 'hsla(var(--primary), 0.2)' }}
+                className="relative flex flex-col h-full rounded-2xl overflow-hidden transition-all duration-500 border border-transparent group-hover:border-primary/20"
             >
                 {/* Card background */}
                 <div className="absolute inset-0 bg-card/50 backdrop-blur-sm rounded-2xl transition-all duration-300 shadow-md group-hover:shadow-xl" />
