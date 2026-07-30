@@ -633,7 +633,7 @@ const ChatBot = () => {
                 )}
             </AnimatePresence>
 
-            <div className="fixed bottom-4 right-4 sm:bottom-8 sm:right-8 z-[9999] flex flex-col items-end pointer-events-none">
+            <div id="mta-chatbot" className="fixed bottom-4 right-4 sm:bottom-8 sm:right-8 z-[9999] flex flex-col items-end pointer-events-none">
                 <AnimatePresence>
                     {isOpen && (
                         <motion.div
@@ -876,6 +876,7 @@ const ChatBot = () => {
                     whileHover={{ scale: 1.1, y: -3 }}
                     whileTap={{ scale: 0.9 }}
                     aria-label="Chat on WhatsApp"
+                    id="mta-whatsapp"
                     className="fixed bottom-4 left-4 sm:bottom-8 sm:left-8 z-40 w-11 h-11 sm:w-12 sm:h-12 rounded-full bg-[#25D366] flex items-center justify-center shadow-[0_6px_20px_rgba(37,211,102,0.4)] hover:shadow-[0_8px_30px_rgba(37,211,102,0.6)] transition-shadow duration-300 group"
                 >
                     <svg viewBox="0 0 24 24" fill="white" className="w-5 h-5 sm:w-6 sm:h-6 group-hover:scale-110 transition-transform duration-200">

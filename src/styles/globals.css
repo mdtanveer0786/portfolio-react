@@ -313,3 +313,13 @@
     scrollbar-width: thin;
     scrollbar-color: hsla(var(--foreground), 0.15) transparent;
 }
+
+/* Hide floating elements when mobile menu is open */
+body.no-scroll #mta-chatbot,
+body.no-scroll #mta-whatsapp {
+    opacity: 0 !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
+    transform: scale(0.9) !important;
+    transition: all 0.3s ease-in-out !important;
+}
