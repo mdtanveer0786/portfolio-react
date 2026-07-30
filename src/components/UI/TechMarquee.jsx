@@ -5,7 +5,7 @@ const techItems = [
     { name: 'React', icon: <FaReact />, color: '#61DAFB' },
     { name: 'Node.js', icon: <FaNodeJs />, color: '#339933' },
     { name: 'MongoDB', icon: <SiMongodb />, color: '#47A248' },
-    { name: 'Express', icon: <SiExpress />, color: '#000000' },
+    { name: 'Express', icon: <SiExpress />, color: '#888888' },
     { name: 'Tailwind', icon: <SiTailwindcss />, color: '#06B6D4' },
     { name: 'TypeScript', icon: <SiTypescript />, color: '#3178C6' },
     { name: 'Git', icon: <FaGitAlt />, color: '#F05032' },

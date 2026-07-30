@@ -171,7 +171,7 @@ const ProjectCard = forwardRef(({ project, index }, ref) => {
                 {/* Spotlight effect */}
                 <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none rounded-2xl"
                     style={{
-                        background: 'radial-gradient(600px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), hsla(var(--primary), 0.04), transparent 60%)'
+                        background: 'radial-gradient(600px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), hsl(var(--primary) / 0.04), transparent 60%)'
                     }}
                 />
             </motion.div>

@@ -56,7 +56,6 @@ export default defineConfig({
                     if (id.includes('node_modules')) {
                         if (id.includes('react')) return 'vendor-react';
                         if (id.includes('framer-motion')) return 'vendor-framer';
-                        if (id.includes('tsparticles') || id.includes('react-particles')) return 'vendor-particles';
                         if (id.includes('lucide-react')) return 'vendor-icons';
                         return 'vendor';
                     }

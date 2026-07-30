@@ -142,7 +142,7 @@ export const skillCategories = [
         icon: Server,
         skills: [
             { name: 'Node.js', level: 85, color: '#339933' },
-            { name: 'Express.js', level: 85, color: '#000000' },
+            { name: 'Express.js', level: 85, color: '#888888' },
             { name: 'REST APIs', level: 90, color: '#FF6C37' },
             { name: 'PHP', level: 80, color: '#777BB4' },
         ]
@@ -152,7 +152,7 @@ export const skillCategories = [
         icon: Cloud,
         skills: [
             { name: 'Git', level: 90, color: '#F05032' },
-            { name: 'Vercel', level: 90, color: '#000000' },
+            { name: 'Vercel', level: 90, color: '#888888' },
             { name: 'Render', level: 85, color: '#46E3B7' },
         ]
     },

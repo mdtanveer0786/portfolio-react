@@ -648,7 +648,7 @@ const ChatBot = () => {
                             <div className="flex items-center gap-3">
                                 <div className="relative">
                                     <div className="w-10 h-10 xs:w-12 xs:h-12 rounded-2xl bg-white/20 backdrop-blur-md flex items-center justify-center border border-white/30 shadow-inner overflow-hidden">
-                                        <img src="./about_avatar.jpeg" alt="Md Tanveer Alam" className="w-full h-full object-cover" />
+                                        <img src="/about_avatar.jpeg" alt="Md Tanveer Alam" className="w-full h-full object-cover" />
                                     </div>
                                     <span className="absolute -bottom-0.5 -right-0.5 w-3.5 h-3.5 xs:w-4 xs:h-4 bg-emerald-400 border-2 border-primary rounded-full animate-pulse" />
                                 </div>
@@ -698,7 +698,7 @@ const ChatBot = () => {
                                             )}
 
                                             {msg.hasResume && (
-                                                <a href="./resume.pdf" download="Md_Tanveer_Alam_Resume.pdf" className="mt-4 flex items-center justify-center gap-2 w-full py-2.5 bg-primary text-white rounded-xl font-bold text-xs hover:bg-primary/90 transition-all shadow-lg shadow-primary/20">
+                                                <a href="/resume.pdf" download="Md_Tanveer_Alam_Resume.pdf" className="mt-4 flex items-center justify-center gap-2 w-full py-2.5 bg-primary text-white rounded-xl font-bold text-xs hover:bg-primary/90 transition-all shadow-lg shadow-primary/20">
                                                     <Download size={14} /> Download Resume
                                                 </a>
                                             )}
