@@ -97,13 +97,13 @@ export default function About() {
                         <SectionReveal delay={0.2} className="h-full">
                             <div className="glass-card p-4 h-full relative group flex flex-col">
                                 <div className="relative rounded-2xl overflow-hidden flex-grow min-h-[320px] md:min-h-full shadow-md">
-                                    <img
-                                        src="./about_avatar.jpeg"
+                                     <img
+                                        src="/about_avatar.jpeg"
                                         alt="Md Tanveer Alam"
                                         className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                                         onError={(e) => {
                                             e.target.onerror = null
-                                            e.target.src = "./about_avatar.jpeg"
+                                            e.target.src = "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'><rect width='100' height='100' fill='%23333333'/><text x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-family='sans-serif' font-size='12' fill='%23ffffff'>MTA</text></svg>"
                                         }}
                                     />
                                     

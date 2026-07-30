@@ -86,8 +86,13 @@ export default function Hero({ setActiveSection }) {
                                 whileHover={{ scale: 1.02, y: -2 }}
                                 transition={{ type: 'spring', stiffness: 400, damping: 25 }}
                                 onClick={() => {
-                                    setActiveSection('contact')
-                                    document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })
+                                    setActiveSection?.('contact')
+                                    const element = document.getElementById('contact')
+                                    if (element) {
+                                        const yOffset = -80
+                                        const y = element.getBoundingClientRect().top + window.scrollY + yOffset
+                                        window.scrollTo({ top: y, behavior: 'smooth' })
+                                    }
                                 }}
                                 className="btn-primary w-full xs:w-auto"
                             >
@@ -234,7 +239,7 @@ export default function Hero({ setActiveSection }) {
                 href="#about"
                 onClick={(e) => {
                     e.preventDefault()
-                    setActiveSection('about')
+                    setActiveSection?.('about')
                     const element = document.getElementById('about')
                     if (element) {
                         const yOffset = -80 // Match header offset
