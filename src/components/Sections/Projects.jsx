@@ -46,10 +46,12 @@ export default function Projects() {
                 {/* Filter Controls */}
                 <SectionReveal y={15}>
                     <div className="flex justify-center items-center gap-2 mb-12 md:mb-16">
-                        <div className="flex items-center gap-1 p-1 rounded-xl bg-black/[0.03] dark:bg-white/[0.03] shadow-inner">
+                        <div className="flex items-center gap-1 p-1 rounded-xl bg-black/[0.03] dark:bg-white/[0.03] shadow-inner" role="tablist" aria-label="Filter projects by category">
                             {CATEGORIES.map((cat) => (
                                 <button
                                     key={cat}
+                                    role="tab"
+                                    aria-selected={activeCategory === cat}
                                     onClick={() => setActiveCategory(cat)}
                                     className={cn(
                                         "relative px-5 py-2 rounded-lg text-xs font-medium capitalize transition-all duration-300",

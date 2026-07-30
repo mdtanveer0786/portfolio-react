@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, memo } from 'react'
 import { 
     Mail, 
     MapPin, 
@@ -8,9 +8,7 @@ import {
 import { socialLinks } from '../../utils/constants'
 import logo from '../../assets/logo.png'
 
-export default function Footer() {
-    const currentYear = new Date().getFullYear()
-
+const FooterClock = memo(function FooterClock() {
     const [localTime, setLocalTime] = useState(() => {
         return new Date().toLocaleTimeString('en-US', { 
             hour: '2-digit', 
@@ -34,6 +32,16 @@ export default function Footer() {
         
         return () => clearInterval(timer)
     }, [])
+
+    return (
+        <p className="text-sm text-foreground font-mono font-medium tabular-nums tracking-tight">
+            {localTime} IST
+        </p>
+    )
+})
+
+export default function Footer() {
+    const currentYear = new Date().getFullYear()
 
     const footerLinks = [
         { name: 'Home', href: '#home' },
@@ -135,9 +143,7 @@ export default function Footer() {
                                     <Clock size={18} />
                                 </div>
                                 <div className="space-y-1">
-                                    <p className="text-sm text-foreground font-mono font-medium tabular-nums tracking-tight">
-                                        {localTime} IST
-                                    </p>
+                                    <FooterClock />
                                     <p className="text-xs text-muted-foreground">Local Time</p>
                                 </div>
                             </div>

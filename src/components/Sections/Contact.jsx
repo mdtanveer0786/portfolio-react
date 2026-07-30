@@ -231,6 +231,7 @@ export default function Contact() {
                                             id="name"
                                             type="text"
                                             name="name"
+                                            required
                                             value={formData.name}
                                             onChange={handleChange}
                                             onFocus={() => setFocusedField('name')}
@@ -247,6 +248,7 @@ export default function Contact() {
                                             id="email"
                                             type="email"
                                             name="email"
+                                            required
                                             value={formData.email}
                                             onChange={handleChange}
                                             onFocus={() => setFocusedField('email')}
@@ -282,6 +284,8 @@ export default function Contact() {
                                         id="message"
                                         name="message"
                                         rows={5}
+                                        required
+                                        minLength={10}
                                         value={formData.message}
                                         onChange={handleChange}
                                         onFocus={() => setFocusedField('message')}

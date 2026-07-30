@@ -23,8 +23,8 @@ export default function TechMarquee() {
             <div className="absolute inset-y-0 left-0 w-16 md:w-32 bg-gradient-to-r from-background to-transparent z-10 pointer-events-none" />
             <div className="absolute inset-y-0 right-0 w-16 md:w-32 bg-gradient-to-l from-background to-transparent z-10 pointer-events-none" />
 
-            <div className="flex overflow-hidden select-none">
-                <div className="flex gap-4 items-center w-max animate-marquee">
+                <div className="flex overflow-hidden select-none motion-reduce:overflow-x-auto">
+                <div className="flex gap-4 items-center w-max animate-marquee motion-reduce:[animation-play-state:paused]">
                     {items.map((tech, index) => (
                         <div
                             key={index}
