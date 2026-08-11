@@ -187,7 +187,7 @@ export const projects = [
         tags: ['React', 'Node.js', 'Express', 'MongoDB', 'Socket.io', 'Razorpay'],
         image: safedropImg,
         github: 'https://github.com/mdtanveer0786/SafeDrop_AI',
-        live: 'https://safedrop-ai.vercel.app/',
+        live: 'https://softdrop.parknpass.com/',
         featured: true,
         category: 'fullstack',
         date: '2026-06-23'
