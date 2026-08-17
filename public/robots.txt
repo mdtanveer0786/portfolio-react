@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://mdtanveeralam.vercel.app/sitemap.xml
+Sitemap: https://mdtanveeralamdev.vercel.app/sitemap.xml
