@@ -135,11 +135,11 @@
     .glass {
         @apply backdrop-blur-2xl shadow-lg;
         background: hsla(var(--card), 0.6);
-        border: 1px solid transparent;
+        border: 1px solid rgba(0, 0, 0, 0.05);
     }
     .dark .glass {
-        background: hsla(var(--card), 0.4);
-        border: 1px solid transparent;
+        background: hsla(var(--card), 0.45);
+        border: 1px solid rgba(255, 255, 255, 0.08);
         box-shadow: 0 8px 32px rgba(0,0,0,0.3);
     }
 
@@ -149,9 +149,11 @@
     .glass-card:hover {
         box-shadow: 0 20px 40px rgba(0,0,0,0.08);
         transform: translateY(-2px);
+        border-color: rgba(0, 0, 0, 0.1);
     }
     .dark .glass-card:hover {
         box-shadow: 0 20px 40px rgba(0,0,0,0.4), 0 0 30px rgba(var(--glow-color), 0.05);
+        border-color: rgba(255, 255, 255, 0.18);
     }
 
     /* Premium Text Gradient */
