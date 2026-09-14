@@ -39,15 +39,23 @@ export default function Header({ activeSection, setActiveSection }) {
         // Defer scroll slightly to let the body unlock from no-scroll state
         setTimeout(() => {
             if (id === 'home') {
-                window.scrollTo({ top: 0, behavior: 'smooth' })
-                window.history.pushState(null, null, ' ')
+                if (window.__lenis) {
+                    window.__lenis.scrollTo(0, { duration: 1.2 });
+                } else {
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                }
+                window.history.pushState(null, null, ' ');
             } else {
-                window.history.pushState(null, null, href)
-                const element = document.getElementById(id)
+                window.history.pushState(null, null, href);
+                const element = document.getElementById(id);
                 if (element) {
                     const yOffset = -80; // Offset for fixed header
-                    const y = element.getBoundingClientRect().top + window.scrollY + yOffset;
-                    window.scrollTo({ top: y, behavior: 'smooth' });
+                    if (window.__lenis) {
+                        window.__lenis.scrollTo(element, { offset: yOffset, duration: 1.2 });
+                    } else {
+                        const y = element.getBoundingClientRect().top + window.scrollY + yOffset;
+                        window.scrollTo({ top: y, behavior: 'smooth' });
+                    }
                 }
             }
         }, 120);

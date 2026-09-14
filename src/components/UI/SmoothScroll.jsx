@@ -14,6 +14,8 @@ export default function SmoothScroll({ children }) {
             infinite: false,
         });
 
+        window.__lenis = lenis;
+
         let rafId;
         function raf(time) {
             lenis.raf(time);
