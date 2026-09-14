@@ -29,6 +29,7 @@ import bikesImg from '../assets/projects/bikes.webp'
 import ecommerceImg from '../assets/projects/ecommerce.webp'
 import safedropImg from '../assets/projects/safedrop.png'
 import parkflowImg from '../assets/projects/parkflow.png'
+import crmImg from '../assets/projects/crm.png'
 
 export const LOADING_DURATION = 1800;
 
@@ -175,7 +176,7 @@ export const projects = [
         title: 'vGrow - Enterprise Multi-Tenant CRM Suite',
         description: 'A comprehensive multi-tenant SaaS platform featuring lead lifecycle tracking, interactive sales pipeline analytics, role-based access control (RBAC/ABAC), AI Copilot, automated workflows, and enterprise support modules.',
         tags: ['React', 'TypeScript', 'Node.js', 'Express', 'MySQL', 'Prisma', 'Tailwind CSS', 'Turborepo'],
-        image: tradeImg,
+        image: crmImg,
         github: 'https://github.com/mdtanveer0786/vgrow',
         live: '',
         featured: true,
