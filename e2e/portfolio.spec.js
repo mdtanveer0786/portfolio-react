@@ -41,6 +41,10 @@ test.describe('Portfolio End-to-End Test Suite', () => {
     const expTitle = page.getByText(/WordPress Developer/i).first();
     await expect(expTitle).toBeAttached({ timeout: 10000 });
 
+    // Verify Enterprise CRM project is visible
+    const crmProject = page.getByText(/Enterprise CRM Suite/i).first();
+    await expect(crmProject).toBeAttached({ timeout: 10000 });
+
     // Ensure Odoo is completely absent across the application
     const odooMention = page.getByText(/Odoo/i);
     await expect(odooMention).toHaveCount(0);

@@ -171,6 +171,18 @@ export const skillCategories = [
 
 export const projects = [
     {
+        id: 9,
+        title: 'Enterprise CRM Suite',
+        description: 'A comprehensive customer relationship management SaaS featuring lead lifecycle tracking, interactive sales pipeline analytics, role-based access control (RBAC), and automated client engagement workflows.',
+        tags: ['React', 'Node.js', 'Express', 'MongoDB', 'Tailwind CSS', 'REST API'],
+        image: tradeImg,
+        github: 'https://github.com/mdtanveer0786',
+        live: '',
+        featured: true,
+        category: 'fullstack',
+        date: '2026-07-15'
+    },
+    {
         id: 8,
         title: 'ParkFlow SaaS',
         description: 'An enterprise-grade parking management SaaS featuring real-time Socket.io state updates, PWA offline capabilities with Workbox networks, and interactive analytical boards. Packaged into a native Android APK using a Web-to-APK Compiler.',
