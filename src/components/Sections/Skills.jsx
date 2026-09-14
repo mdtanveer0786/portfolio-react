@@ -2,8 +2,8 @@ import { Layers } from 'lucide-react'
 import { skillCategories } from '../../utils/constants'
 import SectionReveal from '../UI/SectionReveal'
 import AnimatedBackground from '../UI/AnimatedBackground'
-import { FaReact, FaNodeJs, FaHtml5, FaCss3Alt, FaJs, FaDatabase, FaGitAlt, FaBootstrap, FaPhp } from 'react-icons/fa'
-import { SiTailwindcss, SiExpress, SiMongodb, SiPostman, SiVercel, SiMysql, SiRender } from 'react-icons/si'
+import { FaReact, FaNodeJs, FaHtml5, FaCss3Alt, FaJs, FaDatabase, FaGitAlt, FaBootstrap, FaPhp, FaWordpress } from 'react-icons/fa'
+import { SiTailwindcss, SiExpress, SiMongodb, SiPostman, SiVercel, SiMysql, SiRender, SiElementor } from 'react-icons/si'
 import { motion, useReducedMotion } from 'framer-motion'
 
 const getIcon = (name) => {
@@ -14,6 +14,8 @@ const getIcon = (name) => {
         'React.js': <FaReact />,
         'Tailwind CSS': <SiTailwindcss />,
         'Bootstrap': <FaBootstrap />,
+        'WordPress': <FaWordpress />,
+        'Elementor': <SiElementor />,
         'Node.js': <FaNodeJs />,
         'Express.js': <SiExpress />,
         'PHP': <FaPhp />,

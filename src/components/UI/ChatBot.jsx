@@ -56,8 +56,8 @@ const CHAT_RULES = [
     },
     {
         category: 'skills',
-        keywords: ['skills', 'tech', 'stack', 'languages', 'programming', 'tools', 'database', 'frontend', 'backend', 'expertise', 'proficiency', 'technologies', 'frameworks'],
-        response: "Tanveer technical arsenal includes:\n\n* **Frontend:** React.js, Tailwind CSS, JavaScript\n* **Backend:** Node.js, Express.js, PHP\n* **Databases:** MongoDB, MySQL\n* **Mobile & Cloud:** Web2APK Android Apps, Vercel, Render, Socket.io\n\nHe is well-equipped to handle end-to-end development!"
+        keywords: ['skills', 'tech', 'stack', 'languages', 'programming', 'tools', 'database', 'frontend', 'backend', 'expertise', 'proficiency', 'technologies', 'frameworks', 'wordpress', 'elementor'],
+        response: "Tanveer's technical arsenal includes:\n\n* **Frontend:** React.js, Tailwind CSS, JavaScript, WordPress, Elementor\n* **Backend:** Node.js, Express.js, PHP\n* **Databases:** MongoDB, MySQL\n* **Mobile & Cloud:** Web2APK Android Apps, Vercel, Render, Socket.io\n\nHe is well-equipped to handle end-to-end development!"
     },
     {
         category: 'projects',
@@ -66,8 +66,8 @@ const CHAT_RULES = [
     },
     {
         category: 'services',
-        keywords: ['service', 'offer', 'build', 'website', 'app', 'development', 'developer', 'expert', 'solutions', 'software', 'management system', 'ecommerce', 'freelance'],
-        response: "Tanveer provides premium development services:\n\n* **Custom Full Stack Web Apps**\n* **Enterprise SaaS & Management Systems**\n* **Real-Time Dashboards (Socket.io)**\n* **Website to Android APK Conversion**\n\nNeed a custom solution built? Let's discuss your requirements!"
+        keywords: ['service', 'offer', 'build', 'website', 'app', 'development', 'developer', 'expert', 'solutions', 'software', 'management system', 'ecommerce', 'freelance', 'wordpress', 'elementor'],
+        response: "Tanveer provides premium development services:\n\n* **Custom Full Stack Web Apps**\n* **WordPress & Elementor Dynamic Websites**\n* **Enterprise SaaS & Management Systems**\n* **Real-Time Dashboards (Socket.io)**\n* **Website to Android APK Conversion**\n\nNeed a custom solution built? Let's discuss your requirements!"
     },
     {
         category: 'pricing',

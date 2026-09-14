@@ -90,7 +90,7 @@ export const services = [
         title: 'Frontend Development',
         icon: Palette,
         description: 'Creating visually stunning and highly interactive user interfaces with a focus on UX/UI.',
-        technologies: ['HTML5', 'CSS3', 'JavaScript', 'React.js', 'Tailwind CSS', 'Bootstrap'],
+        technologies: ['HTML5', 'CSS3', 'JavaScript', 'React.js', 'Tailwind CSS', 'WordPress', 'Elementor'],
         gradient: 'from-pink-500/20 to-orange-500/20'
     },
     {
@@ -135,6 +135,8 @@ export const skillCategories = [
             { name: 'React.js', level: 88, color: '#61DAFB' },
             { name: 'Tailwind CSS', level: 90, color: '#06B6D4' },
             { name: 'Bootstrap', level: 85, color: '#7952B3' },
+            { name: 'WordPress', level: 90, color: '#21759B' },
+            { name: 'Elementor', level: 88, color: '#92003B' },
         ]
     },
     {
@@ -275,12 +277,12 @@ export const projects = [
 export const experience = [
     {
         id: 1,
-        title: 'Full Stack Developer & Odoo Developer',
+        title: 'Full Stack Developer & WordPress Developer',
         company: 'VinnPro Web Solutions Pvt. Ltd.',
         period: 'Jan 2026 – Present',
         location: 'Ghaziabad, India (On-site)',
         description: [
-            'Developed custom Odoo modules using Python, XML, and PostgreSQL.',
+            'Developed custom WordPress themes, dynamic Elementor layouts, and plugin customizations using PHP, JavaScript, and MySQL.',
             'Built responsive web applications using React.js, Next.js, Node.js, and MySQL.',
             'Contributed to Park Flow SaaS, Safe Drop AI, and a University Management System with 10+ REST API endpoints.',
             'Integrated REST APIs, fixed bugs, and deployed production-ready features while optimizing application performance.'
