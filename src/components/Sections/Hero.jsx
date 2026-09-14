@@ -205,7 +205,7 @@ export default function Hero({ setActiveSection }) {
                                     </motion.div>
                                     <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1.0 }} className="pl-4">
                                         <span className="text-foreground/70">availability:</span>{' '}
-                                        <span className="text-emerald-600 dark:text-emerald-400">&quot;Open to freelance &amp; full-time roles&quot;</span>
+                                        <span className="text-emerald-600 dark:text-emerald-400">&quot;Open to freelance projects&quot;</span>
                                     </motion.div>
                                     <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1.1 }}>
                                         <span className="text-foreground/50">{'}'}</span><span className="text-foreground/30">;</span>

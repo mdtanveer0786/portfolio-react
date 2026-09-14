@@ -82,7 +82,7 @@ const CHAT_RULES = [
     {
         category: 'location',
         keywords: ['where', 'location', 'live', 'place', 'city', 'based', 'address', 'stay', 'ghaziabad', 'delhi', 'india', 'reside', 'home', 'uttar pradesh', 'remote', 'relocate'],
-        response: "Tanveer is based in **Delhi/NCR, India**. He is fully equipped for **Remote Work** globally and is open to discussing relocation opportunities for the right full-time role."
+        response: "Tanveer is based in **Delhi/NCR, India**. He is fully equipped for **Remote Work** globally and is open to discussing freelance and contract opportunities."
     },
     {
         category: 'contact',
@@ -101,8 +101,8 @@ const CHAT_RULES = [
     },
     {
         category: 'availability',
-        keywords: ['hire', 'availability', 'fulltime', 'full-time', 'opportunity', 'job', 'vacancy', 'open to work', 'available', 'contract', 'recruit'],
-        response: "Tanveer is currently **Open to New Opportunities**! Whether you need a dedicated Full-Time Engineer or a reliable Freelancer for a complex project, he is ready to deliver. Click **Hire Tanveer** to start the conversation."
+        keywords: ['hire', 'availability', 'opportunity', 'job', 'vacancy', 'open to work', 'available', 'contract', 'freelance', 'recruit'],
+        response: "Tanveer is currently **Open to New Opportunities**! Whether you need a dedicated Freelance Engineer or a skilled developer for a complex project, he is ready to deliver. Click **Hire Tanveer** to start the conversation."
     },
     {
         category: 'thanks',
