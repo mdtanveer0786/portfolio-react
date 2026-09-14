@@ -61,8 +61,8 @@ const CHAT_RULES = [
     },
     {
         category: 'projects',
-        keywords: ['projects', 'portfolio', 'work', 'built', 'showcase', 'examples', 'past work', 'live', 'demo', 'safedrop', 'parkflow', 'crm'],
-        response: "Tanveer has built several impressive enterprise projects:\n\n* **Enterprise CRM Suite:** Full-stack customer & sales pipeline management SaaS.\n* **ParkFlow SaaS:** Real-time parking management system.\n* **SafeDrop AI:** Smart luggage tracking & locker SaaS.\n* **Real Estate Elite:** Full-stack property platform.\n\nYou can click the **Projects** button in the chat or scroll down to see them all!"
+        keywords: ['projects', 'portfolio', 'work', 'built', 'showcase', 'examples', 'past work', 'live', 'demo', 'safedrop', 'parkflow', 'crm', 'vgrow'],
+        response: "Tanveer has built several impressive enterprise projects:\n\n* **vGrow CRM:** Multi-tenant enterprise CRM SaaS with AI Copilot & RBAC/ABAC.\n* **ParkFlow SaaS:** Real-time parking management system.\n* **SafeDrop AI:** Smart luggage tracking & locker SaaS.\n* **Real Estate Elite:** Full-stack property platform.\n\nYou can click the **Projects** button in the chat or scroll down to see them all!"
     },
     {
         category: 'services',

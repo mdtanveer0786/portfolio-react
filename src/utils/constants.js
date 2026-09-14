@@ -172,11 +172,11 @@ export const skillCategories = [
 export const projects = [
     {
         id: 9,
-        title: 'Enterprise CRM Suite',
-        description: 'A comprehensive customer relationship management SaaS featuring lead lifecycle tracking, interactive sales pipeline analytics, role-based access control (RBAC), and automated client engagement workflows.',
-        tags: ['React', 'Node.js', 'Express', 'MongoDB', 'Tailwind CSS', 'REST API'],
+        title: 'vGrow - Enterprise Multi-Tenant CRM Suite',
+        description: 'A comprehensive multi-tenant SaaS platform featuring lead lifecycle tracking, interactive sales pipeline analytics, role-based access control (RBAC/ABAC), AI Copilot, automated workflows, and enterprise support modules.',
+        tags: ['React', 'TypeScript', 'Node.js', 'Express', 'MySQL', 'Prisma', 'Tailwind CSS', 'Turborepo'],
         image: tradeImg,
-        github: 'https://github.com/mdtanveer0786',
+        github: 'https://github.com/mdtanveer0786/vgrow',
         live: '',
         featured: true,
         category: 'fullstack',

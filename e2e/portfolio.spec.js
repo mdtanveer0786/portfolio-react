@@ -42,7 +42,7 @@ test.describe('Portfolio End-to-End Test Suite', () => {
     await expect(expTitle).toBeAttached({ timeout: 10000 });
 
     // Verify Enterprise CRM project is visible
-    const crmProject = page.getByText(/Enterprise CRM Suite/i).first();
+    const crmProject = page.getByText(/vGrow - Enterprise Multi-Tenant CRM Suite/i).first();
     await expect(crmProject).toBeAttached({ timeout: 10000 });
 
     // Ensure Odoo is completely absent across the application
