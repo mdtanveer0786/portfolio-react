@@ -37,29 +37,29 @@
     }
 
     .dark {
-        /* Dark Mode — Obsidian Deep Space */
-        --background: 222 47% 3%;
+        /* Dark Mode — Refined Obsidian Glow (Linear.app / Supabase aesthetic) */
+        --background: 225 40% 4%;
         --foreground: 210 20% 98%;
-        --card: 222 47% 5%;
+        --card: 225 35% 7%;
         --card-foreground: 210 20% 98%;
-        --popover: 222 47% 5%;
+        --popover: 225 35% 7%;
         --popover-foreground: 210 20% 98%;
         --primary: 263 70% 58%;
         --primary-foreground: 0 0% 100%;
-        --secondary: 222 30% 8%;
+        --secondary: 225 30% 10%;
         --secondary-foreground: 210 20% 98%;
-        --muted: 222 30% 8%;
+        --muted: 225 25% 10%;
         --muted-foreground: 215 15% 65%;
         --accent: 192 91% 52%;
         --accent-foreground: 0 0% 100%;
         --destructive: 0 63% 31%;
         --destructive-foreground: 210 20% 98%;
-        --border: 222 20% 14%;
-        --input: 222 20% 14%;
+        --border: 225 20% 15%;
+        --input: 225 20% 15%;
         --ring: 263 70% 58%;
         --glow-color: 139 92 246;
-        --surface: 240 10% 5%;
-        --surface-hover: 240 10% 8%;
+        --surface: 228 20% 6%;
+        --surface-hover: 228 18% 9%;
     }
 }
 
