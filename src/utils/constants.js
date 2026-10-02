@@ -178,7 +178,7 @@ export const projects = [
         tags: ['React', 'TypeScript', 'Node.js', 'Express', 'MySQL', 'Prisma', 'Tailwind CSS', 'Turborepo'],
         image: crmImg,
         github: 'https://github.com/mdtanveer0786/vgrow',
-        live: '',
+        live: 'https://us.vgrow247.com/',
         featured: true,
         category: 'fullstack',
         date: '2026-07-15'
