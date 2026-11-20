@@ -44,7 +44,7 @@ const playSynthesizedSound = (type) => {
             osc.stop(now + 0.06);
         }
     } catch (e) {
-        // Fallback silently if audio context not allowed
+        // Fallback silently
     }
 };
 
@@ -190,7 +190,7 @@ const CHAT_RULES = [
             'hire', 'availability', 'opportunity', 'job', 'vacancy', 'open to work', 'available',
             'contract', 'freelance', 'recruit', 'hire karna hai', 'kaam karwana hai', 'freelancer chahiye', 'developer chahiye'
         ],
-        response: "Tanveer is currently **Open to New Opportunities**! Whether you need a dedicated Freelance Engineer or a skilled developer for a complex SaaS project, he is ready to deliver. Click **Hire Tanveer** to start the conversation.",
+        response: "Tanveer is currently **Open to New Opportunities**! Whether you need a dedicated Freelance Engineer or a skilled developer for a complex SaaS project, he is ready to deliver. Click **Hire Tanveer** to open the quick inquiry card.",
         suggestions: ['Hire Tanveer', 'Chat on WhatsApp', 'View Projects', 'Download Resume']
     },
     {
@@ -210,13 +210,6 @@ const QUICK_ACTIONS = [
     { label: 'Hire Tanveer', icon: User, value: 'I want to hire Tanveer' },
     { label: 'WhatsApp', icon: FaWhatsapp, value: 'I want to chat on WhatsApp' },
     { label: 'Resume', icon: Download, value: 'Download resume' },
-];
-
-const LEAD_STEPS = [
-    { key: 'name', question: "I'd love to help you connect with Tanveer! First, may I know your **name**?" },
-    { key: 'email', question: "Nice to meet you! Could you please provide your **email address** so we can reach out?" },
-    { key: 'project', question: "What kind of **project** are you looking for? (e.g., Website, App, AI Bot, SaaS, etc.)" },
-    { key: 'final', question: "Thank you! I've prepared your project summary. Tanveer will review this and get back to you shortly.\n\nI have also sent a confirmation email to your inbox.\n\n**Quick Connect:** You can also message him directly on WhatsApp for instant coordination!" }
 ];
 
 const ChatBot = () => {
@@ -244,22 +237,7 @@ const ChatBot = () => {
     const [inputValue, setInputValue] = useState('');
     const [isTyping, setIsTyping] = useState(false);
     const [showTooltip, setShowTooltip] = useState(false);
-    const [leadData, setLeadData] = useState(() => {
-        const saved = getSafeSessionStorage('tanveer_chat_lead_data');
-        if (saved) {
-            try { 
-                return JSON.parse(saved); 
-            } catch (e) {
-                console.warn("Failed to parse chatbot session storage:", e);
-            }
-        }
-        return { step: -1, data: {} };
-    });
     const [localTime, setLocalTime] = useState(new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }));
-
-    useEffect(() => {
-        setSafeSessionStorage('tanveer_chat_lead_data', JSON.stringify(leadData));
-    }, [leadData]);
     const [isListening, setIsListening] = useState(false);
     const [soundEnabled, setSoundEnabled] = useState(true);
     const messagesEndRef = useRef(null);
@@ -349,8 +327,52 @@ const ChatBot = () => {
             timestamp: new Date(),
             suggestions: ['View Projects', 'What are your skills?', 'Hire Tanveer', 'Chat on WhatsApp']
         }]);
-        setLeadData({ step: -1, data: {} });
         playSound('pop');
+    };
+
+    const sendLeadEmail = (data) => {
+        const templateParams = {
+            name: data.name,
+            email: data.email,
+            subject: `ChatBot Lead - ${data.projectType || 'New Project Inquiry'}`,
+            message: `Project Type: ${data.projectType || 'General'}\nPhone/WhatsApp: ${data.phone || 'Not provided'}\nDetails: ${data.details || 'N/A'}`,
+            from_name: data.name,
+            from_email: data.email,
+            reply_to: data.email,
+            to_name: 'Md Tanveer Alam'
+        };
+
+        const toastId = toast.loading('Sending your project inquiry...');
+
+        // 1. Send Lead Notification to Tanveer
+        emailjs.send(
+            SERVICE_ID, 
+            TEMPLATE_ID, 
+            templateParams, 
+            PUBLIC_KEY
+        ).then(() => {
+            toast.success('Inquiry sent successfully! Tanveer will reach out soon.', { id: toastId });
+        }).catch((err) => {
+            toast.error('Failed to send email. Please use the WhatsApp button instead.', { id: toastId });
+            console.error('Lead notification failed', err);
+        });
+
+        // 2. Send Auto-Reply to User
+        emailjs.send(
+            SERVICE_ID, 
+            AUTOREPLY_TEMPLATE_ID, 
+            {
+                name: data.name,
+                email: data.email,
+                subject: `Project Inquiry Received - Md Tanveer Alam`,
+                message: `Thank you for reaching out regarding your ${data.projectType || 'project'}. I have received your request and will get back to you shortly.`,
+                from_name: 'Md Tanveer Alam',
+                reply_to: 'tanveerdev14@gmail.com'
+            }, 
+            PUBLIC_KEY
+        ).catch((err) => {
+            console.error('Auto-reply failed', err);
+        });
     };
 
     const handleSendMessage = (text) => {
@@ -368,11 +390,6 @@ const ChatBot = () => {
         setInputValue('');
         setIsTyping(true);
         setShowTooltip(false);
-
-        if (leadData.step !== -1) {
-            processLeadStep(text);
-            return;
-        }
 
         // Get response immediately to calculate typing delay
         const botResponse = getBotResponse(text, messages);
@@ -402,6 +419,17 @@ const ChatBot = () => {
                     suggestions: botResponse.suggestions
                 }]);
                 speakText(botResponse.text);
+            } else if (botResponse.type === 'lead_form') {
+                const msgText = "Great! Tanveer is currently available for freelance projects, SaaS architecture, and full-stack contracts. Fill out this quick 15-second inquiry card below, or reach out directly on WhatsApp:";
+                setMessages(prev => [...prev, {
+                    id: Date.now() + 1,
+                    type: 'bot',
+                    text: msgText,
+                    timestamp: new Date(),
+                    isLeadForm: true,
+                    suggestions: ['Chat on WhatsApp', 'View Projects', 'Download Resume']
+                }]);
+                speakText(msgText);
             } else if (botResponse.type === 'projects') {
                 const msgText = botResponse.title || "Here are some of Tanveer's featured projects. These showcase his ability to build scalable and high-performance applications:";
                 setMessages(prev => [...prev, {
@@ -439,16 +467,6 @@ const ChatBot = () => {
                     suggestions: ['View Projects', 'What are your skills?', 'Hire Tanveer']
                 }]);
                 speakText(msgText);
-            } else if (botResponse.type === 'lead') {
-                setLeadData({ step: 0, data: {} });
-                const msgText = LEAD_STEPS[0].question;
-                setMessages(prev => [...prev, {
-                    id: Date.now() + 1,
-                    type: 'bot',
-                    text: msgText,
-                    timestamp: new Date()
-                }]);
-                speakText(msgText);
             } else if (botResponse.type === 'resume') {
                 const msgText = "You can download Md Tanveer Alam professional resume to review his full career history and certifications:";
                 setMessages(prev => [...prev, {
@@ -464,118 +482,6 @@ const ChatBot = () => {
 
             setIsTyping(false);
         }, typingDelay);
-    };
-
-    const processLeadStep = (text) => {
-        const currentStep = leadData.step;
-        const key = LEAD_STEPS[currentStep].key;
-
-        // Cancel command
-        if (text.toLowerCase() === 'cancel' || text.toLowerCase() === 'stop' || text.toLowerCase() === 'ruko') {
-            setLeadData({ step: -1, data: {} });
-            setMessages(prev => [...prev, {
-                id: Date.now(),
-                type: 'bot',
-                text: "No problem! I've cancelled the inquiry form. What else can I help you with?",
-                timestamp: new Date(),
-                suggestions: ['View Projects', 'What are your skills?', 'Chat on WhatsApp']
-            }]);
-            setIsTyping(false);
-            return;
-        }
-
-        // Email validation
-        if (key === 'email' && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(text)) {
-            setTimeout(() => {
-                playSound('pop');
-                setMessages(prev => [...prev, {
-                    id: Date.now(),
-                    type: 'bot',
-                    text: "That doesn't look like a valid email address. Could you please provide a valid one? (or type 'cancel' to stop)",
-                    timestamp: new Date()
-                }]);
-                setIsTyping(false);
-            }, 800);
-            return;
-        }
-
-        const newData = { ...leadData.data, [key]: text };
-
-        setTimeout(() => {
-            playSound('pop');
-            if (currentStep < LEAD_STEPS.length - 2) {
-                const nextStep = currentStep + 1;
-                setLeadData({ step: nextStep, data: newData });
-                const nextQuestion = LEAD_STEPS[nextStep].question;
-                setMessages(prev => [...prev, {
-                    id: Date.now(),
-                    type: 'bot',
-                    text: nextQuestion,
-                    timestamp: new Date()
-                }]);
-                speakText(nextQuestion);
-            } else {
-                setLeadData({ step: -1, data: newData });
-                sendLeadEmail(newData);
-                const finalQuestion = LEAD_STEPS[LEAD_STEPS.length - 1].question;
-                setMessages(prev => [...prev, {
-                    id: Date.now(),
-                    type: 'bot',
-                    text: finalQuestion,
-                    timestamp: new Date(),
-                    leadSummary: newData,
-                    hasWhatsApp: true,
-                    suggestions: ['Chat on WhatsApp', 'View Projects', 'Download Resume']
-                }]);
-                speakText(finalQuestion);
-            }
-            setIsTyping(false);
-        }, 800);
-    };
-
-    const sendLeadEmail = (data) => {
-        const templateParams = {
-            name: data.name,
-            email: data.email,
-            subject: 'ChatBot Lead - New Project Inquiry',
-            message: `Project Details: ${data.project}`,
-            from_name: data.name,
-            from_email: data.email,
-            reply_to: data.email,
-            to_name: 'Md Tanveer Alam'
-        };
-
-        const toastId = toast.loading('Sending your inquiry...');
-
-        // 1. Send Lead Notification to Tanveer
-        emailjs.send(
-            SERVICE_ID, 
-            TEMPLATE_ID, 
-            templateParams, 
-            PUBLIC_KEY
-        ).then(() => {
-            toast.success('Inquiry sent successfully!', { id: toastId });
-        }).catch((err) => {
-            toast.error('Failed to send inquiry. Please try the contact form instead.', { id: toastId });
-            console.error('Lead notification failed', err);
-        });
-
-        // 2. Send Auto-Reply to User
-        emailjs.send(
-            SERVICE_ID, 
-            AUTOREPLY_TEMPLATE_ID, 
-            {
-                name: data.name,
-                email: data.email,
-                subject: 'ChatBot Inquiry',
-                message: `Project Details: ${data.project}`,
-                from_name: 'Md Tanveer Alam',
-                reply_to: 'tanveerdev14@gmail.com'
-            }, 
-            PUBLIC_KEY
-        ).catch((err) => {
-            console.error('Auto-reply failed', err);
-        });
     };
 
     const getBotResponse = (input, currentMessages) => {
@@ -599,7 +505,7 @@ const ChatBot = () => {
                     suggestions: ['Show React Projects', 'Show SaaS Projects', 'Download Resume', 'Hire Tanveer']
                 };
             }
-            if (lastBotMsg.includes('hire') || lastBotMsg.includes('contact')) return { type: 'lead' };
+            if (lastBotMsg.includes('hire') || lastBotMsg.includes('contact')) return { type: 'lead_form' };
         }
 
         // Direct WhatsApp intent
@@ -627,14 +533,22 @@ const ChatBot = () => {
             };
         }
         
+        // Lead / Hire Intent -> Triggers the Inline Interactive Form!
         if (
-            (normalizedInput.includes('hire') || normalizedInput.includes('vacancy') || normalizedInput.includes('opportunity') || normalizedInput.includes('kaam karwana') || normalizedInput.includes('freelancer chahiye')) && 
+            (normalizedInput.includes('hire') || 
+             normalizedInput.includes('vacancy') || 
+             normalizedInput.includes('opportunity') || 
+             normalizedInput.includes('kaam karwana') || 
+             normalizedInput.includes('freelancer chahiye') ||
+             normalizedInput.includes('project banwana') ||
+             normalizedInput.includes('website banwani') ||
+             normalizedInput.includes('app banwani')) && 
             !normalizedInput.includes('experience')
         ) {
-            return { type: 'lead' };
+            return { type: 'lead_form' };
         }
 
-        // Tech-Specific Smart Project Filtering (Feature C)
+        // Tech-Specific Smart Project Filtering
         if (normalizedInput.includes('react') && (normalizedInput.includes('project') || normalizedInput.includes('work') || normalizedInput.includes('dikhao') || normalizedInput.includes('demo'))) {
             const reactProjects = projects.filter(p => p.tags.some(t => t.toLowerCase().includes('react')));
             return {
@@ -752,17 +666,15 @@ const ChatBot = () => {
             for (const keyword of rule.keywords) {
                 const lowerKeyword = keyword.toLowerCase();
                 if (lowerKeyword.includes(' ')) {
-                    // Phrase match
                     if (normalizedInput.includes(lowerKeyword)) {
                         score += 5;
                     }
                 } else {
-                    // Token-based word match
                     for (const word of inputWords) {
                         if (word === lowerKeyword) {
-                            score += 3; // Perfect word boundary match
+                            score += 3;
                         } else if (word.length > 3 && (word.startsWith(lowerKeyword) || lowerKeyword.startsWith(word))) {
-                            score += 1.5; // Fuzzy prefix/partial match for longer words
+                            score += 1.5;
                         }
                     }
                 }
@@ -931,14 +843,16 @@ const ChatBot = () => {
                                     <div className="flex flex-col gap-2 flex-1">
                                         <div className={cn("p-4 rounded-2xl text-[13.5px] leading-relaxed shadow-sm", msg.type === 'bot' ? "bg-white dark:bg-neutral-900/95 border border-border text-foreground rounded-tl-none backdrop-blur-sm" : "bg-primary text-white rounded-tr-none shadow-md shadow-primary/20")}>
                                             {formatMessage(msg.text)}
-                                            
-                                            {msg.leadSummary && (
-                                                <div className="mt-4 p-3 bg-primary/5 dark:bg-primary/10 rounded-xl border border-primary/20 space-y-2 text-[12px]">
-                                                    <p className="font-bold text-primary uppercase tracking-wider text-[10px]">Project Inquiry Summary</p>
-                                                    <p><strong>Name:</strong> {msg.leadSummary.name}</p>
-                                                    <p><strong>Email:</strong> {msg.leadSummary.email}</p>
-                                                    <p><strong>Project:</strong> {msg.leadSummary.project}</p>
-                                                </div>
+
+                                            {/* Interactive Inline Lead Form (Fast & High Conversion) */}
+                                            {msg.isLeadForm && (
+                                                <InlineLeadForm
+                                                    onSubmitLead={(data) => {
+                                                        sendLeadEmail(data);
+                                                        playSound('pop');
+                                                        scrollToBottom('smooth');
+                                                    }}
+                                                />
                                             )}
 
                                             {msg.hasWhatsApp && (
@@ -969,7 +883,7 @@ const ChatBot = () => {
                                             )}
                                         </div>
 
-                                        {/* Dynamic Suggested Follow-up Chips (Feature D) */}
+                                        {/* Dynamic Suggested Follow-up Chips */}
                                         {msg.suggestions && msg.suggestions.length > 0 && (
                                             <div className="flex flex-wrap gap-1.5 mt-1 pt-1">
                                                 {msg.suggestions.map((suggestion, sIdx) => (
@@ -1035,11 +949,7 @@ const ChatBot = () => {
 
                         {/* Quick Actions Bar */}
                         <div className="px-4 py-3 flex flex-nowrap overflow-x-auto gap-2 scrollbar-none bg-black/[0.02] dark:bg-white/[0.02] border-t border-border/50">
-                            {leadData.step !== -1 ? (
-                                <button onClick={() => { setLeadData({ step: -1, data: {} }); setMessages(prev => [...prev, { id: Date.now(), type: 'bot', text: 'Inquiry cancelled. How else can I assist you?', timestamp: new Date(), suggestions: ['View Projects', 'What are your skills?', 'Chat on WhatsApp'] }]); playSound('pop'); speakText('Inquiry cancelled.'); }} className="text-[10px] font-bold uppercase tracking-wider px-4 py-2.5 rounded-xl border border-red-500/30 bg-red-500/10 text-red-500 hover:bg-red-500 hover:text-white transition-all flex items-center gap-2 whitespace-nowrap shadow-sm active:scale-95">
-                                    <X size={13} /> Cancel Inquiry
-                                </button>
-                            ) : QUICK_ACTIONS.map((action, i) => (
+                            {QUICK_ACTIONS.map((action, i) => (
                                 <button key={i} onClick={() => handleSendMessage(action.value)} className="text-[10px] font-bold uppercase tracking-wider px-3.5 py-2.5 rounded-xl border border-border bg-background hover:border-primary hover:text-primary transition-all flex items-center gap-2 whitespace-nowrap shadow-sm hover:shadow-md active:scale-95">
                                     <action.icon size={13} /> {action.label}
                                 </button>
@@ -1053,7 +963,7 @@ const ChatBot = () => {
                                     {isListening ? <MicOff size={18} /> : <Mic size={18} />}
                                 </button>
                                 <div className="relative flex-1 group">
-                                    <input ref={inputRef} type="text" value={inputValue} onChange={(e) => setInputValue(e.target.value)} placeholder={leadData.step !== -1 ? "Type your answer..." : "Ask me anything (or type in Hindi/English)..."} className="w-full bg-muted/30 border border-border rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all pr-10" aria-label="Chat message input" />
+                                    <input ref={inputRef} type="text" value={inputValue} onChange={(e) => setInputValue(e.target.value)} placeholder="Ask me anything (or type in Hindi/English)..." className="w-full bg-muted/30 border border-border rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all pr-10" aria-label="Chat message input" />
                                     <div className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground/30 pointer-events-none group-focus-within:text-primary/30 transition-colors"><ArrowRight size={16} /></div>
                                 </div>
                                 <button type="submit" disabled={!inputValue.trim()} className="p-3.5 rounded-xl bg-primary text-white disabled:opacity-50 disabled:cursor-not-allowed hover:shadow-lg hover:shadow-primary/30 transition-all active:scale-90 flex-shrink-0" aria-label="Send message">
@@ -1157,6 +1067,206 @@ const ChatBot = () => {
             )}
         </AnimatePresence>
         </>
+    );
+};
+
+// Modern Interactive Inline Lead Form Component
+const InlineLeadForm = ({ onSubmitLead }) => {
+    const [name, setName] = useState('');
+    const [email, setEmail] = useState('');
+    const [phone, setPhone] = useState('');
+    const [projectType, setProjectType] = useState('Full Stack / SaaS');
+    const [details, setDetails] = useState('');
+    const [submitting, setSubmitting] = useState(false);
+    const [submitted, setSubmitted] = useState(false);
+
+    const projectTypes = [
+        'Full Stack / SaaS',
+        'WordPress & Elementor',
+        'Custom Web App',
+        'Mobile App (Android)'
+    ];
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        if (!name.trim()) {
+            toast.error('Please enter your name');
+            return;
+        }
+        if (!email.trim() || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim())) {
+            toast.error('Please enter a valid email address');
+            return;
+        }
+
+        setSubmitting(true);
+        const leadPayload = {
+            name: name.trim(),
+            email: email.trim(),
+            phone: phone.trim(),
+            projectType,
+            details: details.trim()
+        };
+
+        if (onSubmitLead) {
+            onSubmitLead(leadPayload);
+        }
+
+        setTimeout(() => {
+            setSubmitting(false);
+            setSubmitted(true);
+        }, 500);
+    };
+
+    if (submitted) {
+        return (
+            <motion.div
+                initial={{ opacity: 0, scale: 0.95 }}
+                animate={{ opacity: 1, scale: 1 }}
+                className="mt-3 p-4 rounded-2xl bg-emerald-500/10 border border-emerald-500/25 space-y-2.5 text-left"
+            >
+                <div className="flex items-center gap-2 text-emerald-400 font-bold text-xs uppercase tracking-wider">
+                    <CheckCircle2 size={16} /> Inquiry Sent to Tanveer!
+                </div>
+                <p className="text-xs text-foreground/90 leading-relaxed">
+                    Thank you, <strong>{name}</strong>! Tanveer will review your <strong>{projectType}</strong> project and email you back at <strong>{email}</strong> shortly.
+                </p>
+                {phone && (
+                    <p className="text-[11px] text-muted-foreground">
+                        Phone / WhatsApp noted: <strong>{phone}</strong>
+                    </p>
+                )}
+                <div className="pt-1">
+                    <a
+                        href={`https://wa.me/917482946610?text=Hi%20Tanveer!%20I%20just%20submitted%20a%20project%20inquiry%20for%20${encodeURIComponent(projectType)}%20(Name:%20${encodeURIComponent(name)}).`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center justify-center gap-2 w-full py-2.5 px-4 bg-[#25D366] hover:bg-[#20ba59] text-white rounded-xl font-bold text-xs shadow-md transition-all active:scale-95"
+                    >
+                        <FaWhatsapp size={15} /> Instant WhatsApp Connect
+                    </a>
+                </div>
+            </motion.div>
+        );
+    }
+
+    return (
+        <form onSubmit={handleSubmit} className="mt-3 p-3.5 sm:p-4 rounded-2xl bg-black/[0.04] dark:bg-white/[0.03] border border-primary/25 space-y-2.5 text-left shadow-inner">
+            <div className="flex items-center justify-between pb-1 border-b border-border/40">
+                <span className="text-[11px] font-bold uppercase tracking-wider text-primary flex items-center gap-1.5">
+                    <User size={13} /> Project Inquiry Card
+                </span>
+                <span className="text-[9px] font-mono text-muted-foreground uppercase tracking-widest bg-primary/10 px-2 py-0.5 rounded-full">
+                    Quick Form
+                </span>
+            </div>
+
+            {/* Name */}
+            <div>
+                <label className="block text-[11px] font-medium text-foreground/80 mb-1">
+                    Your Name <span className="text-primary">*</span>
+                </label>
+                <input
+                    type="text"
+                    required
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                    placeholder="e.g. Alex Smith"
+                    className="w-full bg-background border border-border rounded-xl px-3 py-2 text-xs focus:outline-none focus:border-primary transition-colors text-foreground shadow-xs"
+                />
+            </div>
+
+            {/* Email */}
+            <div>
+                <label className="block text-[11px] font-medium text-foreground/80 mb-1">
+                    Email Address <span className="text-primary">*</span>
+                </label>
+                <input
+                    type="email"
+                    required
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    placeholder="alex@company.com"
+                    className="w-full bg-background border border-border rounded-xl px-3 py-2 text-xs focus:outline-none focus:border-primary transition-colors text-foreground shadow-xs"
+                />
+            </div>
+
+            {/* Phone / WhatsApp (Optional) */}
+            <div>
+                <label className="block text-[11px] font-medium text-foreground/80 mb-1 flex items-center justify-between">
+                    <span>Phone / WhatsApp</span>
+                    <span className="text-[10px] text-emerald-400 font-semibold flex items-center gap-1">
+                        <FaWhatsapp size={11} /> Fast Reply
+                    </span>
+                </label>
+                <input
+                    type="tel"
+                    value={phone}
+                    onChange={(e) => setPhone(e.target.value)}
+                    placeholder="+91 98765... or +1 555..."
+                    className="w-full bg-background border border-border rounded-xl px-3 py-2 text-xs focus:outline-none focus:border-primary transition-colors text-foreground shadow-xs"
+                />
+            </div>
+
+            {/* Project Type Pills */}
+            <div>
+                <label className="block text-[11px] font-medium text-foreground/80 mb-1">
+                    Project Type
+                </label>
+                <div className="flex flex-wrap gap-1.5">
+                    {projectTypes.map((pt) => (
+                        <button
+                            type="button"
+                            key={pt}
+                            onClick={() => setProjectType(pt)}
+                            className={cn(
+                                "px-2.5 py-1 rounded-lg text-[10px] font-semibold transition-all border",
+                                projectType === pt
+                                    ? "bg-primary text-white border-primary shadow-xs"
+                                    : "bg-background text-muted-foreground border-border hover:border-primary/40"
+                            )}
+                        >
+                            {pt}
+                        </button>
+                    ))}
+                </div>
+            </div>
+
+            {/* Brief Scope */}
+            <div>
+                <label className="block text-[11px] font-medium text-foreground/80 mb-1">
+                    Project Details <span className="text-[10px] text-muted-foreground">(Optional)</span>
+                </label>
+                <textarea
+                    rows={2}
+                    value={details}
+                    onChange={(e) => setDetails(e.target.value)}
+                    placeholder="Briefly describe your requirements or timeline..."
+                    className="w-full bg-background border border-border rounded-xl px-3 py-2 text-xs focus:outline-none focus:border-primary transition-colors text-foreground resize-none shadow-xs"
+                />
+            </div>
+
+            {/* Submit Button */}
+            <button
+                type="submit"
+                disabled={submitting}
+                className="w-full py-2.5 px-4 rounded-xl btn-primary text-xs font-bold flex items-center justify-center gap-2 shadow-md transition-all active:scale-95 disabled:opacity-60"
+            >
+                <Send size={13} />
+                {submitting ? 'Sending Inquiry...' : 'Submit Project Inquiry'}
+            </button>
+
+            {/* Direct WhatsApp Option */}
+            <div className="pt-1">
+                <a
+                    href="https://wa.me/917482946610?text=Hi%20Tanveer!%20I%20am%20visiting%20your%20portfolio%20and%20would%20like%20to%20hire%20you%20for%20a%20project."
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center justify-center gap-2 w-full py-2 px-3 rounded-xl bg-[#25D366]/10 hover:bg-[#25D366]/20 text-[#25D366] border border-[#25D366]/30 text-[11px] font-bold transition-all active:scale-95"
+                >
+                    <FaWhatsapp size={14} /> Or Message on WhatsApp (+91 7482946610)
+                </a>
+            </div>
+        </form>
     );
 };
 
