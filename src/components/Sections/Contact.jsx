@@ -52,7 +52,9 @@ export default function Contact() {
             const templateParams = {
                 name: formData.name,
                 email: formData.email,
-                subject: formData.subject,
+                phone: 'Not provided',
+                project_type: formData.subject || 'General Inquiry',
+                subject: formData.subject || 'Portfolio Contact Message',
                 message: formData.message,
                 from_name: formData.name,
                 from_email: formData.email,
@@ -67,6 +69,7 @@ export default function Contact() {
                     await emailjs.send(SERVICE_ID, AUTOREPLY_TEMPLATE_ID, {
                         name: formData.name,
                         email: formData.email,
+                        project_type: formData.subject || 'General Inquiry',
                         subject: formData.subject || 'General Inquiry',
                         message: formData.message,
                         from_name: 'Md Tanveer Alam',
