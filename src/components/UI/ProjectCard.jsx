@@ -71,14 +71,14 @@ const ProjectCard = forwardRef(({ project, index, onOpenCaseStudy }, ref) => {
                     <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
                     {/* Badges */}
-                    <div className="absolute top-3 left-3 flex gap-2">
+                    <div className="absolute top-3 left-3 flex flex-wrap gap-1.5 max-w-[calc(100%-115px)]">
                         {project.featured && (
-                            <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-primary/90 backdrop-blur-md text-white text-[10px] font-semibold uppercase tracking-wide shadow-lg">
-                                <Star size={10} fill="currentColor" />
+                            <div className="flex items-center gap-1 px-2 py-0.5 sm:px-2.5 sm:py-1 rounded-lg bg-primary/90 backdrop-blur-md text-white text-[9px] sm:text-[10px] font-semibold uppercase tracking-wide shadow-lg">
+                                <Star size={9} fill="currentColor" />
                                 Featured
                             </div>
                         )}
-                        <div className="px-2.5 py-1 rounded-lg bg-white/10 backdrop-blur-md text-white text-[10px] font-semibold uppercase tracking-wide">
+                        <div className="px-2 py-0.5 sm:px-2.5 sm:py-1 rounded-lg bg-white/10 backdrop-blur-md text-white text-[9px] sm:text-[10px] font-semibold uppercase tracking-wide">
                             {project.category}
                         </div>
                     </div>

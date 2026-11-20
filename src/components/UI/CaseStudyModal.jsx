@@ -49,48 +49,48 @@ export default function CaseStudyModal({ project, isOpen, onClose }) {
                         exit={{ opacity: 0, scale: 0.93, y: 20 }}
                         transition={{ type: 'spring', damping: 25, stiffness: 300 }}
                         onClick={(e) => e.stopPropagation()}
-                        className="relative w-full max-w-3xl max-h-[90vh] bg-card dark:bg-[#0c0c16] border border-primary/30 rounded-3xl shadow-[0_20px_70px_rgba(0,0,0,0.6)] overflow-hidden flex flex-col z-10 my-auto"
+                        className="relative w-full max-w-3xl max-h-[92dvh] sm:max-h-[90vh] bg-card dark:bg-[#0c0c16] border border-primary/30 rounded-2xl sm:rounded-3xl shadow-[0_20px_70px_rgba(0,0,0,0.6)] overflow-hidden flex flex-col z-10 my-auto"
                     >
                         {/* Header Banner */}
-                        <div className="relative p-6 sm:p-8 bg-gradient-to-r from-primary/15 via-purple-600/10 to-accent/15 border-b border-border/60">
+                        <div className="relative p-4 xs:p-6 sm:p-8 bg-gradient-to-r from-primary/15 via-purple-600/10 to-accent/15 border-b border-border/60">
                             {/* Close Button */}
                             <button
                                 onClick={onClose}
-                                className="absolute top-5 right-5 p-2 rounded-xl bg-black/5 dark:bg-white/10 hover:bg-black/10 dark:hover:bg-white/20 text-foreground transition-all active:scale-95"
+                                className="absolute top-3 right-3 xs:top-4 xs:right-4 sm:top-6 sm:right-6 p-2 rounded-xl bg-black/5 dark:bg-white/10 hover:bg-black/10 dark:hover:bg-white/20 text-foreground transition-all active:scale-95"
                                 aria-label="Close case study"
                             >
-                                <X size={20} />
+                                <X size={18} className="sm:w-5 sm:h-5" />
                             </button>
 
-                            <div className="flex items-center gap-2 mb-3">
-                                <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-bold uppercase tracking-wider bg-primary/20 text-primary border border-primary/30 shadow-sm">
-                                    <Layers size={13} /> {caseStudy.badge || 'Architecture Deep Dive'}
+                            <div className="flex items-center gap-2 mb-2 sm:mb-3 flex-wrap pr-8">
+                                <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 sm:px-3 sm:py-1 rounded-full text-[10px] sm:text-[11px] font-bold uppercase tracking-wider bg-primary/20 text-primary border border-primary/30 shadow-sm">
+                                    <Layers size={12} /> {caseStudy.badge || 'Architecture Deep Dive'}
                                 </span>
                                 {project.featured && (
-                                    <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider bg-amber-500/10 text-amber-500 border border-amber-500/20">
+                                    <span className="inline-flex items-center gap-1 px-2.5 py-0.5 sm:px-2.5 sm:py-1 rounded-full text-[9px] sm:text-[10px] font-bold uppercase tracking-wider bg-amber-500/10 text-amber-500 border border-amber-500/20">
                                         Production Platform
                                     </span>
                                 )}
                             </div>
 
-                            <h2 id="case-study-title" className="text-xl sm:text-3xl font-display font-bold text-foreground tracking-tight leading-snug">
+                            <h2 id="case-study-title" className="text-lg xs:text-xl sm:text-3xl font-display font-bold text-foreground tracking-tight leading-snug">
                                 {project.title}
                             </h2>
 
-                            <p className="mt-2 text-xs sm:text-sm text-muted-foreground font-medium leading-relaxed max-w-2xl">
+                            <p className="mt-1.5 sm:mt-2 text-xs sm:text-sm text-muted-foreground font-medium leading-relaxed max-w-2xl">
                                 {caseStudy.subtitle}
                             </p>
 
                             {/* Quick Action Links */}
-                            <div className="flex flex-wrap items-center gap-3 mt-5">
+                            <div className="flex flex-wrap items-center gap-2 sm:gap-3 mt-4 sm:mt-5">
                                 {project.live && (
                                     <a
                                         href={project.live}
                                         target="_blank"
                                         rel="noopener noreferrer"
-                                        className="inline-flex items-center gap-2 px-4 py-2 rounded-xl btn-primary text-xs font-semibold shadow-md active:scale-95 transition-all"
+                                        className="inline-flex items-center justify-center gap-2 px-3.5 py-2 sm:px-4 sm:py-2 rounded-xl btn-primary text-xs font-semibold shadow-md active:scale-95 transition-all w-full xs:w-auto"
                                     >
-                                        <ExternalLink size={14} /> Open Live Platform
+                                        <ExternalLink size={13} /> Open Live Platform
                                     </a>
                                 )}
                                 {project.github && (
@@ -98,16 +98,16 @@ export default function CaseStudyModal({ project, isOpen, onClose }) {
                                         href={project.github}
                                         target="_blank"
                                         rel="noopener noreferrer"
-                                        className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-black/[0.04] dark:bg-white/[0.06] hover:bg-black/[0.08] dark:hover:bg-white/[0.1] text-foreground border border-border text-xs font-semibold transition-all active:scale-95"
+                                        className="inline-flex items-center justify-center gap-2 px-3.5 py-2 sm:px-4 sm:py-2 rounded-xl bg-black/[0.04] dark:bg-white/[0.06] hover:bg-black/[0.08] dark:hover:bg-white/[0.1] text-foreground border border-border text-xs font-semibold transition-all active:scale-95 w-full xs:w-auto"
                                     >
-                                        <Github size={14} /> View Repository
+                                        <Github size={13} /> View Repository
                                     </a>
                                 )}
                             </div>
                         </div>
 
                         {/* Modal Body */}
-                        <div className="p-6 sm:p-8 overflow-y-auto space-y-7 custom-scrollbar flex-1">
+                        <div className="p-4 xs:p-6 sm:p-8 overflow-y-auto space-y-5 sm:space-y-7 custom-scrollbar flex-1">
                             {/* Executive Overview */}
                             <div>
                                 <h3 className="text-xs font-bold font-mono uppercase tracking-widest text-primary mb-2 flex items-center gap-2">

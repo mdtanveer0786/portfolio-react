@@ -1171,7 +1171,7 @@ const InlineLeadForm = ({ onSubmitLead }) => {
                     value={name}
                     onChange={(e) => setName(e.target.value)}
                     placeholder="e.g. Alex Smith"
-                    className="w-full bg-background border border-border rounded-xl px-3 py-2 text-xs focus:outline-none focus:border-primary transition-colors text-foreground shadow-xs"
+                    className="w-full bg-background border border-border rounded-xl px-3 py-2 text-base sm:text-xs focus:outline-none focus:border-primary transition-colors text-foreground shadow-xs"
                 />
             </div>
 
@@ -1186,7 +1186,7 @@ const InlineLeadForm = ({ onSubmitLead }) => {
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder="alex@company.com"
-                    className="w-full bg-background border border-border rounded-xl px-3 py-2 text-xs focus:outline-none focus:border-primary transition-colors text-foreground shadow-xs"
+                    className="w-full bg-background border border-border rounded-xl px-3 py-2 text-base sm:text-xs focus:outline-none focus:border-primary transition-colors text-foreground shadow-xs"
                 />
             </div>
 
@@ -1203,7 +1203,7 @@ const InlineLeadForm = ({ onSubmitLead }) => {
                     value={phone}
                     onChange={(e) => setPhone(e.target.value)}
                     placeholder="+91 98765... or +1 555..."
-                    className="w-full bg-background border border-border rounded-xl px-3 py-2 text-xs focus:outline-none focus:border-primary transition-colors text-foreground shadow-xs"
+                    className="w-full bg-background border border-border rounded-xl px-3 py-2 text-base sm:text-xs focus:outline-none focus:border-primary transition-colors text-foreground shadow-xs"
                 />
             </div>
 
@@ -1241,7 +1241,7 @@ const InlineLeadForm = ({ onSubmitLead }) => {
                     value={details}
                     onChange={(e) => setDetails(e.target.value)}
                     placeholder="Briefly describe your requirements or timeline..."
-                    className="w-full bg-background border border-border rounded-xl px-3 py-2 text-xs focus:outline-none focus:border-primary transition-colors text-foreground resize-none shadow-xs"
+                    className="w-full bg-background border border-border rounded-xl px-3 py-2 text-base sm:text-xs focus:outline-none focus:border-primary transition-colors text-foreground resize-none shadow-xs"
                 />
             </div>
 
