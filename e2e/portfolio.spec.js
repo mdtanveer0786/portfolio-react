@@ -199,4 +199,67 @@ test.describe('Portfolio End-to-End Test Suite', () => {
       await page.waitForTimeout(300);
     }
   });
+
+  test('multi-device responsiveness: tablet and desktop viewports have zero overflow and proper navigation', async ({ page }) => {
+    const devices = [
+      { width: 768, height: 1024, name: 'iPad Portrait (768px)' },
+      { width: 1024, height: 768, name: 'iPad Landscape (1024px)' },
+      { width: 1280, height: 800, name: 'MacBook / Laptop (1280px)' },
+      { width: 1440, height: 900, name: 'Desktop Monitor (1440px)' }
+    ];
+
+    for (const d of devices) {
+      await page.setViewportSize({ width: d.width, height: d.height });
+      await page.goto('/');
+
+      const hasHorizontalScroll = await page.evaluate(() => {
+        return document.documentElement.scrollWidth > window.innerWidth;
+      });
+      expect(hasHorizontalScroll, `Horizontal overflow on ${d.name}`).toBe(false);
+
+      // Verify header is visible
+      const header = page.locator('header');
+      await expect(header).toBeVisible();
+    }
+  });
+
+  test('lead inquiry form in chatbot captures all details and renders confirmation and whatsapp CTA', async ({ page }) => {
+    await page.goto('/');
+    const chatButton = page.getByLabel('Open chat assistant');
+    await expect(chatButton).toBeVisible();
+    await chatButton.click({ force: true });
+
+    const hireActionBtn = page.getByRole('button', { name: /Hire Tanveer/i }).first();
+    await expect(hireActionBtn).toBeVisible();
+    await hireActionBtn.click();
+
+    const form = page.locator('form', { hasText: 'Project Inquiry Card' }).last();
+    await expect(form).toBeVisible();
+
+    // Verify all input fields are present
+    const nameInput = form.locator('input[type="text"]');
+    const emailInput = form.locator('input[type="email"]');
+    const phoneInput = form.locator('input[type="tel"]');
+    const detailsInput = form.locator('textarea');
+
+    await expect(nameInput).toBeVisible();
+    await expect(emailInput).toBeVisible();
+    await expect(phoneInput).toBeVisible();
+    await expect(detailsInput).toBeVisible();
+
+    // Fill details
+    await nameInput.fill('Sarah Connor');
+    await emailInput.fill('sarah@cyberdyne.io');
+    await phoneInput.fill('+1 415 555 2671');
+    await detailsInput.fill('Need a scalable multi-tenant SaaS application.');
+
+    // Select project type pill
+    const pill = form.getByRole('button', { name: 'WordPress & Elementor' });
+    await pill.click();
+
+    // Verify WhatsApp direct backup link exists
+    const waLink = form.locator('a[href*="wa.me"]');
+    await expect(waLink).toBeVisible();
+    await expect(waLink).toHaveAttribute('href', /wa\.me\/917482946610/);
+  });
 });

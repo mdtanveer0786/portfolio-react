@@ -12,6 +12,14 @@ const TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
 const AUTOREPLY_TEMPLATE_ID = import.meta.env.VITE_EMAILJS_AUTOREPLY_TEMPLATE_ID;
 const PUBLIC_KEY = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
 
+if (PUBLIC_KEY) {
+    try {
+        emailjs.init(PUBLIC_KEY);
+    } catch (e) {
+        // Fallback silently
+    }
+}
+
 // Web Audio API synthesizer for zero latency & offline capability
 const playSynthesizedSound = (type) => {
     try {
@@ -330,49 +338,63 @@ const ChatBot = () => {
         playSound('pop');
     };
 
-    const sendLeadEmail = (data) => {
+    const sendLeadEmail = async (data) => {
         const templateParams = {
             name: data.name,
             email: data.email,
+            phone: data.phone || 'Not provided',
+            project_type: data.projectType || 'General',
             subject: `ChatBot Lead - ${data.projectType || 'New Project Inquiry'}`,
             message: `Project Type: ${data.projectType || 'General'}\nPhone/WhatsApp: ${data.phone || 'Not provided'}\nDetails: ${data.details || 'N/A'}`,
             from_name: data.name,
             from_email: data.email,
             reply_to: data.email,
-            to_name: 'Md Tanveer Alam'
+            to_name: 'Md Tanveer Alam',
+            to_email: 'tanveerdev14@gmail.com'
         };
 
         const toastId = toast.loading('Sending your project inquiry...');
 
-        // 1. Send Lead Notification to Tanveer
-        emailjs.send(
-            SERVICE_ID, 
-            TEMPLATE_ID, 
-            templateParams, 
-            PUBLIC_KEY
-        ).then(() => {
+        try {
+            // 1. Send Lead Notification to Tanveer
+            await emailjs.send(
+                SERVICE_ID, 
+                TEMPLATE_ID, 
+                templateParams, 
+                PUBLIC_KEY
+            );
             toast.success('Inquiry sent successfully! Tanveer will reach out soon.', { id: toastId });
-        }).catch((err) => {
-            toast.error('Failed to send email. Please use the WhatsApp button instead.', { id: toastId });
-            console.error('Lead notification failed', err);
-        });
 
-        // 2. Send Auto-Reply to User
-        emailjs.send(
-            SERVICE_ID, 
-            AUTOREPLY_TEMPLATE_ID, 
-            {
-                name: data.name,
-                email: data.email,
-                subject: `Project Inquiry Received - Md Tanveer Alam`,
-                message: `Thank you for reaching out regarding your ${data.projectType || 'project'}. I have received your request and will get back to you shortly.`,
-                from_name: 'Md Tanveer Alam',
-                reply_to: 'tanveerdev14@gmail.com'
-            }, 
-            PUBLIC_KEY
-        ).catch((err) => {
-            console.error('Auto-reply failed', err);
-        });
+            // 2. Send Auto-Reply to User
+            if (AUTOREPLY_TEMPLATE_ID) {
+                try {
+                    await emailjs.send(
+                        SERVICE_ID, 
+                        AUTOREPLY_TEMPLATE_ID, 
+                        {
+                            name: data.name,
+                            email: data.email,
+                            to_email: data.email,
+                            recipient_email: data.email,
+                            subject: `Project Inquiry Received - Md Tanveer Alam`,
+                            message: `Thank you for reaching out regarding your ${data.projectType || 'project'}. I have received your request and will get back to you shortly.`,
+                            project_type: data.projectType || 'General',
+                            phone: data.phone || 'Not provided',
+                            from_name: 'Md Tanveer Alam',
+                            reply_to: 'tanveerdev14@gmail.com'
+                        }, 
+                        PUBLIC_KEY
+                    );
+                } catch (autoErr) {
+                    console.warn('ChatBot Auto-reply warning:', autoErr);
+                }
+            }
+            return true;
+        } catch (err) {
+            toast.error('Could not send email automatically. Please use the WhatsApp button below!', { id: toastId });
+            console.error('Lead notification failed', err);
+            return false;
+        }
     };
 
     const handleSendMessage = (text) => {
@@ -847,10 +869,11 @@ const ChatBot = () => {
                                             {/* Interactive Inline Lead Form (Fast & High Conversion) */}
                                             {msg.isLeadForm && (
                                                 <InlineLeadForm
-                                                    onSubmitLead={(data) => {
-                                                        sendLeadEmail(data);
+                                                    onSubmitLead={async (data) => {
+                                                        const success = await sendLeadEmail(data);
                                                         playSound('pop');
                                                         scrollToBottom('smooth');
+                                                        return success;
                                                     }}
                                                 />
                                             )}
@@ -1087,7 +1110,7 @@ const InlineLeadForm = ({ onSubmitLead }) => {
         'Mobile App (Android)'
     ];
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         if (!name.trim()) {
             toast.error('Please enter your name');
@@ -1107,14 +1130,15 @@ const InlineLeadForm = ({ onSubmitLead }) => {
             details: details.trim()
         };
 
+        let success = true;
         if (onSubmitLead) {
-            onSubmitLead(leadPayload);
+            success = await onSubmitLead(leadPayload);
         }
 
-        setTimeout(() => {
-            setSubmitting(false);
+        setSubmitting(false);
+        if (success !== false) {
             setSubmitted(true);
-        }, 500);
+        }
     };
 
     if (submitted) {
