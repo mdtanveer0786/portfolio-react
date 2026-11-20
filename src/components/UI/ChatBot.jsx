@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { MessageSquare, X, Send, User, Bot, Sparkles, ExternalLink, ArrowRight, Download, Briefcase, Clock, CheckCircle2, Mic, MicOff, Volume2, VolumeX, Trash2 } from 'lucide-react';
+import { FaWhatsapp } from 'react-icons/fa';
 import { cn } from '../../utils/cn';
 import { projects, skillCategories } from '../../utils/constants';
 import emailjs from '@emailjs/browser';
@@ -11,15 +12,40 @@ const TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
 const AUTOREPLY_TEMPLATE_ID = import.meta.env.VITE_EMAILJS_AUTOREPLY_TEMPLATE_ID;
 const PUBLIC_KEY = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
 
-const SOUNDS = {
-    pop: 'https://assets.mixkit.co/active_storage/sfx/2354/2354-preview.mp3',
-    send: 'https://assets.mixkit.co/active_storage/sfx/2358/2358-preview.mp3'
-};
-
-// Preloaded audio elements for zero latency
-const audioCache = {
-    pop: typeof Audio !== 'undefined' ? new Audio(SOUNDS.pop) : null,
-    send: typeof Audio !== 'undefined' ? new Audio(SOUNDS.send) : null
+// Web Audio API synthesizer for zero latency & offline capability
+const playSynthesizedSound = (type) => {
+    try {
+        const AudioCtx = window.AudioContext || window.webkitAudioContext;
+        if (!AudioCtx) return;
+        const ctx = new AudioCtx();
+        if (ctx.state === 'suspended') {
+            ctx.resume();
+        }
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+        const now = ctx.currentTime;
+        if (type === 'pop') {
+            osc.type = 'sine';
+            osc.frequency.setValueAtTime(450, now);
+            osc.frequency.exponentialRampToValueAtTime(750, now + 0.08);
+            gain.gain.setValueAtTime(0.12, now);
+            gain.gain.exponentialRampToValueAtTime(0.001, now + 0.08);
+            osc.start(now);
+            osc.stop(now + 0.08);
+        } else if (type === 'send') {
+            osc.type = 'triangle';
+            osc.frequency.setValueAtTime(320, now);
+            osc.frequency.exponentialRampToValueAtTime(520, now + 0.06);
+            gain.gain.setValueAtTime(0.10, now);
+            gain.gain.exponentialRampToValueAtTime(0.001, now + 0.06);
+            osc.start(now);
+            osc.stop(now + 0.06);
+        }
+    } catch (e) {
+        // Fallback silently if audio context not allowed
+    }
 };
 
 const getSafeSessionStorage = (key, fallback = null) => {
@@ -41,73 +67,140 @@ const setSafeSessionStorage = (key, value) => {
 const CHAT_RULES = [
     {
         category: 'greeting',
-        keywords: ['hi', 'hello', 'hey', 'namaste', 'greeting', 'good morning', 'good afternoon', 'good evening', 'start', 'online', 'anybody', 'howdy'],
-        response: "Hello! I am **Md Tanveer Alam AI Assistant**. I can answer any questions about his skills, projects, experience, and services. How can I help you today?"
+        keywords: [
+            'hi', 'hello', 'hey', 'namaste', 'greeting', 'good morning', 'good afternoon', 'good evening',
+            'start', 'online', 'anybody', 'howdy', 'kaise ho', 'kya hal hai', 'kya haal hai', 'suno',
+            'bhai', 'helo', 'namaskar', 'halo', 'salaam', 'kaisa hai', 'sun'
+        ],
+        response: "Hello! I am **Md Tanveer Alam AI Assistant**. I can answer any questions about his skills, enterprise projects, experience, and services. How can I help you today? / Aap mujhse Tanveer ke baare me kuch bhi pooch sakte hain!",
+        suggestions: ['View Projects', 'What are your skills?', 'Hire Tanveer', 'Chat on WhatsApp']
     },
     {
         category: 'who',
-        keywords: ['who', 'tanveer', 'bio', 'who are you', 'who is tanveer', 'about tanveer', 'introduce', 'yourself', 'your name', 'tell me about', 'developer name', 'what is your name'],
-        response: "**Md Tanveer Alam** is a highly skilled **Full Stack Developer** specializing in the MERN stack, PHP, and Android App Development. He builds scalable, high-performance web applications and enterprise SaaS products."
+        keywords: [
+            'who', 'tanveer', 'bio', 'who are you', 'who is tanveer', 'about tanveer', 'introduce',
+            'yourself', 'your name', 'tell me about', 'developer name', 'what is your name',
+            'kaun ho', 'tum kaun ho', 'tanveer kaun hai', 'koun ho', 'kiske baare me', 'intro', 'parichay', 'kaun'
+        ],
+        response: "**Md Tanveer Alam** is a highly skilled **Full Stack Developer** specializing in the MERN stack, PHP, WordPress/Elementor, and Android App Development. He builds scalable, high-performance web applications and enterprise SaaS products like vGrow CRM & SafeDrop AI.",
+        suggestions: ['What are your skills?', 'View Projects', 'Download Resume', 'Hire Tanveer']
     },
     {
         category: 'experience',
-        keywords: ['experience', 'work', 'job', 'vinnpro', 'current', 'role', 'seniority', 'years', 'history', 'background', 'career', 'employment', 'company'],
-        response: "Tanveer is currently working as a **Full Stack Developer** at **Vinnpro Web Solutions** (Ghaziabad). He handles complex enterprise applications, REST APIs, and database architecture using React, Node.js, and MongoDB."
+        keywords: [
+            'experience', 'work', 'job', 'vinnpro', 'current', 'role', 'seniority', 'years', 'history',
+            'background', 'career', 'employment', 'company', 'kaha kaam karte ho', 'kaha kaam krte ho',
+            'kitna experience hai', 'kya job karte ho', 'work experience', 'company name', 'anubhav'
+        ],
+        response: "Tanveer is currently working as a **Full Stack Developer & WordPress Developer** at **VinnPro Web Solutions** (Ghaziabad). He handles complex enterprise applications, REST APIs, dynamic WordPress themes/plugins, and database architecture using React, Node.js, and MySQL.",
+        suggestions: ['What are your skills?', 'View Projects', 'Download Resume']
     },
     {
         category: 'skills',
-        keywords: ['skills', 'tech', 'stack', 'languages', 'programming', 'tools', 'database', 'frontend', 'backend', 'expertise', 'proficiency', 'technologies', 'frameworks', 'wordpress', 'elementor'],
-        response: "Tanveer's technical arsenal includes:\n\n* **Frontend:** React.js, Tailwind CSS, JavaScript, WordPress, Elementor\n* **Backend:** Node.js, Express.js, PHP\n* **Databases:** MongoDB, MySQL\n* **Mobile & Cloud:** Web2APK Android Apps, Vercel, Render, Socket.io\n\nHe is well-equipped to handle end-to-end development!"
+        keywords: [
+            'skills', 'tech', 'stack', 'languages', 'programming', 'tools', 'database', 'frontend',
+            'backend', 'expertise', 'proficiency', 'technologies', 'frameworks', 'wordpress', 'elementor',
+            'kya aata hai', 'kya skills hai', 'konsi language', 'kya jante ho', 'technology', 'tech stack', 'hunaar'
+        ],
+        response: "Tanveer's technical arsenal includes:\n\n* **Frontend:** React.js, Tailwind CSS, JavaScript, WordPress, Elementor\n* **Backend:** Node.js, Express.js, PHP, REST APIs\n* **Databases:** MongoDB, MySQL, Prisma\n* **Mobile & Cloud:** Web2APK Android Apps, Vercel, Render, Socket.io\n\nHe is well-equipped to handle end-to-end development!",
+        suggestions: ['Show React Projects', 'Show SaaS Projects', 'Download Resume', 'Hire Tanveer']
     },
     {
         category: 'projects',
-        keywords: ['projects', 'portfolio', 'work', 'built', 'showcase', 'examples', 'past work', 'live', 'demo', 'safedrop', 'parkflow', 'crm', 'vgrow'],
-        response: "Tanveer has built several impressive enterprise projects:\n\n* **vGrow CRM:** Multi-tenant enterprise CRM SaaS with AI Copilot & RBAC/ABAC.\n* **ParkFlow SaaS:** Real-time parking management system.\n* **SafeDrop AI:** Smart luggage tracking & locker SaaS.\n* **Real Estate Elite:** Full-stack property platform.\n\nYou can click the **Projects** button in the chat or scroll down to see them all!"
+        keywords: [
+            'projects', 'portfolio', 'work', 'built', 'showcase', 'examples', 'past work', 'live',
+            'demo', 'safedrop', 'parkflow', 'crm', 'vgrow', 'project dikhao', 'kya banaya hai',
+            'kaam dikhao', 'demo dikhao', 'live link', 'apps', 'project'
+        ],
+        response: "Tanveer has built several impressive enterprise projects:\n\n* **vGrow CRM:** Multi-tenant enterprise CRM SaaS with AI Copilot & RBAC/ABAC.\n* **ParkFlow SaaS:** Real-time parking management system with Socket.io & Android APK.\n* **SafeDrop AI:** Smart luggage tracking & locker SaaS.\n* **Real Estate Elite:** Full-stack property platform with JWT auth.\n\nCheck out the interactive cards below with live links!",
+        suggestions: ['Show SaaS Projects', 'Show React Projects', 'Hire Tanveer', 'Chat on WhatsApp']
     },
     {
         category: 'services',
-        keywords: ['service', 'offer', 'build', 'website', 'app', 'development', 'developer', 'expert', 'solutions', 'software', 'management system', 'ecommerce', 'freelance', 'wordpress', 'elementor'],
-        response: "Tanveer provides premium development services:\n\n* **Custom Full Stack Web Apps**\n* **WordPress & Elementor Dynamic Websites**\n* **Enterprise SaaS & Management Systems**\n* **Real-Time Dashboards (Socket.io)**\n* **Website to Android APK Conversion**\n\nNeed a custom solution built? Let's discuss your requirements!"
+        keywords: [
+            'service', 'offer', 'build', 'website', 'app', 'development', 'developer', 'expert',
+            'solutions', 'software', 'management system', 'ecommerce', 'freelance', 'wordpress', 'elementor',
+            'kya bana sakte ho', 'kya kaam karte ho', 'kya service dete ho', 'website banwana hai', 'app banwana hai', 'software banwana hai', 'service'
+        ],
+        response: "Tanveer provides premium development services:\n\n* **Custom Full Stack Web Apps**\n* **WordPress & Elementor Dynamic Websites**\n* **Enterprise SaaS & Management Systems**\n* **Real-Time Dashboards (Socket.io)**\n* **Website to Android APK Conversion**\n\nNeed a custom solution built? Let's discuss your requirements!",
+        suggestions: ['Hire Tanveer', 'View Projects', 'Chat on WhatsApp']
     },
     {
         category: 'pricing',
-        keywords: ['cost', 'price', 'pricing', 'budget', 'charge', 'money', 'rates', 'affordable', 'expensive', 'fee'],
-        response: "Project costs vary depending on the scope, complexity, and features required. Tanveer offers highly competitive rates for premium quality work. Please provide your project details via the **Hire Tanveer** button for a custom quote!"
+        keywords: [
+            'cost', 'price', 'pricing', 'budget', 'charge', 'money', 'rates', 'affordable', 'expensive',
+            'fee', 'kitna charge', 'kitna paisa', 'kitna kharcha', 'kya rate hai', 'rate list', 'quotation',
+            'fees', 'kitne me banega', 'charges', 'paisa'
+        ],
+        response: "Project costs vary depending on the scope, complexity, and features required. Tanveer offers highly competitive rates for premium quality work.\n\nClick **Hire Tanveer** below to submit your project requirements, or connect directly on WhatsApp for an instant custom quote!",
+        hasWhatsApp: true,
+        suggestions: ['Hire Tanveer', 'Chat on WhatsApp', 'View Projects']
     },
     {
         category: 'education',
-        keywords: ['education', 'degree', 'college', 'university', 'btech', 'study', 'qualification', 'graduated', 'cse', 'b.tech', 'school', 'marks', 'cgpa'],
-        response: "Tanveer holds a **B.Tech in Computer Science Engineering** (2020-2024) from Bikaner Technical University. He also possesses an **A+ Certification in Full Stack Development** from AccioJob/Udemy."
+        keywords: [
+            'education', 'degree', 'college', 'university', 'btech', 'study', 'qualification', 'graduated',
+            'cse', 'b.tech', 'school', 'marks', 'cgpa', 'padhai', 'kaha se padhe ho', 'degree kya hai', 'college name', 'shiksha'
+        ],
+        response: "Tanveer holds a **B.Tech in Computer Science Engineering** (2020-2024) from Bikaner Technical University. He also possesses an **A+ Certification in Full Stack Development** from AccioJob/Udemy.",
+        suggestions: ['What are your skills?', 'Experience', 'Download Resume']
     },
     {
         category: 'location',
-        keywords: ['where', 'location', 'live', 'place', 'city', 'based', 'address', 'stay', 'ghaziabad', 'delhi', 'india', 'reside', 'home', 'uttar pradesh', 'remote', 'relocate'],
-        response: "Tanveer is based in **Delhi/NCR, India**. He is fully equipped for **Remote Work** globally and is open to discussing freelance and contract opportunities."
+        keywords: [
+            'where', 'location', 'live', 'place', 'city', 'based', 'address', 'stay', 'ghaziabad',
+            'delhi', 'india', 'reside', 'home', 'uttar pradesh', 'remote', 'relocate', 'kaha rehte ho',
+            'ghar kaha hai', 'kaha ke ho', 'location kya hai', 'pata'
+        ],
+        response: "Tanveer is based in **Delhi/NCR (Ghaziabad), India**. He is fully equipped for **Remote Work** globally and is open to discussing freelance and contract opportunities.",
+        suggestions: ['Hire Tanveer', 'Chat on WhatsApp', 'View Projects']
     },
     {
         category: 'contact',
-        keywords: ['contact', 'email', 'phone', 'reach', 'connect', 'social', 'linkedin', 'github', 'talk', 'message', 'call', 'whatsapp', 'meet'],
-        response: "You can reach him instantly via:\n\n* **Email:** tanveerdev14@gmail.com\n* **WhatsApp:** Click the floating green icon on the screen\n* **LinkedIn:** [Tanveer Profile](https://linkedin.com/in/md-tanveer-alam-b7a134219/)\n\nOr just use the form in the Contact section!"
+        keywords: [
+            'contact', 'email', 'phone', 'reach', 'connect', 'social', 'linkedin', 'github', 'talk',
+            'message', 'call', 'whatsapp', 'meet', 'baat karni hai', 'number do', 'phone number',
+            'contact kaise kare', 'call karo', 'whatsapp number', 'sampark', 'baat', 'call me'
+        ],
+        response: "You can reach Tanveer instantly via:\n\n* **WhatsApp:** +91 7482946610 (Direct instant reply)\n* **Email:** tanveerdev14@gmail.com\n* **LinkedIn:** [Tanveer Profile](https://linkedin.com/in/md-tanveer-alam-b7a134219/)\n\nClick the button below to message him directly on WhatsApp!",
+        hasWhatsApp: true,
+        suggestions: ['Chat on WhatsApp', 'Hire Tanveer', 'Download Resume']
     },
     {
         category: 'resume',
-        keywords: ['resume', 'cv', 'download', 'pdf', 'document', 'curriculum vitae'],
-        response: "You can download Tanveer latest professional resume by clicking the **Download Resume** button in our quick actions below, or by visiting the Hero section of this website!"
+        keywords: [
+            'resume', 'cv', 'download', 'pdf', 'document', 'curriculum vitae', 'resume chahiye',
+            'cv download', 'cv do', 'resume do'
+        ],
+        response: "You can download Tanveer's professional resume to review his full career history, technical stack, and certifications:",
+        suggestions: ['Hire Tanveer', 'View Projects', 'Chat on WhatsApp']
     },
     {
         category: 'ai',
-        keywords: ['ai', 'chatbot', 'rag', 'openai', 'assistant', 'automation', 'pdf chat', 'gpt', 'llm', 'intelligence', 'artificial'],
-        response: "Yes! Tanveer has experience building intelligent AI assistants and Chatbots (just like me!) using React, Node.js, and AI APIs to automate workflows and enhance user engagement."
+        keywords: [
+            'ai', 'chatbot', 'rag', 'openai', 'assistant', 'automation', 'pdf chat', 'gpt', 'llm',
+            'intelligence', 'artificial'
+        ],
+        response: "Yes! Tanveer has extensive experience building intelligent AI assistants, Chatbots (just like me!), and AI Copilots (integrated inside vGrow CRM and SafeDrop AI) using React, Node.js, and modern AI APIs.",
+        suggestions: ['Show SaaS Projects', 'What are your skills?', 'Hire Tanveer']
     },
     {
         category: 'availability',
-        keywords: ['hire', 'availability', 'opportunity', 'job', 'vacancy', 'open to work', 'available', 'contract', 'freelance', 'recruit'],
-        response: "Tanveer is currently **Open to New Opportunities**! Whether you need a dedicated Freelance Engineer or a skilled developer for a complex project, he is ready to deliver. Click **Hire Tanveer** to start the conversation."
+        keywords: [
+            'hire', 'availability', 'opportunity', 'job', 'vacancy', 'open to work', 'available',
+            'contract', 'freelance', 'recruit', 'hire karna hai', 'kaam karwana hai', 'freelancer chahiye', 'developer chahiye'
+        ],
+        response: "Tanveer is currently **Open to New Opportunities**! Whether you need a dedicated Freelance Engineer or a skilled developer for a complex SaaS project, he is ready to deliver. Click **Hire Tanveer** to start the conversation.",
+        suggestions: ['Hire Tanveer', 'Chat on WhatsApp', 'View Projects', 'Download Resume']
     },
     {
         category: 'thanks',
-        keywords: ['thank', 'thanks', 'cool', 'awesome', 'great', 'nice', 'ok', 'okay', 'perfect', 'bye', 'goodbye', 'amazing', 'wow'],
-        response: "You're very welcome! Feel free to explore the portfolio, test out the live project links, or download the resume. Have a fantastic day! 🚀"
+        keywords: [
+            'thank', 'thanks', 'cool', 'awesome', 'great', 'nice', 'ok', 'okay', 'perfect', 'bye',
+            'goodbye', 'amazing', 'wow', 'dhanyawad', 'shukriya', 'theek hai', 'thik hai', 'accha hai', 'badhiya'
+        ],
+        response: "You're very welcome! Feel free to explore the portfolio, test out the live project links, or download the resume. Have a fantastic day! 🚀",
+        suggestions: ['View Projects', 'Hire Tanveer', 'Chat on WhatsApp']
     }
 ];
 
@@ -115,14 +208,15 @@ const QUICK_ACTIONS = [
     { label: 'View Projects', icon: Briefcase, value: 'Show me your projects' },
     { label: 'Skills', icon: Sparkles, value: 'What are your skills?' },
     { label: 'Hire Tanveer', icon: User, value: 'I want to hire Tanveer' },
+    { label: 'WhatsApp', icon: FaWhatsapp, value: 'I want to chat on WhatsApp' },
     { label: 'Resume', icon: Download, value: 'Download resume' },
 ];
 
 const LEAD_STEPS = [
     { key: 'name', question: "I'd love to help you connect with Tanveer! First, may I know your **name**?" },
     { key: 'email', question: "Nice to meet you! Could you please provide your **email address** so we can reach out?" },
-    { key: 'project', question: "What kind of **project** are you looking for? (e.g., Website, App, AI Bot, etc.)" },
-    { key: 'final', question: "Thank you! I've prepared a project summary. Tanveer will review this and get back to you shortly.\n\nI have also sent a confirmation email to your inbox.\n\n**Next Step:** You can also send a direct message via the [Contact Section](#contact)!" }
+    { key: 'project', question: "What kind of **project** are you looking for? (e.g., Website, App, AI Bot, SaaS, etc.)" },
+    { key: 'final', question: "Thank you! I've prepared your project summary. Tanveer will review this and get back to you shortly.\n\nI have also sent a confirmation email to your inbox.\n\n**Quick Connect:** You can also message him directly on WhatsApp for instant coordination!" }
 ];
 
 const ChatBot = () => {
@@ -141,8 +235,9 @@ const ChatBot = () => {
             { 
                 id: 1, 
                 type: 'bot', 
-                text: "Hi there! I'm Md Tanveer Alam **AI Assistant**. I'm here to help you learn more about his work and expertise. Ask me anything!",
-                timestamp: new Date()
+                text: "Hi there! I'm Md Tanveer Alam **AI Assistant**. I'm here to help you learn more about his work, enterprise projects, and expertise. Ask me anything or choose a quick topic below!",
+                timestamp: new Date(),
+                suggestions: ['View Projects', 'What are your skills?', 'Hire Tanveer', 'Chat on WhatsApp']
             }
         ];
     });
@@ -202,15 +297,7 @@ const ChatBot = () => {
 
     const playSound = (type) => {
         if (!soundEnabled) return;
-        try {
-            const sound = audioCache[type];
-            if (sound) {
-                sound.currentTime = 0;
-                sound.play().catch(() => {});
-            }
-        } catch (e) {
-            console.error('Audio play error', e);
-        }
+        playSynthesizedSound(type);
     };
 
     const speakText = (text) => {
@@ -255,7 +342,13 @@ const ChatBot = () => {
     }, [messages, isTyping, isOpen]);
 
     const clearChat = () => {
-        setMessages([{ id: Date.now(), type: 'bot', text: "Chat history cleared! I am **Md Tanveer Alam AI Assistant**. How can I help you today?", timestamp: new Date() }]);
+        setMessages([{ 
+            id: Date.now(), 
+            type: 'bot', 
+            text: "Chat history cleared! I am **Md Tanveer Alam AI Assistant**. How can I help you today?", 
+            timestamp: new Date(),
+            suggestions: ['View Projects', 'What are your skills?', 'Hire Tanveer', 'Chat on WhatsApp']
+        }]);
         setLeadData({ step: -1, data: {} });
         playSound('pop');
     };
@@ -283,8 +376,9 @@ const ChatBot = () => {
 
         // Get response immediately to calculate typing delay
         const botResponse = getBotResponse(text, messages);
-        const responseLength = typeof botResponse === 'string' ? botResponse.length : 60;
-        const typingDelay = 500 + Math.min(responseLength * 12, 2000); // Dynamic delay between 0.5s and 2.5s
+        const responseText = typeof botResponse === 'string' ? botResponse : (botResponse.text || botResponse.title || '');
+        const responseLength = responseText.length || 60;
+        const typingDelay = 400 + Math.min(responseLength * 10, 1800);
 
         setTimeout(() => {
             playSound('pop');
@@ -294,27 +388,40 @@ const ChatBot = () => {
                     id: Date.now() + 1,
                     type: 'bot',
                     text: botResponse,
-                    timestamp: new Date()
+                    timestamp: new Date(),
+                    suggestions: ['View Projects', 'What are your skills?', 'Hire Tanveer', 'Chat on WhatsApp']
                 }]);
                 speakText(botResponse);
+            } else if (botResponse.type === 'text') {
+                setMessages(prev => [...prev, {
+                    id: Date.now() + 1,
+                    type: 'bot',
+                    text: botResponse.text,
+                    timestamp: new Date(),
+                    hasWhatsApp: botResponse.hasWhatsApp,
+                    suggestions: botResponse.suggestions
+                }]);
+                speakText(botResponse.text);
             } else if (botResponse.type === 'projects') {
-                const msgText = "Here are some of Tanveer featured projects. These showcase his ability to build scalable and high-performance applications:";
+                const msgText = botResponse.title || "Here are some of Tanveer's featured projects. These showcase his ability to build scalable and high-performance applications:";
                 setMessages(prev => [...prev, {
                     id: Date.now() + 1,
                     type: 'bot',
                     text: msgText,
                     timestamp: new Date(),
-                    content: projects.slice(0, 3)
+                    content: botResponse.items || projects.slice(0, 3),
+                    suggestions: botResponse.suggestions || ['Show SaaS Projects', 'Show React Projects', 'Hire Tanveer', 'Chat on WhatsApp']
                 }]);
                 speakText(msgText);
             } else if (botResponse.type === 'skills') {
-                const msgText = "Tanveer has expertise across the full stack. Click a category to explore his technical proficiency:";
+                const msgText = botResponse.text || "Tanveer has expertise across the full stack. Click a category to explore his technical proficiency:";
                 setMessages(prev => [...prev, {
                     id: Date.now() + 1,
                     type: 'bot',
                     text: msgText,
                     timestamp: new Date(),
-                    isSkills: true
+                    isSkills: true,
+                    suggestions: botResponse.suggestions || ['Show React Projects', 'Show SaaS Projects', 'Download Resume', 'Hire Tanveer']
                 }]);
                 speakText(msgText);
             } else if (botResponse.type === 'nav') {
@@ -323,12 +430,13 @@ const ChatBot = () => {
                 if (element) {
                     element.scrollIntoView({ behavior: 'smooth' });
                 }
-                const msgText = `Sure! I've scrolled you to the ${section} section. Let me know if you have any questions about it!`;
+                const msgText = `Sure! I've scrolled you to the **${section}** section. Let me know if you have any questions about it!`;
                 setMessages(prev => [...prev, {
                     id: Date.now() + 1,
                     type: 'bot',
-                    text: `Sure! I've scrolled you to the **${section}** section. Let me know if you have any questions about it!`,
-                    timestamp: new Date()
+                    text: msgText,
+                    timestamp: new Date(),
+                    suggestions: ['View Projects', 'What are your skills?', 'Hire Tanveer']
                 }]);
                 speakText(msgText);
             } else if (botResponse.type === 'lead') {
@@ -348,7 +456,8 @@ const ChatBot = () => {
                     type: 'bot',
                     text: msgText,
                     timestamp: new Date(),
-                    hasResume: true
+                    hasResume: true,
+                    suggestions: botResponse.suggestions || ['Hire Tanveer', 'View Projects', 'Chat on WhatsApp']
                 }]);
                 speakText(msgText);
             }
@@ -362,13 +471,14 @@ const ChatBot = () => {
         const key = LEAD_STEPS[currentStep].key;
 
         // Cancel command
-        if (text.toLowerCase() === 'cancel' || text.toLowerCase() === 'stop') {
+        if (text.toLowerCase() === 'cancel' || text.toLowerCase() === 'stop' || text.toLowerCase() === 'ruko') {
             setLeadData({ step: -1, data: {} });
             setMessages(prev => [...prev, {
                 id: Date.now(),
                 type: 'bot',
-                text: "No problem! I've cancelled the form. What else can I help you with?",
-                timestamp: new Date()
+                text: "No problem! I've cancelled the inquiry form. What else can I help you with?",
+                timestamp: new Date(),
+                suggestions: ['View Projects', 'What are your skills?', 'Chat on WhatsApp']
             }]);
             setIsTyping(false);
             return;
@@ -413,7 +523,9 @@ const ChatBot = () => {
                     type: 'bot',
                     text: finalQuestion,
                     timestamp: new Date(),
-                    leadSummary: newData
+                    leadSummary: newData,
+                    hasWhatsApp: true,
+                    suggestions: ['Chat on WhatsApp', 'View Projects', 'Download Resume']
                 }]);
                 speakText(finalQuestion);
             }
@@ -443,7 +555,6 @@ const ChatBot = () => {
             PUBLIC_KEY
         ).then(() => {
             toast.success('Inquiry sent successfully!', { id: toastId });
-            console.log('Lead notification sent');
         }).catch((err) => {
             toast.error('Failed to send inquiry. Please try the contact form instead.', { id: toastId });
             console.error('Lead notification failed', err);
@@ -470,19 +581,124 @@ const ChatBot = () => {
     const getBotResponse = (input, currentMessages) => {
         const normalizedInput = input.toLowerCase().trim().replace(/[?.,!]/g, '');
 
-        // Context Awareness: Check if user is saying 'yes' to a previous bot question
-        const isAffirmative = ['yes', 'yeah', 'yep', 'sure', 'ok', 'okay', 'of course', 'show me', 'please'].includes(normalizedInput);
+        // Context Awareness: Check if user is saying 'yes' / 'haan' to a previous bot question
+        const isAffirmative = ['yes', 'yeah', 'yep', 'sure', 'ok', 'okay', 'of course', 'show me', 'please', 'haan', 'dikhao', 'batao'].includes(normalizedInput);
         if (isAffirmative && currentMessages && currentMessages.length > 0) {
             const lastBotMsg = currentMessages.slice().reverse().find(m => m.type === 'bot')?.text?.toLowerCase() || '';
-            if (lastBotMsg.includes('project')) return { type: 'projects' };
-            if (lastBotMsg.includes('skill')) return { type: 'skills' };
+            if (lastBotMsg.includes('project')) {
+                return { 
+                    type: 'projects',
+                    title: "Here are Tanveer's featured enterprise projects with live links:",
+                    items: projects.slice(0, 3),
+                    suggestions: ['Show SaaS Projects', 'Show React Projects', 'Hire Tanveer', 'Chat on WhatsApp']
+                };
+            }
+            if (lastBotMsg.includes('skill')) {
+                return { 
+                    type: 'skills',
+                    suggestions: ['Show React Projects', 'Show SaaS Projects', 'Download Resume', 'Hire Tanveer']
+                };
+            }
             if (lastBotMsg.includes('hire') || lastBotMsg.includes('contact')) return { type: 'lead' };
         }
 
-        // 1. Check for specific high-priority intents first
-        if (normalizedInput.includes('resume') || normalizedInput.includes('cv') || normalizedInput.includes('download')) return { type: 'resume' };
-        if ((normalizedInput.includes('hire') || normalizedInput.includes('vacancy') || normalizedInput.includes('opportunity')) && !normalizedInput.includes('experience')) return { type: 'lead' };
-        if (normalizedInput.includes('project') || normalizedInput.includes('showcase') || normalizedInput.includes('portfolio') || normalizedInput.includes('demo')) return { type: 'projects' };
+        // Direct WhatsApp intent
+        if (
+            normalizedInput.includes('whatsapp') || 
+            normalizedInput.includes('wa.me') || 
+            normalizedInput.includes('phone') || 
+            normalizedInput.includes('number do') || 
+            normalizedInput.includes('call') ||
+            normalizedInput.includes('baat karni')
+        ) {
+            return {
+                type: 'text',
+                text: "You can reach Tanveer directly on **WhatsApp** for instant project discussions, quotes, or fast coordination! 💬\n\n* **WhatsApp Number:** +91 7482946610\n* **Email:** tanveerdev14@gmail.com\n\nClick the button below to start a chat right away:",
+                hasWhatsApp: true,
+                suggestions: ['Hire Tanveer', 'View Projects', 'Download Resume']
+            };
+        }
+
+        // 1. High-priority intents
+        if (normalizedInput.includes('resume') || normalizedInput.includes('cv') || normalizedInput.includes('download')) {
+            return { 
+                type: 'resume',
+                suggestions: ['Hire Tanveer', 'View Projects', 'Chat on WhatsApp']
+            };
+        }
+        
+        if (
+            (normalizedInput.includes('hire') || normalizedInput.includes('vacancy') || normalizedInput.includes('opportunity') || normalizedInput.includes('kaam karwana') || normalizedInput.includes('freelancer chahiye')) && 
+            !normalizedInput.includes('experience')
+        ) {
+            return { type: 'lead' };
+        }
+
+        // Tech-Specific Smart Project Filtering (Feature C)
+        if (normalizedInput.includes('react') && (normalizedInput.includes('project') || normalizedInput.includes('work') || normalizedInput.includes('dikhao') || normalizedInput.includes('demo'))) {
+            const reactProjects = projects.filter(p => p.tags.some(t => t.toLowerCase().includes('react')));
+            return {
+                type: 'projects',
+                title: "Here are Tanveer's featured **React.js** projects with live interactive demos & source code:",
+                items: reactProjects.slice(0, 3),
+                suggestions: ['Show SaaS Projects', 'What are your skills?', 'Hire Tanveer']
+            };
+        }
+
+        if (
+            (normalizedInput.includes('saas') || normalizedInput.includes('crm') || normalizedInput.includes('vgrow') || normalizedInput.includes('parkflow') || normalizedInput.includes('safedrop')) && 
+            !normalizedInput.includes('hire')
+        ) {
+            const saasProjects = projects.filter(p => 
+                p.title.toLowerCase().includes('saas') || 
+                p.title.toLowerCase().includes('crm') || 
+                p.title.toLowerCase().includes('safedrop') || 
+                p.title.toLowerCase().includes('parkflow') || 
+                p.title.toLowerCase().includes('vgrow')
+            );
+            return {
+                type: 'projects',
+                title: "Here are Tanveer's production-grade **Enterprise SaaS & Management Platforms** (featuring real-time Socket.io, multi-tenancy, and AI Copilot):",
+                items: saasProjects.slice(0, 3),
+                suggestions: ['Tell me about vGrow CRM', 'Chat on WhatsApp', 'Hire Tanveer']
+            };
+        }
+
+        if (normalizedInput.includes('node') && (normalizedInput.includes('project') || normalizedInput.includes('backend') || normalizedInput.includes('api'))) {
+            const nodeProjects = projects.filter(p => p.tags.some(t => t.toLowerCase().includes('node') || t.toLowerCase().includes('express')));
+            return {
+                type: 'projects',
+                title: "Here are Tanveer's **Node.js & Backend Architecture** projects:",
+                items: nodeProjects.slice(0, 3),
+                suggestions: ['Show SaaS Projects', 'What are your skills?', 'Hire Tanveer']
+            };
+        }
+
+        if (normalizedInput.includes('frontend') && (normalizedInput.includes('project') || normalizedInput.includes('work'))) {
+            const feProjects = projects.filter(p => p.category === 'frontend' || p.tags.includes('Tailwind') || p.tags.includes('React'));
+            return {
+                type: 'projects',
+                title: "Here are Tanveer's modern **Frontend & UI/UX** projects:",
+                items: feProjects.slice(0, 3),
+                suggestions: ['Show SaaS Projects', 'What are your skills?', 'Hire Tanveer']
+            };
+        }
+
+        if (
+            normalizedInput.includes('project') || 
+            normalizedInput.includes('showcase') || 
+            normalizedInput.includes('portfolio') || 
+            normalizedInput.includes('demo') ||
+            normalizedInput.includes('kaam dikhao') ||
+            normalizedInput.includes('project dikhao')
+        ) {
+            return { 
+                type: 'projects',
+                title: "Here are some of Tanveer's top enterprise & full-stack projects with live deployments:",
+                items: projects.slice(0, 3),
+                suggestions: ['Show SaaS Projects', 'Show React Projects', 'Hire Tanveer', 'Chat on WhatsApp']
+            };
+        }
 
         // Check if query is about a specific skill category (Frontend, Backend, etc.)
         for (const cat of skillCategories) {
@@ -495,16 +711,31 @@ const ChatBot = () => {
                 (normalizedInput.includes('cloud') && catTitle.includes('cloud'))
             ) {
                 const skillList = cat.skills.map(s => `* **${s.name}**`).join('\n');
-                return `Here are Tanveer **${cat.title}** skills:\n\n${skillList}\n\nWould you like to know about his projects built with these?`;
+                return {
+                    type: 'text',
+                    text: `Here are Tanveer **${cat.title}** skills:\n\n${skillList}\n\nWould you like to know about his projects built with these?`,
+                    suggestions: [`Show ${cat.title.split(' ')[0]} Projects`, 'Download Resume', 'Hire Tanveer']
+                };
             }
         }
 
-        if (normalizedInput.includes('skill') && !normalizedInput.includes('about')) return { type: 'skills' };
+        if (normalizedInput.includes('skill') && !normalizedInput.includes('about')) {
+            return { 
+                type: 'skills',
+                suggestions: ['Show React Projects', 'Show SaaS Projects', 'Download Resume', 'Hire Tanveer']
+            };
+        }
 
         // 2. Navigation Intent
-        const sections = ['home', 'about', 'education', 'skills', 'projects', 'contact'];
+        const sections = ['home', 'about', 'services', 'experience', 'skills', 'projects', 'education', 'contact'];
         for (const s of sections) {
-            if (normalizedInput.includes(`go to ${s}`) || normalizedInput.includes(`show ${s}`) || normalizedInput.includes(`scroll to ${s}`)) {
+            if (
+                normalizedInput.includes(`go to ${s}`) || 
+                normalizedInput.includes(`show ${s}`) || 
+                normalizedInput.includes(`scroll to ${s}`) ||
+                normalizedInput.includes(`${s} pe jao`) ||
+                normalizedInput.includes(`${s} dikhao`)
+            ) {
                 return { type: 'nav', section: s };
             }
         }
@@ -512,7 +743,7 @@ const ChatBot = () => {
         // Tokenize user input to match word boundaries
         const inputWords = normalizedInput.split(/\s+/).filter(w => w.length > 0);
 
-        // 3. Rule-based Scoring System
+        // 3. Rule-based Scoring System with Hinglish support
         let bestMatch = null;
         let highestScore = 0;
 
@@ -543,15 +774,28 @@ const ChatBot = () => {
         }
 
         if (bestMatch && highestScore > 0) {
-            return bestMatch.response;
+            return {
+                type: 'text',
+                text: bestMatch.response,
+                hasWhatsApp: bestMatch.hasWhatsApp || false,
+                suggestions: bestMatch.suggestions || ['View Projects', 'What are your skills?', 'Hire Tanveer']
+            };
         }
         
         // 4. Fallback with context
         if (normalizedInput.length > 3) {
-            return "I'm still learning to answer that specific question! However, I can tell you about Tanveer **skills**, **projects**, **education**, or **how to contact him**. Which would you prefer?";
+            return {
+                type: 'text',
+                text: "I'm still learning to answer that specific question! However, I can tell you about Tanveer's **skills**, **enterprise projects**, **education**, or **how to contact him**. Which would you prefer?",
+                suggestions: ['View Projects', 'What are your skills?', 'Chat on WhatsApp', 'Hire Tanveer']
+            };
         }
         
-        return "I'm not sure I caught that. Could you please rephrase your question? You can ask about my **experience**, **services**, or **projects**.";
+        return {
+            type: 'text',
+            text: "I'm not sure I caught that. Could you please rephrase your question? You can ask about his **skills**, **projects**, or **services**.",
+            suggestions: ['View Projects', 'What are your skills?', 'Chat on WhatsApp']
+        };
     };
 
     const toggleListening = () => {
@@ -697,6 +941,17 @@ const ChatBot = () => {
                                                 </div>
                                             )}
 
+                                            {msg.hasWhatsApp && (
+                                                <a 
+                                                    href="https://wa.me/917482946610?text=Hi%20Tanveer!%20I%20contacted%20you%20via%20your%20portfolio%20AI%20Assistant%20and%20would%20like%20to%20discuss%20a%20project." 
+                                                    target="_blank" 
+                                                    rel="noopener noreferrer" 
+                                                    className="mt-3 flex items-center justify-center gap-2 w-full py-2.5 px-4 bg-[#25D366] hover:bg-[#20ba59] text-white rounded-xl font-bold text-xs transition-all shadow-md shadow-[#25D366]/20 active:scale-95"
+                                                >
+                                                    <FaWhatsapp size={16} /> Chat on WhatsApp Directly
+                                                </a>
+                                            )}
+
                                             {msg.hasResume && (
                                                 <a href="/resume.pdf" download="Md_Tanveer_Alam_Resume.pdf" className="mt-4 flex items-center justify-center gap-2 w-full py-2.5 bg-primary text-white rounded-xl font-bold text-xs hover:bg-primary/90 transition-all shadow-lg shadow-primary/20">
                                                     <Download size={14} /> Download Resume
@@ -713,6 +968,22 @@ const ChatBot = () => {
                                                 </div>
                                             )}
                                         </div>
+
+                                        {/* Dynamic Suggested Follow-up Chips (Feature D) */}
+                                        {msg.suggestions && msg.suggestions.length > 0 && (
+                                            <div className="flex flex-wrap gap-1.5 mt-1 pt-1">
+                                                {msg.suggestions.map((suggestion, sIdx) => (
+                                                    <button 
+                                                        key={sIdx} 
+                                                        type="button" 
+                                                        onClick={() => handleSendMessage(suggestion)} 
+                                                        className="px-2.5 py-1 rounded-lg border border-primary/25 bg-primary/5 hover:bg-primary hover:text-white text-primary text-[11px] font-semibold transition-all active:scale-95 shadow-xs"
+                                                    >
+                                                        {suggestion} →
+                                                    </button>
+                                                ))}
+                                            </div>
+                                        )}
 
                                         {msg.content && (
                                             <div className="flex flex-col gap-3 mt-1">
@@ -765,11 +1036,11 @@ const ChatBot = () => {
                         {/* Quick Actions Bar */}
                         <div className="px-4 py-3 flex flex-nowrap overflow-x-auto gap-2 scrollbar-none bg-black/[0.02] dark:bg-white/[0.02] border-t border-border/50">
                             {leadData.step !== -1 ? (
-                                <button onClick={() => { setLeadData({ step: -1, data: {} }); setMessages(prev => [...prev, { id: Date.now(), type: 'bot', text: 'Inquiry cancelled. How else can I assist you?', timestamp: new Date() }]); playSound('pop'); speakText('Inquiry cancelled.'); }} className="text-[10px] font-bold uppercase tracking-wider px-4 py-2.5 rounded-xl border border-red-500/30 bg-red-500/10 text-red-500 hover:bg-red-500 hover:text-white transition-all flex items-center gap-2 whitespace-nowrap shadow-sm active:scale-95">
+                                <button onClick={() => { setLeadData({ step: -1, data: {} }); setMessages(prev => [...prev, { id: Date.now(), type: 'bot', text: 'Inquiry cancelled. How else can I assist you?', timestamp: new Date(), suggestions: ['View Projects', 'What are your skills?', 'Chat on WhatsApp'] }]); playSound('pop'); speakText('Inquiry cancelled.'); }} className="text-[10px] font-bold uppercase tracking-wider px-4 py-2.5 rounded-xl border border-red-500/30 bg-red-500/10 text-red-500 hover:bg-red-500 hover:text-white transition-all flex items-center gap-2 whitespace-nowrap shadow-sm active:scale-95">
                                     <X size={13} /> Cancel Inquiry
                                 </button>
                             ) : QUICK_ACTIONS.map((action, i) => (
-                                <button key={i} onClick={() => handleSendMessage(action.value)} className="text-[10px] font-bold uppercase tracking-wider px-4 py-2.5 rounded-xl border border-border bg-background hover:border-primary hover:text-primary transition-all flex items-center gap-2 whitespace-nowrap shadow-sm hover:shadow-md active:scale-95">
+                                <button key={i} onClick={() => handleSendMessage(action.value)} className="text-[10px] font-bold uppercase tracking-wider px-3.5 py-2.5 rounded-xl border border-border bg-background hover:border-primary hover:text-primary transition-all flex items-center gap-2 whitespace-nowrap shadow-sm hover:shadow-md active:scale-95">
                                     <action.icon size={13} /> {action.label}
                                 </button>
                             ))}
@@ -782,7 +1053,7 @@ const ChatBot = () => {
                                     {isListening ? <MicOff size={18} /> : <Mic size={18} />}
                                 </button>
                                 <div className="relative flex-1 group">
-                                    <input ref={inputRef} type="text" value={inputValue} onChange={(e) => setInputValue(e.target.value)} placeholder={leadData.step !== -1 ? "Type your answer..." : "Ask me anything..."} className="w-full bg-muted/30 border border-border rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all pr-10" aria-label="Chat message input" />
+                                    <input ref={inputRef} type="text" value={inputValue} onChange={(e) => setInputValue(e.target.value)} placeholder={leadData.step !== -1 ? "Type your answer..." : "Ask me anything (or type in Hindi/English)..."} className="w-full bg-muted/30 border border-border rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all pr-10" aria-label="Chat message input" />
                                     <div className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground/30 pointer-events-none group-focus-within:text-primary/30 transition-colors"><ArrowRight size={16} /></div>
                                 </div>
                                 <button type="submit" disabled={!inputValue.trim()} className="p-3.5 rounded-xl bg-primary text-white disabled:opacity-50 disabled:cursor-not-allowed hover:shadow-lg hover:shadow-primary/30 transition-all active:scale-90 flex-shrink-0" aria-label="Send message">
