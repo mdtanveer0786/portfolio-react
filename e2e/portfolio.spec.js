@@ -114,4 +114,22 @@ test.describe('Portfolio End-to-End Test Suite', () => {
     const htmlTag = page.locator('html');
     await expect(htmlTag).toHaveClass(/(dark|light)/);
   });
+
+  test('architecture case study modal opens and displays engineering breakdown', async ({ page }) => {
+    await page.goto('/');
+    const caseStudyBtn = page.getByRole('button', { name: /case study|architecture/i }).first();
+    await expect(caseStudyBtn).toBeAttached({ timeout: 10000 });
+    await caseStudyBtn.click({ force: true });
+
+    // Verify modal header and architectural highlights are visible
+    const modalHeading = page.locator('#case-study-title');
+    await expect(modalHeading).toBeVisible({ timeout: 10000 });
+    await expect(page.getByText(/Architectural Overview/i)).toBeVisible();
+
+    // Verify close button
+    const closeBtn = page.getByLabel('Close case study');
+    await expect(closeBtn).toBeVisible();
+    await closeBtn.click();
+    await expect(modalHeading).not.toBeVisible();
+  });
 });

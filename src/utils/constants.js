@@ -181,7 +181,37 @@ export const projects = [
         live: 'https://us.vgrow247.com/',
         featured: true,
         category: 'fullstack',
-        date: '2026-07-15'
+        date: '2026-07-15',
+        caseStudy: {
+            badge: 'Enterprise SaaS Architecture',
+            subtitle: 'Multi-Tenant Architecture & Sales Pipeline Engine',
+            overview: 'vGrow is an enterprise-tier Customer Relationship Management suite engineered for multi-tenant organizations. It automates complex lead lifecycles, delivers interactive real-time sales pipeline analytics, and enforces granular role-based and attribute-based security.',
+            highlights: [
+                {
+                    title: 'Multi-Tenant Schema Scoping',
+                    desc: 'Database-level tenant isolation orchestrated with Prisma ORM and MySQL. Subdomain tenant resolution ensures strict tenant boundary protection and data isolation.'
+                },
+                {
+                    title: 'Hierarchical RBAC & ABAC',
+                    desc: 'Fine-grained access control permitting dynamic permission sets for Super Admins, Regional Directors, Branch Managers, and Sales Representatives.'
+                },
+                {
+                    title: 'AI Copilot & Workflow Automation',
+                    desc: 'Embedded AI assistant enabling one-click lead sentiment analysis, smart email composition, and automated lead stage transition triggers.'
+                },
+                {
+                    title: 'Turborepo Monorepo Scaling',
+                    desc: 'Structured as a modular monorepo with Turborepo, decoupling UI components, shared TypeScript schemas, and backend micro-packages for optimal build caching.'
+                }
+            ],
+            metrics: [
+                { label: 'Tenant Isolation', value: '100% Scoped' },
+                { label: 'Access Control', value: 'RBAC + ABAC' },
+                { label: 'API Architecture', value: 'RESTful + Modular' },
+                { label: 'Data Layer', value: 'Prisma + MySQL' }
+            ],
+            techStack: ['React 18', 'TypeScript', 'Node.js', 'Express', 'Prisma ORM', 'MySQL', 'Turborepo', 'Tailwind CSS']
+        }
     },
     {
         id: 8,
@@ -193,7 +223,37 @@ export const projects = [
         live: 'https://parkflow.parknpass.com/',
         featured: true,
         category: 'fullstack',
-        date: '2026-06-23'
+        date: '2026-06-23',
+        caseStudy: {
+            badge: 'Real-Time IoT & Telemetry SaaS',
+            subtitle: 'Real-Time Telemetry & Cross-Platform Android Deployment',
+            overview: 'ParkFlow SaaS manages enterprise parking ecosystems across physical gates, multi-level slots, and valet operations. It pairs low-latency WebSocket telemetry with progressive offline resilience and handheld POS deployment.',
+            highlights: [
+                {
+                    title: 'Sub-50ms WebSocket Synchronization',
+                    desc: 'Socket.io event pipelines stream live parking slot states, entry/exit boom triggers, and valet queues across all operators instantaneously.'
+                },
+                {
+                    title: 'Offline-First Workbox Architecture',
+                    desc: 'PWA service workers with custom caching strategies allow booth gate attendants to scan, log, and queue vehicle entries even during network dropouts.'
+                },
+                {
+                    title: 'Native Android APK Packaging',
+                    desc: 'Compiled into a standalone Android APK via Web-to-APK pipeline, enabling deployment onto ruggedized handheld barcode/POS devices at physical checkpoints.'
+                },
+                {
+                    title: 'Dynamic Revenue & Slot Analytics',
+                    desc: 'Interactive analytical dashboards computing real-time hourly occupancy rates, peak traffic forecasts, and payment reconciliations.'
+                }
+            ],
+            metrics: [
+                { label: 'Event Latency', value: '< 50ms' },
+                { label: 'Offline Resilience', value: 'Workbox PWA' },
+                { label: 'Mobile Runtime', value: 'Android APK' },
+                { label: 'State Sync', value: 'Socket.io Cluster' }
+            ],
+            techStack: ['React', 'Node.js', 'Express', 'MongoDB', 'Socket.io', 'PWA Workbox', 'Web2APK', 'Tailwind CSS']
+        }
     },
     {
         id: 7,
@@ -205,7 +265,37 @@ export const projects = [
         live: 'https://softdrop.parknpass.com/',
         featured: true,
         category: 'fullstack',
-        date: '2026-06-23'
+        date: '2026-06-23',
+        caseStudy: {
+            badge: 'High-Security Transit SaaS',
+            subtitle: 'Secure Luggage Custody & Cryptographic Verification',
+            overview: 'SafeDrop AI provides zero-trust luggage and smart locker tracking for airports, railway junctions, and high-traffic hospitality hubs. It eliminates manual baggage slips using dynamic cryptographic QR tokens and multi-tenant hub scoping.',
+            highlights: [
+                {
+                    title: 'Time-Bound Cryptographic Tokens',
+                    desc: 'Generates non-replayable, cryptographically signed QR claim tokens that expire automatically upon physical locker unlock or retrieval.'
+                },
+                {
+                    title: 'Multi-Tenant Hub Partitioning',
+                    desc: 'Centralized admin portal partitioning physical terminal locations, locker sizes, dynamic hourly pricing tiers, and operator shifts.'
+                },
+                {
+                    title: 'Automated Payment Reconciliation',
+                    desc: 'Integrated Razorpay payment webhooks automate fee calculations for overtime locker custody with immediate digital invoice dispatch.'
+                },
+                {
+                    title: 'Instant Custody Audit Trail',
+                    desc: 'Immutable timeline tracking luggage handoff, custodial transfers, inspection logs, and pickup verification for total accountability.'
+                }
+            ],
+            metrics: [
+                { label: 'Claim Security', value: 'Signed QR Tokens' },
+                { label: 'Payments', value: 'Razorpay Webhooks' },
+                { label: 'Branch Scoping', value: 'Multi-Hub SaaS' },
+                { label: 'Audit Trail', value: 'Real-Time Logging' }
+            ],
+            techStack: ['React', 'Node.js', 'Express', 'MongoDB', 'Socket.io', 'Razorpay API', 'Tailwind CSS']
+        }
     },
     {
         id: 1,

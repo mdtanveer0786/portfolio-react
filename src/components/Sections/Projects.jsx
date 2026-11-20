@@ -4,6 +4,7 @@ import { Layout } from 'lucide-react'
 import { projects } from '../../utils/constants'
 import SectionReveal from '../UI/SectionReveal'
 import ProjectCard from '../UI/ProjectCard'
+import CaseStudyModal from '../UI/CaseStudyModal'
 import AnimatedBackground from '../UI/AnimatedBackground'
 import { cn } from '../../utils/cn'
 
@@ -11,6 +12,7 @@ const CATEGORIES = ['all', 'fullstack', 'frontend']
 
 export default function Projects() {
     const [activeCategory, setActiveCategory] = useState('all')
+    const [selectedProject, setSelectedProject] = useState(null)
 
     const filteredProjects = useMemo(() => {
         if (activeCategory === 'all') return projects
@@ -85,11 +87,19 @@ export default function Projects() {
                                 key={project.id}
                                 project={project}
                                 index={index}
+                                onOpenCaseStudy={setSelectedProject}
                             />
                         ))}
                     </AnimatePresence>
                 </motion.div>
             </div>
+
+            {/* Architecture Case Study Modal */}
+            <CaseStudyModal
+                project={selectedProject}
+                isOpen={!!selectedProject}
+                onClose={() => setSelectedProject(null)}
+            />
         </section>
     )
 }

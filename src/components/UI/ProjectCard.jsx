@@ -1,8 +1,8 @@
 import { forwardRef, useRef } from 'react'
 import { motion, useMotionValue, useSpring, useTransform, useReducedMotion } from 'framer-motion'
-import { Github, ExternalLink, Star } from 'lucide-react'
+import { Github, ExternalLink, Star, Layers } from 'lucide-react'
 
-const ProjectCard = forwardRef(({ project, index }, ref) => {
+const ProjectCard = forwardRef(({ project, index, onOpenCaseStudy }, ref) => {
     const cardRef = useRef(null)
     const tickingRef = useRef(false)
     const shouldReduceMotion = useReducedMotion()
@@ -83,12 +83,27 @@ const ProjectCard = forwardRef(({ project, index }, ref) => {
                         </div>
                     </div>
 
-                    {/* Status badge */}
+                    {/* Status badge & Case Study Badge */}
                     {project.status === 'coming-soon' && (
                         <div className="absolute top-3 right-3 flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-amber-500/90 backdrop-blur-md text-white text-[10px] font-semibold uppercase tracking-wide">
                             <span className="w-1.5 h-1.5 rounded-full bg-white animate-pulse" />
                             Coming Soon
                         </div>
+                    )}
+                    {project.caseStudy && (
+                        <button
+                            type="button"
+                            onClick={(e) => {
+                                e.preventDefault();
+                                e.stopPropagation();
+                                onOpenCaseStudy?.(project);
+                            }}
+                            className="absolute top-3 right-3 flex items-center gap-1 px-2.5 py-1 rounded-lg bg-black/60 hover:bg-primary backdrop-blur-md text-white text-[10px] font-semibold uppercase tracking-wide border border-white/10 transition-colors shadow-lg cursor-pointer active:scale-95 z-10"
+                            title="Explore Architecture"
+                            aria-label={`Explore architecture case study for ${project.title}`}
+                        >
+                            <Layers size={11} /> Case Study
+                        </button>
                     )}
                 </div>
 
@@ -139,6 +154,25 @@ const ProjectCard = forwardRef(({ project, index }, ref) => {
                                 <ExternalLink size={13} />
                                 Live Demo
                             </motion.a>
+                        )}
+                        {project.caseStudy && (
+                            <motion.button
+                                type="button"
+                                whileHover={{ scale: 1.03, y: -1 }}
+                                whileTap={{ scale: 0.97 }}
+                                transition={{ type: 'spring', stiffness: 400, damping: 25 }}
+                                onClick={(e) => {
+                                    e.preventDefault();
+                                    e.stopPropagation();
+                                    onOpenCaseStudy?.(project);
+                                }}
+                                className="flex items-center justify-center gap-1.5 px-3 py-2.5 rounded-xl bg-primary/10 hover:bg-primary/20 text-primary border border-primary/20 text-xs font-semibold transition-all shadow-sm active:scale-95 shrink-0"
+                                title="View Architecture Case Study"
+                                aria-label={`View architecture case study for ${project.title}`}
+                            >
+                                <Layers size={13} />
+                                <span className="hidden xs:inline">Architecture</span>
+                            </motion.button>
                         )}
                         {project.github && (
                             <motion.a
