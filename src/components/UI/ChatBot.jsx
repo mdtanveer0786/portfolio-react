@@ -763,12 +763,16 @@ const ChatBot = () => {
         recognition.start();
     };
 
-    const formatMessage = (text) => {
+    const formatMessage = (text, msgType = 'bot') => {
         if (typeof text !== 'string') return text;
         const parts = text.split(/(\*\*.*?\*\*|\[.*?\]\(.*?\))/g);
         return parts.map((part, index) => {
             if (part.startsWith('**') && part.endsWith('**')) {
-                return <strong key={index} className="text-primary font-bold">{part.slice(2, -2)}</strong>;
+                const content = part.slice(2, -2);
+                if (msgType === 'user') {
+                    return <strong key={index} className="text-white font-bold">{content}</strong>;
+                }
+                return <strong key={index} className="text-primary dark:text-purple-400 font-bold">{content}</strong>;
             }
             if (part.startsWith('[') && part.includes('](')) {
                 const labelMatch = part.match(/\[(.*?)\]/);
@@ -786,7 +790,12 @@ const ChatBot = () => {
                                     setIsOpen(false);
                                 }
                             }}
-                            className="text-accent underline decoration-accent/30 hover:decoration-accent transition-all inline-flex items-center gap-1 font-medium"
+                            className={cn(
+                                "underline transition-all inline-flex items-center gap-1 font-medium",
+                                msgType === 'user'
+                                    ? "text-white decoration-white/50 hover:decoration-white"
+                                    : "text-accent dark:text-sky-400 decoration-accent/30 hover:decoration-accent"
+                            )}
                         >
                             {labelMatch[1]} {!isInternal && <ExternalLink size={10} />}
                         </a>
@@ -819,10 +828,10 @@ const ChatBot = () => {
                             animate={{ opacity: 1, scale: 1, y: 0 }}
                             exit={{ opacity: 0, scale: 0.92, y: 20 }}
                             transition={{ type: 'spring', damping: 25, stiffness: 250 }}
-                            className="fixed inset-x-0 bottom-0 sm:inset-auto sm:absolute sm:bottom-full sm:right-0 sm:mb-4 w-full sm:w-[420px] h-[85dvh] sm:h-[min(calc(100dvh-12rem),700px)] glass-card rounded-t-[2rem] sm:rounded-2xl border-t sm:border border-primary/30 flex flex-col overflow-hidden shadow-[0_-10px_50px_rgba(0,0,0,0.5)] pointer-events-auto"
+                            className="fixed inset-x-0 bottom-0 sm:inset-auto sm:absolute sm:bottom-full sm:right-0 sm:mb-4 w-full sm:w-[420px] h-[85dvh] sm:h-[min(calc(100dvh-12rem),700px)] bg-white dark:bg-[#0c0d14] rounded-t-[2rem] sm:rounded-2xl border-t sm:border border-neutral-300/80 dark:border-neutral-800 flex flex-col overflow-hidden shadow-[0_20px_60px_-15px_rgba(0,0,0,0.25)] dark:shadow-[0_25px_80px_rgba(0,0,0,0.9)] ring-1 ring-black/5 dark:ring-white/10 pointer-events-auto"
                         >
                         {/* Premium Header */}
-                        <div className="p-4 xs:p-5 bg-gradient-to-r from-primary via-fuchsia-600 to-accent text-white flex items-center justify-between shadow-lg relative z-10">
+                        <div className="p-4 xs:p-5 bg-gradient-to-r from-primary via-fuchsia-600 to-accent text-white flex items-center justify-between shadow-lg relative z-10 border-b border-white/10">
                             <div className="flex items-center gap-3">
                                 <div className="relative">
                                     <div className="w-10 h-10 xs:w-12 xs:h-12 rounded-2xl bg-white/20 backdrop-blur-md flex items-center justify-center border border-white/30 shadow-inner overflow-hidden">
@@ -856,15 +865,15 @@ const ChatBot = () => {
                         </div>
 
                         {/* Messages Area */}
-                        <div className="flex-1 overflow-y-auto p-4 sm:p-6 space-y-6 custom-scrollbar bg-dot-grid" data-lenis-prevent>
+                        <div className="flex-1 overflow-y-auto p-4 sm:p-6 space-y-6 custom-scrollbar bg-slate-100/70 dark:bg-[#07080d] bg-dot-grid" data-lenis-prevent>
                             {messages.map((msg) => (
                                 <motion.div key={msg.id} initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className={cn("flex gap-3 max-w-[92%]", msg.type === 'user' ? "ml-auto flex-row-reverse" : "")}>
-                                    <div className={cn("w-9 h-9 rounded-xl flex-shrink-0 flex items-center justify-center shadow-sm", msg.type === 'bot' ? "bg-primary/10 text-primary border border-primary/20" : "bg-accent/10 text-accent border border-accent/20")}>
+                                    <div className={cn("w-9 h-9 rounded-xl flex-shrink-0 flex items-center justify-center shadow-sm", msg.type === 'bot' ? "bg-primary/10 text-primary border border-primary/25 dark:bg-primary/20 dark:text-purple-300 dark:border-primary/40" : "bg-fuchsia-500/10 text-fuchsia-600 border border-fuchsia-500/25 dark:bg-fuchsia-500/20 dark:text-fuchsia-300 dark:border-fuchsia-500/40")}>
                                         {msg.type === 'bot' ? <Bot size={16} /> : <User size={16} />}
                                     </div>
                                     <div className="flex flex-col gap-2 flex-1">
-                                        <div className={cn("p-4 rounded-2xl text-[13.5px] leading-relaxed shadow-sm", msg.type === 'bot' ? "bg-white dark:bg-neutral-900/95 border border-border text-foreground rounded-tl-none backdrop-blur-sm" : "bg-primary text-white rounded-tr-none shadow-md shadow-primary/20")}>
-                                            {formatMessage(msg.text)}
+                                        <div className={cn("p-4 rounded-2xl text-[13.5px] leading-relaxed shadow-sm", msg.type === 'bot' ? "bg-white dark:bg-[#151724] border border-neutral-200/90 dark:border-neutral-700/80 text-neutral-900 dark:text-neutral-100 rounded-tl-none shadow-[0_2px_8px_rgba(0,0,0,0.04)] dark:shadow-[0_2px_10px_rgba(0,0,0,0.4)]" : "bg-gradient-to-r from-primary to-fuchsia-600 text-white rounded-tr-none shadow-md shadow-primary/25")}>
+                                            {formatMessage(msg.text, msg.type)}
 
                                             {/* Interactive Inline Lead Form (Fast & High Conversion) */}
                                             {msg.isLeadForm && (
@@ -898,7 +907,7 @@ const ChatBot = () => {
                                             {msg.isSkills && (
                                                 <div className="mt-4 flex flex-wrap gap-2">
                                                     {skillCategories.map((cat, i) => (
-                                                        <button key={i} onClick={() => handleSendMessage(`Tell me more about ${cat.title}`)} className="px-3 py-1.5 rounded-lg border border-primary/20 bg-primary/5 text-primary text-[11px] font-bold hover:bg-primary hover:text-white transition-all">
+                                                        <button key={i} onClick={() => handleSendMessage(`Tell me more about ${cat.title}`)} className="px-3 py-1.5 rounded-lg border border-primary/25 bg-primary/10 text-primary dark:text-purple-300 dark:border-primary/40 text-[11px] font-bold hover:bg-primary hover:text-white transition-all">
                                                             {cat.title}
                                                         </button>
                                                     ))}
@@ -914,7 +923,7 @@ const ChatBot = () => {
                                                         key={sIdx} 
                                                         type="button" 
                                                         onClick={() => handleSendMessage(suggestion)} 
-                                                        className="px-2.5 py-1 rounded-lg border border-primary/25 bg-primary/5 hover:bg-primary hover:text-white text-primary text-[11px] font-semibold transition-all active:scale-95 shadow-xs"
+                                                        className="px-2.5 py-1 rounded-lg border border-primary/25 bg-primary/10 hover:bg-primary hover:text-white text-primary dark:text-purple-300 dark:border-primary/40 text-[11px] font-semibold transition-all active:scale-95 shadow-xs"
                                                     >
                                                         {suggestion} →
                                                     </button>
@@ -925,26 +934,26 @@ const ChatBot = () => {
                                         {msg.content && (
                                             <div className="flex flex-col gap-3 mt-1">
                                                 {msg.content.map((project, i) => (
-                                                    <motion.div key={i} initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: i * 0.1 }} className="bg-white dark:bg-neutral-900 border border-border rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-all group">
+                                                    <motion.div key={i} initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: i * 0.1 }} className="bg-white dark:bg-[#181a28] border border-neutral-200/90 dark:border-neutral-700/80 rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-all group">
                                                         <div className="h-24 w-full relative overflow-hidden">
                                                             <img src={project.image} alt={project.title} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" />
                                                             <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
                                                             <p className="absolute bottom-2 left-3 text-white font-bold text-xs">{project.title}</p>
                                                         </div>
                                                         <div className="p-3">
-                                                            <p className="text-[11px] text-muted-foreground line-clamp-2 mb-3">{project.description}</p>
+                                                            <p className="text-[11px] text-neutral-600 dark:text-neutral-300 line-clamp-2 mb-3">{project.description}</p>
                                                             <div className="flex gap-2">
                                                                 {project.live ? (
-                                                                    <a href={project.live} target="_blank" rel="noopener noreferrer" className="flex-1 flex items-center justify-center gap-1.5 py-1.5 bg-primary/10 text-primary rounded-lg font-bold text-[10px] hover:bg-primary hover:text-white transition-all">
+                                                                    <a href={project.live} target="_blank" rel="noopener noreferrer" className="flex-1 flex items-center justify-center gap-1.5 py-1.5 bg-primary/10 text-primary border border-primary/20 rounded-lg font-bold text-[10px] hover:bg-primary hover:text-white transition-all">
                                                                         Live <ExternalLink size={10} />
                                                                     </a>
                                                                 ) : (
-                                                                    <div className="flex-1 flex items-center justify-center gap-1.5 py-1.5 bg-black/[0.03] dark:bg-white/[0.03] text-muted-foreground rounded-lg font-bold text-[10px] border border-border/30">
+                                                                    <div className="flex-1 flex items-center justify-center gap-1.5 py-1.5 bg-black/[0.04] dark:bg-white/[0.04] text-neutral-500 dark:text-neutral-400 rounded-lg font-bold text-[10px] border border-neutral-200 dark:border-neutral-700">
                                                                         Soon
                                                                     </div>
                                                                 )}
                                                                 {project.github ? (
-                                                                    <a href={project.github} target="_blank" rel="noopener noreferrer" className="flex-1 flex items-center justify-center gap-1.5 py-1.5 bg-neutral-100 dark:bg-neutral-800 text-foreground rounded-lg font-bold text-[10px] hover:bg-neutral-200 dark:hover:bg-neutral-700 transition-all">
+                                                                    <a href={project.github} target="_blank" rel="noopener noreferrer" className="flex-1 flex items-center justify-center gap-1.5 py-1.5 bg-neutral-100 dark:bg-neutral-800 text-neutral-800 dark:text-neutral-200 rounded-lg font-bold text-[10px] hover:bg-neutral-200 dark:hover:bg-neutral-700 border border-neutral-200 dark:border-neutral-700 transition-all">
                                                                         Code <ArrowRight size={10} />
                                                                     </a>
                                                                 ) : null}
@@ -959,11 +968,11 @@ const ChatBot = () => {
                             ))}
                             {isTyping && (
                                 <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="flex gap-3 max-w-[85%]">
-                                    <div className="w-9 h-9 rounded-xl bg-primary/10 text-primary border border-primary/20 flex items-center justify-center"><Bot size={16} /></div>
-                                    <div className="bg-white/80 dark:bg-neutral-900/80 backdrop-blur-sm border border-border p-3.5 rounded-2xl rounded-tl-none flex gap-1.5 items-center">
-                                        <span className="w-1.5 h-1.5 bg-primary/40 rounded-full animate-bounce" />
-                                        <span className="w-1.5 h-1.5 bg-primary/60 rounded-full animate-bounce [animation-delay:0.2s]" />
-                                        <span className="w-1.5 h-1.5 bg-primary/80 rounded-full animate-bounce [animation-delay:0.4s]" />
+                                    <div className="w-9 h-9 rounded-xl bg-primary/10 text-primary border border-primary/25 dark:bg-primary/20 dark:text-purple-300 flex items-center justify-center"><Bot size={16} /></div>
+                                    <div className="bg-white dark:bg-[#151724] border border-neutral-200/90 dark:border-neutral-700/80 p-3.5 rounded-2xl rounded-tl-none flex gap-1.5 items-center shadow-xs">
+                                        <span className="w-1.5 h-1.5 bg-primary/60 dark:bg-purple-400/70 rounded-full animate-bounce" />
+                                        <span className="w-1.5 h-1.5 bg-primary/80 dark:bg-purple-400/90 rounded-full animate-bounce [animation-delay:0.2s]" />
+                                        <span className="w-1.5 h-1.5 bg-primary dark:bg-purple-400 rounded-full animate-bounce [animation-delay:0.4s]" />
                                     </div>
                                 </motion.div>
                             )}
@@ -971,25 +980,25 @@ const ChatBot = () => {
                         </div>
 
                         {/* Quick Actions Bar */}
-                        <div className="px-4 py-3 flex flex-nowrap overflow-x-auto gap-2 scrollbar-none bg-black/[0.02] dark:bg-white/[0.02] border-t border-border/50">
+                        <div className="px-4 py-3 flex flex-nowrap overflow-x-auto gap-2 scrollbar-none bg-neutral-100/90 dark:bg-[#0c0d14] border-t border-neutral-200 dark:border-neutral-800">
                             {QUICK_ACTIONS.map((action, i) => (
-                                <button key={i} onClick={() => handleSendMessage(action.value)} className="text-[10px] font-bold uppercase tracking-wider px-3.5 py-2.5 rounded-xl border border-border bg-background hover:border-primary hover:text-primary transition-all flex items-center gap-2 whitespace-nowrap shadow-sm hover:shadow-md active:scale-95">
+                                <button key={i} onClick={() => handleSendMessage(action.value)} className="text-[10px] font-bold uppercase tracking-wider px-3.5 py-2.5 rounded-xl border border-neutral-200/90 dark:border-neutral-700/80 bg-white dark:bg-[#151724] text-neutral-700 dark:text-neutral-200 hover:border-primary hover:text-primary dark:hover:border-primary/60 dark:hover:text-white transition-all flex items-center gap-2 whitespace-nowrap shadow-xs hover:shadow-sm active:scale-95">
                                     <action.icon size={13} /> {action.label}
                                 </button>
                             ))}
                         </div>
 
                         {/* Input Footer */}
-                        <div className="p-3 xs:p-4 sm:p-5 border-t border-border bg-background/80 backdrop-blur-xl">
+                        <div className="p-3 xs:p-4 sm:p-5 border-t border-neutral-200 dark:border-neutral-800 bg-white dark:bg-[#0c0d14]">
                             <form onSubmit={(e) => { e.preventDefault(); handleSendMessage(inputValue); }} className="flex items-center gap-2">
-                                <button type="button" onClick={toggleListening} className={cn("p-2.5 rounded-xl transition-all", isListening ? "bg-red-500 text-white animate-pulse" : "bg-muted/50 text-muted-foreground hover:bg-muted")} aria-label={isListening ? 'Stop listening' : 'Start voice input'}>
+                                <button type="button" onClick={toggleListening} className={cn("p-2.5 rounded-xl transition-all border", isListening ? "bg-red-500 text-white animate-pulse border-red-600" : "bg-neutral-100 dark:bg-neutral-800 text-neutral-600 dark:text-neutral-300 hover:bg-neutral-200 dark:hover:bg-neutral-700 border-neutral-200 dark:border-neutral-700")} aria-label={isListening ? 'Stop listening' : 'Start voice input'}>
                                     {isListening ? <MicOff size={18} /> : <Mic size={18} />}
                                 </button>
                                 <div className="relative flex-1 group">
-                                    <input ref={inputRef} type="text" value={inputValue} onChange={(e) => setInputValue(e.target.value)} placeholder="Ask me anything (or type in Hindi/English)..." className="w-full bg-muted/30 border border-border rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all pr-10" aria-label="Chat message input" />
-                                    <div className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground/30 pointer-events-none group-focus-within:text-primary/30 transition-colors"><ArrowRight size={16} /></div>
+                                    <input ref={inputRef} type="text" value={inputValue} onChange={(e) => setInputValue(e.target.value)} placeholder="Ask me anything (or type in Hindi/English)..." className="w-full bg-neutral-50 dark:bg-[#151724] border border-neutral-200 dark:border-neutral-700/80 rounded-xl px-4 py-3 text-sm text-neutral-900 dark:text-neutral-100 placeholder:text-neutral-400 dark:placeholder:text-neutral-500 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all pr-10 shadow-inner" aria-label="Chat message input" />
+                                    <div className="absolute right-3 top-1/2 -translate-y-1/2 text-neutral-400 dark:text-neutral-500 pointer-events-none group-focus-within:text-primary transition-colors"><ArrowRight size={16} /></div>
                                 </div>
-                                <button type="submit" disabled={!inputValue.trim()} className="p-3.5 rounded-xl bg-primary text-white disabled:opacity-50 disabled:cursor-not-allowed hover:shadow-lg hover:shadow-primary/30 transition-all active:scale-90 flex-shrink-0" aria-label="Send message">
+                                <button type="submit" disabled={!inputValue.trim()} className="p-3.5 rounded-xl bg-gradient-to-r from-primary to-fuchsia-600 text-white disabled:opacity-40 disabled:cursor-not-allowed hover:shadow-lg hover:shadow-primary/30 transition-all active:scale-90 flex-shrink-0" aria-label="Send message">
                                     <Send size={20} />
                                 </button>
                             </form>
@@ -1029,7 +1038,7 @@ const ChatBot = () => {
                     }}
                     aria-label={isOpen ? "Close chat assistant" : "Open chat assistant"}
                     className={cn(
-                        "w-14 h-14 sm:w-16 sm:h-16 rounded-[1.75rem] sm:rounded-[2rem] items-center justify-center text-white shadow-[0_10px_30px_rgba(0,0,0,0.2)] transition-all duration-500 relative overflow-hidden group border-2 border-white/20 bg-primary",
+                        "w-14 h-14 sm:w-16 sm:h-16 rounded-[1.75rem] sm:rounded-[2rem] items-center justify-center text-white shadow-[0_10px_35px_rgba(139,92,246,0.35)] dark:shadow-[0_10px_35px_rgba(139,92,246,0.55)] transition-all duration-500 relative overflow-hidden group border-2 border-white/30 bg-gradient-to-tr from-primary to-fuchsia-600",
                         isOpen ? "hidden sm:flex" : "flex"
                     )}
                 >
@@ -1146,16 +1155,16 @@ const InlineLeadForm = ({ onSubmitLead }) => {
             <motion.div
                 initial={{ opacity: 0, scale: 0.95 }}
                 animate={{ opacity: 1, scale: 1 }}
-                className="mt-3 p-4 rounded-2xl bg-emerald-500/10 border border-emerald-500/25 space-y-2.5 text-left"
+                className="mt-3 p-4 rounded-2xl bg-emerald-500/10 dark:bg-emerald-500/15 border border-emerald-500/30 space-y-2.5 text-left"
             >
-                <div className="flex items-center gap-2 text-emerald-400 font-bold text-xs uppercase tracking-wider">
+                <div className="flex items-center gap-2 text-emerald-600 dark:text-emerald-400 font-bold text-xs uppercase tracking-wider">
                     <CheckCircle2 size={16} /> Inquiry Sent to Tanveer!
                 </div>
-                <p className="text-xs text-foreground/90 leading-relaxed">
+                <p className="text-xs text-neutral-800 dark:text-neutral-200 leading-relaxed">
                     Thank you, <strong>{name}</strong>! Tanveer will review your <strong>{projectType}</strong> project and email you back at <strong>{email}</strong> shortly.
                 </p>
                 {phone && (
-                    <p className="text-[11px] text-muted-foreground">
+                    <p className="text-[11px] text-neutral-600 dark:text-neutral-400">
                         Phone / WhatsApp noted: <strong>{phone}</strong>
                     </p>
                 )}
@@ -1174,19 +1183,19 @@ const InlineLeadForm = ({ onSubmitLead }) => {
     }
 
     return (
-        <form onSubmit={handleSubmit} className="mt-3 p-3.5 sm:p-4 rounded-2xl bg-black/[0.04] dark:bg-white/[0.03] border border-primary/25 space-y-2.5 text-left shadow-inner">
-            <div className="flex items-center justify-between pb-1 border-b border-border/40">
-                <span className="text-[11px] font-bold uppercase tracking-wider text-primary flex items-center gap-1.5">
+        <form onSubmit={handleSubmit} className="mt-3 p-3.5 sm:p-4 rounded-2xl bg-neutral-50 dark:bg-[#0f111c] border border-neutral-200 dark:border-neutral-700/80 space-y-2.5 text-left shadow-sm">
+            <div className="flex items-center justify-between pb-1 border-b border-neutral-200/80 dark:border-neutral-800">
+                <span className="text-[11px] font-bold uppercase tracking-wider text-primary dark:text-purple-400 flex items-center gap-1.5">
                     <User size={13} /> Project Inquiry Card
                 </span>
-                <span className="text-[9px] font-mono text-muted-foreground uppercase tracking-widest bg-primary/10 px-2 py-0.5 rounded-full">
+                <span className="text-[9px] font-mono text-neutral-600 dark:text-neutral-400 uppercase tracking-widest bg-primary/10 dark:bg-primary/20 px-2 py-0.5 rounded-full font-bold">
                     Quick Form
                 </span>
             </div>
 
             {/* Name */}
             <div>
-                <label className="block text-[11px] font-medium text-foreground/80 mb-1">
+                <label className="block text-[11px] font-medium text-neutral-700 dark:text-neutral-300 mb-1">
                     Your Name <span className="text-primary">*</span>
                 </label>
                 <input
@@ -1195,13 +1204,13 @@ const InlineLeadForm = ({ onSubmitLead }) => {
                     value={name}
                     onChange={(e) => setName(e.target.value)}
                     placeholder="e.g. Alex Smith"
-                    className="w-full bg-background border border-border rounded-xl px-3 py-2 text-base sm:text-xs focus:outline-none focus:border-primary transition-colors text-foreground shadow-xs"
+                    className="w-full bg-white dark:bg-[#151724] border border-neutral-200 dark:border-neutral-700 text-neutral-900 dark:text-neutral-100 placeholder:text-neutral-400 dark:placeholder:text-neutral-500 rounded-xl px-3 py-2 text-base sm:text-xs focus:outline-none focus:border-primary transition-colors shadow-xs"
                 />
             </div>
 
             {/* Email */}
             <div>
-                <label className="block text-[11px] font-medium text-foreground/80 mb-1">
+                <label className="block text-[11px] font-medium text-neutral-700 dark:text-neutral-300 mb-1">
                     Email Address <span className="text-primary">*</span>
                 </label>
                 <input
@@ -1210,15 +1219,15 @@ const InlineLeadForm = ({ onSubmitLead }) => {
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder="alex@company.com"
-                    className="w-full bg-background border border-border rounded-xl px-3 py-2 text-base sm:text-xs focus:outline-none focus:border-primary transition-colors text-foreground shadow-xs"
+                    className="w-full bg-white dark:bg-[#151724] border border-neutral-200 dark:border-neutral-700 text-neutral-900 dark:text-neutral-100 placeholder:text-neutral-400 dark:placeholder:text-neutral-500 rounded-xl px-3 py-2 text-base sm:text-xs focus:outline-none focus:border-primary transition-colors shadow-xs"
                 />
             </div>
 
             {/* Phone / WhatsApp (Optional) */}
             <div>
-                <label className="block text-[11px] font-medium text-foreground/80 mb-1 flex items-center justify-between">
+                <label className="block text-[11px] font-medium text-neutral-700 dark:text-neutral-300 mb-1 flex items-center justify-between">
                     <span>Phone / WhatsApp</span>
-                    <span className="text-[10px] text-emerald-400 font-semibold flex items-center gap-1">
+                    <span className="text-[10px] text-emerald-600 dark:text-emerald-400 font-semibold flex items-center gap-1">
                         <FaWhatsapp size={11} /> Fast Reply
                     </span>
                 </label>
@@ -1227,13 +1236,13 @@ const InlineLeadForm = ({ onSubmitLead }) => {
                     value={phone}
                     onChange={(e) => setPhone(e.target.value)}
                     placeholder="+91 98765... or +1 555..."
-                    className="w-full bg-background border border-border rounded-xl px-3 py-2 text-base sm:text-xs focus:outline-none focus:border-primary transition-colors text-foreground shadow-xs"
+                    className="w-full bg-white dark:bg-[#151724] border border-neutral-200 dark:border-neutral-700 text-neutral-900 dark:text-neutral-100 placeholder:text-neutral-400 dark:placeholder:text-neutral-500 rounded-xl px-3 py-2 text-base sm:text-xs focus:outline-none focus:border-primary transition-colors shadow-xs"
                 />
             </div>
 
             {/* Project Type Pills */}
             <div>
-                <label className="block text-[11px] font-medium text-foreground/80 mb-1">
+                <label className="block text-[11px] font-medium text-neutral-700 dark:text-neutral-300 mb-1">
                     Project Type
                 </label>
                 <div className="flex flex-wrap gap-1.5">
@@ -1246,7 +1255,7 @@ const InlineLeadForm = ({ onSubmitLead }) => {
                                 "px-2.5 py-1 rounded-lg text-[10px] font-semibold transition-all border",
                                 projectType === pt
                                     ? "bg-primary text-white border-primary shadow-xs"
-                                    : "bg-background text-muted-foreground border-border hover:border-primary/40"
+                                    : "bg-white dark:bg-[#151724] text-neutral-600 dark:text-neutral-300 border-neutral-200 dark:border-neutral-700 hover:border-primary/40"
                             )}
                         >
                             {pt}
@@ -1257,15 +1266,15 @@ const InlineLeadForm = ({ onSubmitLead }) => {
 
             {/* Brief Scope */}
             <div>
-                <label className="block text-[11px] font-medium text-foreground/80 mb-1">
-                    Project Details <span className="text-[10px] text-muted-foreground">(Optional)</span>
+                <label className="block text-[11px] font-medium text-neutral-700 dark:text-neutral-300 mb-1">
+                    Project Details <span className="text-[10px] text-neutral-500 dark:text-neutral-400">(Optional)</span>
                 </label>
                 <textarea
                     rows={2}
                     value={details}
                     onChange={(e) => setDetails(e.target.value)}
                     placeholder="Briefly describe your requirements or timeline..."
-                    className="w-full bg-background border border-border rounded-xl px-3 py-2 text-base sm:text-xs focus:outline-none focus:border-primary transition-colors text-foreground resize-none shadow-xs"
+                    className="w-full bg-white dark:bg-[#151724] border border-neutral-200 dark:border-neutral-700 text-neutral-900 dark:text-neutral-100 placeholder:text-neutral-400 dark:placeholder:text-neutral-500 rounded-xl px-3 py-2 text-base sm:text-xs focus:outline-none focus:border-primary transition-colors resize-none shadow-xs"
                 />
             </div>
 
