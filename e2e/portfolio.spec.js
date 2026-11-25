@@ -117,9 +117,7 @@ test.describe('Portfolio End-to-End Test Suite', () => {
 
   test('architecture case study modal opens and displays engineering breakdown', async ({ page }) => {
     await page.goto('/');
-    const projectsSection = page.locator('#projects');
-    await projectsSection.scrollIntoViewIfNeeded();
-
+    await page.locator('#projects').scrollIntoViewIfNeeded({ timeout: 15000 });
     const caseStudyBtn = page.locator('button[title="View Architecture Case Study"]').first();
     await expect(caseStudyBtn).toBeVisible({ timeout: 15000 });
     await caseStudyBtn.click({ force: true });

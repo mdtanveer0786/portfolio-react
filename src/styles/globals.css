@@ -316,7 +316,7 @@
     scrollbar-color: hsla(var(--foreground), 0.15) transparent;
 }
 
-/* Hide floating elements when mobile menu is open */
+/* Hide floating elements when mobile menu or modal is open */
 body.no-scroll #mta-chatbot,
 body.no-scroll #mta-whatsapp {
     opacity: 0 !important;
@@ -324,4 +324,12 @@ body.no-scroll #mta-whatsapp {
     pointer-events: none !important;
     transform: scale(0.9) !important;
     transition: all 0.3s ease-in-out !important;
+}
+
+/* Ensure modal and scrollable overlays remain fully touch-interactive when body has no-scroll */
+body.no-scroll [role="dialog"],
+body.no-scroll [data-lenis-prevent] {
+    touch-action: pan-y !important;
+    -webkit-overflow-scrolling: touch !important;
+    overscroll-behavior: contain !important;
 }

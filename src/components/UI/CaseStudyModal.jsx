@@ -1,9 +1,15 @@
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, ExternalLink, Github, Layers, ShieldCheck, Cpu, Zap, CheckCircle2 } from 'lucide-react';
 import { FaWhatsapp } from 'react-icons/fa';
 
 export default function CaseStudyModal({ project, isOpen, onClose }) {
+    const lastProjectRef = useRef(project);
+    if (project) {
+        lastProjectRef.current = project;
+    }
+    const activeProject = project || lastProjectRef.current;
+
     useEffect(() => {
         if (!isOpen) return;
 
@@ -12,30 +18,33 @@ export default function CaseStudyModal({ project, isOpen, onClose }) {
         };
 
         window.addEventListener('keydown', handleKeyDown);
-        const originalOverflow = document.body.style.overflow;
-        document.body.style.overflow = 'hidden';
+        document.body.classList.add('no-scroll');
 
         return () => {
             window.removeEventListener('keydown', handleKeyDown);
-            document.body.style.overflow = originalOverflow;
+            document.body.classList.remove('no-scroll');
         };
     }, [isOpen, onClose]);
 
-    if (!project || !project.caseStudy) return null;
+    if (!activeProject || !activeProject.caseStudy) return null;
 
-    const { caseStudy } = project;
+    const { caseStudy } = activeProject;
 
     return (
         <AnimatePresence>
             {isOpen && (
-                <div className="fixed inset-0 z-[10000] flex items-center justify-center p-3 sm:p-6 overflow-y-auto">
+                <div 
+                    className="fixed inset-0 z-[10000] flex items-center justify-center p-2.5 sm:p-6 overflow-hidden pointer-events-auto"
+                    data-lenis-prevent
+                >
                     {/* Backdrop */}
                     <motion.div
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
+                        transition={{ duration: 0.2 }}
                         onClick={onClose}
-                        className="fixed inset-0 bg-black/75 backdrop-blur-md cursor-pointer"
+                        className="fixed inset-0 bg-black/80 backdrop-blur-sm sm:backdrop-blur-md cursor-pointer"
                         aria-hidden="true"
                     />
 
@@ -44,15 +53,16 @@ export default function CaseStudyModal({ project, isOpen, onClose }) {
                         role="dialog"
                         aria-modal="true"
                         aria-labelledby="case-study-title"
-                        initial={{ opacity: 0, scale: 0.93, y: 25 }}
+                        initial={{ opacity: 0, scale: 0.95, y: 15 }}
                         animate={{ opacity: 1, scale: 1, y: 0 }}
-                        exit={{ opacity: 0, scale: 0.93, y: 20 }}
-                        transition={{ type: 'spring', damping: 25, stiffness: 300 }}
+                        exit={{ opacity: 0, scale: 0.95, y: 15 }}
+                        transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
                         onClick={(e) => e.stopPropagation()}
-                        className="relative w-full max-w-3xl max-h-[92dvh] sm:max-h-[90vh] bg-card dark:bg-[#0c0c16] border border-primary/30 rounded-2xl sm:rounded-3xl shadow-[0_20px_70px_rgba(0,0,0,0.6)] overflow-hidden flex flex-col z-10 my-auto"
+                        className="relative w-full max-w-3xl h-[88dvh] sm:h-auto sm:max-h-[88vh] bg-card dark:bg-[#0c0c16] border border-primary/30 rounded-2xl sm:rounded-3xl shadow-[0_20px_70px_rgba(0,0,0,0.6)] overflow-hidden flex flex-col z-10 my-auto will-change-transform"
+                        data-lenis-prevent
                     >
                         {/* Header Banner */}
-                        <div className="relative p-4 xs:p-6 sm:p-8 bg-gradient-to-r from-primary/15 via-purple-600/10 to-accent/15 border-b border-border/60">
+                        <div className="relative shrink-0 p-4 xs:p-6 sm:p-8 bg-gradient-to-r from-primary/15 via-purple-600/10 to-accent/15 border-b border-border/60">
                             {/* Close Button */}
                             <button
                                 onClick={onClose}
@@ -66,7 +76,7 @@ export default function CaseStudyModal({ project, isOpen, onClose }) {
                                 <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 sm:px-3 sm:py-1 rounded-full text-[10px] sm:text-[11px] font-bold uppercase tracking-wider bg-primary/20 text-primary border border-primary/30 shadow-sm">
                                     <Layers size={12} /> {caseStudy.badge || 'Architecture Deep Dive'}
                                 </span>
-                                {project.featured && (
+                                {activeProject.featured && (
                                     <span className="inline-flex items-center gap-1 px-2.5 py-0.5 sm:px-2.5 sm:py-1 rounded-full text-[9px] sm:text-[10px] font-bold uppercase tracking-wider bg-amber-500/10 text-amber-500 border border-amber-500/20">
                                         Production Platform
                                     </span>
@@ -74,7 +84,7 @@ export default function CaseStudyModal({ project, isOpen, onClose }) {
                             </div>
 
                             <h2 id="case-study-title" className="text-lg xs:text-xl sm:text-3xl font-display font-bold text-foreground tracking-tight leading-snug">
-                                {project.title}
+                                {activeProject.title}
                             </h2>
 
                             <p className="mt-1.5 sm:mt-2 text-xs sm:text-sm text-muted-foreground font-medium leading-relaxed max-w-2xl">
@@ -83,9 +93,9 @@ export default function CaseStudyModal({ project, isOpen, onClose }) {
 
                             {/* Quick Action Links */}
                             <div className="flex flex-wrap items-center gap-2 sm:gap-3 mt-4 sm:mt-5">
-                                {project.live && (
+                                {activeProject.live && (
                                     <a
-                                        href={project.live}
+                                        href={activeProject.live}
                                         target="_blank"
                                         rel="noopener noreferrer"
                                         className="inline-flex items-center justify-center gap-2 px-3.5 py-2 sm:px-4 sm:py-2 rounded-xl btn-primary text-xs font-semibold shadow-md active:scale-95 transition-all w-full xs:w-auto"
@@ -93,9 +103,9 @@ export default function CaseStudyModal({ project, isOpen, onClose }) {
                                         <ExternalLink size={13} /> Open Live Platform
                                     </a>
                                 )}
-                                {project.github && (
+                                {activeProject.github && (
                                     <a
-                                        href={project.github}
+                                        href={activeProject.github}
                                         target="_blank"
                                         rel="noopener noreferrer"
                                         className="inline-flex items-center justify-center gap-2 px-3.5 py-2 sm:px-4 sm:py-2 rounded-xl bg-black/[0.04] dark:bg-white/[0.06] hover:bg-black/[0.08] dark:hover:bg-white/[0.1] text-foreground border border-border text-xs font-semibold transition-all active:scale-95 w-full xs:w-auto"
@@ -107,7 +117,11 @@ export default function CaseStudyModal({ project, isOpen, onClose }) {
                         </div>
 
                         {/* Modal Body */}
-                        <div className="p-4 xs:p-6 sm:p-8 overflow-y-auto space-y-5 sm:space-y-7 custom-scrollbar flex-1">
+                        <div 
+                            className="p-4 xs:p-6 sm:p-8 overflow-y-auto space-y-5 sm:space-y-7 custom-scrollbar flex-1 min-h-0 overscroll-contain touch-pan-y"
+                            style={{ WebkitOverflowScrolling: 'touch' }}
+                            data-lenis-prevent
+                        >
                             {/* Executive Overview */}
                             <div>
                                 <h3 className="text-xs font-bold font-mono uppercase tracking-widest text-primary mb-2 flex items-center gap-2">
@@ -178,7 +192,7 @@ export default function CaseStudyModal({ project, isOpen, onClose }) {
                         </div>
 
                         {/* Footer Banner */}
-                        <div className="p-4 sm:p-5 bg-black/[0.03] dark:bg-white/[0.02] border-t border-border flex flex-col sm:flex-row items-center justify-between gap-3">
+                        <div className="shrink-0 p-4 sm:p-5 bg-black/[0.03] dark:bg-white/[0.02] border-t border-border flex flex-col sm:flex-row items-center justify-between gap-3">
                             <p className="text-xs text-muted-foreground text-center sm:text-left">
                                 Need a custom multi-tenant SaaS or real-time architecture built?
                             </p>
